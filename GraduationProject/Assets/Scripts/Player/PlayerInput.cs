@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using HedgehogTeam.EasyTouch;
+
 public class PlayerInput : MonoBehaviour
 {
     public float h ;
@@ -17,7 +17,6 @@ public class PlayerInput : MonoBehaviour
     void FixedUpdate()
     {
      
-        h = ETCInput.GetAxis("Horizontal");
-        v = ETCInput.GetAxis("Vertical");
+
     }
 }

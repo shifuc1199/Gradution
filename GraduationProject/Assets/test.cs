@@ -33,6 +33,7 @@ public class test : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("加入成功");
+        PhotonNetwork.Instantiate("Cube", Vector3.zero, Quaternion.identity, 0);
     }
     // Update is called once per frame
     void Update()

@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class View : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static Scene CurrentScene = null;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
