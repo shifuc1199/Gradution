@@ -1,43 +1,48 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-public class test : MonoBehaviourPunCallbacks
+using System;
+using UnityEngine.Networking;
+using UnityEngine.UI;
+using XLua;
+[Hotfix]
+public class test : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Text text;
+    DateTime time;
+    double time_str = -1;
+    LuaEnv _env;
+    // Use this for initialization
     void Start()
     {
-        PhotonNetwork.ConnectUsingSettings();
+        _env = new LuaEnv();
+        _env.DoString("require 'test'");
     }
-    public void StartMatching()
-    {
-        PhotonNetwork.JoinRandomRoom();
-    }
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("连接到主机");
-    }
-    public override void OnConnected()
-    {
-        Debug.Log("连接成功");
-    }
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        PhotonNetwork.CreateRoom(System.Guid.NewGuid().ToString());
-        Debug.Log("加入失败");
-    }
-    public override void OnCreatedRoom()
-    {
-        Debug.Log("创建房间");
-    }
-    public override void OnJoinedRoom()
-    {
-        Debug.Log("加入成功");
-        PhotonNetwork.Instantiate("Cube", Vector3.zero, Quaternion.identity, 0);
-    }
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
         
     }
+
+    // Update is called once per frame
+    void Update()
+    {
+       StartCoroutine(Util.GetTime((str)=> {
+           time = Convert.ToDateTime(str);
+           if (time_str == -1)
+           {
+               time_str = (time - Convert.ToDateTime(PlayerPrefs.GetString("offline_time"))).TotalSeconds;
+               Debug.Log(time_str);
+           }
+       }
+       ));//时刻更新时间
+        if(time!=null)
+        text.text = time.ToString();
+    }
+    private void OnDisable()
+    {
+      Debug.Log("下线：" + time.ToString());
+      PlayerPrefs.SetString("offline_time", time.ToString());
+         
+    }
+
 }
