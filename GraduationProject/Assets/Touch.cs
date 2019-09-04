@@ -61,9 +61,7 @@ public class Touch : MonoBehaviour
 
     public virtual void OnMoveEnd(BaseEventData data)
     {
-         
         center.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-         
     }
 
 
