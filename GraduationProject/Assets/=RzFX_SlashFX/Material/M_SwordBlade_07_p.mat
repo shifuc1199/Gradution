@@ -1,0 +1,142 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_SwordBlade_07_p
+  m_Shader: {fileID: 4800000, guid: dfeef937d7f955b41a327f60c22672fb, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FlowMap:
+        m_Texture: {fileID: 2800000, guid: 96d828acabca0bf48bea08f94d95d543, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 3c68351a169dfe340a0f8063b09db4cd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _node_3522:
+        m_Texture: {fileID: 2800000, guid: 37843a95265c15844999479d9a718d6b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _node_4922:
+        m_Texture: {fileID: 2800000, guid: 47344b1818dad3c4c90b7e3ce21a5d3a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AlphaStrength: 4
+    - _BlackAmount: 4
+    - _BladeStretch: 1
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _EmissFadeout: 1
+    - _EmissStrength: 1
+    - _Emission: 2
+    - _FlowSpeed: -0.2
+    - _FlowStrength: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _HighlightStrength: 1
+    - _KeepEdge_NonFlowmap: 0
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Off: 0
+    - _Parallax: 0.02
+    - _RefractionStrength: 0.25
+    - _SS: -1
+    - _SharpEdge: 1
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SqueezeAmount: 8
+    - _SrcBlend: 1
+    - _StrecthAmount: 0.443
+    - _StretchAmount: 4
+    - _StretchX: 0
+    - _UVSec: 0
+    - _U_StretchStrength: 10
+    - _ZWrite: 1
+    - _node_1208: 1
+    - _node_1685: 1
+    - _node_2505: 5
+    - _node_2729: 0
+    - _node_2915: 0
+    - _node_3010: 0
+    - _node_3541: 0
+    - _node_3979: 1
+    - _node_4388: -0.02
+    - _node_4553: 0
+    - _node_4908: -0.32
+    - _node_4938: 1
+    - _node_5028: 1
+    - _node_5097: 1
+    - _node_5147: 0
+    - _node_5938: -1
+    - _node_6054: 0
+    - _node_690: 0
+    - _node_7261: 0
+    - _node_7422: 0
+    - _node_7789: 3
+    - _node_8027: 0.07
+    - _node_8176: 1
+    - _node_8486: 0.008415548
+    - _node_8799: 2
+    - _node_8916: 1
+    - _node_9399: 0
+    - _node_9465: 1
+    - _node_9796: -1
+    - _node_9847: -1
+    - _node_9898: 0.661
+    - _node_997: 1
+    - _offsetX: 0
+    m_Colors:
+    - _Color: {r: 0.6503359, g: 0.21600002, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _node_8180: {r: 0, g: 0, b: 0, a: 0}
