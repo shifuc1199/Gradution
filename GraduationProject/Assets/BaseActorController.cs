@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ActorBase :MonoBehaviour
+public abstract class BaseActorController :MonoBehaviour
 {
     public KeyCode attack_key = KeyCode.Mouse0;
     public KeyCode right_move_key = KeyCode.D;
@@ -24,7 +24,10 @@ public abstract class ActorBase :MonoBehaviour
         }
     }
     public abstract void Attack();
-    public abstract void Jump();
+    public virtual void Jump()
+    {
+
+    }
     public virtual void Update()
     {
         Move();

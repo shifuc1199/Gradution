@@ -1,35 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class SwordActor : ActorBase
+using DG.Tweening;
+public class SwordActor : BaseActorController
 {
-    public float attack_timer;
+    public float attack_time;
     float timer;
-     
+    float attack_timer;
     private void Start()
     {
    
     }
-    public override void Jump()
-    {
-        if(Input.GetKeyDown(jump_key))
-        {
-
-        }
-    }
+   
 
     public override void Attack()
     {
         if(Input.GetKey(attack_key))
         {
-            timer += Time.deltaTime;
-            if(timer>=attack_timer)
+            attack_timer += Time.deltaTime;
+            if(attack_timer >= attack_time)
             {
                 GetComponent<Animator>().SetTrigger("attack");
+                attack_timer = 0;
             }
         }
     }
-
-    
 }

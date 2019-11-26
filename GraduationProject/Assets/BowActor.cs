@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BowActor : ActorBase
+public class BowActor : BaseActorController
 {
     public float attack_timer;
     float timer;

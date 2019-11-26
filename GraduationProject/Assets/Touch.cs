@@ -12,7 +12,7 @@ public class Touch : MonoBehaviour
     public float radius;
 
     Vector3 center_start_pos;
-
+    
     public Vector3 dir;
 
     private void Awake()
@@ -39,7 +39,8 @@ public class Touch : MonoBehaviour
         trigger.triggers.Add(entry_move);
         trigger.triggers.Add(entry_move_end);
 
-        center_start_pos = center.transform.position;
+        center_start_pos = center.GetComponent<RectTransform>().anchoredPosition;
+     
     }
 
     public virtual void OnMoveStart(BaseEventData data)
@@ -49,19 +50,19 @@ public class Touch : MonoBehaviour
 
     public virtual void OnMove(BaseEventData data)
     {
+        
         Vector3 dir = Input.mousePosition - center_start_pos;
         this.dir = dir.normalized;
         float r = dir.magnitude;
         r = Mathf.Clamp(r,0, radius);
-        center.transform.position = this.dir * r + center_start_pos;
-        Debug.Log(center.transform.position);
-        Debug.Log("move");
+        center.GetComponent<RectTransform>().anchoredPosition = this.dir * r + center_start_pos;
+      
     }
 
 
     public virtual void OnMoveEnd(BaseEventData data)
     {
-        center.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        center.GetComponent<RectTransform>().anchoredPosition    = center_start_pos;
     }
 
 
