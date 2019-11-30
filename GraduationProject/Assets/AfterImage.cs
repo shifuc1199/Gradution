@@ -96,7 +96,7 @@ public class AfterImage : MonoBehaviour
             }
 
         }
-
+ 
         //数据刷新
         DataUptate();
 
@@ -119,6 +119,7 @@ public class AfterImage : MonoBehaviour
     /// <summary>
     /// 幻影数据刷新
     /// </summary>
+    public bool IsUpdate = false;
     private void DataUptate()
     {
 
@@ -127,7 +128,8 @@ public class AfterImage : MonoBehaviour
             return;
         }
 
-
+        if (!IsUpdate)
+            return;
 
 
         lastPosition = transform.position;

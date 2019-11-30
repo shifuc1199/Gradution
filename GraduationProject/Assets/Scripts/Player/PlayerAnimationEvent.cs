@@ -19,7 +19,7 @@ public class PlayerAnimationEvent : MonoBehaviour
     public void OnDashEnter()
     {
         _rigi.velocity = transform.right * 80;
-        GetComponentInParent<AfterImage>().enabled = true;
+        GetComponentInParent<AfterImage>().IsUpdate = true;
     }
     public void OnDashUpdate()
     {
@@ -28,7 +28,8 @@ public class PlayerAnimationEvent : MonoBehaviour
     public void OnDashExit()
     {
         _rigi.velocity = Vector2.zero;
-       
+        GetComponentInParent<AfterImage>().IsUpdate = false;
+
     }
     public void ResetTrigger(string _name)
     {
