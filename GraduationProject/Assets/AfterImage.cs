@@ -143,6 +143,7 @@ public class AfterImage : MonoBehaviour
         for (int i = 0; i < spriteList.Count; i++)
         {
             var item = spriteList[i];
+           
             //获得当前精灵的信息
             AfterimageMatrix4x4 afterimageMatrix4X4 = new AfterimageMatrix4x4(
                 item.transform.position,
@@ -181,7 +182,7 @@ public class AfterImage : MonoBehaviour
             DrawAfterimageItem(propertyBlock, item);
         }
     }
-
+     
     /// <summary>
     /// 绘制一个幻影
     /// </summary>
@@ -192,8 +193,10 @@ public class AfterImage : MonoBehaviour
         for (int i = 0; i < afterimageData.AM4x4List.Count; i++)
         {
             AfterimageMatrix4x4 item = afterimageData.AM4x4List[i];
-
+            if (item.sprite == null)
+                return;
             //设置贴图
+
             propertyBlock.SetTexture(idMainTex, item.sprite.texture);
             //获得网格
             var mesh = SpriteToMesh(item.sprite);

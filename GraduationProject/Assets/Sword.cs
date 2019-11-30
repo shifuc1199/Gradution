@@ -16,7 +16,7 @@ public class Sword : MonoBehaviour
         if(collision.gameObject.tag=="Enemy")
         {
             Camera.main.DOShakePosition(0.1f, 1);
-            
+            collision.gameObject.GetComponent<BaseEnemyController>().GetHurt();
           
         }
     }
@@ -27,7 +27,7 @@ public class Sword : MonoBehaviour
         if(Time.timeScale!=1)
         {
             timer += Time.unscaledDeltaTime;
-            if(timer>=0.15f)
+            if(timer>=0.1f)
             {
                
                 timer = 0;

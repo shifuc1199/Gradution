@@ -356,8 +356,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 3
     messageOptions: 0
-  - time: 0.3
-    functionName: SetAttackTrigger
+  - time: 0.083333336
+    functionName: SetAttackTriggerActive
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.28333333
+    functionName: SetAttackTriggerDeactive
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

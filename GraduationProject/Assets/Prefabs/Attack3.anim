@@ -464,6 +464,13 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
+  - time: 0.083333336
+    functionName: SetAttackTriggerActive
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.36666667
     functionName: ResetTrigger
     data: attack
@@ -471,8 +478,8 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.4
-    functionName: SetAttackTrigger
+  - time: 0.38333333
+    functionName: SetAttackTriggerDeactive
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
