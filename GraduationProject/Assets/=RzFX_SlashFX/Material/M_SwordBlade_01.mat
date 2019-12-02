@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M_SwordBlade_01
   m_Shader: {fileID: 4800000, guid: 3decfc019ad8a184692ab3a5ff1e14c6, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _KEEPEDGE_NONFLOWMAP_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -69,7 +69,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaStrength: 4
-    - _BlackAmount: 20
+    - _BlackAmount: 5
     - _BladeStretch: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -82,13 +82,13 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _KeepEdge_NonFlowmap: 0
+    - _KeepEdge_NonFlowmap: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _RefractionStrength: 0
-    - _SharpEdge: 15
+    - _RefractionStrength: 1
+    - _SharpEdge: 10
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

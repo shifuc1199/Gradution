@@ -5,6 +5,7 @@ using DG.Tweening;
 public class Sword : MonoBehaviour
 {
     private Animator _anim;
+    public bool isHeavy;
     float timer;
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,10 @@ public class Sword : MonoBehaviour
         {
             Camera.main.DOShakePosition(0.1f, 1);
             collision.gameObject.GetComponent<BaseEnemyController>().GetHurt();
-          
+            if(isHeavy)
+            {
+                Time.timeScale = 0.2f;
+            }
         }
     }
  

@@ -48,7 +48,7 @@ public class AfterImage : MonoBehaviour
 
 
 
-    private CommandBuffer buffer;
+   
 
     private List<AfterimageData> AfterimageDataList = new List<AfterimageData>();
 
@@ -99,21 +99,10 @@ public class AfterImage : MonoBehaviour
  
         //数据刷新
         DataUptate();
-
-        if (buffer != null)
-        {
-            Camera.main.RemoveCommandBuffer(CameraEvent.BeforeForwardAlpha, buffer);
-        }
-
-
-
         //设置绘制数据
         DrawAfterimage(AfterimageDataList);
 
-        if (buffer != null)
-        {
-            Camera.main.AddCommandBuffer(CameraEvent.BeforeForwardAlpha, buffer);
-        }
+       
     }
 
     /// <summary>
@@ -169,7 +158,7 @@ public class AfterImage : MonoBehaviour
     /// <param name="afterimageDatas"></param>
     private void DrawAfterimage(List<AfterimageData> afterimageDatas)
     {
-        buffer = new CommandBuffer();
+  
         var propertyBlock = new MaterialPropertyBlock();
 
 
@@ -184,7 +173,7 @@ public class AfterImage : MonoBehaviour
             DrawAfterimageItem(propertyBlock, item);
         }
     }
-     
+    public Material _mat;
     /// <summary>
     /// 绘制一个幻影
     /// </summary>
@@ -203,8 +192,8 @@ public class AfterImage : MonoBehaviour
             //获得网格
             var mesh = SpriteToMesh(item.sprite);
 
-
-            buffer.DrawMesh(mesh, Matrix4x4.TRS(item.position, item.rotation, item.localScale), item.material, 0, 0, propertyBlock);
+            Graphics.DrawMesh(mesh, Matrix4x4.TRS(item.position, item.rotation, item.localScale), _mat, 1,Camera.main, 0,propertyBlock);
+           
         }
     }
 

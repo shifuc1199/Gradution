@@ -7,6 +7,7 @@ public class PlayerAnimationEvent : MonoBehaviour
     public GameObject sword_slash_prefab;
     public GameObject heavy_sword_slash_prefab;
     public GameObject attack_trigger;
+    public GameObject heavy_attack_trigger;
     private Rigidbody2D _rigi;
     List<int> effect_rotation = new List<int>() { 45, 130, 60,0};
     private void Start()
@@ -46,9 +47,27 @@ public class PlayerAnimationEvent : MonoBehaviour
         
        // Destroy(temp, 2);
     }
+    public void SetHeavySlash(int index)
+    {
+        GameObject temp;
+
+        temp = Instantiate(heavy_sword_slash_prefab, transform.position + new Vector3(0, 2, 0), Quaternion.Euler(transform.eulerAngles.y, 90, 0));
+
+        temp.transform.position += new Vector3(0, 0, -index);
+
+        // Destroy(temp, 2);
+    }
     public void SetAttackTriggerActive()
     {
         attack_trigger.SetActive(true);
+    }
+    public void SetHeavyAttackTriggerActive()
+    {
+        heavy_attack_trigger.SetActive(true);
+    }
+    public void SetHeavyAttackTriggerDeActive()
+    {
+        heavy_attack_trigger.SetActive(false);
     }
     public void SetAttackTriggerDeactive()
     {
