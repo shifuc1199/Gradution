@@ -5,9 +5,10 @@ using DG.Tweening;
 public class PlayerAnimationEvent : MonoBehaviour
 {
     public GameObject sword_slash_prefab;
+    public GameObject heavy_sword_slash_prefab;
     public GameObject attack_trigger;
     private Rigidbody2D _rigi;
-    List<int> effect_rotation = new List<int>() { 60, 110, 70, 120 };
+    List<int> effect_rotation = new List<int>() { 45, 130, 60,0};
     private void Start()
     {
         _rigi = GetComponentInParent<Rigidbody2D>();
@@ -37,11 +38,11 @@ public class PlayerAnimationEvent : MonoBehaviour
     }
     public void SetSlash(int index)
     {
-        
-         
-        GameObject temp = Instantiate(sword_slash_prefab, transform.position+new Vector3(0,2,0), Quaternion.Euler(transform.eulerAngles.y,90, transform.eulerAngles.y+ effect_rotation[index]));
+        GameObject temp;
+ 
+         temp = Instantiate(sword_slash_prefab, transform.position+new Vector3(0,2,0), Quaternion.Euler(transform.eulerAngles.y,90, transform.eulerAngles.y+ effect_rotation[index]));
        
-            temp.transform.position += new Vector3(0, 0, -index);
+        temp.transform.position += new Vector3(0, 0, -index);
         
        // Destroy(temp, 2);
     }
