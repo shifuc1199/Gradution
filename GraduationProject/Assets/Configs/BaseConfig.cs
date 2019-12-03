@@ -31,7 +31,7 @@ public class BaseConfig<T> where T : BaseConfig<T>
         {
             T model = JsonMapper.ToObject<T>(pair.Value.ToJson());
             model.OnLoadJsonEnded();
-            Datas[pair.Key.ToInt()] = model;
+            Datas[int.Parse(pair.Key)] = model;
         }
     }
     public virtual void OnLoadJsonEnded(){}

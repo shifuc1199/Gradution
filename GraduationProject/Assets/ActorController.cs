@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DreamerTool.FSM;
 public class ActorController : MonoBehaviour
 {
     public KeyCode attack_key = KeyCode.Mouse0;
@@ -9,6 +9,7 @@ public class ActorController : MonoBehaviour
     public KeyCode left_move_key = KeyCode.A;
     public KeyCode jump_key = KeyCode.Space;
     public KeyCode dash_key = KeyCode.LeftShift;
+    public KeyCode heavy_attack_key = KeyCode.Mouse1;
     public float move_speed;
     private Animator _anim;
     private Rigidbody2D _rigi;
@@ -19,6 +20,7 @@ public class ActorController : MonoBehaviour
     }
     public virtual void Move()
     {
+         
         if (Input.GetKey(right_move_key))
         {
             
@@ -38,12 +40,17 @@ public class ActorController : MonoBehaviour
         {
         _anim.SetTrigger ("attack");
         }
+        if(Input.GetKeyDown(heavy_attack_key))
+        {
+            _anim.SetTrigger("heavyattack");
+        }
     }
+    
     public  void Jump()
     {
         if(Input.GetKeyDown(jump_key))
         {
-            
+            _anim.SetTrigger("jump");
         }
     }
     public void Dash()

@@ -51,7 +51,7 @@ public class PlayerAnimationEvent : MonoBehaviour
     {
         GameObject temp;
 
-        temp = Instantiate(heavy_sword_slash_prefab, transform.position + new Vector3(0, 2, 0), Quaternion.Euler(transform.eulerAngles.y, 90, 0));
+        temp = Instantiate(heavy_sword_slash_prefab, transform.position + new Vector3(0, 2, 0), Quaternion.Euler(180-transform.eulerAngles.y, 90, 0));
 
         temp.transform.position += new Vector3(0, 0, -index);
 
@@ -76,6 +76,16 @@ public class PlayerAnimationEvent : MonoBehaviour
     public void OnAttackEnter()
     {
 
+    }
+    public void OnHeavyAttackEnter()
+    {
+        _rigi.velocity = transform.right * 80;
+        GetComponentInParent<AfterImage>().IsUpdate = true;
+    }
+    public void OnHeavyAttackExit()
+    {
+        _rigi.velocity = Vector2.zero;
+        GetComponentInParent<AfterImage>().IsUpdate = false;
     }
 
     public void OnAttackExit()

@@ -165,7 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sword_slash_prefab: {fileID: 1744892889613756, guid: 8e7c6e5309f9cd3428b6049c60a047e3,
     type: 3}
-  heavy_sword_slash_prefab: {fileID: 1744892889613756, guid: c1e567eee10444e4a9c7ec481f0c42b3,
+  heavy_sword_slash_prefab: {fileID: 1744892889613756, guid: 3e54e5bc5065cdb469f03f82eb7e408a,
     type: 3}
   attack_trigger: {fileID: 1905179402}
   heavy_attack_trigger: {fileID: 494193590}
@@ -418,6 +418,7 @@ MonoBehaviour:
   left_move_key: 97
   jump_key: 32
   dash_key: 304
+  heavy_attack_key: 324
   move_speed: 10
 --- !u!114 &388285064
 MonoBehaviour:
@@ -505,7 +506,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 100
-  m_Sprite: {fileID: 21300000, guid: eb9aabdea50184846ac06778d27c60af, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0fc0e0a8b5e96f14abd3e748f8a33e4a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -525,9 +526,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 494193591}
-  - component: {fileID: 494193594}
   - component: {fileID: 494193593}
   - component: {fileID: 494193592}
+  - component: {fileID: 494193594}
   m_Layer: 0
   m_Name: 1 (1)
   m_TagString: Untagged
@@ -583,8 +584,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isHeavy: 1
---- !u!60 &494193594
-PolygonCollider2D:
+--- !u!61 &494193594
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -596,7 +597,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.6910019, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -606,18 +607,9 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.6040994, y: 1.6342913}
-      - {x: -0.38479972, y: 0.29218104}
-      - {x: -0.31997323, y: -0.21380119}
-      - {x: -0.48786914, y: -0.439588}
-      - {x: -0.8067523, y: -0.8422462}
-      - {x: -1.4834831, y: -1.5529349}
-      - {x: 0.30241013, y: -1.7047346}
-      - {x: 3.5554018, y: -2.0482726}
-      - {x: 4.3793287, y: 0.61098176}
-      - {x: 1.3677201, y: 4.1033077}
+  serializedVersion: 2
+  m_Size: {x: 15.466202, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &782961101
 GameObject:
   m_ObjectHideFlags: 0
