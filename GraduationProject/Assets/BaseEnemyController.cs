@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 public class BaseEnemyController : MonoBehaviour,IHurt
 {
+    public GameObject hit_prefab;
     private Animator _anim;
     private Rigidbody2D _rigi;
     public float start_gravity;
@@ -18,6 +19,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
     }
     public void GetHurt(HitType _type,UnityAction hurt_call_back=null)
     {
+        Instantiate(hit_prefab, transform.position+new Vector3(0,2,0), Quaternion.identity);
         _anim.SetTrigger("Impact");
         hurt_call_back?.Invoke();
         switch (_type)

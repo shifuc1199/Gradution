@@ -20,7 +20,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     }
     public void SetPickUpSlash()
     {
-      var temp =  Instantiate(pickupslash_prefab, transform.position + new Vector3(0, 2, 0), Quaternion.Euler(-45, 90, 180));
+      var temp =  Instantiate(pickupslash_prefab, transform.position + new Vector3(0, 2, 0), Quaternion.Euler(-45, 90*transform.right.x, 180));
         temp.transform.position += new Vector3(0, 0, -5);
         attack_trigger.GetComponent<Sword>().attack_type = HitType.上挑;
     }
