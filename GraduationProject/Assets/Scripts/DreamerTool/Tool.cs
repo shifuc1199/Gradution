@@ -51,6 +51,7 @@ namespace DreamerTool.FSM
 {
     public class StateMachine
 {
+     public StateBase current_state;
      public Dictionary<string,StateBase> states=new Dictionary<string,StateBase>();
      public void AddState(StateBase state)
      {
@@ -58,9 +59,22 @@ namespace DreamerTool.FSM
      }
      public void RemoveState(StateBase state)
      {
-
         states.Remove(state.id);
      }
+    public void ChangeState(string id)
+    {
+        if(!states.ContainsKey(id))
+        {
+            return;
+        }
+        if(current_state!=null)
+        {
+            current_state.OnExit();
+        }
+        states[id].OnEnter();
+        current_state = states[id];
+ 
+        }
 }
  
 public class  StateBase
@@ -72,7 +86,7 @@ public class  StateBase
         this.id = _id;
     }
     public virtual void OnEnter(params object[] args){}
-    public virtual void OnStay(params object[] args){}
+    public virtual void OnStay(params object[] args){ Debug.Log("123");}
     public virtual void OnExit(params object[] args){}
     
 }

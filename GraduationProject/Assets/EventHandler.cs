@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CameraFollow : FollowObject
+using UnityEngine.Events;
+public static class EventHandler   
 {
     
 }

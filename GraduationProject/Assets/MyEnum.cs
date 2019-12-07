@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class MyEnum 
+﻿ public enum HitType
 {
-     
+    普通,
+    击退,
+    击飞,
+    上挑
 }

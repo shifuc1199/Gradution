@@ -4,41 +4,51 @@ using UnityEngine;
 using DreamerTool.FSM;
 public class ActorController : MonoBehaviour
 {
+    public Transform ground_check_pos;
+    public bool isMoveable = true;
+    public bool isGround = true;
     public KeyCode attack_key = KeyCode.Mouse0;
-    public KeyCode right_move_key = KeyCode.D;
-    public KeyCode left_move_key = KeyCode.A;
     public KeyCode jump_key = KeyCode.Space;
     public KeyCode dash_key = KeyCode.LeftShift;
     public KeyCode heavy_attack_key = KeyCode.Mouse1;
+    
     public float move_speed;
-    private Animator _anim;
-    private Rigidbody2D _rigi;
+    [System.NonSerialized] public Animator _anim;
+    [System.NonSerialized] public Rigidbody2D _rigi;
+    [System.NonSerialized] public float start_grivaty;
     private void Awake()
     {
         _rigi = GetComponent<Rigidbody2D>();
+        start_grivaty = _rigi.gravityScale;
         _anim = GetComponentInChildren<Animator>();
+  
     }
-    public virtual void Move()
+    public void Move()
     {
-         
-        if (Input.GetKey(right_move_key))
+        if (!isMoveable)
         {
-            
-            transform.rotation = Quaternion.identity;
-            transform.Translate(Vector2.right * move_speed * Time.deltaTime, Space.World);
+            _anim.SetBool("run", false);
+            return;
         }
-        if (Input.GetKey(left_move_key))
+        var h = Input.GetAxisRaw("Horizontal");
+        if (h != 0)
         {
-            
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-            transform.Translate(Vector2.left * move_speed * Time.deltaTime, Space.World);
-        }   
+            transform.rotation = Quaternion.Euler(0, h > 0 ? 0 : 180, 0);
+        }
+        _anim.SetBool("run", h != 0);
+        transform.Translate(new Vector2(h,0) * move_speed * Time.deltaTime, Space.World);
+         
     }
-    public  void Attack()
+    public void Attack()
     {
+        var v = Input.GetAxisRaw("Vertical");
         if (Input.GetKeyDown(attack_key))
         {
-        _anim.SetTrigger ("attack");
+            if(v>0)
+             _anim.SetTrigger("pickupattack");
+            else
+            _anim.SetTrigger("attack");
+             
         }
         if(Input.GetKeyDown(heavy_attack_key))
         {
@@ -48,9 +58,12 @@ public class ActorController : MonoBehaviour
     
     public  void Jump()
     {
-        if(Input.GetKeyDown(jump_key))
+        if(Input.GetKeyDown(jump_key)&&isGround)
         {
+            _rigi.ResetVelocity();
+            _rigi.velocity = Vector2.up * 100;
             _anim.SetTrigger("jump");
+
         }
     }
     public void Dash()
@@ -60,10 +73,19 @@ public class ActorController : MonoBehaviour
             _anim.SetTrigger("dash");
         }
     }
+    public void StateCheck()
+    {
+         
+        isGround = Physics2D.OverlapCircle(ground_check_pos.position, 1,LayerMask.GetMask("Ground"));
+       
+    }
     public   void Update()
     {
-        Move();
         Attack();
+        StateCheck();
+     
+        Move();
+         
         Jump();
         Dash();
     }

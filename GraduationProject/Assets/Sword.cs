@@ -5,7 +5,7 @@ using DG.Tweening;
 public class Sword : MonoBehaviour
 {
     private Animator _anim;
-    public bool isHeavy;
+    public HitType attack_type;
     float timer;
     // Start is called before the first frame update
     void Start()
@@ -17,11 +17,7 @@ public class Sword : MonoBehaviour
         if(collision.gameObject.tag=="Enemy")
         {
             Camera.main.DOShakePosition(0.1f, 1);
-            collision.gameObject.GetComponent<BaseEnemyController>().GetHurt();
-            if(isHeavy)
-            {
-                Time.timeScale = 0.2f;
-            }
+            collision.gameObject.GetComponent<IHurt>().GetHurt(attack_type,()=> { collision.gameObject.transform.rotation = transform.rotation; });
         }
     }
  

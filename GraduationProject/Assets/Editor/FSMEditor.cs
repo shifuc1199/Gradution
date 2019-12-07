@@ -47,6 +47,7 @@ public class MyEditor : EditorWindow
                 using (StreamWriter write = new StreamWriter(f))
                 {
                     write.WriteLine(@"
+using DreamerTool.FSM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,8 +58,23 @@ public class " + script_name + @" : StateBaseTemplate<" + script.name + @">
         this.id = _id;
         this.owner  = owner;
     }
-}
+
 "
++@" public override void OnEnter(params object[] args)
+    {
+
+    }"
++ @" 
+    public override void OnExit(params object[] args)
+    {
+
+    }"
++ @" 
+    public override void OnStay(params object[] args)
+    {
+
+    }
+}"
         );
 
                 }

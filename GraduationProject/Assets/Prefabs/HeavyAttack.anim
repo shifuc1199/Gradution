@@ -1998,7 +1998,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.51666665
+  - time: 0.43333334
+    functionName: SetHeavySlash
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.46666667
     functionName: SetHeavyAttackTriggerActive
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -2006,14 +2013,14 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.51666665
-    functionName: SetHeavySlash
+    functionName: SetHeavyAttackTriggerDeActive
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.5833333
-    functionName: SetHeavyAttackTriggerDeActive
+    functionName: OnHeavyAttackExit
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
