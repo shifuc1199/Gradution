@@ -39,6 +39,7 @@ public class BaseActorAnimationEvent : MonoBehaviour
             _controller._rigi.SetGravity(_controller.start_grivaty);
         }
         _controller.isMoveable = true;
+        _controller.isInputable = true;
 
     }
     public void ResetTrigger(string _name)

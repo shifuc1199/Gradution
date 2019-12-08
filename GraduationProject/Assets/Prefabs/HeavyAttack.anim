@@ -1992,7 +1992,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.4
-    functionName: OnHeavyAttackEnter
+    functionName: HeavyAttackMove
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -2005,22 +2005,8 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.46666667
-    functionName: SetHeavyAttackTriggerActive
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.51666665
-    functionName: SetHeavyAttackTriggerDeActive
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
   - time: 0.5833333
-    functionName: OnHeavyAttackExit
+    functionName: HeavyAttackReset
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

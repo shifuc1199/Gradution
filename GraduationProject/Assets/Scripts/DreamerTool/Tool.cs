@@ -113,22 +113,23 @@ namespace DreamerTool.GameObjectPool
             this._prefab = _prefab;
         }
 
-        public virtual GameObject Get(Vector3 pos, float life_time)
+        public virtual GameObject Get(Vector3 pos,Quaternion rot, float life_time)
         {
             GameObject get_object = null;
             if (object_pool_queue.Count == 0)
             {
                 get_object = GameObject.Instantiate(_prefab);
                 ObjectRecover _recover = get_object.AddComponent<ObjectRecover>();
-                _recover._life_time = life_time;
                 _recover.recover_call_back = Remove;
             }
             else
             {
                 get_object = object_pool_queue.Dequeue();
             }
+            get_object.GetComponent<ObjectRecover>().Excute(life_time);
             get_object.SetActive(true);
             get_object.transform.position = pos;
+            get_object.transform.rotation = rot;
             return get_object;
         }
         public virtual void Remove(GameObject tempObject)
@@ -145,11 +146,10 @@ namespace DreamerTool.GameObjectPool
 
     public class ObjectRecover : MonoBehaviour
     {
-        public float _life_time;
         public UnityAction<GameObject> recover_call_back;
-        private void OnEnable()
+        public void Excute(float timer)
         {
-            Invoke("Recover", _life_time);
+            Invoke("Recover", timer);
         }
         public void Recover()
         {

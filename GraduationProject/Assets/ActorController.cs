@@ -4,8 +4,10 @@ using UnityEngine;
 using DreamerTool.FSM;
 public class ActorController : MonoBehaviour
 {
+    public static ActorController _controller;
     public Transform ground_check_pos;
     public bool isMoveable = true;
+    public bool isInputable = true;
     public bool isGround = true;
     public KeyCode attack_key = KeyCode.Mouse0;
     public KeyCode jump_key = KeyCode.Space;
@@ -18,6 +20,7 @@ public class ActorController : MonoBehaviour
     [System.NonSerialized] public float start_grivaty;
     private void Awake()
     {
+        _controller = this;
         _rigi = GetComponent<Rigidbody2D>();
         start_grivaty = _rigi.gravityScale;
         _anim = GetComponentInChildren<Animator>();
@@ -54,6 +57,10 @@ public class ActorController : MonoBehaviour
         {
             _anim.SetTrigger("heavyattack");
         }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            _anim.SetTrigger("skill1");
+        }
     }
     
     public  void Jump()
@@ -81,6 +88,8 @@ public class ActorController : MonoBehaviour
     }
     public   void Update()
     {
+        if (!isInputable)
+            return;
         Attack();
         StateCheck();
      
