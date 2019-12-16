@@ -84,12 +84,8 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     }
     public void OnHeavyAttackEnter()
     {
-        if (!_controller.isGround)
-        {
-
-            _controller._rigi.ResetVelocity();
-            _controller._rigi.ClearGravity();
-        }
+        _controller._rigi.ResetVelocity();
+        _controller._rigi.ClearGravity();
         _controller.isInputable = false;
     }
     public Vector2 HeavyAttackDirection;
@@ -98,6 +94,14 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     {
         HeavyAttackDirection = v;
         _anim.SetTrigger("heavyattack");
+        if(HeavyAttackDirection.x>0)
+        {
+            _controller.transform.rotation = Quaternion.identity;
+        }
+        else if (HeavyAttackDirection.x < 0)
+        {
+            _controller.transform.rotation = Quaternion.Euler(0,180,0);
+        }
     }
     public void HeavyAttackMove()
     {

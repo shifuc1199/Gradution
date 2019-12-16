@@ -92,10 +92,11 @@ public class ActorController : MonoBehaviour
     }
     public   void Update()
     {
+        StateCheck();
         if (!isInputable)
             return;
         Attack();
-        StateCheck();
+         
      
         Move();
          
