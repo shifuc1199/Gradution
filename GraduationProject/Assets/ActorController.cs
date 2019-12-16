@@ -57,9 +57,13 @@ public class ActorController : MonoBehaviour
         {
             _anim.SetTrigger("heavyattack");
         }
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F1))
         {
             _anim.SetTrigger("skill1");
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            _anim.SetTrigger("skill2");
         }
     }
     

@@ -191,7 +191,7 @@ public class AfterImage : MonoBehaviour
             propertyBlock.SetTexture(idMainTex, item.sprite.texture);
             //获得网格
             var mesh = SpriteToMesh(item.sprite);
-
+            
             Graphics.DrawMesh(mesh, Matrix4x4.TRS(item.position, item.rotation, item.localScale), _mat, 1,Camera.main, 0,propertyBlock);
            
         }

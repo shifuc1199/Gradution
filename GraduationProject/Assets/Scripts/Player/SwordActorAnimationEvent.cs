@@ -23,6 +23,8 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
         sword_slash_pool = new BaseGameObjectPool(sword_slash_prefab);
         heavy_sword_slash_pool = new BaseGameObjectPool(heavy_sword_slash_prefab);
         skill_1_pool = new BaseGameObjectPool(skill_1_prefab);
+
+        skill.ReleaseSkillEvent += SetHeavyAttackDir;
     }
     public void SetPickUpSlash()
     {
@@ -56,11 +58,19 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     public void SetHeavySlash()
     {
         GameObject temp;
-        temp = heavy_sword_slash_pool.Get(transform.position + new Vector3(0, 2, 0), Quaternion.Euler(180 - transform.eulerAngles.y, 90, 0), 0.4f);
+ 
+     
+        temp = heavy_sword_slash_pool.Get(transform.position + new Vector3(0, 2, 0), Quaternion.Euler(new Vector3(180-Quaternion.FromToRotation(Vector2.right, HeavyAttackDirection).eulerAngles.z,90,0)), 0.4f);
+    }
+    public void OnSkill2Enter()
+    {
+       // GetComponentInParent<AfterImage>().IsUpdate = true;
+    }
+    public void OnSkill2Exit()
+    {
+      //  GetComponentInParent<AfterImage>().IsUpdate = false;
     }
 
-    
-     
     public void OnAttackEnter()
     { 
         if (!_controller.isGround)
@@ -82,11 +92,16 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
         }
         _controller.isInputable = false;
     }
-    
+    public Vector2 HeavyAttackDirection;
+    public SkillJoyStick skill;
+    public void SetHeavyAttackDir(Vector2 v)
+    {
+        HeavyAttackDirection = v;
+        _anim.SetTrigger("heavyattack");
+    }
     public void HeavyAttackMove()
     {
-
-        _rigi.velocity = transform.right * 200;
+        _rigi.velocity = HeavyAttackDirection * 200;
         GetComponentInParent<AfterImage>().IsUpdate = true;
     }
     public void HeavyAttackReset()
