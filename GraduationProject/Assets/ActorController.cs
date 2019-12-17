@@ -69,11 +69,11 @@ public class ActorController : MonoBehaviour
     
     public  void Jump()
     {
-        if(Input.GetKeyDown(jump_key)&&isGround)
+     
+        if (Input.GetKeyDown(jump_key)&&isGround)
         {
             _rigi.ResetVelocity();
             _rigi.velocity = Vector2.up * 100;
-            _anim.SetTrigger("jump");
 
         }
     }
@@ -86,7 +86,9 @@ public class ActorController : MonoBehaviour
     }
     public void StateCheck()
     {
-         
+        _anim.SetFloat("speedy", _rigi.velocity.y);
+        _anim.SetBool("isground", isGround);
+        _anim.SetFloat("gravity", _rigi.gravityScale);
         isGround = Physics2D.OverlapCircle(ground_check_pos.position, 1,LayerMask.GetMask("Ground"));
        
     }
@@ -96,10 +98,7 @@ public class ActorController : MonoBehaviour
         if (!isInputable)
             return;
         Attack();
-         
-     
         Move();
-         
         Jump();
         Dash();
     }

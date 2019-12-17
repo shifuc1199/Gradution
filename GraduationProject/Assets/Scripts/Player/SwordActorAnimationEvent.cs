@@ -60,7 +60,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
         GameObject temp;
  
      
-        temp = heavy_sword_slash_pool.Get(transform.position + new Vector3(0, 2, 0), Quaternion.Euler(new Vector3(180-Quaternion.FromToRotation(Vector2.right, HeavyAttackDirection).eulerAngles.z,90,0)), 0.4f);
+        temp = heavy_sword_slash_pool.Get(transform.position + new Vector3(0, 2, 0), Quaternion.Euler(new Vector3(180-Quaternion.FromToRotation(Vector2.right, HeavyAttackDirection).eulerAngles.z,90,0)), 0.35f);
     }
     public void OnSkill2Enter()
     {

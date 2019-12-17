@@ -32,6 +32,7 @@ public class BaseActorAnimationEvent : MonoBehaviour
         GetComponentInParent<AfterImage>().IsUpdate = false;
 
     }
+  
      public void OnIdleEnter()
     {
         if (!_controller.isGround)
