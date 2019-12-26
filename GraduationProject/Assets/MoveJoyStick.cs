@@ -13,6 +13,9 @@ public class MoveJoyStick : JoyStick
     public override void onJoystickUp(Vector2 V)
     {
         base.onJoystickUp(V);
+        buttons[2].CrossFadeColor(Color.white, 0.1f, true, true);
+        buttons[0].CrossFadeColor(Color.white, 0.1f, true, true);
+        buttons[1].CrossFadeColor(Color.white, 0.1f, true, true);
     }
     public override void onJoystickMove(Vector2 V)
     {
@@ -23,16 +26,25 @@ public class MoveJoyStick : JoyStick
 
     public void ChangeButton(Vector2 V)
     {
-        if (V.x > 0)
+        if (V.y >= 0.9f && Mathf.Abs(V.x) <= 0.8f)
         {
+            buttons[2].CrossFadeColor(Color.red, 0.1f, true, true);
+            buttons[0].CrossFadeColor(Color.white, 0.1f, true, true);
             buttons[1].CrossFadeColor(Color.white, 0.1f, true, true);
-            buttons[0].CrossFadeColor(Color.red, 0.1f, true, true);
         }
-        if (V.y > 0.5f)
+        else if  (V.x > 0.8f && V.y< 0.8f)
+        {
+            buttons[0].CrossFadeColor(Color.red, 0.1f, true, true);
+            buttons[1].CrossFadeColor(Color.white, 0.1f, true, true);
+            buttons[2].CrossFadeColor(Color.white, 0.1f, true, true);
+        }
+        else if (V.x < -0.8f && V.y < 0.8f)
         {
             buttons[1].CrossFadeColor(Color.red, 0.1f, true, true);
+            buttons[2].CrossFadeColor(Color.white, 0.1f, true, true);
             buttons[0].CrossFadeColor(Color.white, 0.1f, true, true);
         }
+
     }
  
 }
