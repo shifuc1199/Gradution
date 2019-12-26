@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DreamerTool.FSM;
+[RequireComponent(typeof(ActorSkillController),typeof(ActorState))]
 public class ActorController : MonoBehaviour
 {
     public static ActorController _controller;
+    [System.NonSerialized]
+    public ActorSkillController skill_controller;
+    [System.NonSerialized]
+    public ActorState actor_state;
     public Transform ground_check_pos;
-    public bool isMoveable = true;
-    public bool isInputable = true;
-    public bool isGround = true;
     public KeyCode attack_key = KeyCode.Mouse0;
     public KeyCode jump_key = KeyCode.Space;
     public KeyCode dash_key = KeyCode.LeftShift;
     public KeyCode heavy_attack_key = KeyCode.Mouse1;
-    
     public float move_speed;
-    [System.NonSerialized] public Animator _anim;
+    private Animator _anim;
     [System.NonSerialized] public Rigidbody2D _rigi;
     [System.NonSerialized] public float start_grivaty;
     private void Awake()
@@ -24,11 +25,12 @@ public class ActorController : MonoBehaviour
         _rigi = GetComponent<Rigidbody2D>();
         start_grivaty = _rigi.gravityScale;
         _anim = GetComponentInChildren<Animator>();
-  
+        skill_controller = GetComponent<ActorSkillController>();
+        actor_state = GetComponent<ActorState>();
     }
     public void Move()
     {
-        if (!isMoveable)
+        if (!actor_state.isMoveable)
         {
             _anim.SetBool("run", false);
             return;
@@ -39,8 +41,13 @@ public class ActorController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, h > 0 ? 0 : 180, 0);
         }
         _anim.SetBool("run", h != 0);
-        transform.Translate(new Vector2(h,0) * move_speed * Time.deltaTime, Space.World);
-         
+        transform.Translate(new Vector2(h,0) * move_speed * Time.deltaTime, Space.World); 
+    }
+    
+
+    public void MobileAttack()
+    {
+        _anim.SetTrigger("attack");
     }
     public void Attack()
     {
@@ -50,8 +57,7 @@ public class ActorController : MonoBehaviour
             if(v>0)
              _anim.SetTrigger("pickupattack");
             else
-            _anim.SetTrigger("attack");
-             
+            _anim.SetTrigger("attack"); 
         }
         if(Input.GetKeyDown(heavy_attack_key))
         {
@@ -66,15 +72,13 @@ public class ActorController : MonoBehaviour
             _anim.SetTrigger("skill2");
         }
     }
-    
+   
     public  void Jump()
     {
-     
-        if (Input.GetKeyDown(jump_key)&&isGround)
+        if (Input.GetKeyDown(jump_key)&&actor_state.isGround)
         {
             _rigi.ResetVelocity();
             _rigi.velocity = Vector2.up * 100;
-
         }
     }
     public void Dash()
@@ -87,15 +91,14 @@ public class ActorController : MonoBehaviour
     public void StateCheck()
     {
         _anim.SetFloat("speedy", _rigi.velocity.y);
-        _anim.SetBool("isground", isGround);
+        _anim.SetBool("isground", actor_state.isGround);
         _anim.SetFloat("gravity", _rigi.gravityScale);
-        isGround = Physics2D.OverlapCircle(ground_check_pos.position, 1,LayerMask.GetMask("Ground"));
-       
+        actor_state.isGround = Physics2D.OverlapCircle(ground_check_pos.position, 1,LayerMask.GetMask("Ground"));
     }
-    public   void Update()
+    public void Update()
     {
         StateCheck();
-        if (!isInputable)
+        if (!actor_state.isInputable)
             return;
         Attack();
         Move();

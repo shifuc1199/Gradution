@@ -23,8 +23,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
         sword_slash_pool = new BaseGameObjectPool(sword_slash_prefab);
         heavy_sword_slash_pool = new BaseGameObjectPool(heavy_sword_slash_prefab);
         skill_1_pool = new BaseGameObjectPool(skill_1_prefab);
-
-        skill.ReleaseSkillEvent += SetHeavyAttackDir;
+         
     }
     public void SetPickUpSlash()
     {
@@ -33,11 +32,11 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     }
     public void SetSkill1()
     {
-        skill_1_pool.Get(transform.position + transform.right * 2+new Vector3(0,-1.5f,0), Quaternion.Euler(transform.eulerAngles.y,90,0), 3);
+        skill_1_pool.Get(transform.position + transform.right * 2+new Vector3(0,-1.5f,0), Quaternion.Euler(new Vector3(-Quaternion.FromToRotation(Vector2.right, _controller.skill_controller.SkillDirection).eulerAngles.z,90,0)), 3);
     }
     public void SetSlash(int index)
     {
-        if (_controller.isGround)
+        if (_controller.actor_state.isGround)
         {
             _rigi.ResetVelocity();
             _rigi.AddForce(transform.right * 5, ForceMode2D.Impulse);
@@ -59,53 +58,29 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     {
         GameObject temp;
  
-     
-        temp = heavy_sword_slash_pool.Get(transform.position + new Vector3(0, 2, 0), Quaternion.Euler(new Vector3(180-Quaternion.FromToRotation(Vector2.right, HeavyAttackDirection).eulerAngles.z,90,0)), 0.35f);
+        temp = heavy_sword_slash_pool.Get(transform.position + new Vector3(0, 2, 0), Quaternion.Euler(new Vector3(180-Quaternion.FromToRotation(Vector2.right, _controller.skill_controller.SkillDirection).eulerAngles.z,90,0)), 0.35f);
     }
-    public void OnSkill2Enter()
-    {
-       // GetComponentInParent<AfterImage>().IsUpdate = true;
-    }
-    public void OnSkill2Exit()
-    {
-      //  GetComponentInParent<AfterImage>().IsUpdate = false;
-    }
-
     public void OnAttackEnter()
     { 
-        if (!_controller.isGround)
+        if (!_controller.actor_state.isGround)
         {
              
             _controller._rigi.ResetVelocity();
             _controller._rigi.ClearGravity();
         }
-        _controller.isMoveable = false;
+        _controller.actor_state.isMoveable = false;
 
     }
     public void OnHeavyAttackEnter()
     {
         _controller._rigi.ResetVelocity();
         _controller._rigi.ClearGravity();
-        _controller.isInputable = false;
+        _controller.actor_state.isInputable = false;
     }
-    public Vector2 HeavyAttackDirection;
-    public SkillJoyStick skill;
-    public void SetHeavyAttackDir(Vector2 v)
-    {
-        HeavyAttackDirection = v;
-        _anim.SetTrigger("heavyattack");
-        if(HeavyAttackDirection.x>0)
-        {
-            _controller.transform.rotation = Quaternion.identity;
-        }
-        else if (HeavyAttackDirection.x < 0)
-        {
-            _controller.transform.rotation = Quaternion.Euler(0,180,0);
-        }
-    }
+ 
     public void HeavyAttackMove()
     {
-        _rigi.velocity = HeavyAttackDirection * 200;
+        _rigi.velocity = _controller.skill_controller.SkillDirection * 200;
         GetComponentInParent<AfterImage>().IsUpdate = true;
     }
     public void HeavyAttackReset()

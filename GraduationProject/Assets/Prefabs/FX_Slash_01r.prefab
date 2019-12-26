@@ -25,14 +25,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744892889613756}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.6532815, y: 0.27059805, z: 0.6532815, w: -0.27059805}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 5462736038625187204}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: -45, y: 90, z: 180}
 --- !u!198 &198598609680779244
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -267,7 +267,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 4.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -4860,16 +4860,16 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.6040994, y: 1.6342913}
-      - {x: -0.38479972, y: 0.29218104}
-      - {x: -0.31997323, y: -0.21380119}
-      - {x: -0.48786914, y: -0.439588}
-      - {x: -0.8067523, y: -0.8422462}
-      - {x: -1.4834831, y: -1.5529349}
+    - - {x: -3.0015554, y: 4.622845}
+      - {x: -5.928279, y: 1.2987208}
+      - {x: -2.5639806, y: -0.14399469}
+      - {x: -0.73388743, y: -0.74019}
+      - {x: -0.19846608, y: -1.1748259}
+      - {x: 0.078120805, y: -1.284003}
       - {x: 0.30241013, y: -1.7047346}
-      - {x: 3.5554018, y: -2.0482726}
+      - {x: 2.0771863, y: -4.19052}
       - {x: 4.3793287, y: 0.61098176}
-      - {x: 1.3677201, y: 4.1033077}
+      - {x: 3.1145089, y: 4.26975}
 --- !u!114 &780646753772537981
 MonoBehaviour:
   m_ObjectHideFlags: 0

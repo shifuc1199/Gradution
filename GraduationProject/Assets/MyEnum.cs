@@ -6,3 +6,7 @@ public enum HitType
     击飞,
     上挑
 }
+public enum SkillType
+{
+    
+}

@@ -35,17 +35,19 @@ public class BaseActorAnimationEvent : MonoBehaviour
   
      public void OnIdleEnter()
     {
-        if (!_controller.isGround)
+        if (!_controller.actor_state.isGround)
         {
             _controller._rigi.SetGravity(_controller.start_grivaty);
         }
         
-        _controller.isMoveable = true;
-        _controller.isInputable = true;
+        _controller.actor_state.isMoveable = true;
+        _controller.actor_state.isInputable = true;
 
     }
     public void ResetTrigger(string _name)
     {
         _anim.ResetTrigger(_name);
-    }
+ 
+   }
 }
+ 

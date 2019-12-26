@@ -7,10 +7,8 @@ using Werewolf.StatusIndicators.Components;
 public class SkillJoyStick : JoyStick
 {
     public int Skill_ID;
-
     public SplatManager splat_manager;
 
-    public Action<Vector2> ReleaseSkillEvent;
     private void Awake()
     {
       
@@ -25,7 +23,7 @@ public class SkillJoyStick : JoyStick
     {
         base.onJoystickUp(V);
         splat_manager.CancelSpellIndicator();
-        ReleaseSkillEvent?.Invoke(V);
+        ActorController._controller.skill_controller.ExecuteSkill(Skill_ID,V,V);
     }
     public override void onJoystickMove(Vector2 V)
     {
