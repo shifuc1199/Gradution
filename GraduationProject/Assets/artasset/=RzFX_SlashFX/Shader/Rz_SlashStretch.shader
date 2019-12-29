@@ -28,8 +28,7 @@ Shader "RzShader/Rz_SlashStretch" {
             #define UNITY_PASS_FORWARDBASE
             #include "UnityCG.cginc"
             #pragma multi_compile_fwdbase
-            #pragma only_renderers d3d9 d3d11 glcore gles 
-            #pragma target 3.0
+			#pragma target 3.0
             uniform float4 _TimeEditor;
             uniform float4 _Color;
             uniform sampler2D _MainTex; uniform float4 _MainTex_ST;
