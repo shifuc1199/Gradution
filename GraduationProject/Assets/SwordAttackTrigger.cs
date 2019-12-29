@@ -17,7 +17,7 @@ public class SwordAttackTrigger : BaseAttackTrigger
                 Camera.main.GetComponent< Cinemachine.CinemachineImpulseSource>().GenerateImpulse();
                 Time.timeScale = 0.2f;
             }
-            collision.gameObject.GetComponent<IHurt>().GetHurt(attack_type,()=> {
+                collision.gameObject.GetComponent<IHurt>().GetHurt(attack_type,()=> {
                 collision.gameObject.transform.rotation = ActorController._controller.transform.rotation;
             });
         }

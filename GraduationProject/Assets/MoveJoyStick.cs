@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MoveJoyStick : JoyStick
 {
-    public Image[] buttons;
+    
+    public Image up_button;
+    public Image right_button;
+    public Image left_button;
     public override void onJoystickDown(Vector2 V)
     {
         base.onJoystickDown(V);
@@ -13,9 +16,12 @@ public class MoveJoyStick : JoyStick
     public override void onJoystickUp(Vector2 V)
     {
         base.onJoystickUp(V);
-        buttons[2].CrossFadeColor(Color.white, 0.1f, true, true);
-        buttons[0].CrossFadeColor(Color.white, 0.1f, true, true);
-        buttons[1].CrossFadeColor(Color.white, 0.1f, true, true);
+        up_button.CrossFadeColor(Color.white, 0.1f, true, true);
+        left_button.CrossFadeColor(Color.white, 0.1f, true, true);
+        right_button.CrossFadeColor(Color.white, 0.1f, true, true);
+        ActorController._controller.actor_state.isAttackUp = false;
+        ActorController._controller.actor_state.isMoveRight = false;
+        ActorController._controller.actor_state.isMoveLeft = false;
     }
     public override void onJoystickMove(Vector2 V)
     {
@@ -28,21 +34,30 @@ public class MoveJoyStick : JoyStick
     {
         if (V.y >= 0.9f && Mathf.Abs(V.x) <= 0.8f)
         {
-            buttons[2].CrossFadeColor(Color.red, 0.1f, true, true);
-            buttons[0].CrossFadeColor(Color.white, 0.1f, true, true);
-            buttons[1].CrossFadeColor(Color.white, 0.1f, true, true);
+            ActorController._controller.actor_state.isAttackUp = true;
+            ActorController._controller.actor_state.isMoveRight = false;
+            ActorController._controller.actor_state.isMoveLeft = false;
+            up_button.CrossFadeColor(Color.red, 0.1f, true, true);
+            right_button.CrossFadeColor(Color.white, 0.1f, true, true);
+            left_button.CrossFadeColor(Color.white, 0.1f, true, true);
         }
         else if  (V.x > 0.8f && V.y< 0.8f)
         {
-            buttons[0].CrossFadeColor(Color.red, 0.1f, true, true);
-            buttons[1].CrossFadeColor(Color.white, 0.1f, true, true);
-            buttons[2].CrossFadeColor(Color.white, 0.1f, true, true);
+            ActorController._controller.actor_state.isAttackUp = false;
+            ActorController._controller.actor_state.isMoveRight = true;
+            ActorController._controller.actor_state.isMoveLeft = false;
+            right_button.CrossFadeColor(Color.red, 0.1f, true, true);
+            left_button.CrossFadeColor(Color.white, 0.1f, true, true);
+            up_button.CrossFadeColor(Color.white, 0.1f, true, true);
         }
         else if (V.x < -0.8f && V.y < 0.8f)
         {
-            buttons[1].CrossFadeColor(Color.red, 0.1f, true, true);
-            buttons[2].CrossFadeColor(Color.white, 0.1f, true, true);
-            buttons[0].CrossFadeColor(Color.white, 0.1f, true, true);
+            ActorController._controller.actor_state.isAttackUp = false;
+            ActorController._controller.actor_state.isMoveRight = false;
+            ActorController._controller.actor_state.isMoveLeft = true;
+            left_button.CrossFadeColor(Color.red, 0.1f, true, true);
+            right_button.CrossFadeColor(Color.white, 0.1f, true, true);
+            up_button.CrossFadeColor(Color.white, 0.1f, true, true);
         }
 
     }

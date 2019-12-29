@@ -6,19 +6,14 @@ using DreamerTool.FSM;
 public class ActorController : MonoBehaviour
 {
     public static ActorController _controller;
-    [System.NonSerialized]
-    public ActorSkillController skill_controller;
-    [System.NonSerialized]
-    public ActorState actor_state;
-    public Transform ground_check_pos;
-    public KeyCode attack_key = KeyCode.Mouse0;
-    public KeyCode jump_key = KeyCode.Space;
-    public KeyCode dash_key = KeyCode.LeftShift;
-    public KeyCode heavy_attack_key = KeyCode.Mouse1;
-    public float move_speed;
-    private Animator _anim;
+    [System.NonSerialized]public ActorSkillController skill_controller;
+    [System.NonSerialized]public ActorState actor_state;
     [System.NonSerialized] public Rigidbody2D _rigi;
     [System.NonSerialized] public float start_grivaty;
+    [System.NonSerialized] public Animator _anim;
+    public Transform ground_check_pos;
+    public float move_speed;
+     
     private void Awake()
     {
         _controller = this;
@@ -35,57 +30,51 @@ public class ActorController : MonoBehaviour
             _anim.SetBool("run", false);
             return;
         }
-        var h = Input.GetAxisRaw("Horizontal");
-        if (h != 0)
+        Vector2 move_dir=Vector2.zero;
+        if (actor_state.isMoveRight)
         {
-            transform.rotation = Quaternion.Euler(0, h > 0 ? 0 : 180, 0);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            move_dir = Vector2.right;
         }
-        _anim.SetBool("run", h != 0);
-        transform.Translate(new Vector2(h,0) * move_speed * Time.deltaTime, Space.World); 
-    }
-    
-
-    public void MobileAttack()
-    {
-        _anim.SetTrigger("attack");
+        if (actor_state.isMoveLeft)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            move_dir = Vector2.left;
+        }
+         
+        _anim.SetBool("run", actor_state.isMoveRight || actor_state.isMoveLeft);
+        transform.Translate(move_dir * move_speed * Time.deltaTime, Space.World); 
     }
     public void Attack()
     {
-        var v = Input.GetAxisRaw("Vertical");
-        if (Input.GetKeyDown(attack_key))
+        if (actor_state.isAttack)
         {
-            if(v>0)
+            if(actor_state.isAttackUp)
              _anim.SetTrigger("pickupattack");
             else
-            _anim.SetTrigger("attack"); 
+            _anim.SetTrigger("attack");
+
+            actor_state.isAttack = false;
+            
         }
-        if(Input.GetKeyDown(heavy_attack_key))
-        {
-            _anim.SetTrigger("heavyattack");
-        }
-        if (Input.GetKeyDown(KeyCode.F1))
-        {
-            _anim.SetTrigger("skill1");
-        }
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            _anim.SetTrigger("skill2");
-        }
+    
     }
    
     public  void Jump()
     {
-        if (Input.GetKeyDown(jump_key)&&actor_state.isGround)
+        if (actor_state.isJump && actor_state.isGround)
         {
             _rigi.ResetVelocity();
             _rigi.velocity = Vector2.up * 100;
+            actor_state.isJump = false;
         }
     }
     public void Dash()
     {
-        if(Input.GetKeyDown(dash_key))
+        if(actor_state.isDash)
         {
             _anim.SetTrigger("dash");
+            actor_state.isDash = false;
         }
     }
     public void StateCheck()

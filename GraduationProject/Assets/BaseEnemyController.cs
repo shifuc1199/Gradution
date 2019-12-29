@@ -12,6 +12,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
     public float start_gravity;
     public bool isGround;
     public Transform ground_check_pos;
+    
     private void Awake()
     {
 
@@ -25,6 +26,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
         hit_effect_pool.Get(transform.position + new Vector3(0, 2, 0), Quaternion.identity,0.5f);
         _anim.SetTrigger("Impact");
         hurt_call_back?.Invoke();
+ 
         switch (_type)
         {
             case HitType.普通:
@@ -46,6 +48,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
                 _rigi.AddForce(new Vector2(transform.right.x, 1).normalized * 40, ForceMode2D.Impulse);
                 break;
             case HitType.上挑:
+         
                 _rigi.ResetVelocity();
                 _rigi.AddForce(Vector2.up *50, ForceMode2D.Impulse);
                 break;
@@ -53,6 +56,13 @@ public class BaseEnemyController : MonoBehaviour,IHurt
                 break;
         }
         
+    }
+    public void IsLocked()
+    {
+
+        _rigi.ResetVelocity();
+        _rigi.ClearGravity();
+         
     }
     
  

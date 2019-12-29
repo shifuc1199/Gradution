@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-public class GameScene : MonoBehaviour
+using DreamerTool.UI;
+public class GameScene : Scene
 {
     public static GameScene _instance;
     float timer;
