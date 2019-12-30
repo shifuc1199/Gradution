@@ -7,6 +7,11 @@ public class PlayerView : View
     public override void OnShow()
     {
         base.OnShow();
-        CurrentScene.GetView<GameInfoView>().GetComponent<Animator>().enabled = true;
+        CurrentScene.GetView<GameInfoView>().HideAnim();
+    }
+    public override void OnHide()
+    {
+        base.OnHide();
+        CurrentScene.GetView<GameInfoView>().ShowAnim();
     }
 }

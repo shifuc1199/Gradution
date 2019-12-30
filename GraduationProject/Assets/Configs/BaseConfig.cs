@@ -11,12 +11,18 @@ public class BaseConfig<T> where T : BaseConfig<T>
     }
     static public JsonData LoadJson(string path)
     {
-        JsonData json = ResManager.GetJson(path);
+        JsonData json = "";
         if (json == null)
         {
             Debug.Log("Config Load Faild: " + path);
         }
         return json;
+    }
+    static public void Reload()
+    {
+        Datas.Clear();
+         TextAsset ta = Resources.Load<TextAsset>("all_config");
+        ConfigLoader.LoadFromJson(JsonMapper.ToObject(ta.text));
     }
     static public void LoadFromJson(JsonData data)
     {
@@ -29,7 +35,9 @@ public class BaseConfig<T> where T : BaseConfig<T>
         IDictionary<string,JsonData> dict = data.ToObject();
         foreach (var pair in dict)
         {
+
             T model = JsonMapper.ToObject<T>(pair.Value.ToJson());
+            
             model.OnLoadJsonEnded();
             Datas[int.Parse(pair.Key)] = model;
         }
@@ -42,6 +50,7 @@ public class BaseConfig<T> where T : BaseConfig<T>
             TextAsset ta = Resources.Load<TextAsset>("all_config");
             ConfigLoader.LoadFromJson(JsonMapper.ToObject(ta.text));
         }
+   
         if (Datas.ContainsKey(key))
         {
             return Datas[key];

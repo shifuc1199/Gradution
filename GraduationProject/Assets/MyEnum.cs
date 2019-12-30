@@ -6,6 +6,15 @@ public enum HitType
     击飞,
     上挑
 }
+public enum WeaponType
+{
+    刀,
+    法杖
+}
+public enum ItemType
+{
+    武器
+}
 public enum SkillType
 {
     

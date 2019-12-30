@@ -22,6 +22,6 @@ public class ActorInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ActorController._controller.actor_state.isAttackUp = Input.GetAxisRaw("Vertical") > 0;
     }
 }

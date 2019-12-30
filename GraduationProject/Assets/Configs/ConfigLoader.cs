@@ -8,6 +8,6 @@ public class ConfigLoader
 {
 	static public void LoadFromJson(JsonData json)
 	{
-		TestConfig.LoadFromJson(json["test"]);
+        WeaponConfig.LoadFromJson(json["Weapon"]);
 	}
 }
