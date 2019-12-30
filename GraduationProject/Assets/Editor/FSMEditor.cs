@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
-public class MyEditor : EditorWindow
+public class FSMEditor : EditorWindow
 {
-    MyEditor()
+    FSMEditor()
 
     {
 
@@ -15,13 +15,13 @@ public class MyEditor : EditorWindow
 
     //2.这是在哪里创建窗口
 
-    [MenuItem("Test/Test窗口")]
+    [MenuItem("DreamerEditor/FSM脚本模板")]
 
     static void CreateTestWindows()
 
     {
 
-        EditorWindow.GetWindow(typeof(MyEditor));
+        EditorWindow.GetWindow(typeof(FSMEditor));
 
     }
     private void OnEnable()

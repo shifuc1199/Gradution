@@ -17,7 +17,7 @@ public class MyEditorWindow : OdinMenuEditorWindow
     public ItemType config_type;
     public OdinMenuTree _tree;
     // Start is called before the first frame update
-        [MenuItem("mywindow/test")]
+        [MenuItem("DreamerEditor/物品编辑器")]
         private static void Open()
         {
             _window = GetWindow<MyEditorWindow>();
