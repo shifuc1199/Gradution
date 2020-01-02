@@ -67,5 +67,9 @@ namespace DreamerTool.UI
         {
             OnHide();
         }
+        public virtual void OnCloseClick()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }
