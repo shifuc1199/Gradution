@@ -6,7 +6,7 @@ using LitJson;
 using System.IO;
 using UnityEditor;
  using Sirenix.OdinInspector;
-public   class WeaponConfig : BaseConfig<WeaponConfig>
+public   class WeaponConfig : ItemConfig<WeaponConfig>
 {
 	[ReadOnly]
 	[BoxGroup("基础信息")]
@@ -18,7 +18,6 @@ public   class WeaponConfig : BaseConfig<WeaponConfig>
 	[BoxGroup("基础信息")]
 	[VerticalGroup("基础信息/p/o")]
 	public WeaponType 武器种类;/*nil*/
-    
 	[BoxGroup("基础信息")]
 	[VerticalGroup("基础信息/p/o")]
 	[TextArea()]
@@ -41,7 +40,7 @@ public   class WeaponConfig : BaseConfig<WeaponConfig>
 	[BoxGroup("属性信息")]
 	public double 暴击伤害;
 	[Button("保存",50)]
-	public void Save()
+	public override void Save()
 	{
 		TextAsset ta =Resources.Load<TextAsset>("all_config");
 		JsonData jd = JsonMapper.ToObject(ta.text);
