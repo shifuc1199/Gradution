@@ -4,11 +4,11 @@ using UnityEngine;
 using DreamerTool.UI;
 public class GameInfoView : View
 {
-    private InactiveButtons inactrive_buttons;
+    public InactiveButtons inactrive_buttons;
 
-    public void SetInactiveType(InactiveType _type)
+    public void SetInactiveType(InactiveType _type,ItemSprite item = null)
     {
-        inactrive_buttons.SetInactiveType(_type);
+        inactrive_buttons.SetInactiveType(_type,item);
     }
     public void ShowAnim()
     {

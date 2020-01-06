@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -61,11 +62,14 @@ public   class WeaponConfig : ItemConfig<WeaponConfig>
 		{
 			sw.Write(jd.ToJson());
 		}
-		AssetDatabase.Refresh();
-		MyEditorWindow._window.ForceMenuTreeRebuild();
+
+#if UNITY_EDITOR
+        AssetDatabase.Refresh();
+        MyEditorWindow._window.ForceMenuTreeRebuild();
 		MyEditorWindow._window.isCreate=false;
 		MyEditorWindow._window._tree.MenuItems[MyEditorWindow._window._tree.MenuItems.Count-1].Select();
-	}
+#endif
+    }
     public Sprite GetSprite()
     {
         return Resources.Load<Sprite>(图标名字);

@@ -71,5 +71,9 @@ namespace DreamerTool.UI
         {
             gameObject.SetActive(false);
         }
+        public virtual void OnShowClick()
+        {
+            gameObject.SetActive(true);
+        }
     }
 }
