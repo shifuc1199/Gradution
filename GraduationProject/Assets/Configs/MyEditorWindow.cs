@@ -38,8 +38,10 @@ public class MyEditorWindow : OdinMenuEditorWindow
                         
                     foreach(var item in WeaponConfig.Datas)
                     {
-                    // Adds the character overview table.
-                    _tree.Add(item.Value.武器名字,item.Value);
+
+                        // Adds the character overview table.
+ 
+                    _tree.Add(item.Value.物品名字,item.Value);
                         _tree.EnumerateTree().AddIcons<WeaponConfig>(x => x.GetSprite());
                     _tree.EnumerateTree().ForEach(AddDragHandles);
                     }
@@ -79,7 +81,7 @@ public class MyEditorWindow : OdinMenuEditorWindow
                 {
                     isCreate=true;
                      WeaponConfig w = new WeaponConfig();
-                     w.武器ID = _tree.MenuItems.Count+1;
+                     w.物品ID = _tree.MenuItems.Count+1;
                      _tree.Add("New Weapon",w);
                      _tree.MenuItems[_tree.MenuItems.Count-1].Select();
                       

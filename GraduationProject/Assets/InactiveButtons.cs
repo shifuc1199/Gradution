@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
+using DreamerTool.UI;
 public class InactiveButtons : SerializedMonoBehaviour
 {
     public ItemSprite current_stay_item;
@@ -23,16 +24,18 @@ public class InactiveButtons : SerializedMonoBehaviour
         this.inactive_type = _type;
         if (_type == InactiveType.攻击)
         {
+            main_inactive_image.GetComponent<RectTransform>().sizeDelta = new Vector2(110, 110);
             main_inactive_image.GetComponent<RectTransform>().anchoredPosition = new Vector2(-6.6f, -13.8f);
             main_inactive_image.sprite = WeaponConfig.Get(ActorController._controller.model.current_weapon_id).GetSprite();
         }
         else
         {
+            main_inactive_image.GetComponent<RectTransform>().sizeDelta = new Vector2(50, 50);
             main_inactive_image.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
             main_inactive_image.sprite = inactive_sprite_dic[_type];
         }
 
-        main_inactive_image.SetNativeSize();
+         
     }
     public void Inactive_Click()
     {
@@ -42,8 +45,18 @@ public class InactiveButtons : SerializedMonoBehaviour
                 ActorController._controller.actor_state.isAttack = true;
                 break;
             case InactiveType.拾取:
+                 
                 if(current_stay_item!=null)
                 {
+                    switch (current_stay_item.item_type)
+                    {
+                        case ItemType.武器:
+                            var _config = WeaponConfig.Get(current_stay_item.config_id);
+                            View.CurrentScene.GetView<PlayerInfoAndBagView>().bag_view.AddItem(_config);
+                            break;
+                        default:
+                            break;
+                    }
                     Destroy(current_stay_item.gameObject);
                 }
                 break;

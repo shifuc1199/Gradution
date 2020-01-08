@@ -6,6 +6,7 @@ public class ItemSprite : MonoBehaviour
 {
     public ItemType item_type;
     public int config_id;
+ 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))
@@ -28,7 +29,7 @@ public class ItemSprite : MonoBehaviour
         {
             case ItemType.武器:
                 GetComponent<SpriteRenderer>().sprite =  WeaponConfig.Get(config_id).GetSprite();
-                GetComponentInChildren<TextMesh>().text = WeaponConfig.Get(config_id).武器名字;
+                GetComponentInChildren<TextMesh>().text = WeaponConfig.Get(config_id).物品名字;
                 break;
     
             default:

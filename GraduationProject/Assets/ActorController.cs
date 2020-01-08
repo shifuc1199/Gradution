@@ -23,7 +23,7 @@ public class ActorController : MonoBehaviour
         _anim = GetComponentInChildren<Animator>();
         skill_controller = GetComponent<ActorSkillController>();
         actor_state = GetComponent<ActorState>();
-        model.current_weapon_id = 2;
+        model.current_weapon_id = 1;
     }
     public void Move()
     {

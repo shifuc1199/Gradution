@@ -27,7 +27,7 @@ public class GameScene : Scene
     {
         _instance = this;
         Application.targetFrameRate = 60;
-        View.CurrentScene.GetView<PlayerInfoAndBagView>().bag_view.AddItem(WeaponConfig.Get(2));
+ 
     }
 
     // Update is called once per frame
