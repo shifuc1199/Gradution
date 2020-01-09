@@ -8,21 +8,15 @@ using UnityEngine.UI;
 public class ItemUITip : MonoBehaviour
 {
     public Text _text;
-    public void SetConfig<T>(ItemConfig<T> _config) where T : BaseConfig<T>
+    public void SetConfig(ItemType type,int id) 
     {
- 
-        switch (typeof(T).Name)
+        switch (type)
         {
-            case "WeaponConfig":
-                var i = _config as WeaponConfig;
-                Debug.Log(i.物品名字);
+            case ItemType.武器:
+                var i = WeaponConfig.Get(id);
+                _text.text = "武器名字: "+i.物品名字 + "\n武器描述: " +i.物品描述+"\n武器阶级: " + i.物品阶级;
                 break;
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+ 
 }

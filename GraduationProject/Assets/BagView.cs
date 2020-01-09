@@ -28,11 +28,28 @@ public class BagView : MonoBehaviour
         ChooseGrid();
     }
 
-   
+    public void Equip()
+    {
+         
+        switch (CurretnSelect.itemtype)
+        {
+            case ItemType.武器:
+                int temp = ActorController._controller.model.Equipment[EquipmentType.武器];
+                ActorController._controller.model.Equipment[EquipmentType.武器] = CurretnSelect.config_id;
+                CurretnSelect.SetConfig(ItemType.武器, temp);
+                ItemUITip.SetConfig(ItemType.武器, temp);
+                break;
+            default:
+                break;
+        }
+         
+        EventHandler.OnChangeEquipment();
+    }
     private void OnEnable()
     {
         ChooseGrid();
     }
+ 
     public Transform GetEmptyGrid()
     {
         for(int i =0;i<grid_root.childCount;i++)
@@ -59,18 +76,10 @@ public class BagView : MonoBehaviour
             ItemUITip.gameObject.SetActive(true);
             ItemUITip.transform.position = Items[grid_index].transform.position;
             var itemui = Items[grid_index];
-            switch (itemui.itemtype)
-            {
-                case ItemType.武器:
-                    ItemUITip.SetConfig(WeaponConfig.Get(itemui.config_id));
-                    break;
-                default:
-                    break;
-            }
+            ItemUITip.SetConfig(itemui.itemtype,itemui.config_id);
         }
         else
         {
-           
             ItemUITip.gameObject.SetActive(false);
         }
         CurretnSelect = Items[grid_index];
@@ -78,13 +87,13 @@ public class BagView : MonoBehaviour
         
 
     }
-    public void AddItem<T>(ItemConfig<T> _config) where T:BaseConfig<T>
+    public void AddItem(int id, ItemType type) 
     {
         var grid = GetEmptyGrid();
         if(grid != null)
         {
             grid.GetChild(0).gameObject.SetActive(true);
-            grid.GetChild(0).GetComponent<ItemUI>().SetConfig(_config);
+            grid.GetChild(0).GetComponent<ItemUI>().SetConfig(type, id);
             Items.Add(grid.GetChild(0).GetComponent<ItemUI>());
         }
         

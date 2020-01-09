@@ -12,24 +12,42 @@ public class ItemUI : MonoBehaviour
     public ItemType itemtype;
     public GameObject select_frame;
  
-    public void SetConfig<T>(ItemConfig<T> _config) where T:BaseConfig<T>
+    public void SetConfig(ItemType t,int id) 
     {
-      
-        config_id = _config.物品ID;
-        GetComponent<Image>().sprite = _config.GetSprite();
-        switch (typeof(T).Name)
+        config_id = id;
+        itemtype = t;
+        switch (t)
         {
-            case "WeaponConfig":
-                itemtype = ItemType.武器;
+            case ItemType.腿部:
+                break;
+            case ItemType.裤子:
+                break;
+            case ItemType.肩膀:
+                break;
+            case ItemType.手腕:
+                break;
+            case ItemType.武器:
+                GetComponent<Image>().sprite = WeaponConfig.Get(id).GetSprite();
+                break;
+            case ItemType.上衣:
+                break;
+            case ItemType.消耗品:
+                break;
+            default:
                 break;
         }
+         
+     
     }
+ 
+ 
     public void Select()
     {
         select_frame.SetActive(true);
     }
     public void UnSelect()
     {
+        
         select_frame.SetActive(false);
     }
 

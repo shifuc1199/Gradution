@@ -23,19 +23,18 @@ public class ItemSprite : MonoBehaviour
         }
     }
     private void Awake()
-    {
-         
+    { 
         switch (item_type)
         {
             case ItemType.武器:
                 GetComponent<SpriteRenderer>().sprite =  WeaponConfig.Get(config_id).GetSprite();
                 GetComponentInChildren<TextMesh>().text = WeaponConfig.Get(config_id).物品名字;
+                GetComponentInChildren<TextMesh>().color = StaticData.ITEM_COLOR_DICT[WeaponConfig.Get(config_id).物品阶级];
                 break;
-    
             default:
                 break;
         }
-        if(!GetComponent<PolygonCollider2D>())
+        if (!GetComponent<PolygonCollider2D>())
         {
             gameObject.AddComponent<PolygonCollider2D>().isTrigger=true;
         }

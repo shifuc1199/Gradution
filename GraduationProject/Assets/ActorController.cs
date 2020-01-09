@@ -6,8 +6,8 @@ using DreamerTool.FSM;
 public class ActorController : MonoBehaviour
 {
     public static ActorController _controller;
-    [System.NonSerialized]public ActorSkillController skill_controller;
-    [System.NonSerialized]public ActorState actor_state;
+    [System.NonSerialized] public ActorSkillController skill_controller;
+    [System.NonSerialized] public ActorState actor_state;
     [System.NonSerialized] public Rigidbody2D _rigi;
     [System.NonSerialized] public float start_grivaty;
     [System.NonSerialized] public Animator _anim;
@@ -23,7 +23,7 @@ public class ActorController : MonoBehaviour
         _anim = GetComponentInChildren<Animator>();
         skill_controller = GetComponent<ActorSkillController>();
         actor_state = GetComponent<ActorState>();
-        model.current_weapon_id = 1;
+         
     }
     public void Move()
     {

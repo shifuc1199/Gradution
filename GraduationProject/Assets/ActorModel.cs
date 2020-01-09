@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ActorModel
 {
-    public int current_weapon_id;
-   
+    public Dictionary<EquipmentType, int> Equipment = new Dictionary<EquipmentType, int>()
+    {
+        { EquipmentType.武器,1}
+
+    };
+
 }

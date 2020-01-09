@@ -41,7 +41,7 @@ public class BagJoyStick : JoyStick
         if (isDown)
         {
             timer += Time.deltaTime;
-            if(timer>=0.1f)
+            if(timer>=0.08f)
             {
                 timer = 0;
                 if(move_action!=null)

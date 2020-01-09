@@ -12,6 +12,12 @@ public static class Extra
     {
         _rigi.gravityScale = 0; 
     }
+    public static Color GetColorByString(this string color_s)
+    {
+        Color result;
+        ColorUtility.TryParseHtmlString(color_s, out result);
+        return result;
+    }
     public static void SetGravity(this Rigidbody2D _rigi,float v)
     {
         _rigi.gravityScale = v;

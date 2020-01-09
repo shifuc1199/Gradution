@@ -14,15 +14,26 @@ public abstract class ItemConfig<T> : BaseConfig<T> where T: BaseConfig<T>
     public string 物品名字;/*nil*/
     [JsonNonField][HideLabel, PreviewField(100)][AssetsOnly][BoxGroup("基础信息")][HorizontalGroup("基础信息/p", 100)]
     public Sprite 编辑器图标 = null;
-    [BoxGroup("基础信息")][VerticalGroup("基础信息/p/o")][TextArea()]
-    public string 物品描述;/*nil*/
     [NonSerialized]
     public string 图标名字;
+ 
+    [BoxGroup("基础信息")]
+    [VerticalGroup("基础信息/p/o")]
+    public ItemLevel 物品阶级;
+    [BoxGroup("基础信息")]
+    [VerticalGroup("基础信息/p/o")]
+    [TextArea()]
+    public string 物品描述;/*nil*/
     public abstract void Save();
     public Sprite GetSprite()
     {
- 
         return Resources.Load<Sprite>(图标名字);
+    }
+    public void SetEditorSprite()
+    {
+         
+        if (编辑器图标 == null)
+            编辑器图标 = GetSprite();
     }
 }
  

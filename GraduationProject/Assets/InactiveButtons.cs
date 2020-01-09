@@ -26,7 +26,7 @@ public class InactiveButtons : SerializedMonoBehaviour
         {
             main_inactive_image.GetComponent<RectTransform>().sizeDelta = new Vector2(110, 110);
             main_inactive_image.GetComponent<RectTransform>().anchoredPosition = new Vector2(-6.6f, -13.8f);
-            main_inactive_image.sprite = WeaponConfig.Get(ActorController._controller.model.current_weapon_id).GetSprite();
+            main_inactive_image.GetComponent<EquipmentSprite>().UpdateIamgeSprite();
         }
         else
         {
@@ -48,15 +48,7 @@ public class InactiveButtons : SerializedMonoBehaviour
                  
                 if(current_stay_item!=null)
                 {
-                    switch (current_stay_item.item_type)
-                    {
-                        case ItemType.武器:
-                            var _config = WeaponConfig.Get(current_stay_item.config_id);
-                            View.CurrentScene.GetView<PlayerInfoAndBagView>().bag_view.AddItem(_config);
-                            break;
-                        default:
-                            break;
-                    }
+                    View.CurrentScene.GetView<PlayerInfoAndBagView>().bag_view.AddItem(current_stay_item.config_id,current_stay_item.item_type);
                     Destroy(current_stay_item.gameObject);
                 }
                 break;

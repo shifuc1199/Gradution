@@ -10,8 +10,7 @@ using UnityEditor;
 public   class WeaponConfig : ItemConfig<WeaponConfig>
 {
  
-    [BoxGroup("基础信息")]
-    [VerticalGroup("基础信息/p/o")]
+    [BoxGroup("属性信息")]
     public WeaponType 武器种类;/*nil*/
     [BoxGroup("属性信息")]
     public double 攻击力;
@@ -21,7 +20,8 @@ public   class WeaponConfig : ItemConfig<WeaponConfig>
 	public double 暴击率;
 	[BoxGroup("属性信息")]
 	public double 暴击伤害;
-	[Button("保存",50)]
+ 
+    [Button("保存",50)]
 	public override void Save()
 	{
 		TextAsset ta =Resources.Load<TextAsset>("all_config");
@@ -36,6 +36,7 @@ public   class WeaponConfig : ItemConfig<WeaponConfig>
 		data["图标名字"] = 编辑器图标 ? 编辑器图标.name:"";
         data["攻击力"] = 攻击力;
         data["法术强度"] = 法术强度;
+        data["物品阶级"] = (int)物品阶级;
         data["暴击率"] =暴击率;
 		data["暴击伤害"] = 暴击伤害;
 		jd["Weapon"][物品ID.ToString()] = data;
@@ -52,13 +53,7 @@ public   class WeaponConfig : ItemConfig<WeaponConfig>
 #endif
     }
  
-    public void SetEditorSprite()
-    {
-        if (编辑器图标 == null)
-            编辑器图标 = GetSprite();
-
-        
-    }
+ 
  
 
  

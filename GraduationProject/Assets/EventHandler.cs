@@ -4,5 +4,5 @@ using UnityEngine;
 using UnityEngine.Events;
 public static class EventHandler   
 {
-    
+    public static UnityAction OnChangeEquipment;
 }

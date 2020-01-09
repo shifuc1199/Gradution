@@ -4,5 +4,6 @@ using UnityEngine;
 using DreamerTool.UI;
 public class PlayerView : MonoBehaviour
 {
-    
+ 
+
 }
