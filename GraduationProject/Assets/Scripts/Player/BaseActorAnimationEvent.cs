@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DreamerTool.Extra;
 public class BaseActorAnimationEvent : MonoBehaviour
 {
     [System.NonSerialized]public Rigidbody2D _rigi;

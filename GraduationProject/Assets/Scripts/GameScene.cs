@@ -27,6 +27,7 @@ public class GameScene : Scene
     {
         _instance = this;
         Application.targetFrameRate = 60;
+        GameObjectPoolManager.InitByScriptableObject();
  
     }
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DreamerTool.Extra;
 public class BaseEnemyAnimationEvent : MonoBehaviour
 {
     private BaseEnemyController _controller;

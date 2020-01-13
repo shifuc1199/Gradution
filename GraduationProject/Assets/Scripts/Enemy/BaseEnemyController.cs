@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DreamerTool.UI;
+using DreamerTool.Extra;
 using UnityEngine.Events;
 using DreamerTool.GameObjectPool;
 public class BaseEnemyController : MonoBehaviour,IHurt
@@ -26,9 +27,11 @@ public class BaseEnemyController : MonoBehaviour,IHurt
         enemy_data = new BaseEnemyData(_config);
     }
      
-    public void GetHurt(HitType _type,UnityAction hurt_call_back=null)
+    public void GetHurt(double hurt_value,HitType _type,UnityAction hurt_call_back=null)
     {
-        enemy_data.SetHealth(-1);
+        enemy_data.SetHealth(-hurt_value);
+        var pop_text = GameObjectPoolManager.GetPool("pop_text").Get(transform.position, Quaternion.identity, 0.5f);
+        pop_text.GetComponent<PopText>().SetText(hurt_value.ToString());
         GameObjectPoolManager.GetPool("hit_effect_pool").Get(transform.position + new Vector3(0, 2, 0), Quaternion.identity,0.5f);
         _anim.SetTrigger("Impact");
         hurt_call_back?.Invoke();

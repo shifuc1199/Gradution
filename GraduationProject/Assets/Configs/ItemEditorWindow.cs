@@ -40,22 +40,32 @@ public class ItemEditorWindow : OdinMenuEditorWindow
                         
                     foreach(var item in WeaponConfig.Datas)
                     {
-
-                        // Adds the character overview table.
- 
                     _tree.Add(item.Value.物品名字,item.Value);
                      _tree.EnumerateTree().AddIcons<WeaponConfig>(x => x.GetSprite());
-                    _tree.EnumerateTree().ForEach(AddDragHandles);
+                    _tree.EnumerateTree().ForEach(AddDragHandles<WeaponConfig>);
                     }
                     }
                     break;
+            case ItemType.腿部:
+                FootConfig.Reload();
+                if (FootConfig.Count > 0)
+                {
+
+                    foreach (var item in FootConfig.Datas)
+                    {
+                        _tree.Add(item.Value.物品名字, item.Value);
+                        _tree.EnumerateTree().AddIcons<FootConfig>(x => x.GetSprite());
+                        _tree.EnumerateTree().ForEach(AddDragHandles<FootConfig>);
+                    }
+                }
+                break;
           
             }        
             return _tree;
         }
-    public void AddDragHandles(OdinMenuItem item)
+    public void AddDragHandles<T>(OdinMenuItem item) where T:ItemConfig<T>
     {
-        item.OnDrawItem += (t) => { (t.Value as WeaponConfig).SetEditorSprite(); };
+        item.OnDrawItem += (t) => { (t.Value as T).SetEditorSprite(); };
     }
     // Update is called once per frame
     protected override void OnBeginDrawEditors()
@@ -75,11 +85,35 @@ public class ItemEditorWindow : OdinMenuEditorWindow
                  SirenixEditorGUI.ToolbarTab(false,"");
                 if (SirenixEditorGUI.ToolbarButton(new GUIContent("    +   ")) && !isCreate)
                 {
-                    isCreate=true;
-                     WeaponConfig w = new WeaponConfig();
-                     w.物品ID = _tree.MenuItems.Count+1;
-                     _tree.Add("New Weapon",w);
-                     _tree.MenuItems[_tree.MenuItems.Count-1].Select(); 
+                     isCreate=true;
+                switch (config_type)
+                {
+                    case ItemType.腿部:
+                        FootConfig f = new FootConfig();
+                        f.物品ID = _tree.MenuItems.Count + 1;
+                        _tree.Add("New Foot", f);
+                        _tree.MenuItems[_tree.MenuItems.Count - 1].Select();
+                        break;
+                    case ItemType.裤子:
+                        break;
+                    case ItemType.肩膀:
+                        break;
+                    case ItemType.手腕:
+                        break;
+                    case ItemType.武器:
+                        WeaponConfig w = new WeaponConfig();
+                        w.物品ID = _tree.MenuItems.Count + 1;
+                        _tree.Add("New Weapon", w);
+                        _tree.MenuItems[_tree.MenuItems.Count - 1].Select();
+                        break;
+                    case ItemType.上衣:
+                        break;
+                    case ItemType.消耗品:
+                        break;
+                    default:
+                        break;
+                }
+             
                 }
             }
             SirenixEditorGUI.EndHorizontalToolbar();

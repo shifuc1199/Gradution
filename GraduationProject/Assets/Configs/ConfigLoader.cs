@@ -10,5 +10,7 @@ public class ConfigLoader
 	{
         WeaponConfig.LoadFromJson(json["Weapon"]);
         EnemyConfig.LoadFromJson(json["Enemy"]);
-	}
+        FootConfig.LoadFromJson(json["Foot"]);
+
+    }
 }

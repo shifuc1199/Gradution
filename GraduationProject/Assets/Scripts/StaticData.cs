@@ -4,8 +4,8 @@ Created by 师鸿博
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
- 
-public class StaticData  
+using DreamerTool.Extra;
+public static class StaticData  
 {
     /*白色 绿色 蓝色 黄色 紫色 橙色 红色 黑色*/
     public static Dictionary<ItemLevel, Color> ITEM_COLOR_DICT = new Dictionary<ItemLevel, Color>()
@@ -19,5 +19,7 @@ public class StaticData
         { ItemLevel.荣誉,Color.red },
         { ItemLevel.灵魂,Color.black },
     };
+
+
 
 }

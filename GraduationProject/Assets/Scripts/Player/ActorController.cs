@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DreamerTool.FSM;
+using DreamerTool.Extra;
 [RequireComponent(typeof(ActorSkillController),typeof(ActorState))]
 public class ActorController : MonoBehaviour
 {

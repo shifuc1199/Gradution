@@ -4,17 +4,25 @@ Created by 师鸿博
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using DG.Tweening;
+using TMPro;
 public class PopText : MonoBehaviour
 {
-    private Text _text;
+    private TextMeshPro _text;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        _text = GetComponentInChildren<Text>();
+        _text = GetComponentInChildren<TextMeshPro>();
+        
+    }
+    private void OnEnable()
+    {
+        _text.DOFade(1, 0);
     }
     public void SetText(string t)
     {
         _text.text = t;
+        transform.DOLocalMoveY(2, 0.5f).SetEase(Ease.Linear);
+        _text.DOFade(0,0.5f).SetEase(Ease.Linear);
     }
 }

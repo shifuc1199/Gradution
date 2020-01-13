@@ -16,7 +16,6 @@ public abstract class ItemConfig<T> : BaseConfig<T> where T: BaseConfig<T>
     public Sprite 编辑器图标 = null;
     [NonSerialized]
     public string 图标名字;
- 
     [BoxGroup("基础信息")]
     [VerticalGroup("基础信息/p/o")]
     public ItemLevel 物品阶级;
