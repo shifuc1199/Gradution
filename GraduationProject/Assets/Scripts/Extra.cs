@@ -8,6 +8,18 @@ public static class Extra
     {
         _rigi.velocity = Vector2.zero;
     }
+    public static void SetPositionX(this Transform tran,float x)
+    {
+        tran.position = new Vector3(x, tran.position.y, tran.position.z);
+    }
+    public static void SetPositionY(this Transform tran, float y)
+    {
+        tran.position = new Vector3(tran.position.x, y, tran.position.z);
+    }
+    public static void SetPositionZ(this Transform tran, float z)
+    {
+        tran.position = new Vector3(tran.position.x, tran.position.y, z);
+    }
     public static void ClearGravity(this Rigidbody2D _rigi)
     {
         _rigi.gravityScale = 0; 

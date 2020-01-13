@@ -40,16 +40,16 @@ public   class WeaponConfig : ItemConfig<WeaponConfig>
         data["暴击率"] =暴击率;
 		data["暴击伤害"] = 暴击伤害;
 		jd["Weapon"][物品ID.ToString()] = data;
-		using(StreamWriter sw = new StreamWriter(new FileStream("Assets/Resources/all_config.json",FileMode.OpenOrCreate)))
+		using(StreamWriter sw = new StreamWriter(new FileStream("Assets/Resources/all_config.json",FileMode.Truncate)))
 		{
 			sw.Write(jd.ToJson());
 		}
 
 #if UNITY_EDITOR
         AssetDatabase.Refresh();
-        MyEditorWindow._window.ForceMenuTreeRebuild();
-		MyEditorWindow._window.isCreate=false;
-		MyEditorWindow._window._tree.MenuItems[MyEditorWindow._window._tree.MenuItems.Count-1].Select();
+        ItemEditorWindow._window.ForceMenuTreeRebuild();
+		ItemEditorWindow._window.isCreate=false;
+		ItemEditorWindow._window._tree.MenuItems[ItemEditorWindow._window._tree.MenuItems.Count-1].Select();
 #endif
     }
  

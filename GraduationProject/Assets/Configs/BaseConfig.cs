@@ -21,7 +21,7 @@ public class BaseConfig<T> where T : BaseConfig<T>
     static public void Reload()
     {
         Datas.Clear();
-         TextAsset ta = Resources.Load<TextAsset>("all_config");
+        TextAsset ta = Resources.Load<TextAsset>("all_config");
         ConfigLoader.LoadFromJson(JsonMapper.ToObject(ta.text));
     }
     static public void LoadFromJson(JsonData data)

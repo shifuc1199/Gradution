@@ -102,13 +102,13 @@ public class StateBaseTemplate<T>:StateBase
 }
 namespace DreamerTool.GameObjectPool
 {
-    public class BaseGameObjectPool
+    public class GameObjectPool
     {
        
         private Queue<GameObject> object_pool_queue = new Queue<GameObject>();
         private GameObject _prefab;
 
-        public BaseGameObjectPool(GameObject _prefab)
+        public GameObjectPool(GameObject _prefab)
         {
             this._prefab = _prefab;
         }

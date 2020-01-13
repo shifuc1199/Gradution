@@ -9,5 +9,6 @@ public class ConfigLoader
 	static public void LoadFromJson(JsonData json)
 	{
         WeaponConfig.LoadFromJson(json["Weapon"]);
+        EnemyConfig.LoadFromJson(json["Enemy"]);
 	}
 }
