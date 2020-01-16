@@ -11,6 +11,9 @@ public class ConfigLoader
         WeaponConfig.LoadFromJson(json["Weapon"]);
         EnemyConfig.LoadFromJson(json["Enemy"]);
         FootConfig.LoadFromJson(json["Foot"]);
-
+        SleeveConfig.LoadFromJson(json["Sleeve"]);
+        ArmConfig.LoadFromJson(json["Arm"]);
+        PelvisConfig.LoadFromJson(json["Pelvis"]);
+        TorsoConfig.LoadFromJson(json["Torso"]);
     }
 }

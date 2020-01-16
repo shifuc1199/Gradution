@@ -33,39 +33,49 @@ public class ItemEditorWindow : OdinMenuEditorWindow
             _tree.Config.DrawSearchToolbar = true;
             switch(config_type)
             {
-                case ItemType.武器:
-                    WeaponConfig.Reload();
-                    if(WeaponConfig.Count>0)
-                    {
-                        
-                    foreach(var item in WeaponConfig.Datas)
-                    {
-                    _tree.Add(item.Value.物品名字,item.Value);
-                     _tree.EnumerateTree().AddIcons<WeaponConfig>(x => x.GetSprite());
-                    _tree.EnumerateTree().ForEach(AddDragHandles<WeaponConfig>);
-                    }
-                    }
-                    break;
-            case ItemType.腿部:
-                FootConfig.Reload();
-                if (FootConfig.Count > 0)
-                {
-
-                    foreach (var item in FootConfig.Datas)
-                    {
-                        _tree.Add(item.Value.物品名字, item.Value);
-                        _tree.EnumerateTree().AddIcons<FootConfig>(x => x.GetSprite());
-                        _tree.EnumerateTree().ForEach(AddDragHandles<FootConfig>);
-                    }
-                }
+             case ItemType.武器:
+                LoadItem<WeaponConfig>(ref _tree);
                 break;
-          
-            }        
+            case ItemType.上衣:
+                LoadItem<TorsoConfig>(ref _tree);
+                break;
+            case ItemType.手链:
+                LoadItem<SleeveConfig>(ref _tree);
+                break;
+            case ItemType.肩膀:
+                LoadItem<ArmConfig>(ref _tree);
+                break;
+            case ItemType.鞋子:
+                LoadItem<FootConfig>(ref _tree);
+                break;
+            case ItemType.裤子:
+                LoadItem<PelvisConfig>(ref _tree);
+                break;
+        }        
             return _tree;
         }
     public void AddDragHandles<T>(OdinMenuItem item) where T:ItemConfig<T>
     {
         item.OnDrawItem += (t) => { (t.Value as T).SetEditorSprite(); };
+    }
+    public void CreateItem<T>(T i,ref OdinMenuTree t) where T:ItemConfig<T>
+    {
+        i.物品ID = _tree.MenuItems.Count + 1;
+        _tree.Add("New "+typeof(T).Name, i);
+        _tree.MenuItems[_tree.MenuItems.Count - 1].Select();
+    }
+    public void LoadItem<T>(ref OdinMenuTree t) where T : ItemConfig<T>
+    {
+        ItemConfig<T>.Reload();
+        if (ItemConfig<T>.Count > 0)
+        {
+            foreach (var item in ItemConfig<T>.Datas)
+            {
+                t.Add(item.Value.物品名字, item.Value);
+                t.EnumerateTree().AddIcons<T>(x => x.GetSprite());
+                t.EnumerateTree().ForEach(AddDragHandles<T>);
+            }
+        }
     }
     // Update is called once per frame
     protected override void OnBeginDrawEditors()
@@ -74,46 +84,43 @@ public class ItemEditorWindow : OdinMenuEditorWindow
             var toolbarHeight = this.MenuTree.Config.SearchToolbarHeight;
             SirenixEditorGUI.BeginHorizontalToolbar(toolbarHeight);
             {
-            foreach (var temp in Enum.GetNames(typeof(ItemType)))
-            {
-                if (SirenixEditorGUI.ToolbarButton(new GUIContent("     "+temp+"    " )))
+                foreach (var temp in Enum.GetNames(typeof(ItemType)))
                 {
-                    config_type = (ItemType)Enum.Parse(typeof(ItemType),temp);
-                    ForceMenuTreeRebuild();
+                    if (SirenixEditorGUI.ToolbarButton(new GUIContent("     "+temp+"    " )))
+                    {
+                        config_type = (ItemType)Enum.Parse(typeof(ItemType),temp);
+                        ForceMenuTreeRebuild();
+                    }
                 }
-            }
-                 SirenixEditorGUI.ToolbarTab(false,"");
+                SirenixEditorGUI.ToolbarTab(false,"");
                 if (SirenixEditorGUI.ToolbarButton(new GUIContent("    +   ")) && !isCreate)
                 {
-                     isCreate=true;
-                switch (config_type)
-                {
-                    case ItemType.腿部:
-                        FootConfig f = new FootConfig();
-                        f.物品ID = _tree.MenuItems.Count + 1;
-                        _tree.Add("New Foot", f);
-                        _tree.MenuItems[_tree.MenuItems.Count - 1].Select();
-                        break;
-                    case ItemType.裤子:
-                        break;
-                    case ItemType.肩膀:
-                        break;
-                    case ItemType.手腕:
-                        break;
-                    case ItemType.武器:
-                        WeaponConfig w = new WeaponConfig();
-                        w.物品ID = _tree.MenuItems.Count + 1;
-                        _tree.Add("New Weapon", w);
-                        _tree.MenuItems[_tree.MenuItems.Count - 1].Select();
-                        break;
-                    case ItemType.上衣:
-                        break;
-                    case ItemType.消耗品:
-                        break;
-                    default:
-                        break;
-                }
-             
+                    isCreate=true;
+                    switch (config_type)
+                    {
+                        case ItemType.鞋子:
+                            CreateItem(new FootConfig(), ref _tree);
+                            break;
+                        case ItemType.裤子:
+                            CreateItem(new PelvisConfig(), ref _tree);
+                            break;
+                        case ItemType.肩膀:
+                            CreateItem(new ArmConfig(), ref _tree);
+                            break;
+                        case ItemType.手链:
+                            CreateItem(new SleeveConfig(), ref _tree);
+                            break;
+                        case ItemType.武器:
+                            CreateItem(new WeaponConfig(), ref _tree);
+                            break;
+                        case ItemType.上衣:
+                            CreateItem(new TorsoConfig(), ref _tree);
+                            break;
+                        case ItemType.消耗品:
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
             SirenixEditorGUI.EndHorizontalToolbar();

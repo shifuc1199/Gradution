@@ -26,7 +26,13 @@ public   class ActorModel
     };
     private Dictionary<EquipmentType, int> Equipment = new Dictionary<EquipmentType, int>()
     {
-        { EquipmentType.武器,1}
+        { EquipmentType.武器,1},
+         { EquipmentType.上衣,1},
+         { EquipmentType.肩膀右,1},
+         { EquipmentType.肩膀左,1},
+          { EquipmentType.手链,0},
+         { EquipmentType.裤子,1},
+         { EquipmentType.鞋子,1}
     };
     public void SetPlayerAttribute(PlayerAttribute attribute, double value)
     {

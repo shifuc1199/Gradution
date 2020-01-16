@@ -11,12 +11,13 @@
 }
 public enum EquipmentType
 {
-    腿部,
+    鞋子,
     裤子,
-    肩膀,
-    手腕,
+    肩膀左,
+    肩膀右,
+    手链,
     武器,
-    上衣
+    上衣,
 }
 public enum HitType
 {
@@ -43,10 +44,10 @@ public enum PlayerAttribute
 
 public enum ItemType
 {
-    腿部,
+    鞋子,
     裤子,
     肩膀,
-    手腕,
+    手链,
     武器,
     上衣,
     消耗品

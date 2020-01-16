@@ -24,13 +24,9 @@ public abstract class ItemConfig<T> : BaseConfig<T> where T: BaseConfig<T>
     [TextArea()]
     public string 物品描述;/*nil*/
     public abstract void Save();
-    public Sprite GetSprite()
-    {
-        return Resources.Load<Sprite>(图标名字);
-    }
+    public abstract Sprite GetSprite();
     public void SetEditorSprite()
     {
-         
         if (编辑器图标 == null)
             编辑器图标 = GetSprite();
     }

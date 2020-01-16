@@ -18,13 +18,13 @@ public class ItemUI : MonoBehaviour
         itemtype = t;
         switch (t)
         {
-            case ItemType.腿部:
+            case ItemType.鞋子:
                 break;
             case ItemType.裤子:
                 break;
             case ItemType.肩膀:
                 break;
-            case ItemType.手腕:
+            case ItemType.手链:
                 break;
             case ItemType.武器:
                 GetComponent<Image>().sprite = WeaponConfig.Get(id).GetSprite();

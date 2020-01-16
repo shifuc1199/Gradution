@@ -52,12 +52,16 @@ public   class WeaponConfig : ItemConfig<WeaponConfig>
 		ItemEditorWindow._window._tree.MenuItems[ItemEditorWindow._window._tree.MenuItems.Count-1].Select();
 #endif
     }
- 
- 
- 
+    public override Sprite GetSprite()
+    {
+        return Resources.Load<Sprite>("Weapons/"+ 图标名字);
+    }
 
- 
-	 
+
+
+
+
+
 }
  
 
