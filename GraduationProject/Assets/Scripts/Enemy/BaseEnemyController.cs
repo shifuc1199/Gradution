@@ -31,7 +31,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
     {
         enemy_data.SetHealth(-hurt_value);
         var pop_text = GameObjectPoolManager.GetPool("pop_text").Get(transform.position, Quaternion.identity, 0.5f);
-        pop_text.GetComponent<PopText>().SetText(hurt_value.ToString());
+        pop_text.GetComponent<PopText>().SetText(hurt_value.ToString(),Color.white);
         GameObjectPoolManager.GetPool("hit_effect_pool").Get(transform.position + new Vector3(0, 2, 0), Quaternion.identity,0.5f);
         _anim.SetTrigger("Impact");
         hurt_call_back?.Invoke();
@@ -45,6 +45,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
                 {
                     _rigi.ResetVelocity();
                     _rigi.ClearGravity();
+                    Debug.Log("受伤");
                 }
                 else
                 {
@@ -57,7 +58,6 @@ public class BaseEnemyController : MonoBehaviour,IHurt
                 _rigi.AddForce(new Vector2(transform.right.x, 1).normalized * 40, ForceMode2D.Impulse);
                 break;
             case HitType.上挑:
-         
                 _rigi.ResetVelocity();
                 _rigi.AddForce(Vector2.up *50, ForceMode2D.Impulse);
                 break;

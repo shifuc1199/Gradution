@@ -20,6 +20,7 @@ public class EnemyHealthBar : MonoBehaviour
         head.sprite = data.head;
         name_text.text = data.enemy_name;
         health_text.text = data.health + "/" + data.maxhealth;
+      
         health_bar.fillAmount = (float)(data.health / data.maxhealth);
     }
 }

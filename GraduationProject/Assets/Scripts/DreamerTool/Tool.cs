@@ -175,6 +175,7 @@ namespace DreamerTool.ScriptableObject
 }
 namespace DreamerTool.EditorTool
 {
+#if UNITY_EDITOR
     using System.IO;
     using UnityEngine;
     using UnityEditor;
@@ -260,7 +261,7 @@ namespace DreamerTool.EditorTool
             return path.Substring(0, path.Length - inset);
         }
     }
-
+#endif
 }
 
 namespace DreamerTool.Inactive

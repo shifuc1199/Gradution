@@ -8,9 +8,9 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MissileBody
-  m_Shader: {fileID: 4800000, guid: e3b829a0ccaed0d4083a62e66ddb12d5, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -19,8 +19,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _DistortTex:
-        m_Texture: {fileID: 2800000, guid: 67df11e656e080948be3ca7e9b530fe4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 001017bff094ea04c95b12a62ee3cc06, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -40,6 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - PixelSnap: 0
     - _Blur: 0.01
     - _BlurAmount: 0.02
     - _BlurX: 0
@@ -50,8 +55,10 @@ Material:
     - _BlurY2: 0.01
     - _ChargeAmount: 1
     - _Cutoff: 0
+    - _Distort: 0
     - _DistortX: 0.05
     - _DistortY: 0.1
+    - _EnableExternalAlpha: 0
     - _ExpandAmount: 0.351
     - _Fill: 1
     - _FillAmount: -0.0016666667
@@ -61,6 +68,9 @@ Material:
     - _Proportion: 0.448
     m_Colors:
     - _ChargeColor: {r: 0.11724138, g: 1, b: 0, a: 1}
+    - _Color: {r: 0.214289, g: 0.8962264, b: 0, a: 1}
     - _FillColor: {r: 0, g: 1, b: 0.13103485, a: 1}
-    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SecondaryColor: {r: 1, g: 0.55862063, b: 0, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 0.22014178, g: 0.9716981, b: 0, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SecondaryColor: {r: 0, g: 0.9528302, b: 0.1019543, a: 1}

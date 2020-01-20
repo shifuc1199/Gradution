@@ -12,6 +12,7 @@ public class BagJoyStick : JoyStick
     public Image up_button;
     public Image right_button;
     public Image left_button;
+    public Image down_button;
     float timer = 0;
     UnityAction move_action;
     public override void onJoystickDown(Vector2 V)
@@ -26,6 +27,13 @@ public class BagJoyStick : JoyStick
         up_button.CrossFadeColor(Color.white, 0.1f, true, true);
         left_button.CrossFadeColor(Color.white, 0.1f, true, true);
         right_button.CrossFadeColor(Color.white, 0.1f, true, true);
+        down_button.CrossFadeColor(Color.white, 0.1f, true, true);
+
+        if(timer<0.15f&&timer>0)
+        {
+            if (move_action != null)
+                move_action.Invoke();
+        }
         timer = 0;
         isDown = false;
 
@@ -41,7 +49,7 @@ public class BagJoyStick : JoyStick
         if (isDown)
         {
             timer += Time.deltaTime;
-            if(timer>=0.08f)
+            if(timer>=0.15f)
             {
                 timer = 0;
                 if(move_action!=null)
@@ -54,9 +62,20 @@ public class BagJoyStick : JoyStick
     {
         if (V.y >= 0.9f && Mathf.Abs(V.x) <= 0.8f)
         {
+            move_action = View.CurrentScene.GetView<PlayerInfoAndBagView>().bag_view.SelectUp;
             up_button.CrossFadeColor(Color.red, 0.1f, true, true);
             right_button.CrossFadeColor(Color.white, 0.1f, true, true);
             left_button.CrossFadeColor(Color.white, 0.1f, true, true);
+            down_button.CrossFadeColor(Color.white, 0.1f, true, true);
+        }
+        else if (V.y <= -0.9f && Mathf.Abs(V.x) <= 0.8f)
+        {
+            move_action = View.CurrentScene.GetView<PlayerInfoAndBagView>().bag_view.SelectDown;
+            down_button.CrossFadeColor(Color.red, 0.1f, true, true);
+            right_button.CrossFadeColor(Color.white, 0.1f, true, true);
+            left_button.CrossFadeColor(Color.white, 0.1f, true, true);
+            up_button.CrossFadeColor(Color.white, 0.1f, true, true);
+             
         }
         else if (V.x > 0.8f && V.y < 0.8f)
         {
@@ -64,6 +83,7 @@ public class BagJoyStick : JoyStick
             right_button.CrossFadeColor(Color.red, 0.1f, true, true);
             left_button.CrossFadeColor(Color.white, 0.1f, true, true);
             up_button.CrossFadeColor(Color.white, 0.1f, true, true);
+            down_button.CrossFadeColor(Color.white, 0.1f, true, true);
         }
         else if (V.x < -0.8f && V.y < 0.8f)
         {
@@ -71,6 +91,7 @@ public class BagJoyStick : JoyStick
             left_button.CrossFadeColor(Color.red, 0.1f, true, true);
             right_button.CrossFadeColor(Color.white, 0.1f, true, true);
             up_button.CrossFadeColor(Color.white, 0.1f, true, true);
+            down_button.CrossFadeColor(Color.white, 0.1f, true, true);
         }
 
     }

@@ -10,7 +10,22 @@ public class BagView : MonoBehaviour
     public ItemUI CurretnSelect;
     public List<ItemUI> Items = new List<ItemUI>();
     int grid_index = 0;
- 
+    public void SelectUp()
+    {
+
+        if (grid_index-5 <0)
+            return;
+        grid_index-=5;
+        ChooseGrid();
+    }
+    public void SelectDown()
+    {
+
+        if (grid_index+5 > Items.Count - 1)
+            return;
+        grid_index+=5;
+        ChooseGrid();
+    }
     public void SelectRight()
     {
          
@@ -38,6 +53,37 @@ public class BagView : MonoBehaviour
                 ActorController._controller.model.SetPlayerEquipment(EquipmentType.武器, CurretnSelect.config_id);  
                 CurretnSelect.SetConfig(ItemType.武器, temp);
                 ItemUITip.SetConfig(ItemType.武器, temp);
+                break;
+            case ItemType.肩膀:
+                int temp1 = ActorController._controller.model.GetPlayerEquipment(EquipmentType.肩膀右);
+                ActorController._controller.model.SetPlayerEquipment(EquipmentType.肩膀右, CurretnSelect.config_id);
+                ActorController._controller.model.SetPlayerEquipment(EquipmentType.肩膀左, CurretnSelect.config_id);
+                CurretnSelect.SetConfig(ItemType.肩膀, temp1);
+                ItemUITip.SetConfig(ItemType.肩膀, temp1);
+                break;
+            case ItemType.上衣:
+                int temp2 = ActorController._controller.model.GetPlayerEquipment(EquipmentType.上衣);
+                ActorController._controller.model.SetPlayerEquipment(EquipmentType.上衣, CurretnSelect.config_id);
+                CurretnSelect.SetConfig(ItemType.上衣, temp2);
+                ItemUITip.SetConfig(ItemType.上衣, temp2);
+                break;
+            case ItemType.手链:
+                int temp3= ActorController._controller.model.GetPlayerEquipment(EquipmentType.手链);
+                ActorController._controller.model.SetPlayerEquipment(EquipmentType.手链, CurretnSelect.config_id);
+                CurretnSelect.SetConfig(ItemType.手链, temp3);
+                ItemUITip.SetConfig(ItemType.手链, temp3);
+                break;
+            case ItemType.裤子:
+                int temp4 = ActorController._controller.model.GetPlayerEquipment(EquipmentType.裤子);
+                ActorController._controller.model.SetPlayerEquipment(EquipmentType.裤子, CurretnSelect.config_id);
+                CurretnSelect.SetConfig(ItemType.裤子, temp4);
+                ItemUITip.SetConfig(ItemType.裤子, temp4);
+                break;
+            case ItemType.鞋子:
+                int temp5 = ActorController._controller.model.GetPlayerEquipment(EquipmentType.鞋子);
+                ActorController._controller.model.SetPlayerEquipment(EquipmentType.鞋子, CurretnSelect.config_id);
+                CurretnSelect.SetConfig(ItemType.鞋子, temp5);
+                ItemUITip.SetConfig(ItemType.鞋子, temp5);
                 break;
             default:
                 break;
@@ -93,7 +139,7 @@ public class BagView : MonoBehaviour
         if(grid != null)
         {
             grid.GetChild(0).gameObject.SetActive(true);
-            grid.GetChild(0).GetComponent<ItemUI>().SetConfig(type, id);
+            grid.GetChild(0).GetComponent<ItemUI>().SetConfig(type, id,true);
             Items.Add(grid.GetChild(0).GetComponent<ItemUI>());
         }
         

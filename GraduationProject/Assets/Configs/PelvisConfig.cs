@@ -1,6 +1,7 @@
 ﻿/*****************************
 Created by 师鸿博
 *****************************/
+ 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,8 +15,7 @@ public class PelvisConfig : ItemConfig<PelvisConfig>
     [Button("保存", 50)]
     public override void Save()
     {
-        
-       
+#if UNITY_EDITOR
         TextAsset ta = Resources.Load<TextAsset>("all_config");
         JsonData jd = JsonMapper.ToObject(ta.text);
         if (jd["Pelvis"] == null)
@@ -31,13 +31,14 @@ public class PelvisConfig : ItemConfig<PelvisConfig>
         {
             sw.Write(jd.ToJson());
         }
-#if UNITY_EDITOR
+ 
         AssetDatabase.Refresh();
         ItemEditorWindow._window.ForceMenuTreeRebuild();
         ItemEditorWindow._window.isCreate = false;
         ItemEditorWindow._window._tree.MenuItems[ItemEditorWindow._window._tree.MenuItems.Count - 1].Select();
 #endif
     }
+
     public override Sprite GetSprite()
     {
  
@@ -46,3 +47,4 @@ public class PelvisConfig : ItemConfig<PelvisConfig>
 
 
 }
+ 

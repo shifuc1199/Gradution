@@ -1,6 +1,7 @@
 ﻿/*****************************
 Created by 师鸿博
 *****************************/
+ 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,8 +15,7 @@ public class SleeveConfig : ItemConfig<SleeveConfig>
     [Button("保存", 50)]
     public override void Save()
     {
-        
-       
+#if UNITY_EDITOR
         TextAsset ta = Resources.Load<TextAsset>("all_config");
         JsonData jd = JsonMapper.ToObject(ta.text);
         if (jd["Sleeve"] == null)
@@ -31,18 +31,18 @@ public class SleeveConfig : ItemConfig<SleeveConfig>
         {
             sw.Write(jd.ToJson());
         }
-#if UNITY_EDITOR
         AssetDatabase.Refresh();
         ItemEditorWindow._window.ForceMenuTreeRebuild();
         ItemEditorWindow._window.isCreate = false;
         ItemEditorWindow._window._tree.MenuItems[ItemEditorWindow._window._tree.MenuItems.Count - 1].Select();
 #endif
     }
+
     public override Sprite GetSprite()
     {
-        Debug.Log(图标名字);
+
         return Resources.Load<Sprite>(图标名字);
     }
 
-
+ 
 }

@@ -19,8 +19,9 @@ public class PopText : MonoBehaviour
     {
         _text.DOFade(1, 0);
     }
-    public void SetText(string t)
+    public void SetText(string t,Color c)
     {
+        _text.color = c;
         _text.text = t;
         transform.DOLocalMoveY(2, 0.5f).SetEase(Ease.Linear);
         _text.DOFade(0,0.5f).SetEase(Ease.Linear);

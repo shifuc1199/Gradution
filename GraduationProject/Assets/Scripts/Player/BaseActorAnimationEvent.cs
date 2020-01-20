@@ -15,6 +15,13 @@ public class BaseActorAnimationEvent : MonoBehaviour
     }
     public void OnDashEnter()
     {
+        if (!_controller.actor_state.isGround)
+        {
+
+            _controller._rigi.ResetVelocity();
+            _controller._rigi.ClearGravity();
+        }
+        _controller.actor_state.isInputable = false;
         _rigi.velocity = transform.right * 80;
         GetComponentInParent<AfterImage>().IsUpdate = true;
     }
@@ -28,6 +35,7 @@ public class BaseActorAnimationEvent : MonoBehaviour
     }
     public void OnDashExit()
     {
+        _controller.actor_state.isInputable = true;
         _rigi.velocity = Vector2.zero;
         GetComponentInParent<AfterImage>().IsUpdate = false;
 

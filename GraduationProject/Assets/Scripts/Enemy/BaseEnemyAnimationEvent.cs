@@ -13,7 +13,7 @@ public class BaseEnemyAnimationEvent : MonoBehaviour
     }
     public void OnStandEnter()
     {
-        
+        Debug.Log("stand");
         _rigi.SetGravity(_controller.start_gravity);
     }
 }

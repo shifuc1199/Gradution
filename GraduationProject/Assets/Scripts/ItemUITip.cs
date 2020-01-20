@@ -13,8 +13,28 @@ public class ItemUITip : MonoBehaviour
         switch (type)
         {
             case ItemType.武器:
-                var i = WeaponConfig.Get(id);
-                _text.text = "武器名字: "+i.物品名字 + "\n武器描述: " +i.物品描述+"\n武器阶级: " + i.物品阶级;
+                var i1 = WeaponConfig.Get(id);
+                _text.text = "武器名字: "+i1.物品名字 + "\n\n武器描述: " +i1.物品描述+"\n\n武器阶级: " + i1.物品阶级;
+                break;
+            case ItemType.上衣:
+                var i2 = TorsoConfig.Get(id);
+                _text.text = "武器名字: " + i2.物品名字 + "\n\n武器描述: " + i2.物品描述 + "\n\n武器阶级: " + i2.物品阶级;
+                break;
+            case ItemType.手链:
+                var i3 = SleeveConfig.Get(id);
+                _text.text = "武器名字: " + i3.物品名字 + "\n\n武器描述: " + i3.物品描述 + "\n\n武器阶级: " + i3.物品阶级;
+                break;
+            case ItemType.肩膀:
+                var i4 = ArmConfig.Get(id);
+                _text.text = "武器名字: " + i4.物品名字 + "\n\n武器描述: " + i4.物品描述 + "\n\n武器阶级: " + i4.物品阶级;
+                break;
+            case ItemType.裤子:
+                var i5 = PelvisConfig.Get(id);
+                _text.text = "武器名字: " + i5.物品名字 + "\n\n武器描述: " + i5.物品描述 + "\n\n武器阶级: " + i5.物品阶级;
+                break;
+            case ItemType.鞋子:
+                var i6 = FootConfig.Get(id);
+                _text.text = "武器名字: " + i6.物品名字 + "\n\n武器描述: " + i6.物品描述 + "\n\n武器阶级: " + i6.物品阶级;
                 break;
         }
     }

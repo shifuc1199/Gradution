@@ -52,10 +52,14 @@ public class ActorController : MonoBehaviour
     {
         if (actor_state.isAttack)
         {
-            if(actor_state.isAttackUp)
-             _anim.SetTrigger("pickupattack");
+            if (actor_state.isAttackUp)
+            {
+                _anim.SetTrigger("pickupattack");
+                 
+                 
+            }
             else
-            _anim.SetTrigger("attack");
+                _anim.SetTrigger("attack");
 
             actor_state.isAttack = false;
             

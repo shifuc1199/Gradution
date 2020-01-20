@@ -45,11 +45,10 @@ public class InactiveButtons : SerializedMonoBehaviour
                 ActorController._controller.actor_state.isAttack = true;
                 break;
             case InactiveType.拾取:
-                 
                 if(current_stay_item!=null)
                 {
                     View.CurrentScene.GetView<PlayerInfoAndBagView>().bag_view.AddItem(current_stay_item.config_id,current_stay_item.item_type);
-                    Destroy(current_stay_item.gameObject);
+                    Destroy(current_stay_item.transform.parent.gameObject);
                 }
                 break;
             default:

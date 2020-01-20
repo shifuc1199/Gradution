@@ -27,6 +27,8 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     {
        var temp = pick_up_slash_pool.Get(transform.position + new Vector3(0, 2, -5), Quaternion.Euler(-45, 90 * transform.right.x, 180),0.5f);
         temp.GetComponentInChildren<SwordAttackTrigger>().attack_type = HitType.上挑;
+        temp.transform.parent = transform.parent.parent;
+        temp.transform.localScale = Vector3.one * 1.5f;
     }
     public void SetSkill1()
     {
@@ -40,7 +42,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
             _rigi.AddForce(transform.right * 5, ForceMode2D.Impulse);
         }
         GameObject temp;
-        temp = sword_slash_pool.Get(transform.position + new Vector3(0, 2, -index), Quaternion.Euler(transform.eulerAngles.y, 90, transform.eulerAngles.y + effect_rotation[index]),0.5f);
+        temp = sword_slash_pool.Get(transform.position + new Vector3(0, 2, 0), Quaternion.Euler(transform.eulerAngles.y, 90, transform.eulerAngles.y + effect_rotation[index]),0.25f);
 
         if (index == 3)
         {
@@ -86,6 +88,11 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
         _rigi.velocity = Vector2.zero;
         GetComponentInParent<AfterImage>().IsUpdate = false;
          
+    }
+    public void PickUpAttackJump()
+    {
+        _rigi.ResetVelocity();
+        _rigi.velocity = Vector2.up * 100; 
     }
 
     public void OnAttackExit()
