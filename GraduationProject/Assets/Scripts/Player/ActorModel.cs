@@ -34,6 +34,14 @@ public   class ActorModel
          { EquipmentType.裤子,1},
          { EquipmentType.鞋子,1}
     };
+    private Dictionary<FaceType, int> Faces = new Dictionary<FaceType, int>()
+    {
+        { FaceType.发型,1},
+         { FaceType.嘴巴,1},
+         { FaceType.眼睛,1},
+         { FaceType.耳朵,1},
+          { FaceType.发饰,1},
+    };
     public void SetPlayerAttribute(PlayerAttribute attribute, double value)
     {
         PlayerAttributes[attribute] += value;
@@ -45,10 +53,22 @@ public   class ActorModel
     public void SetPlayerEquipment(EquipmentType equip, int id)
     {
         Equipment[equip] = id;
+        EventHandler.OnChangeEquipment();
     }
     public int GetPlayerEquipment(EquipmentType equip)
     {
         return Equipment[equip];
+    }
+    public void SetFace(FaceType face, int id)
+    {
+        Faces[face] = id;
+        if(EventHandler.OnChangeFace!=null)
+        EventHandler.OnChangeFace();
+    }
+    public int GetFace(FaceType face)
+    {
+ 
+        return Faces[face];
     }
     public double GetAttack()
     {

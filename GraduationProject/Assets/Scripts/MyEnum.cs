@@ -46,7 +46,8 @@ public enum FaceType
     眼睛,
     嘴巴,
     发型,
-    胡子,
+    耳朵,
+    发饰,
 }
 
 public enum ItemType

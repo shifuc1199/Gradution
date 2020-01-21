@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 namespace DreamerTool.UI
 {
     public class Scene : MonoBehaviour
@@ -44,6 +45,10 @@ namespace DreamerTool.UI
                 return null;
             _views[_name].gameObject.SetActive(false);
             return (T)_views[_name];
+        }
+        public void SceneChange(string scene_name)
+        {
+            SceneManager.LoadScene(scene_name);
         }
     }
 

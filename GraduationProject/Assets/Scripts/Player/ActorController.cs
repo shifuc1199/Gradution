@@ -12,7 +12,7 @@ public class ActorController : MonoBehaviour
     [System.NonSerialized] public Rigidbody2D _rigi;
     [System.NonSerialized] public float start_grivaty;
     [System.NonSerialized] public Animator _anim;
-    [System.NonSerialized] public ActorModel model=new ActorModel();
+ 
     public Transform ground_check_pos;
     public float move_speed;
      

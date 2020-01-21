@@ -14,6 +14,11 @@ public class ConfigLoader
         SleeveConfig.LoadFromJson(json["Sleeve"]);
         ArmConfig.LoadFromJson(json["Arm"]);
         PelvisConfig.LoadFromJson(json["Pelvis"]);
+        EyeConfig.LoadFromJson(json["EyeConfig"]);
+        MouthConfig.LoadFromJson(json["MouthConfig"]);
+        HairConfig.LoadFromJson(json["HairConfig"]);
+        EarConfig.LoadFromJson(json["EarConfig"]);
         TorsoConfig.LoadFromJson(json["Torso"]);
+        HairDecorateConfig.LoadFromJson(json["HairDecorateConfig"]);
     }
 }
