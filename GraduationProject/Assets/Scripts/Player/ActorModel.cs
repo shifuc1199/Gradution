@@ -62,8 +62,7 @@ public   class ActorModel
     public void SetFace(FaceType face, int id)
     {
         Faces[face] = id;
-        if(EventHandler.OnChangeFace!=null)
-        EventHandler.OnChangeFace();
+        EventHandler.OnChangeFace?.Invoke();
     }
     public int GetFace(FaceType face)
     {

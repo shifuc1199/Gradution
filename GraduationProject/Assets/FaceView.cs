@@ -14,7 +14,7 @@ public class FaceView : View
     // Start is called before the first frame update
     private void Awake()
     {
-        SetType(2);
+        SetType(0);
     }
     public void Select(FaceUICell cell)
     {

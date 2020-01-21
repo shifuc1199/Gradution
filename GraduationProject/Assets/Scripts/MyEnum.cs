@@ -43,9 +43,9 @@ public enum PlayerAttribute
 }
 public enum FaceType
 {
+    发型,
     眼睛,
     嘴巴,
-    发型,
     耳朵,
     发饰,
 }
