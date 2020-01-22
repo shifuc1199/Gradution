@@ -22,7 +22,7 @@ public class BaseActorAnimationEvent : MonoBehaviour
             _controller._rigi.ClearGravity();
         }
         _controller.actor_state.isInputable = false;
-        _rigi.velocity = transform.right * 80;
+        _rigi.velocity = transform.right * 150;
         GetComponentInParent<AfterImage>().IsUpdate = true;
     }
     public void OnDashUpdate()

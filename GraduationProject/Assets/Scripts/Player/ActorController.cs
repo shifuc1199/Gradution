@@ -52,7 +52,7 @@ public class ActorController : MonoBehaviour
     {
         if (actor_state.isAttack)
         {
-            if (actor_state.isAttackUp)
+            if (actor_state.isAttackUp && actor_state.isGround)
             {
                 _anim.SetTrigger("pickupattack");
                  
@@ -69,10 +69,13 @@ public class ActorController : MonoBehaviour
    
     public  void Jump()
     {
-        if (actor_state.isJump && actor_state.isGround)
+        if (actor_state.isJump)
         {
-            _rigi.ResetVelocity();
-            _rigi.velocity = Vector2.up * 100;
+            if (actor_state.isGround)
+            {
+                _rigi.ResetVelocity();
+                _rigi.velocity = Vector2.up * 100;
+            }
             actor_state.isJump = false;
         }
     }

@@ -19,6 +19,7 @@ public   class ActorModel
     {
         _model = this;
     }
+    public string actor_name;
     private Dictionary<PlayerAttribute, double> PlayerAttributes = new Dictionary<PlayerAttribute, double>()
     {
         { PlayerAttribute.攻击力,1},
