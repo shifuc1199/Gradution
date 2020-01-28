@@ -29,7 +29,8 @@ public enum HitType
 public enum InactiveType
 {
     攻击,
-    拾取
+    拾取,
+    交互
 }
 public enum WeaponType
 {
@@ -39,7 +40,9 @@ public enum WeaponType
 public enum PlayerAttribute
 {
     生命值,
-    攻击力
+    攻击力,
+    防御力,
+    能量值
 }
 public enum FaceType
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DreamerTool.FSM;
 using DreamerTool.Extra;
+using DreamerTool.UI;
 [RequireComponent(typeof(ActorSkillController),typeof(ActorState))]
 public class ActorController : MonoBehaviour
 {
@@ -25,6 +26,10 @@ public class ActorController : MonoBehaviour
         skill_controller = GetComponent<ActorSkillController>();
         actor_state = GetComponent<ActorState>();
          
+    }
+    public void Transfer(Transform point)
+    {
+        transform.position = point.position;
     }
     public void Move()
     {
@@ -74,7 +79,7 @@ public class ActorController : MonoBehaviour
             if (actor_state.isGround)
             {
                 _rigi.ResetVelocity();
-                _rigi.velocity = Vector2.up * 100;
+                _rigi.velocity = Vector2.up * 85;
             }
             actor_state.isJump = false;
         }

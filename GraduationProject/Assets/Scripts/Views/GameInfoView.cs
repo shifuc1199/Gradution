@@ -4,10 +4,13 @@ using UnityEngine;
 using DreamerTool.UI;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.Events;
 public class GameInfoView : View
 {
     public InactiveButtons inactrive_buttons;
     public EnemyHealthBar enemy_health;
+    public Image fade_image;
+    public ActorHUD hud;
     public GameObject pop_text;
     public void SetInactiveType(InactiveType _type,ItemSprite item = null)
     {
@@ -15,9 +18,11 @@ public class GameInfoView : View
     }
     Timer timer1=null;
     Timer timer2 = null;
-    public void Test()
+ 
+    public void FadeAnim(UnityAction action = null,float t = 1)
     {
-        SetPopText("qwqweqweqe", Color.white);
+        fade_image.DOFade(1, 0.5f).SetEase(Ease.Linear).onComplete = () => { action?.Invoke(); Timer.Register(t, () => { fade_image.DOFade(0, 0.5f).SetEase(Ease.Linear); }); };
+        
     }
     public void SetPopText(string v,Color c,float t=0.5f)
     {

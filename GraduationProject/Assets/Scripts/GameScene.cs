@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using DreamerTool.Util;
 using DreamerTool.UI;
 public class GameScene : Scene
 {
@@ -25,12 +26,17 @@ public class GameScene : Scene
     // Start is called before the first frame update
     void Start()
     {
+         
+        ActorModel model = new ActorModel();
         _instance = this;
         Application.targetFrameRate = 60;
-        GameObjectPoolManager.InitByScriptableObject();
- 
+        GameObjectPoolManager.InitByScriptableObject();  
     }
-
+    public void TransferPlayerByFadeAnim(Transform pos)
+    {
+        GetView<GameInfoView>().FadeAnim(() => { ActorController._controller.Transfer(pos);
+        Camera.main.GetComponent<Cinemachine.CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<Cinemachine.CinemachineConfiner>().m_BoundingShape2D = pos.gameObject.GetComponent<PolygonCollider2D>(); });
+    }
     // Update is called once per frame
     void Update()
     {

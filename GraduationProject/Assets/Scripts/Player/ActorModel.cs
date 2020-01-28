@@ -20,28 +20,46 @@ public   class ActorModel
         _model = this;
     }
     public string actor_name;
+    private double money;
+    public double health;
+    public double energy;
+    public void SetMoney(double m)
+    {
+        money += m;
+        EventHandler.OnChangeMoney();
+    }
+    public double GetMoney()
+    {
+        return money;
+    }
+    public double GetAttack()
+    {
+        return WeaponConfig.Get(Equipment[EquipmentType.武器]).攻击力;
+    }
     private Dictionary<PlayerAttribute, double> PlayerAttributes = new Dictionary<PlayerAttribute, double>()
     {
-        { PlayerAttribute.攻击力,1},
+        { PlayerAttribute.攻击力,100 },
         { PlayerAttribute.生命值,100 },
+        { PlayerAttribute.防御力,100 },
+        { PlayerAttribute.能量值,100 },
     };
     private Dictionary<EquipmentType, int> Equipment = new Dictionary<EquipmentType, int>()
     {
-        { EquipmentType.武器,1},
+         { EquipmentType.武器,1},
          { EquipmentType.上衣,1},
          { EquipmentType.肩膀右,1},
          { EquipmentType.肩膀左,1},
-          { EquipmentType.手链,1},
+         { EquipmentType.手链,1},
          { EquipmentType.裤子,1},
          { EquipmentType.鞋子,1}
     };
     private Dictionary<FaceType, int> Faces = new Dictionary<FaceType, int>()
     {
-        { FaceType.发型,1},
+         { FaceType.发型,1},
          { FaceType.嘴巴,1},
          { FaceType.眼睛,1},
          { FaceType.耳朵,1},
-          { FaceType.发饰,1},
+         { FaceType.发饰,1},
     };
     public void SetPlayerAttribute(PlayerAttribute attribute, double value)
     {
@@ -67,12 +85,8 @@ public   class ActorModel
     }
     public int GetFace(FaceType face)
     {
- 
         return Faces[face];
     }
-    public double GetAttack()
-    {
-        return WeaponConfig.Get(Equipment[EquipmentType.武器]).攻击力;
-    }
+ 
 
 }

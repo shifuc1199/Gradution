@@ -16,11 +16,19 @@ public class EnemyHealthBar : MonoBehaviour
    public void SetData(BaseEnemyData data)
     {
         this.data = data;
+        if (data.health==0)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
         gameObject.SetActive(true);
         head.sprite = data.head;
         name_text.text = data.enemy_name;
         health_text.text = data.health + "/" + data.maxhealth;
-      
         health_bar.fillAmount = (float)(data.health / data.maxhealth);
+    }
+    public BaseEnemyData GetData()
+    {
+        return data;
     }
 }

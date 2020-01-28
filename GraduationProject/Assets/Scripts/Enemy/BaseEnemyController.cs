@@ -4,35 +4,60 @@ using UnityEngine;
 using DreamerTool.UI;
 using DreamerTool.Extra;
 using UnityEngine.Events;
+using DreamerTool.ScriptableObject;
 using DreamerTool.GameObjectPool;
 public class BaseEnemyController : MonoBehaviour,IHurt
 {
-    public GameObject hit_prefab;
+    public int config_id;
     BaseEnemyData enemy_data;
- 
+    private AudioSource _audio;
     private Animator _anim;
     private Rigidbody2D _rigi;
-    public float start_gravity;
-    public bool isGround;
+   [System.NonSerialized] public float start_gravity;
+    [System.NonSerialized] public bool isGround;
     public Transform ground_check_pos;
-    public int  config_id;
+     
     EnemyConfig _config;
     private void Awake()
     {
         _config = EnemyConfig.Get(config_id);
+        _audio = GetComponent<AudioSource>();
         _anim = GetComponentInChildren<Animator>();
         _rigi = GetComponent<Rigidbody2D>();
         start_gravity = _rigi.gravityScale;
-        GameObjectPoolManager.AddPool("hit_effect_pool",hit_prefab);
-        enemy_data = new BaseEnemyData(_config);
+        enemy_data = new BaseEnemyData(_config,()=> {
+   
+            var coin = GameObjectPoolManager.GetPool("coin_effect").Get(transform.position + new Vector3(0, 1, 0), Quaternion.identity, 2f);
+            coin.GetComponent<CoinParticle>().transf = View.CurrentScene.GetView<GameInfoView>().hud.coin_icon.rectTransform;
+            var colliders = GetComponentsInChildren<PolygonCollider2D>();
+            var rigis = GetComponentsInChildren<Rigidbody2D>();
+            _anim.enabled = false;
+            foreach (var col in colliders)
+            {
+                col.enabled = true;
+            }
+            foreach (var rigi in rigis)
+            {
+                if (!rigi.simulated)
+                {
+                    rigi.simulated = true;
+                    rigi.AddTorque(2,ForceMode2D.Impulse);
+                    rigi.AddForce(new Vector3(Random.Range(-1f, 1f)*2, Random.Range(0f, 1f)*5, 0) ,ForceMode2D.Impulse);
+                }
+            }
+            _rigi.simulated = false;
+        });
+       
+
     }
      
     public void GetHurt(double hurt_value,HitType _type,UnityAction hurt_call_back=null)
     {
+        _audio.PlayOneShot(ScriptableObjectUtil.GetScriptableObject<AudioClips>().GetClip("hit"));
         enemy_data.SetHealth(-hurt_value);
         var pop_text = GameObjectPoolManager.GetPool("pop_text").Get(transform.position, Quaternion.identity, 0.5f);
         pop_text.GetComponent<PopText>().SetText(hurt_value.ToString(),Color.white);
-        GameObjectPoolManager.GetPool("hit_effect_pool").Get(transform.position + new Vector3(0, 2, 0), Quaternion.identity,0.5f);
+        GameObjectPoolManager.GetPool("hit_effect").Get(transform.position + new Vector3(0, 2, 0), Quaternion.identity,0.5f);
         _anim.SetTrigger("Impact");
         hurt_call_back?.Invoke();
         View.CurrentScene.GetView<GameInfoView>().enemy_health.SetData(enemy_data);
@@ -41,7 +66,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
             case HitType.普通:
                 break;
             case HitType.击退:
-                if (!isGround)
+                if (!isGround)  
                 {
                     _rigi.ResetVelocity();
                     _rigi.ClearGravity();

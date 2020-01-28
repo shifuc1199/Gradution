@@ -23,7 +23,7 @@ public class PopText : MonoBehaviour
     {
         _text.color = c;
         _text.text = t;
-        transform.DOLocalMoveY(2, 0.5f).SetEase(Ease.Linear);
+        transform.GetChild(0).DOLocalMoveY(2, 0.5f).SetEase(Ease.Linear);
         _text.DOFade(0,0.5f).SetEase(Ease.Linear);
     }
 }

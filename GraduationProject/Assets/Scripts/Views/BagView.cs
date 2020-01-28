@@ -5,11 +5,20 @@ using UnityEngine;
 using UnityEngine.UI;
 public class BagView : MonoBehaviour
 {
+    public Text money_text;
     public Transform grid_root;
     public ItemUITip ItemUITip;
     public ItemUI CurretnSelect;
     public List<ItemUI> Items = new List<ItemUI>();
     int grid_index = 0;
+    private void Awake()
+    {
+        SetMoney();
+    }
+    public void SetMoney()
+    {
+        money_text.text = ActorModel.Model.GetMoney().ToString();
+    }
     public void SelectUp()
     {
 
@@ -45,7 +54,8 @@ public class BagView : MonoBehaviour
 
     public void Equip()
     {
-        
+        if (CurretnSelect == null)
+            return;
         switch (CurretnSelect.itemtype)
         {
             case ItemType.武器:

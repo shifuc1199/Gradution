@@ -8,8 +8,10 @@ public class BaseEnemyAnimationEvent : MonoBehaviour
     private Rigidbody2D _rigi;
     private void Awake()
     {
+
         _controller = GetComponentInParent<BaseEnemyController>();
         _rigi = GetComponentInParent<Rigidbody2D>();
+       
     }
     public void OnStandEnter()
     {

@@ -10,6 +10,12 @@ namespace DreamerTool.Util
 {
     public static class Util
     {
+
+        public static double GetHurtValue(double a, double d)
+        {
+            return a * a / (a + d);
+        }
+         
         public static KeyValuePair<Tkey, Tvalue> Get<Tkey, Tvalue>(this Dictionary<Tkey, Tvalue> dict, int index)
         {
             int temp = 0;

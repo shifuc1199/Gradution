@@ -43,11 +43,9 @@ public class BaseActorAnimationEvent : MonoBehaviour
   
      public void OnIdleEnter()
     {
-        if (!_controller.actor_state.isGround)
-        {
+
             _controller._rigi.SetGravity(_controller.start_grivaty);
-        }
-        
+
         _controller.actor_state.isMoveable = true;
         _controller.actor_state.isInputable = true;
 
