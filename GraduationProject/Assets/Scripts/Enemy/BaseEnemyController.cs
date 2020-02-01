@@ -6,6 +6,7 @@ using DreamerTool.Extra;
 using UnityEngine.Events;
 using DreamerTool.ScriptableObject;
 using DreamerTool.GameObjectPool;
+using UnityEditor;
 public class BaseEnemyController : MonoBehaviour,IHurt
 {
     public int config_id;
@@ -13,8 +14,9 @@ public class BaseEnemyController : MonoBehaviour,IHurt
     private AudioSource _audio;
     private Animator _anim;
     private Rigidbody2D _rigi;
-   [System.NonSerialized] public float start_gravity;
+    [System.NonSerialized] public float start_gravity;
     [System.NonSerialized] public bool isGround;
+ 
     public Transform ground_check_pos;
      
     EnemyConfig _config;
@@ -29,6 +31,9 @@ public class BaseEnemyController : MonoBehaviour,IHurt
    
             var coin = GameObjectPoolManager.GetPool("coin_effect").Get(transform.position + new Vector3(0, 1, 0), Quaternion.identity, 2f);
             coin.GetComponent<CoinParticle>().transf = View.CurrentScene.GetView<GameInfoView>().hud.coin_icon.rectTransform;
+            var exp = GameObjectPoolManager.GetPool("exp_effect").Get(transform.position + new Vector3(0, 1, 0), Quaternion.identity, 1.85f);
+            exp.GetComponent<ExpParticle>().transf = View.CurrentScene.GetView<GameInfoView>().expbar.GetComponent<RectTransform>();
+
             var colliders = GetComponentsInChildren<PolygonCollider2D>();
             var rigis = GetComponentsInChildren<Rigidbody2D>();
             _anim.enabled = false;
@@ -42,7 +47,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
                 {
                     rigi.simulated = true;
                     rigi.AddTorque(2,ForceMode2D.Impulse);
-                    rigi.AddForce(new Vector3(Random.Range(-1f, 1f)*2, Random.Range(0f, 1f)*5, 0) ,ForceMode2D.Impulse);
+                    rigi.AddForce(new Vector3(Random.Range(-1f, 1f)*4f, Random.Range(0.5f, 1f)*5, 0) ,ForceMode2D.Impulse);
                 }
             }
             _rigi.simulated = false;
@@ -50,7 +55,11 @@ public class BaseEnemyController : MonoBehaviour,IHurt
        
 
     }
-     
+    [ContextMenu("123")]
+    private  void Change()
+    {
+
+    }
     public void GetHurt(double hurt_value,HitType _type,UnityAction hurt_call_back=null)
     {
         _audio.PlayOneShot(ScriptableObjectUtil.GetScriptableObject<AudioClips>().GetClip("hit"));
@@ -58,7 +67,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
         var pop_text = GameObjectPoolManager.GetPool("pop_text").Get(transform.position, Quaternion.identity, 0.5f);
         pop_text.GetComponent<PopText>().SetText(hurt_value.ToString(),Color.white);
         GameObjectPoolManager.GetPool("hit_effect").Get(transform.position + new Vector3(0, 2, 0), Quaternion.identity,0.5f);
-        _anim.SetTrigger("Impact");
+        
         hurt_call_back?.Invoke();
         View.CurrentScene.GetView<GameInfoView>().enemy_health.SetData(enemy_data);
         switch (_type)
@@ -70,17 +79,29 @@ public class BaseEnemyController : MonoBehaviour,IHurt
                 {
                     _rigi.ResetVelocity();
                     _rigi.ClearGravity();
-                    Debug.Log("受伤");
+                     
                 }
                 else
                 {
+                     
                     _rigi.ResetVelocity();
                     _rigi.AddForce(transform.right * 10, ForceMode2D.Impulse);
                 }
+                _anim.SetTrigger("hit");
                 break;
             case HitType.击飞:
+                _anim.SetTrigger("hitfly");
                 _rigi.ResetVelocity();
-                _rigi.AddForce(new Vector2(transform.right.x, 1).normalized * 40, ForceMode2D.Impulse);
+                if (isGround)
+                {
+                    
+                   
+                    _rigi.AddForce(new Vector2(transform.right.x, 1).normalized * 35, ForceMode2D.Impulse);
+                }
+                else
+                {
+                    _rigi.AddForce(new Vector2(transform.right.x, 0).normalized * 35, ForceMode2D.Impulse);
+                }
                 break;
             case HitType.上挑:
                 _rigi.ResetVelocity();
@@ -103,5 +124,6 @@ public class BaseEnemyController : MonoBehaviour,IHurt
     void Update()
     {
         isGround = Physics2D.OverlapCircle(ground_check_pos.position, 1, LayerMask.GetMask("Ground"));
+        _anim.SetBool("isground", isGround);
     }
 }

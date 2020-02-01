@@ -10,6 +10,7 @@ public class GameInfoView : View
     public InactiveButtons inactrive_buttons;
     public EnemyHealthBar enemy_health;
     public Image fade_image;
+    public ExpBar expbar;
     public ActorHUD hud;
     public GameObject pop_text;
     public void SetInactiveType(InactiveType _type,ItemSprite item = null)

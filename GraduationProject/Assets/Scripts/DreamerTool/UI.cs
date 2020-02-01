@@ -11,14 +11,22 @@ namespace DreamerTool.UI
     {
         public Transform _root;
         public Dictionary<string, View> _views = new Dictionary<string, View>();
-        private void Awake()
-        {
+        public virtual void Awake()
+        { 
             View.CurrentScene = this;
-            for (int i = 0; i < _root.childCount; i++)
+            if (_root)
             {
-                var child = _root.GetChild(i);
-                _views.Add(child.name, child.GetComponent<View>());
+                for (int i = 0; i < _root.childCount; i++)
+                {
+                    var child = _root.GetChild(i);
+                    _views.Add(child.name, child.GetComponent<View>());
+                }
             }
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
 
         public T OpenView<T>() where T : View
@@ -49,6 +57,10 @@ namespace DreamerTool.UI
         public void SceneChange(string scene_name)
         {
             SceneManager.LoadScene(scene_name);
+        }
+        public virtual void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene,LoadSceneMode mode)
+        {
+            GameObjectPool.GameObjectPoolManager.ClearAll();
         }
     }
 

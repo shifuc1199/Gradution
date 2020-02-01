@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1569116970}
   - component: {fileID: 1569116971}
+  - component: {fileID: 1551453282}
   m_Layer: 0
   m_Name: head decoration
   m_TagString: Untagged
@@ -80,6 +81,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1551453282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569116969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39fb6c61960ffc141aa790049b40cbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facetype: 4
 --- !u!1 &1254880501746647064
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,6 +187,7 @@ GameObject:
   - component: {fileID: 1258980058962158402}
   - component: {fileID: 1412769271450840058}
   - component: {fileID: 2132017142}
+  - component: {fileID: 5216677373139480379}
   m_Layer: 0
   m_Name: ArmR[Armor]
   m_TagString: Untagged
@@ -244,6 +259,19 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &2132017142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254937561391125536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0111c17f98e43c4b931ab01b187fddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipment_type: 3
+--- !u!114 &5216677373139480379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -427,6 +455,7 @@ GameObject:
   - component: {fileID: 1254043640994367852}
   - component: {fileID: 1412708970797270320}
   - component: {fileID: 361979173}
+  - component: {fileID: 8826792360480691685}
   m_Layer: 0
   m_Name: SleeveR[Armor]
   m_TagString: Untagged
@@ -498,6 +527,19 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &361979173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255506406685527694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0111c17f98e43c4b931ab01b187fddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipment_type: 4
+--- !u!114 &8826792360480691685
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -963,6 +1005,7 @@ GameObject:
   - component: {fileID: 1259187680460946342}
   - component: {fileID: 1411917819514798344}
   - component: {fileID: 738444284}
+  - component: {fileID: 748599290146052546}
   m_Layer: 0
   m_Name: Shin[Armor]
   m_TagString: Untagged
@@ -1034,6 +1077,19 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &738444284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256189078744097064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0111c17f98e43c4b931ab01b187fddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipment_type: 0
+--- !u!114 &748599290146052546
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1538,6 +1594,7 @@ GameObject:
   - component: {fileID: 2082098983776570165}
   - component: {fileID: 2162040245276219277}
   - component: {fileID: 1913121123}
+  - component: {fileID: 4134897580354816272}
   m_Layer: 0
   m_Name: Torso[Armor]
   m_TagString: Untagged
@@ -1609,6 +1666,19 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &1913121123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085211350523062581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0111c17f98e43c4b931ab01b187fddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipment_type: 6
+--- !u!114 &4134897580354816272
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2078,6 +2148,7 @@ GameObject:
   - component: {fileID: 2088188683376824409}
   - component: {fileID: 2163126218113832831}
   - component: {fileID: 489949751}
+  - component: {fileID: 4028756035554863794}
   m_Layer: 0
   m_Name: ArmL[Armor]
   m_TagString: Untagged
@@ -2149,6 +2220,19 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &489949751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085348765592565391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0111c17f98e43c4b931ab01b187fddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipment_type: 2
+--- !u!114 &4028756035554863794
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2253,6 +2337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2088010385509314183}
   - component: {fileID: 2163496545965986763}
+  - component: {fileID: 548903961}
   m_Layer: 0
   m_Name: Ears
   m_TagString: Untagged
@@ -2311,7 +2396,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: 813d4b92d583a0641b270ada1c3bb201, type: 3}
   m_Color: {r: 1, g: 0.74509805, b: 0.47058824, a: 1}
   m_FlipX: 0
@@ -2323,6 +2408,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &548903961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085353880778046835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39fb6c61960ffc141aa790049b40cbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facetype: 3
 --- !u!1 &2085418547718853723
 GameObject:
   m_ObjectHideFlags: 0
@@ -2609,6 +2707,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2088146914191486619}
   - component: {fileID: 2163727500521780169}
+  - component: {fileID: 1497754070}
   m_Layer: 0
   m_Name: Eyes
   m_TagString: Untagged
@@ -2669,7 +2768,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 8
   m_Sprite: {fileID: 21300000, guid: acf45409c01770146b48557778ef7558, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.2160201, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2679,6 +2778,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1497754070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085481890830145217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39fb6c61960ffc141aa790049b40cbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facetype: 0
 --- !u!1 &2085515813340826475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2850,6 +2962,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2081866523740382359}
   - component: {fileID: 2163006087882369043}
+  - component: {fileID: 435745400}
   m_Layer: 0
   m_Name: Hair
   m_TagString: Untagged
@@ -2920,6 +3033,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &435745400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085545397782482793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39fb6c61960ffc141aa790049b40cbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facetype: 2
 --- !u!1 &2085575963375057449
 GameObject:
   m_ObjectHideFlags: 0
@@ -3334,6 +3460,7 @@ GameObject:
   - component: {fileID: 2082265970288404887}
   - component: {fileID: 2163651617056258631}
   - component: {fileID: 220847940}
+  - component: {fileID: 5976815146387465959}
   m_Layer: 0
   m_Name: Pelvis[Armor]
   m_TagString: Untagged
@@ -3405,6 +3532,19 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &220847940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085866470111120281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0111c17f98e43c4b931ab01b187fddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipment_type: 1
+--- !u!114 &5976815146387465959
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3646,14 +3786,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2b2f6be71b3cb64698ae2f8caf162ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupslash_prefab: {fileID: 1744892889613756, guid: c1e567eee10444e4a9c7ec481f0c42b3,
-    type: 3}
-  sword_slash_prefab: {fileID: 1744892889613756, guid: aac396b00750bc34ca32101a49023a35,
-    type: 3}
-  heavy_sword_slash_prefab: {fileID: 1744892889613756, guid: 3e54e5bc5065cdb469f03f82eb7e408a,
-    type: 3}
-  skill_1_prefab: {fileID: 1124449426615244, guid: a35b16e7951d777478c0cc737aab4d71,
-    type: 3}
 --- !u!114 &1256446254811237297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3876,6 +4008,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2088107979339126609}
   - component: {fileID: 2163526854910927103}
+  - component: {fileID: 1772925713}
   m_Layer: 0
   m_Name: Mouth
   m_TagString: Untagged
@@ -3946,6 +4079,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1772925713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087000745305850981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39fb6c61960ffc141aa790049b40cbe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  facetype: 1
 --- !u!1 &2087022722370472571
 GameObject:
   m_ObjectHideFlags: 0
@@ -4069,6 +4215,7 @@ GameObject:
   - component: {fileID: 6300063591194159250}
   - component: {fileID: 6165420418039190076}
   - component: {fileID: 1699988808}
+  - component: {fileID: 5558064530292985635}
   m_Layer: 0
   m_Name: Shin[Armor]
   m_TagString: Untagged
@@ -4140,6 +4287,19 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &1699988808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6303134836975972892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0111c17f98e43c4b931ab01b187fddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipment_type: 0
+--- !u!114 &5558064530292985635
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13853,7 +14013,7 @@ Transform:
   m_GameObject: {fileID: 7893900100093703553}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -16.05, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2.4, y: 2.4, z: 2}
   m_Children:
   - {fileID: 2088019740726631533}
   - {fileID: 6922130410297177944}
@@ -13872,6 +14032,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8c7675e4d9eda4bbc6d251b1a367b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelUpEffect: {fileID: 0}
   ground_check_pos: {fileID: 6922130410297177944}
   move_speed: 30
 --- !u!50 &7893900100093703552
@@ -13889,7 +14050,7 @@ Rigidbody2D:
   m_Mass: 0.3
   m_LinearDrag: 0.5
   m_AngularDrag: 0.05
-  m_GravityScale: 20
+  m_GravityScale: 15
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

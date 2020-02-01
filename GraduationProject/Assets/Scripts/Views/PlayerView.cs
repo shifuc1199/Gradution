@@ -7,11 +7,19 @@ using DreamerTool.UI;
 public class PlayerView : MonoBehaviour
 {
     public Text player_name_text;
+    public Text player_level_text;
     public Text player_attribute_text;
     private void Awake()
     {
         SetPlayAttributeText();
         player_name_text.text = ActorModel.Model.actor_name ;
+        SetPlayerLevel();
+
+        EventHandler.OnChangeLevel += SetPlayerLevel;
+    }
+   public void SetPlayerLevel()
+    {
+        player_level_text.text ="LV  " +ActorModel.Model.GetLevel();
     }
     public void SetPlayAttributeText()
     {

@@ -66,7 +66,7 @@ namespace Werewolf.StatusIndicators.Components {
 		/// Scale Range Indicator to be same as Splat Range.
 		/// </summary>
 		private void UpdateRangeIndicatorSize() {
-            Debug.Log("123");
+ 
 			if(RangeIndicator != null)
 				RangeIndicator.Scale = range * 2.1f;
 		}

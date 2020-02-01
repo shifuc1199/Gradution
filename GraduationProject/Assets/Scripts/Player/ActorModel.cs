@@ -19,19 +19,17 @@ public   class ActorModel
     {
         _model = this;
     }
+
     public string actor_name;
+
     private double money;
-    public double health;
-    public double energy;
-    public void SetMoney(double m)
-    {
-        money += m;
-        EventHandler.OnChangeMoney();
-    }
-    public double GetMoney()
-    {
-        return money;
-    }
+    private double health;
+    private double energy;
+    private int level = 1;
+    private int exp;
+    private int max_exp=100;
+
+    
     public double GetAttack()
     {
         return WeaponConfig.Get(Equipment[EquipmentType.武器]).攻击力;
@@ -87,6 +85,43 @@ public   class ActorModel
     {
         return Faces[face];
     }
- 
+    public void SetMoney(double m)
+    {
+        money += m;
+        EventHandler.OnChangeMoney();
+    }
+    public double GetMoney()
+    {
+        return money;
+    }
+    public void SetLevel(int l)
+    {
+        level += l;
+        EventHandler.OnChangeLevel();
+    }
+    public int GetLevel()
+    {
+        return level;
+    }
+    public void SetExp(int exp)
+    {
+        this.exp += exp;
+        if(this.exp>=max_exp)
+        {
+            SetLevel(this.exp / max_exp);
+            this.exp = this.exp % max_exp;
+             
+        }
+        EventHandler.OnChangeExp();
+    }
+    public int GetMaxExp()
+    {
+        return max_exp;
+    }
+    public int GetExp()
+    {
+        return exp;
+    }
+
 
 }

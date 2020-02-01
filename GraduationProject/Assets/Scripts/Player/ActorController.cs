@@ -13,7 +13,7 @@ public class ActorController : MonoBehaviour
     [System.NonSerialized] public Rigidbody2D _rigi;
     [System.NonSerialized] public float start_grivaty;
     [System.NonSerialized] public Animator _anim;
- 
+    public GameObject LevelUpEffect;
     public Transform ground_check_pos;
     public float move_speed;
      
@@ -25,7 +25,9 @@ public class ActorController : MonoBehaviour
         _anim = GetComponentInChildren<Animator>();
         skill_controller = GetComponent<ActorSkillController>();
         actor_state = GetComponent<ActorState>();
-         
+
+
+        EventHandler.OnChangeLevel += () => { LevelUpEffect.SetActive(true); };
     }
     public void Transfer(Transform point)
     {
