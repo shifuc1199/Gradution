@@ -13,9 +13,10 @@ public class BaseEnemyAnimationEvent : MonoBehaviour
         _rigi = GetComponentInParent<Rigidbody2D>();
        
     }
+
     public void OnStandEnter()
     {
-        Debug.Log("stand");
+        
         _rigi.SetGravity(_controller.start_gravity);
     }
 }

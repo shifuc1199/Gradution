@@ -18,7 +18,9 @@ public class ConfigLoader
         MouthConfig.LoadFromJson(json["MouthConfig"]);
         HairConfig.LoadFromJson(json["HairConfig"]);
         EarConfig.LoadFromJson(json["EarConfig"]);
+        SkillConfig.LoadFromJson(json["Skill"]);
         TorsoConfig.LoadFromJson(json["Torso"]);
+        ShieldConfig.LoadFromJson(json["Shield"]);
         HairDecorateConfig.LoadFromJson(json["HairDecorateConfig"]);
     }
 }

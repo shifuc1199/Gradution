@@ -8,14 +8,14 @@ public class MoveJoyStick : JoyStick
     public Image up_button;
     public Image right_button;
     public Image left_button;
-    public override void onJoystickDown(Vector2 V)
+    public override void onJoystickDown(Vector2 V,float R)
     {
-        base.onJoystickDown(V);
+        base.onJoystickDown(V,R);
         ChangeButton(V);
     }
-    public override void onJoystickUp(Vector2 V)
+    public override void onJoystickUp(Vector2 V, float R)
     {
-        base.onJoystickUp(V);
+        base.onJoystickUp(V,R);
         up_button.CrossFadeColor(Color.white, 0.1f, true, true);
         left_button.CrossFadeColor(Color.white, 0.1f, true, true);
         right_button.CrossFadeColor(Color.white, 0.1f, true, true);
@@ -23,9 +23,9 @@ public class MoveJoyStick : JoyStick
         ActorController._controller.actor_state.isMoveRight = false;
         ActorController._controller.actor_state.isMoveLeft = false;
     }
-    public override void onJoystickMove(Vector2 V)
+    public override void onJoystickMove(Vector2 V, float R)
     {
-        base.onJoystickMove(V);
+        base.onJoystickMove(V,R);
         ChangeButton(V);
     }
 

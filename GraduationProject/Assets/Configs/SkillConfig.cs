@@ -12,7 +12,8 @@ public class SkillConfig :  BaseConfig<SkillConfig>
 {
     [ReadOnly]
     public int ID;
-    public string SkillName;
+    public string skill_name;
+    public SkillType skill_type;
     [System.NonSerialized]
     public string sprite_path;
     [PreviewField(100)]
@@ -29,8 +30,10 @@ public class SkillConfig :  BaseConfig<SkillConfig>
             jd["Skill"] = new JsonData();
         JsonData data = new JsonData();
         data["ID"] = ID;
+        data["skill_type"] = (int)skill_type;
+        data["skill_name"] = skill_name;
         data["sprite_path"] = editor_sprite ? AssetDatabase.GetAssetPath(editor_sprite).Substring(0, AssetDatabase.GetAssetPath(editor_sprite).Length - 4).Substring(17) : "";
-        jd["Skill"] = data;
+        jd["Skill"][ID.ToString()] = data;
         using (StreamWriter sw = new StreamWriter(new FileStream("Assets/Resources/all_config.json", FileMode.Truncate)))
         {
             sw.Write(jd.ToJson());
@@ -39,6 +42,7 @@ public class SkillConfig :  BaseConfig<SkillConfig>
         AssetDatabase.Refresh();
         SkillEditorWindow._window.ForceMenuTreeRebuild();
         SkillEditorWindow._window.isCreate = false;
+        if(SkillEditorWindow._window._tree.MenuItems.Count>0)
         SkillEditorWindow._window._tree.MenuItems[SkillEditorWindow._window._tree.MenuItems.Count - 1].Select();
 #endif
     }

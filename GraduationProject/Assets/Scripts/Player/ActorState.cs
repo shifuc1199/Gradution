@@ -13,5 +13,6 @@ public class ActorState : MonoBehaviour
     public bool isMoveRight { get; set; }
     public bool isMoveLeft { get; set; }
     public bool isAttackUp { get; set; }
+    public bool isShield { get; set; }
     // Start is called before the first frame update
 }

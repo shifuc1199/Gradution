@@ -24,9 +24,7 @@ public class ActorSkillController : MonoBehaviour
         SkillPos = pos;
         SkillDirection = dir;
 
-        if(skill_id == 0)
-        _anim.SetTrigger("skill1");
-        else
-         _anim.SetTrigger("heavyattack");
+        _anim.SetTrigger("skill"+ skill_id.ToString());
+         
     }
 }

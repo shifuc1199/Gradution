@@ -8,7 +8,6 @@ using DreamerTool.UI;
 using DreamerTool.GameObjectPool;
 public class GameScene : Scene
 {
-    public static GameScene _instance;
     float timer;
     private int hit_count;
     public Text hit_count_text;
@@ -34,14 +33,14 @@ public class GameScene : Scene
     private void Awake()
     {
         base.Awake();
+        GameObjectPoolManager.InitByScriptableObject();
         ActorModel model = new ActorModel();
     }
     // Start is called before the first frame update
     void Start()
     {
-        _instance = this;
-        Application.targetFrameRate = 60;
-        GameObjectPoolManager.InitByScriptableObject();  
+       
+ 
     }
     public void TransferPlayerByFadeAnim(Transform pos)
     {

@@ -22,20 +22,18 @@ public class LoadingScene : DreamerTool.UI.Scene
         base.OnSceneLoaded(scene, mode);
  
     }
-
-    private void Awake()
+    private void Start()
     {
-        base.Awake();
-         
         StartCoroutine(Load());
     }
+  
     IEnumerator Load()
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(scene_name);
         operation.allowSceneActivation = false;
-        while (operation.progress <= 0.9f)
+        while (operation.progress < 0.9f)
         {
-            load_text .text = operation.progress * 100+"%";
+            load_text .text = (int)(operation.progress * 100)+"%";
             load_imag.fillAmount = operation.progress;
             yield return new WaitForEndOfFrame();
         }

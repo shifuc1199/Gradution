@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DreamerTool.UI;
 using DG.Tweening;
 public class SwordAttackTrigger : BaseAttackTrigger
 {
@@ -10,7 +11,7 @@ public class SwordAttackTrigger : BaseAttackTrigger
     {   
         if(collision.gameObject.tag=="Enemy")
         {
-            GameScene._instance.HitCount++;
+            (View.CurrentScene as GameScene) .HitCount++;
             if(attack_type == HitType.击飞)
             {
                 

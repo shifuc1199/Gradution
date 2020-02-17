@@ -15,15 +15,15 @@ public class BagJoyStick : JoyStick
     public Image down_button;
     float timer = 0;
     UnityAction move_action;
-    public override void onJoystickDown(Vector2 V)
+    public override void onJoystickDown(Vector2 V,float R)
     {
-        base.onJoystickDown(V);
+        base.onJoystickDown(V,R);
         ChangeButton(V);
         isDown = true;
     }
-    public override void onJoystickUp(Vector2 V)
+    public override void onJoystickUp(Vector2 V, float R)
     {
-        base.onJoystickUp(V);
+        base.onJoystickUp(V,R);
         up_button.CrossFadeColor(Color.white, 0.1f, true, true);
         left_button.CrossFadeColor(Color.white, 0.1f, true, true);
         right_button.CrossFadeColor(Color.white, 0.1f, true, true);
@@ -38,9 +38,9 @@ public class BagJoyStick : JoyStick
         isDown = false;
 
     }
-    public override void onJoystickMove(Vector2 V)
+    public override void onJoystickMove(Vector2 V, float R)
     {
-        base.onJoystickMove(V);
+        base.onJoystickMove(V,R);
         ChangeButton(V);
     }
     bool isDown = false;

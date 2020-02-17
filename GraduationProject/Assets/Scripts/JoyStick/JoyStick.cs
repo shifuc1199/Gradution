@@ -18,7 +18,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         r = Mathf.Clamp(r, 0, radius);
       
         center.localPosition = dir.normalized * r ;
-        onJoystickDown(dir.normalized);
+        onJoystickDown(dir.normalized,r);
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -27,7 +27,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         float r = dir.magnitude;
         r = Mathf.Clamp(r, 0, radius);
         center.localPosition = Vector2.zero;
-        onJoystickUp(dir.normalized);
+        onJoystickUp(dir.normalized,r);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -38,18 +38,18 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
         r = Mathf.Clamp(r, 0, radius);
         center.localPosition = dir.normalized * r ;
 
-        onJoystickMove(dir.normalized);
+        onJoystickMove(dir.normalized,r);
     }
 
-    public virtual void onJoystickDown(Vector2 V)
+    public virtual void onJoystickDown(Vector2 V,float R)
     {
 
     }
-    public virtual void onJoystickUp(Vector2 V)
+    public virtual void onJoystickUp(Vector2 V, float R)
     {
 
     }
-    public virtual void onJoystickMove(Vector2 V)
+    public virtual void onJoystickMove(Vector2 V, float R)
     {
 
     }

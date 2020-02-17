@@ -18,6 +18,7 @@ public enum EquipmentType
     手链,
     武器,
     上衣,
+    盾牌,
 }
 public enum HitType
 {
@@ -61,9 +62,13 @@ public enum ItemType
     手链,
     武器,
     上衣,
+    盾牌,
     消耗品
 }
 public enum SkillType
 {
-    
+    普通,
+    点,
+    线,
+
 }

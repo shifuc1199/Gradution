@@ -53,6 +53,9 @@ public class EquipmentSprite : MonoBehaviour
             case EquipmentType.上衣:
                 _image.sprite = TorsoConfig.Get(ActorModel.Model.GetPlayerEquipment(equipment_type)).GetSprite();
                 break;
+            case EquipmentType.盾牌:
+                _image.sprite = ShieldConfig.Get(ActorModel.Model.GetPlayerEquipment(equipment_type)).GetSprite();
+                break;
             default:
                 break;
         }
@@ -81,6 +84,9 @@ public class EquipmentSprite : MonoBehaviour
                 break;
             case EquipmentType.上衣:
                 _sprite.sprite = TorsoConfig.Get(ActorModel.Model.GetPlayerEquipment(equipment_type)).GetSprite();
+                break;
+            case EquipmentType.盾牌:
+                _sprite.sprite = ShieldConfig.Get(ActorModel.Model.GetPlayerEquipment(equipment_type)).GetSprite();
                 break;
             default:
                 break;

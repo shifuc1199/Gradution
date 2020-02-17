@@ -35,7 +35,7 @@ public class BaseConfig<T> where T : BaseConfig<T>
         IDictionary<string,JsonData> dict = data.ToObject();
         foreach (var pair in dict)
         {
-
+             
             T model = JsonMapper.ToObject<T>(pair.Value.ToJson());
             
             model.OnLoadJsonEnded();

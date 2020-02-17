@@ -44,6 +44,7 @@ public   class ActorModel
     private Dictionary<EquipmentType, int> Equipment = new Dictionary<EquipmentType, int>()
     {
          { EquipmentType.武器,1},
+          { EquipmentType.盾牌,1},
          { EquipmentType.上衣,1},
          { EquipmentType.肩膀右,1},
          { EquipmentType.肩膀左,1},

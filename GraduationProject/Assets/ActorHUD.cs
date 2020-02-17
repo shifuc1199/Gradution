@@ -19,6 +19,10 @@ public class ActorHUD : MonoBehaviour
         SetMoneyText();
         EventHandler.OnChangeMoney += SetMoneyText;
     }
+    private void OnDisable()
+    {
+        EventHandler.OnChangeMoney -= SetMoneyText;
+    }
     public void SetMoneyText()
     {
         money_text.text = ActorModel.Model.GetMoney().ToString(); 

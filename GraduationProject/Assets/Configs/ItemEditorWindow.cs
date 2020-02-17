@@ -51,6 +51,9 @@ public class ItemEditorWindow : OdinMenuEditorWindow
             case ItemType.裤子:
                 LoadItem<PelvisConfig>(ref _tree);
                 break;
+            case ItemType.盾牌:
+                LoadItem<ShieldConfig>(ref _tree);
+                break;
         }        
             return _tree;
         }
@@ -116,7 +119,10 @@ public class ItemEditorWindow : OdinMenuEditorWindow
                         case ItemType.上衣:
                             CreateItem(new TorsoConfig(), ref _tree);
                             break;
-                        case ItemType.消耗品:
+                    case ItemType.盾牌:
+                        CreateItem(new ShieldConfig(), ref _tree);
+                        break;
+                    case ItemType.消耗品:
                             break;
                         default:
                             break;

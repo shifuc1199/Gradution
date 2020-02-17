@@ -19,8 +19,11 @@ public class ExpBar : MonoBehaviour
     {
         SetBar();
     }
-
-  public void SetBar()
+    private void OnDisable()
+    {
+        EventHandler.OnChangeExp -= SetBar;
+    }
+    public void SetBar()
     {
         _level_text.text = "LV "+ ActorModel.Model.GetLevel();
         _text.text = ActorModel.Model.GetExp() + " / " + ActorModel.Model.GetMaxExp();

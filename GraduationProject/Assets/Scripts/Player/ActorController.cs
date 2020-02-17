@@ -29,6 +29,10 @@ public class ActorController : MonoBehaviour
 
         EventHandler.OnChangeLevel += () => { LevelUpEffect.SetActive(true); };
     }
+    private void OnDisable()
+    {
+        EventHandler.OnChangeLevel -= () => { LevelUpEffect.SetActive(true); };
+    }
     public void Transfer(Transform point)
     {
         transform.position = point.position;
@@ -55,6 +59,7 @@ public class ActorController : MonoBehaviour
         _anim.SetBool("run", actor_state.isMoveRight || actor_state.isMoveLeft);
         transform.Translate(move_dir * move_speed * Time.deltaTime, Space.World); 
     }
+ 
     public void Attack()
     {
         if (actor_state.isAttack)
@@ -96,6 +101,7 @@ public class ActorController : MonoBehaviour
     }
     public void StateCheck()
     {
+        _anim.SetBool("shield", actor_state.isShield);
         _anim.SetFloat("speedy", _rigi.velocity.y);
         _anim.SetBool("isground", actor_state.isGround);
         _anim.SetFloat("gravity", _rigi.gravityScale);
