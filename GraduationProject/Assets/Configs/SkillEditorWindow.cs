@@ -38,7 +38,7 @@ public class SkillEditorWindow : OdinMenuEditorWindow
                 {
 
                 // Adds the character overview table.
-                Debug.Log(item.Value.skill_name);
+ 
                     _tree.Add(item.Value.skill_name, item.Value);
                     _tree.EnumerateTree().AddIcons<SkillConfig>(x => x.GetSprite());
                     _tree.EnumerateTree().ForEach(AddDragHandles);

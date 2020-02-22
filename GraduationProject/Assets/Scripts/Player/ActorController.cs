@@ -16,6 +16,7 @@ public class ActorController : MonoBehaviour
     public GameObject LevelUpEffect;
     public Transform ground_check_pos;
     public float move_speed;
+    public float jump_speed;
      
     private void Awake()
     {
@@ -86,7 +87,7 @@ public class ActorController : MonoBehaviour
             if (actor_state.isGround)
             {
                 _rigi.ResetVelocity();
-                _rigi.velocity = Vector2.up * 85;
+                _rigi.AddForce(Vector2.up * jump_speed, ForceMode2D.Impulse);
             }
             actor_state.isJump = false;
         }

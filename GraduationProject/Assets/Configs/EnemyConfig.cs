@@ -34,6 +34,7 @@ public class EnemyConfig : BaseConfig<EnemyConfig>
     public string EnemyPrefabName;
     [BoxGroup("敌人属性")]
     public double MaxHealth;
+    public double defend;
     [Button("保存", 50)]
     public void Save()
     {
@@ -46,6 +47,7 @@ public class EnemyConfig : BaseConfig<EnemyConfig>
         data["图标名字"] = 编辑器图标? 编辑器图标.name:"";
         data["EnemyPrefabName"] = EnemyPrefab ? EnemyPrefab.name : ""; 
         data["EnemyName"] = EnemyName;
+        data["defend"] = defend;
         data["MaxHealth"] = MaxHealth;
         jd["Enemy"][EnemyID.ToString()] = data;
         Debug.Log(jd.ToJson());

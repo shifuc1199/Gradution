@@ -10,10 +10,8 @@ using UnityEngine.UI;
 public class ToggleButton : Toggle
 {
     public int index;
-    protected override void Start()
-    {
-        base.Start();
-    }
+ 
+  
     public override void OnSelect(BaseEventData eventData)
     {
         base.OnSelect(eventData);

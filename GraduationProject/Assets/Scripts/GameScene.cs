@@ -33,8 +33,13 @@ public class GameScene : Scene
     private void Awake()
     {
         base.Awake();
+        GameInit();
+    }
+    public static void GameInit()
+    {
         GameObjectPoolManager.InitByScriptableObject();
         ActorModel model = new ActorModel();
+        SkillModel.Init();
     }
     // Start is called before the first frame update
     void Start()

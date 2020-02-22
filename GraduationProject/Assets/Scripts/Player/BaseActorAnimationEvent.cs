@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DreamerTool.GameObjectPool;
 using DreamerTool.Extra;
 public class BaseActorAnimationEvent : MonoBehaviour
 {
@@ -13,8 +14,13 @@ public class BaseActorAnimationEvent : MonoBehaviour
         _rigi = GetComponentInParent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
     }
+    public void OnFallExit()
+    {
+        GameObjectPoolManager.GetPool("dust_ground").Get(transform.position+new Vector3(0,-3,0), Quaternion.identity, 1);
+    }
     public void OnDashEnter()
     {
+        AudioManager.Instance.PlayOneShot("dash");
         if (!_controller.actor_state.isGround)
         {
 

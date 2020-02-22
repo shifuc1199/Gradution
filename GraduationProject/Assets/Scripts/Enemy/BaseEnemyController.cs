@@ -4,9 +4,8 @@ using UnityEngine;
 using DreamerTool.UI;
 using DreamerTool.Extra;
 using UnityEngine.Events;
-using DreamerTool.ScriptableObject;
 using DreamerTool.GameObjectPool;
-using UnityEditor;
+using DreamerTool.Util;
 public class BaseEnemyController : MonoBehaviour,IHurt
 {
     public int config_id;
@@ -35,7 +34,6 @@ public class BaseEnemyController : MonoBehaviour,IHurt
             coin.GetComponent<CoinParticle>().transf = View.CurrentScene.GetView<GameInfoView>().hud.coin_icon.rectTransform;
             var exp = GameObjectPoolManager.GetPool("exp_effect").Get(transform.position + new Vector3(0, 1, 0), Quaternion.identity, 1.85f);
             exp.GetComponent<ExpParticle>().transf = View.CurrentScene.GetView<GameInfoView>().expbar.GetComponent<RectTransform>();
-
             var colliders = GetComponentsInChildren<PolygonCollider2D>();
             var rigis = GetComponentsInChildren<Rigidbody2D>();
             _anim.enabled = false;
@@ -55,8 +53,6 @@ public class BaseEnemyController : MonoBehaviour,IHurt
             GetComponent<Collider2D>().enabled = false;
             _rigi.simulated = false;
         });
-       
-
     }
     [ContextMenu("123")]
     private  void Change()
@@ -65,15 +61,18 @@ public class BaseEnemyController : MonoBehaviour,IHurt
     }
     public void GetHurt(double hurt_value,HitType _type,UnityAction hurt_call_back=null)
     {
+        enemy_data.SetHealth(-hurt_value);
+        View.CurrentScene.GetView<GameInfoView>().enemy_health.SetData(enemy_data);
+
         if (enemy_data.isdie)
             return;
-        _audio.PlayOneShot(ScriptableObjectUtil.GetScriptableObject<AudioClips>().GetClip("hit"));
-        enemy_data.SetHealth(-hurt_value);
+
+        AudioManager.Instance.PlayOneShot("hit");
         var pop_text = GameObjectPoolManager.GetPool("pop_text").Get(transform.position, Quaternion.identity, 0.5f);
-        pop_text.GetComponent<PopText>().SetText(hurt_value.ToString(),Color.white);
+        pop_text.GetComponent<PopText>().SetText(((int)Util.GetHurtValue(hurt_value,this._config.defend)).ToString(),Color.white);
         GameObjectPoolManager.GetPool("hit_effect").Get(transform.position + new Vector3(0, 2, 0), Quaternion.identity,0.5f);
         hurt_call_back?.Invoke();
-        View.CurrentScene.GetView<GameInfoView>().enemy_health.SetData(enemy_data);
+         
         switch (_type)
         {
             case HitType.普通:

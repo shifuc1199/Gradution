@@ -113,6 +113,7 @@ namespace DreamerTool.GameObjectPool
             var prefabs = ScriptableObjectUtil.GetScriptableObject<GameObjectPoolPrefabs>();
             foreach (var item in prefabs.Prefabs)
             {
+                if(!pools.ContainsKey(item.prefab_name))
                 pools.Add(item.prefab_name, new GameObjectPool(item.prefab));
             }
         }

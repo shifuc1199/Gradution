@@ -43,7 +43,8 @@ public enum PlayerAttribute
     生命值,
     攻击力,
     防御力,
-    能量值
+    能量值,
+    善恶值
 }
 public enum FaceType
 {

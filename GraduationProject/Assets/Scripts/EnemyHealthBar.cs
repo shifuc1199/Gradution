@@ -24,7 +24,7 @@ public class EnemyHealthBar : MonoBehaviour
         gameObject.SetActive(true);
         head.sprite = data.head;
         name_text.text = data.enemy_name;
-        health_text.text = data.health + "/" + data.maxhealth;
+        health_text.text = (int)data.health + "/" + data.maxhealth;
         health_bar.fillAmount = (float)(data.health / data.maxhealth);
     }
     public BaseEnemyData GetData()

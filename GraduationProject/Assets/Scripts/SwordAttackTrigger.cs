@@ -11,7 +11,7 @@ public class SwordAttackTrigger : BaseAttackTrigger
     {   
         if(collision.gameObject.tag=="Enemy")
         {
-            (View.CurrentScene as GameScene) .HitCount++;
+            ( View.CurrentScene as GameScene) .HitCount++;
             if(attack_type == HitType.击飞)
             {
                 

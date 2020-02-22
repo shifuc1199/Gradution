@@ -10,6 +10,7 @@ public class BlackHole : MonoBehaviour
     public float radius;
     public float speed;
     public float attack_timer_interval;
+    public int skill_id;
     float timer;
     public List<BaseEnemyController> enemys = new List<BaseEnemyController>();
     // Start is called before the first frame update
@@ -48,7 +49,7 @@ public class BlackHole : MonoBehaviour
                     timer = 0;
                     return;
                 }
-                enemy.GetHurt(10, HitType.普通);
+                enemy.GetHurt(SkillModel.Get(skill_id).GetHurtValue(), HitType.普通);
                 timer = 0;
             }
         }

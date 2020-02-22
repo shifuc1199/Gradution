@@ -1,6 +1,7 @@
 ﻿/*****************************
 Created by 师鸿博
 *****************************/
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.UI;
 
@@ -26,3 +27,4 @@ public class DreamerButtonEditor : ButtonEditor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif

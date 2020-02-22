@@ -16,6 +16,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     }
     public void SetPickUpSlash()
     {
+        AudioManager.Instance.PlayOneShot("player_heavy_attack");
         var temp = GameObjectPoolManager.GetPool("pick_up_slash").Get(transform.position + new Vector3(0, 2, -5), Quaternion.Euler(-45, 90 * transform.right.x, 180),0.5f);
         temp.GetComponentInChildren<SwordAttackTrigger>().attack_type = HitType.上挑;
         temp.transform.parent = transform.parent.parent;
@@ -33,16 +34,16 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
             _rigi.AddForce(transform.right * 5, ForceMode2D.Impulse);
         }
         GameObject temp;
-        temp = GameObjectPoolManager.GetPool("sword_slash").Get(transform.position + new Vector3(0, 2, 0), Quaternion.Euler(transform.eulerAngles.y, 90, transform.eulerAngles.y + effect_rotation[index]),0.35f);
+        temp = GameObjectPoolManager.GetPool("sword_slash").Get(transform.position + new Vector3(0, 2, 0), Quaternion.Euler(transform.eulerAngles.y, 90, transform.eulerAngles.y + effect_rotation[index]),0.2f);
 
         if (index == 3)
         {
             temp.GetComponentInChildren<SwordAttackTrigger>().attack_type = HitType.击飞;
-            temp.GetComponent<AudioSource>().PlayOneShot(ScriptableObjectUtil.GetScriptableObject<AudioClips>().GetClip("player_heavy_attack"));
+           AudioManager.Instance.PlayOneShot("player_heavy_attack");
         }
         else
         {
-            temp.GetComponent<AudioSource>().PlayOneShot(ScriptableObjectUtil.GetScriptableObject<AudioClips>().GetClip("player_common_attack"));
+            AudioManager.Instance.PlayOneShot("player_common_attack");
             temp.GetComponentInChildren<SwordAttackTrigger>().attack_type = HitType.击退;
         }
 
@@ -66,7 +67,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     }
     public void SetBlackHole()
     {
-        GameObjectPoolManager.GetPool("blackhole").Get(ActorController._controller.skill_controller.SkillPos, Quaternion.identity, 5);
+        GameObjectPoolManager.GetPool("blackhole").Get(ActorController._controller.skill_controller.SkillPos, Quaternion.identity, 3);
     }
     public void OnHeavyAttackEnter()
     {
@@ -116,7 +117,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     public void PickUpAttackJump()
     {
         _rigi.ResetVelocity();
-        _rigi.velocity = Vector2.up * 85;
+        _rigi.AddForce(Vector2.up*ActorController._controller.jump_speed,ForceMode2D.Impulse);
         _anim.ResetTrigger("pickupattack");
     }
     public void OnSkill2Exit()
@@ -155,7 +156,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     }
     public void OnSkill4Enter()
     {
-        Skill4_Pos = ActorController._controller.transform.position + transform.right *30;
+        Skill4_Pos = ActorController._controller.transform.position + transform.right *40;
         _rigi.ResetVelocity();
         _rigi.ClearGravity();
         _rigi.velocity = Vector2.up * 100;

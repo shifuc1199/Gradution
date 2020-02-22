@@ -28,7 +28,7 @@ public   class ActorModel
     private int level = 1;
     private int exp;
     private int max_exp=100;
-
+    public Dictionary<int, SkillModel> skillmodels = new Dictionary<int, SkillModel>();
     
     public double GetAttack()
     {
@@ -40,6 +40,7 @@ public   class ActorModel
         { PlayerAttribute.生命值,100 },
         { PlayerAttribute.防御力,100 },
         { PlayerAttribute.能量值,100 },
+         { PlayerAttribute.善恶值,100 },
     };
     private Dictionary<EquipmentType, int> Equipment = new Dictionary<EquipmentType, int>()
     {
