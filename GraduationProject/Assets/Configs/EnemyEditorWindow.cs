@@ -21,6 +21,7 @@ public class EnemyEditorWindow : OdinMenuEditorWindow
         [MenuItem("DreamerEditor/敌人编辑器")]
         private static void Open()
         {
+        
             _window = GetWindow<EnemyEditorWindow>();
         _window.titleContent = new GUIContent("敌人编辑器");
             _window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 500);
