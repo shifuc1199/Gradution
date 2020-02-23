@@ -61,18 +61,19 @@ public class BaseEnemyController : MonoBehaviour,IHurt
     }
     public void GetHurt(double hurt_value,HitType _type,UnityAction hurt_call_back=null)
     {
-        enemy_data.SetHealth(-hurt_value);
-        View.CurrentScene.GetView<GameInfoView>().enemy_health.SetData(enemy_data);
-
         if (enemy_data.isdie)
             return;
 
-        AudioManager.Instance.PlayOneShot("hit");
+
+        enemy_data.SetHealth(-hurt_value);
         var pop_text = GameObjectPoolManager.GetPool("pop_text").Get(transform.position, Quaternion.identity, 0.5f);
-        pop_text.GetComponent<PopText>().SetText(((int)Util.GetHurtValue(hurt_value,this._config.defend)).ToString(),Color.white);
+        pop_text.GetComponent<PopText>().SetText(((int)Util.GetHurtValue(hurt_value, this._config.defend)).ToString(), Color.white);
+        View.CurrentScene.GetView<GameInfoView>().enemy_health.SetData(enemy_data);
+        AudioManager.Instance.PlayOneShot("hit");
         GameObjectPoolManager.GetPool("hit_effect").Get(transform.position + new Vector3(0, 2, 0), Quaternion.identity,0.5f);
         hurt_call_back?.Invoke();
          
+
         switch (_type)
         {
             case HitType.普通:

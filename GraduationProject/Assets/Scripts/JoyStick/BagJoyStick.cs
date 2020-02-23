@@ -9,10 +9,7 @@ using DreamerTool.UI;
 using UnityEngine.Events;
 public class BagJoyStick : JoyStick
 {
-    public Image up_button;
-    public Image right_button;
-    public Image left_button;
-    public Image down_button;
+ 
     float timer = 0;
     UnityAction move_action;
     public override void onJoystickDown(Vector2 V,float R)
@@ -24,10 +21,7 @@ public class BagJoyStick : JoyStick
     public override void onJoystickUp(Vector2 V, float R)
     {
         base.onJoystickUp(V,R);
-        up_button.CrossFadeColor(Color.white, 0.1f, true, true);
-        left_button.CrossFadeColor(Color.white, 0.1f, true, true);
-        right_button.CrossFadeColor(Color.white, 0.1f, true, true);
-        down_button.CrossFadeColor(Color.white, 0.1f, true, true);
+       
 
         if(timer<0.15f&&timer>0)
         {
@@ -63,35 +57,22 @@ public class BagJoyStick : JoyStick
         if (V.y >= 0.9f && Mathf.Abs(V.x) <= 0.8f)
         {
             move_action = View.CurrentScene.GetView<PlayerInfoAndBagView>().bag_view.SelectUp;
-            up_button.CrossFadeColor(Color.red, 0.1f, true, true);
-            right_button.CrossFadeColor(Color.white, 0.1f, true, true);
-            left_button.CrossFadeColor(Color.white, 0.1f, true, true);
-            down_button.CrossFadeColor(Color.white, 0.1f, true, true);
+          
         }
         else if (V.y <= -0.9f && Mathf.Abs(V.x) <= 0.8f)
         {
             move_action = View.CurrentScene.GetView<PlayerInfoAndBagView>().bag_view.SelectDown;
-            down_button.CrossFadeColor(Color.red, 0.1f, true, true);
-            right_button.CrossFadeColor(Color.white, 0.1f, true, true);
-            left_button.CrossFadeColor(Color.white, 0.1f, true, true);
-            up_button.CrossFadeColor(Color.white, 0.1f, true, true);
-             
+           
         }
         else if (V.x > 0.8f && V.y < 0.8f)
         {
             move_action = View.CurrentScene.GetView<PlayerInfoAndBagView>().bag_view.SelectRight;
-            right_button.CrossFadeColor(Color.red, 0.1f, true, true);
-            left_button.CrossFadeColor(Color.white, 0.1f, true, true);
-            up_button.CrossFadeColor(Color.white, 0.1f, true, true);
-            down_button.CrossFadeColor(Color.white, 0.1f, true, true);
+            
         }
         else if (V.x < -0.8f && V.y < 0.8f)
         {
             move_action = View.CurrentScene.GetView<PlayerInfoAndBagView>().bag_view.SelectLeft;
-            left_button.CrossFadeColor(Color.red, 0.1f, true, true);
-            right_button.CrossFadeColor(Color.white, 0.1f, true, true);
-            up_button.CrossFadeColor(Color.white, 0.1f, true, true);
-            down_button.CrossFadeColor(Color.white, 0.1f, true, true);
+           
         }
 
     }

@@ -60,7 +60,7 @@ public class EnemyConfig : BaseConfig<EnemyConfig>
         AssetDatabase.Refresh();
         EnemyEditorWindow._window.ForceMenuTreeRebuild();
         EnemyEditorWindow._window.isCreate = false;
-        EnemyEditorWindow._window._tree.MenuItems[EnemyEditorWindow._window._tree.MenuItems.Count - 1].Select();
+        EnemyEditorWindow._window._tree.MenuItems[EnemyID-1].Select();
 #endif
     }
     public void SetEditorPrefab()

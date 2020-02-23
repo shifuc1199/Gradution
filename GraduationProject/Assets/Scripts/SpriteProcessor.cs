@@ -5,14 +5,14 @@ using UnityEngine;
 using UnityEditor;
 public class SpriteProcessor : AssetPostprocessor
 {
-   /*  void OnPreprocessTexture()
+     void OnPreprocessTexture()
     {
         
         if(assetImporter.assetPath.Contains(".png"))
         {
             TextureImporter textureImporter = assetImporter as TextureImporter;
-            textureImporter.spritePivot = new Vector2(0.5f, 0.6f);
+            textureImporter.textureType = TextureImporterType.Sprite;
         }
-    }*/
+    }
 }
 #endif

@@ -35,7 +35,7 @@ public class ArmConfig : ItemConfig<ArmConfig>
         AssetDatabase.Refresh();
         ItemEditorWindow._window.ForceMenuTreeRebuild();
         ItemEditorWindow._window.isCreate = false;
-        ItemEditorWindow._window._tree.MenuItems[ItemEditorWindow._window._tree.MenuItems.Count - 1].Select();
+        ItemEditorWindow._window._tree.MenuItems[物品ID- 1].Select();
 #endif
     }
 

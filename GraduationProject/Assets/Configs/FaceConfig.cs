@@ -36,7 +36,7 @@ public class FaceConfig<T> : BaseConfig<T> where T:BaseConfig<T>
         AssetDatabase.Refresh();
         FaceEditorWindow._window.ForceMenuTreeRebuild();
         FaceEditorWindow._window.isCreate = false;
-        FaceEditorWindow._window._tree.MenuItems[FaceEditorWindow._window._tree.MenuItems.Count - 1].Select();
+        FaceEditorWindow._window._tree.MenuItems[ID - 1].Select();
 #endif
     }
     public static void RemoveAll()
@@ -54,9 +54,6 @@ public class FaceConfig<T> : BaseConfig<T> where T:BaseConfig<T>
         }
         AssetDatabase.Refresh();
         FaceEditorWindow._window.ForceMenuTreeRebuild();
-        FaceEditorWindow._window.isCreate = false;
-        if(FaceEditorWindow._window._tree.MenuItems.Count>0)
-        FaceEditorWindow._window._tree.MenuItems[FaceEditorWindow._window._tree.MenuItems.Count - 1].Select();
 #endif
     }
     public Sprite GetSprite()

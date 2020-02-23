@@ -50,8 +50,8 @@ public class SkillConfig :  BaseConfig<SkillConfig>
         AssetDatabase.Refresh();
         SkillEditorWindow._window.ForceMenuTreeRebuild();
         SkillEditorWindow._window.isCreate = false;
-        if(SkillEditorWindow._window._tree.MenuItems.Count>0)
-        SkillEditorWindow._window._tree.MenuItems[SkillEditorWindow._window._tree.MenuItems.Count - 1].Select();
+    
+        SkillEditorWindow._window._tree.MenuItems[ID-1].Select();
 #endif
     }
     public static void RemoveAll()

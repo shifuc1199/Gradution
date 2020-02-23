@@ -11,7 +11,7 @@ public class SkillIntroduce : MonoBehaviour
     public GifManager gif;
     public void SetModel(SkillModel model)
     {
-        intro_text.text = model._config.skill_des.Replace("t", "<color=#FF9A00>" + model.GetHurtValue() + "</color>");
+        intro_text.text = model._config.skill_des.Replace("t", "<color=#FF9A00>" + (int)model.GetHurtValue() + "</color>");
         gif.SetPath(model._config.ID.ToString());
     }
 }

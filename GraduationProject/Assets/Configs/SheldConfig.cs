@@ -35,7 +35,7 @@ public class ShieldConfig : ItemConfig<ShieldConfig>
         ItemEditorWindow._window.ForceMenuTreeRebuild();
         ItemEditorWindow._window.isCreate = false;
         if(ItemEditorWindow._window._tree.MenuItems.Count>0)
-            ItemEditorWindow._window._tree.MenuItems[ItemEditorWindow._window._tree.MenuItems.Count - 1].Select();
+            ItemEditorWindow._window._tree.MenuItems[物品ID - 1].Select();
 #endif
     }
 
