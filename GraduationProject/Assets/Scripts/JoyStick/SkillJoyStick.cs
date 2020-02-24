@@ -8,6 +8,7 @@ public class SkillJoyStick : JoyStick
     public int Skill_ID;
     public SplatManager splat_manager;
     SkillConfig _config;
+     
     private void Awake()
     {
         _config = SkillConfig.Get(Skill_ID);

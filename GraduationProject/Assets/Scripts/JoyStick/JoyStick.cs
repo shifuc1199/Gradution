@@ -9,10 +9,14 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 {
     public Transform bound;
     public Transform center;
+    public bool isDisable = false;
     public float radius;
  
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (isDisable)
+            return;
+
         Vector2 dir = eventData.position - (Vector2)bound.position;
         float r = dir.magnitude;
         r = Mathf.Clamp(r, 0, radius);
@@ -23,6 +27,9 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (isDisable)
+            return;
+
         Vector2 dir = eventData.position - (Vector2)bound.position;
         float r = dir.magnitude;
         r = Mathf.Clamp(r, 0, radius);
@@ -32,6 +39,9 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (isDisable)
+            return;
+
         Vector2 dir = eventData.position - (Vector2)bound.position;
      
         float r = dir.magnitude;

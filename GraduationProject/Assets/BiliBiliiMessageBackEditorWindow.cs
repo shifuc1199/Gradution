@@ -4,12 +4,14 @@ Created by 师鸿博
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+#if UNITY_EDITOR
 using UnityEditor;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using Sirenix.Utilities;
 using Sirenix.OdinInspector;
-using UnityEngine.Networking;
+ 
 public class BiliBiliiMessageBackEditorWindow : OdinEditorWindow
 {
     public string RoomID = "3555146";
@@ -30,8 +32,10 @@ public class BiliBiliiMessageBackEditorWindow : OdinEditorWindow
         BiliBiliMessageHelper.Instance.SendContent(Content,RoomID);
         DestroyImmediate(BiliBiliMessageHelper.Instance.gameObject);
     }
-   
+
 }
+#endif
+ 
 class BiliBiliMessageHelper : Singleton<BiliBiliMessageHelper>
 {
     
