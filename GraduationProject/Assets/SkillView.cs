@@ -12,16 +12,20 @@ public class SkillView : View
     public GameObject cell_prefab;
 
     public SkillIntroduce introduce;
+    private void Awake()
+    {
+        foreach (var item in ActorModel.Model.skillmodels)
+        {
+            GameObject temp = Instantiate(cell_prefab, root);
+            temp.GetComponent<SkillCell>().SetModel(item.Value);
+        }
+    }
     public override void OnShow()
     {
         base.OnShow();
         CurrentScene.GetView<GameInfoView>().HideAnim();
 
-        foreach(var item in ActorModel.Model.skillmodels)
-        {
-           GameObject temp = Instantiate(cell_prefab, root);
-            temp.GetComponent<SkillCell>().SetModel(item.Value);
-        }
+ 
     }
     public void SelecetCell(int index)
     {
