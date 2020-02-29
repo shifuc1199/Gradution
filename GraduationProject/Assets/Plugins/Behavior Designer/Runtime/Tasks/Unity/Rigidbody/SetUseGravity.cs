@@ -9,7 +9,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityRigidbody
         [Tooltip("The GameObject that the task operates on. If null the task GameObject is used.")]
         public SharedGameObject targetGameObject;
         [Tooltip("The use gravity value of the Rigidbody")]
-        public SharedBool isKinematic;
+        public SharedBool useGravity;
 
         // cache the rigidbody component
         private Rigidbody rigidbody;
@@ -31,7 +31,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityRigidbody
                 return TaskStatus.Failure;
             }
 
-            rigidbody.useGravity = isKinematic.Value;
+            rigidbody.useGravity = useGravity.Value;
 
             return TaskStatus.Success;
         }
@@ -39,7 +39,7 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityRigidbody
         public override void OnReset()
         {
             targetGameObject = null;
-            isKinematic = false;
+            useGravity = false;
         }
     }
 }

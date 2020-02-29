@@ -19,13 +19,18 @@ public class SkillView : View
             GameObject temp = Instantiate(cell_prefab, root);
             temp.GetComponent<SkillCell>().SetModel(item.Value);
         }
+         
+    }
+    private void Start()
+    {
+        SelecetCell(0);
     }
     public override void OnShow()
     {
         base.OnShow();
         CurrentScene.GetView<GameInfoView>().HideAnim();
+        
 
- 
     }
     public void SelecetCell(int index)
     {

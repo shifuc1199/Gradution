@@ -11,6 +11,10 @@ public class SkillModel
     {
         this._config = SkillConfig.Get(config_id);
     }
+    public double GetCoolTime()
+    {
+        return this._config.basic_skill_cool_time+this._config.skill_cool_ratio * this.skill_level;
+    }
     public double GetHurtValue()
     {
         return _config.basic_hurt + skill_level * _config.skill_level_ratio + _config.actor_attack_ratio * ActorModel.Model.GetAttack();

@@ -36,7 +36,7 @@ public   class ActorModel
     }
     private Dictionary<PlayerAttribute, double> PlayerAttributes = new Dictionary<PlayerAttribute, double>()
     {
-        { PlayerAttribute.攻击力,100 },
+        { PlayerAttribute.攻击力,1 },
         { PlayerAttribute.生命值,100 },
         { PlayerAttribute.防御力,100 },
         { PlayerAttribute.能量值,100 },

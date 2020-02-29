@@ -68,7 +68,7 @@ public enum ItemType
 }
 public enum SkillType
 {
-    普通,
+    点击,
     点,
     线,
 

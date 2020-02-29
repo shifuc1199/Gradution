@@ -25,7 +25,7 @@ namespace BehaviorDesigner.Runtime.Tasks
 
         public override void OnCollisionEnter(Collision collision)
         {
-            if (string.IsNullOrEmpty(tag.Value) || tag.Value.Equals(collision.gameObject.tag)) {
+            if (string.IsNullOrEmpty(tag.Value) || collision.gameObject.CompareTag(tag.Value)) {
                 collidedGameObject.Value = collision.gameObject;
                 enteredCollision = true;
             }

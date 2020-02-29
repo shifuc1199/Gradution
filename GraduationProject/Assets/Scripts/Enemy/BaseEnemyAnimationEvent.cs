@@ -13,7 +13,14 @@ public class BaseEnemyAnimationEvent : MonoBehaviour
         _rigi = GetComponentInParent<Rigidbody2D>();
        
     }
-
+    public void OnAttackEnter()
+    {
+        _controller.isMoveable = false;
+    }
+    public void OnAttackExit()
+    {
+        _controller.isMoveable = true;
+    }
     public void OnStandEnter()
     {
         

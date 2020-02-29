@@ -1,13 +1,29 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+ 
+using UnityEngine.Networking;
 using DreamerTool.ScriptableObject;
-
+//http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1 时间
 namespace DreamerTool.Util
 {
     public static class Util
     {
-
+        public static System.Collections.IEnumerator GetDateTimeFromURL()
+        {
+            UnityWebRequest webRequest = UnityWebRequest.Get("http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1");
+            yield return webRequest.SendWebRequest();
+            if(webRequest.isNetworkError)
+            {
+                yield return null;
+            }
+             
+            System.DateTime start =System.TimeZone.CurrentTimeZone.ToLocalTime( new System.DateTime(1970, 1, 1));
+            start =  start.AddMilliseconds(long.Parse(webRequest.downloadHandler.text.Substring(2)));
+             
+            Debug.Log(start.ToString("yyyy-MM-dd HH:mm:ss"));
+            yield return null;
+        }
         public static double GetHurtValue(double a, double d)
         {
             return a * a / (a + d);

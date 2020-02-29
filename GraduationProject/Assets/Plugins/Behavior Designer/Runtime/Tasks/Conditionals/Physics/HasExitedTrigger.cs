@@ -25,7 +25,7 @@ namespace BehaviorDesigner.Runtime.Tasks
 
         public override void OnTriggerExit(Collider other)
         {
-            if (string.IsNullOrEmpty(tag.Value) || tag.Value.Equals(other.gameObject.tag)) {
+            if (string.IsNullOrEmpty(tag.Value) || other.gameObject.CompareTag(tag.Value)) {
                 otherGameObject.Value = other.gameObject;
                 exitedTrigger = true;
             }

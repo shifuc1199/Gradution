@@ -34,6 +34,7 @@ public class GameScene : Scene
     {
         base.Awake();
         GameInit();
+      StartCoroutine( Util.GetDateTimeFromURL());
     }
     public static void GameInit()
     {

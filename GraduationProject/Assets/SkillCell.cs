@@ -10,6 +10,7 @@ public class SkillCell : MonoBehaviour
     public Text skill_info_text;
     public Image skill_image;
  
+    
     public SkillModel model;
      public void SetModel(SkillModel model)
     {

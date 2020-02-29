@@ -14,10 +14,5 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.Math
             storeResult.Value = Random.value < 0.5f;
             return TaskStatus.Success;
         }
-
-        public override void OnReset()
-        {
-            storeResult.Value = false;
-        }
     }
 }

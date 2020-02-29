@@ -1,5 +1,4 @@
-﻿#if UNITY_2017_1_OR_NEWER
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Playables;
 
 namespace BehaviorDesigner.Runtime.Tasks.Unity.Timeline
@@ -54,4 +53,3 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.Timeline
         }
     }
 }
-#endif

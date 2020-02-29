@@ -6,8 +6,6 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimator
     [TaskDescription("Sets the look at weight. Returns success immediately after.")]
     public class SetLookAtWeight : Action
     {
-        [Tooltip("The GameObject that the task operates on. If null the task GameObject is used.")]
-        public SharedGameObject targetGameObject;
         [Tooltip("(0-1) the global weight of the LookAt, multiplier for other parameters.")]
         public SharedFloat weight;
         [Tooltip("(0-1) determines how much the body is involved in the LookAt.")]
@@ -21,16 +19,11 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimator
         public float clampWeight = 0.5f;
 
         private Animator animator;
-        private GameObject prevGameObject;
         private bool weightSet;
 
         public override void OnStart()
         {
-            var currentGameObject = GetDefaultGameObject(targetGameObject.Value);
-            if (currentGameObject != prevGameObject) {
-                animator = currentGameObject.GetComponent<Animator>();
-                prevGameObject = currentGameObject;
-            }
+            animator = GetComponent<Animator>();
             weightSet = false;
         }
 
@@ -55,7 +48,6 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimator
 
         public override void OnReset()
         {
-            targetGameObject = null;
             weight = 0;
             bodyWeight = 0;
             headWeight = 1;

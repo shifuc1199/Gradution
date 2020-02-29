@@ -8,6 +8,7 @@ public class PlayerView : MonoBehaviour
 {
     public Text player_name_text;
     public Text player_level_text;
+    public Text[] player_attribute_text;
   //  public Text player_attribute_text;
     private void Awake()
     {
@@ -23,11 +24,13 @@ public class PlayerView : MonoBehaviour
     }
     public void SetPlayAttributeText()
     {
-      /*  foreach (var temp in Enum.GetNames(typeof(PlayerAttribute)))
+        var attrubutes = Enum.GetNames(typeof(PlayerAttribute));
+        
+        for(int i =0; i  < attrubutes.Length;i++)
         {
           
-            player_attribute_text.text += temp+": "+ ActorModel.Model.GetPlayerAttribute((PlayerAttribute)Enum.Parse(typeof(PlayerAttribute), temp))+"\n";
-        }*/
+            player_attribute_text[i].text = attrubutes [i]+ ": \n"+ ActorModel.Model.GetPlayerAttribute((PlayerAttribute)Enum.Parse(typeof(PlayerAttribute), attrubutes[i]));
+        }
        
     }
 

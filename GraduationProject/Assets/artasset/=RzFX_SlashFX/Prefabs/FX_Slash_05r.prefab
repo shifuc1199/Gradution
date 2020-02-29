@@ -4671,7 +4671,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4829567796766301662}
   - component: {fileID: 1443655262687641949}
-  - component: {fileID: 8501062570819641618}
+  - component: {fileID: 4660113187581453289}
   m_Layer: 0
   m_Name: AttackTrigger
   m_TagString: Untagged
@@ -4729,7 +4729,7 @@ PolygonCollider2D:
       - {x: 5.177638, y: 0.93256235}
       - {x: 3.590825, y: 4.548766}
       - {x: 2.5123248, y: 6.198326}
---- !u!114 &8501062570819641618
+--- !u!114 &4660113187581453289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4738,7 +4738,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2684199234594261823}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 563409bfff502a247b2d56bb0f42d070, type: 3}
+  m_Script: {fileID: 11500000, guid: ccc2daa9bf4b012489d463971d092627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attack_type: 2
+  skill_id: 1

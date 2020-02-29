@@ -25,7 +25,7 @@ namespace BehaviorDesigner.Runtime.Tasks
 
         public override void OnTriggerEnter(Collider other)
         {
-            if (string.IsNullOrEmpty(tag.Value) || tag.Value.Equals(other.gameObject.tag)) {
+            if (string.IsNullOrEmpty(tag.Value) || other.gameObject.CompareTag(tag.Value)) {
                 otherGameObject.Value = other.gameObject;
                 enteredTrigger = true;
             }

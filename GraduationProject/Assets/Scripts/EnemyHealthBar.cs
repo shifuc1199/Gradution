@@ -16,7 +16,8 @@ public class EnemyHealthBar : MonoBehaviour
    public void SetData(BaseEnemyData data)
     {
         this.data = data;
-        if (data.health==0)
+        
+        if (data.health<=0)
         {
             gameObject.SetActive(false);
             return;

@@ -42,9 +42,8 @@ namespace BehaviorDesigner.Runtime.Tasks.Unity.UnityAnimator
                 return TaskStatus.Failure;
             }
 
-
             var state = animator.GetCurrentAnimatorStateInfo(layer.Value);
-            if (state.fullPathHash == stateHash) {
+            if (state.shortNameHash == stateHash) {
                 return TaskStatus.Success;
             }
 

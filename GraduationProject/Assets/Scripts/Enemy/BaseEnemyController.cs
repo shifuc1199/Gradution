@@ -16,7 +16,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
     public GameObject Shadow;
     [System.NonSerialized] public float start_gravity;
     [System.NonSerialized] public bool isGround;
- 
+    public bool isMoveable = true;
     public Transform ground_check_pos;
      
     EnemyConfig _config;

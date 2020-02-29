@@ -8,15 +8,18 @@ using DreamerTool.ScriptableObject;
 public class AudioManager : Singleton<AudioManager>
 {
     private AudioSource _audio;
-
+  
     private void Awake()
     {
-        if(!GetComponent<AudioSource>())
-        _audio = gameObject.AddComponent<AudioSource>();
+        if (!GetComponent<AudioSource>())
+            _audio = gameObject.AddComponent<AudioSource>();
     }
+ 
+
+
     public void PlayOneShot(string audio_name)
     {
-       var clip =  ScriptableObjectUtil.GetScriptableObject<AudioClips>().GetClip(audio_name);
+        var clip = ScriptableObjectUtil.GetScriptableObject<AudioClips>().GetClip(audio_name);
         _audio.pitch = Random.Range(1.0f, 2.0f);
         _audio.PlayOneShot(clip);
     }
