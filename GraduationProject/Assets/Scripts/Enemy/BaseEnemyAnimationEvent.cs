@@ -4,8 +4,8 @@ using UnityEngine;
 using DreamerTool.Extra;
 public class BaseEnemyAnimationEvent : MonoBehaviour
 {
-    private BaseEnemyController _controller;
-    private Rigidbody2D _rigi;
+    [HideInInspector]public BaseEnemyController _controller;
+    [HideInInspector] public Rigidbody2D _rigi;
     private void Awake()
     {
 

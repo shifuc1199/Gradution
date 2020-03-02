@@ -358,6 +358,15 @@ namespace DreamerTool.Extra
 
     public static class Extra
     {
+        public static List<Transform> GetChildren(this Transform tran)
+        {
+            List<Transform> result = new List<Transform>();
+            for (int i = 0; i <  tran.childCount; i++)
+            {
+                result.Add(tran.GetChild(i));
+            }
+            return result;
+        }
         public static void ResetVelocity(this Rigidbody2D _rigi)
         {
             _rigi.velocity = Vector2.zero;
