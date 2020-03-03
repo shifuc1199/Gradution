@@ -16,7 +16,7 @@ public class LanceSkeletonAnimationEvent : BaseEnemyAnimationEvent
     public void OnLanceAttackStay()
     {
         if(isDash)
-        _controller.transform.Translate  ( -_controller.transform.right * Time.deltaTime * dash_speed,Space.World);
+        _rigi.position  -=  (Vector2)_controller.transform.right * Time.deltaTime * dash_speed;
        
     }
     

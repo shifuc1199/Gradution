@@ -18,7 +18,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     {
         AudioManager.Instance.PlayOneShot("player_heavy_attack");
         var temp = GameObjectPoolManager.GetPool("pick_up_slash").Get(transform.position + new Vector3(0, 2, -5), Quaternion.Euler(-45, 90 * transform.right.x, 180),0.5f);
-        temp.GetComponentInChildren<SwordAttackTrigger>().attack_type = HitType.上挑;
+        temp.GetComponentInChildren<PlayerSwordAttackTrigger>().attack_type = HitType.上挑;
         temp.transform.parent = transform.parent.parent;
         temp.transform.localScale = Vector3.one * 2f;
     }
@@ -38,13 +38,13 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
 
         if (index == 3)
         {
-            temp.GetComponentInChildren<SwordAttackTrigger>().attack_type = HitType.击飞;
+            temp.GetComponentInChildren<PlayerSwordAttackTrigger>().attack_type = HitType.击飞;
            AudioManager.Instance.PlayOneShot("player_heavy_attack");
         }
         else
         {
             AudioManager.Instance.PlayOneShot("player_common_attack");
-            temp.GetComponentInChildren<SwordAttackTrigger>().attack_type = HitType.击退;
+            temp.GetComponentInChildren<PlayerSwordAttackTrigger>().attack_type = HitType.击退;
         }
 
     }

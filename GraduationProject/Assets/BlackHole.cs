@@ -55,6 +55,7 @@ public class BlackHole : MonoBehaviour
         }
         foreach (var enemy in enemys)
         {
+            if(!enemy.isSuperArmor)
             enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, transform.position, speed*Time.deltaTime);
         }
        

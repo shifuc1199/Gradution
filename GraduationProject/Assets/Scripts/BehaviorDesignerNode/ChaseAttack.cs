@@ -10,9 +10,9 @@ public class ChaseAttack : Action
 {
       GameObject find_tip;
     Animator animator;
-    public SharedTransform target;
+    public Transform target;
     public float chase_speed;
-    public float attack_distance;
+    public SharedFloat attack_distance;
     public float attack_interval;
     float attack_timer ;
     public override void OnAwake()
@@ -20,6 +20,7 @@ public class ChaseAttack : Action
         base.OnAwake();
         animator = transform.GetChild(0).GetComponent<Animator>();
         find_tip = transform.GetChild(1).gameObject;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     public override void OnStart()
@@ -35,8 +36,8 @@ public class ChaseAttack : Action
     {
         if (GetComponent<BaseEnemyController>().isMoveable)
         {
-            transform.rotation = target.Value.position.x > transform.position.x ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
-            if (Vector3.Distance(transform.position, new Vector2(target.Value.position.x, transform.position.y)) <= attack_distance)
+            transform.rotation = target.position.x > transform.position.x ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
+            if (Vector3.Distance(transform.position, new Vector2(target.position.x, transform.position.y)) <= attack_distance.Value)
             {
                 animator.SetBool("run", false);
 
@@ -51,7 +52,7 @@ public class ChaseAttack : Action
             else
             {
                  
-                transform.position = Vector3.MoveTowards(transform.position, new Vector2(target.Value.position.x, transform.position.y), Time.deltaTime * chase_speed);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector2(target.position.x, transform.position.y), Time.deltaTime * chase_speed);
                 animator.SetBool("run", true);
             }
         }

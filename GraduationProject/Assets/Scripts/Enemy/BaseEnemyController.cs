@@ -6,6 +6,7 @@ using DreamerTool.Extra;
 using UnityEngine.Events;
 using DreamerTool.GameObjectPool;
 using DreamerTool.Util;
+using DG.Tweening;
 public class BaseEnemyController : MonoBehaviour,IHurt
 {
     public int config_id;
@@ -17,6 +18,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
     [System.NonSerialized] public float start_gravity;
     [System.NonSerialized] public bool isGround;
     public bool isMoveable = true;
+    public bool isSuperArmor = false;
     public Transform ground_check_pos;
      
     EnemyConfig _config;
@@ -54,11 +56,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
             _rigi.simulated = false;
         });
     }
-    [ContextMenu("123")]
-    private  void Change()
-    {
-
-    }
+ 
     public void GetHurt(double hurt_value,HitType _type,UnityAction hurt_call_back=null)
     {
         if (enemy_data.isdie)
@@ -69,10 +67,25 @@ public class BaseEnemyController : MonoBehaviour,IHurt
         var pop_text = GameObjectPoolManager.GetPool("pop_text").Get(transform.position, Quaternion.identity, 0.5f);
         pop_text.GetComponent<PopText>().SetText(((int)Util.GetHurtValue(hurt_value, this._config.defend)).ToString(), Color.white);
         View.CurrentScene.GetView<GameInfoView>().enemy_health.SetData(enemy_data);
+ 
         AudioManager.Instance.PlayOneShot("hit");
         GameObjectPoolManager.GetPool("hit_effect").Get(transform.position + new Vector3(0, 2, 0), Quaternion.identity,0.5f);
         hurt_call_back?.Invoke();
-         
+
+        if (isSuperArmor)
+        {
+            _type = HitType.普通;
+        }
+
+        foreach (var item in GetComponentsInChildren<SpriteRenderer>())
+        {
+
+            if (item.sprite != null)
+            {
+                item.DOKill(true);
+                item.DOColor(Color.red, 0.2f).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo);
+            }
+        }
 
         switch (_type)
         {
@@ -85,6 +98,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
                 _anim.SetTrigger("hit");
                 break;
             case HitType.击退:
+  
                 if (!isGround)  
                 {
                     _rigi.ResetVelocity();

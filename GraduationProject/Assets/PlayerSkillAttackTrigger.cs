@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DreamerTool.UI;
-public class SkillAttackTrigger : BaseAttackTrigger
+public class PlayerSkillAttackTrigger : BaseAttackTrigger
 {
     public int skill_id;
     SkillModel model;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DreamerTool.UI;
 using DG.Tweening;
-public class SwordAttackTrigger : BaseAttackTrigger
+public class PlayerSwordAttackTrigger : BaseAttackTrigger
 {
 
    

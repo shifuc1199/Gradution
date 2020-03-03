@@ -4,8 +4,10 @@ using UnityEngine;
 using DreamerTool.FSM;
 using DreamerTool.Extra;
 using DreamerTool.UI;
+using UnityEngine.Events;
+using DG.Tweening;
 [RequireComponent(typeof(ActorSkillController),typeof(ActorState))]
-public class ActorController : MonoBehaviour
+public class ActorController : MonoBehaviour,IHurt
 {
     public static ActorController _controller;
     [System.NonSerialized] public ActorSkillController skill_controller;
@@ -17,6 +19,8 @@ public class ActorController : MonoBehaviour
     public Transform ground_check_pos;
     public float move_speed;
     public float jump_speed;
+    public float super_armor_time;
+    
      
     private void Awake()
     {
@@ -61,7 +65,7 @@ public class ActorController : MonoBehaviour
         transform.Translate(move_dir * move_speed * Time.deltaTime, Space.World); 
     }
  
-    public void Attack()
+    public virtual void Attack()
     {
         if (actor_state.isAttack)
         {
@@ -119,4 +123,40 @@ public class ActorController : MonoBehaviour
         Dash();
     }
 
+    public void GetHurt(double hurtvalue, HitType _type, UnityAction hurt_call_back = null)
+    {
+        if (actor_state.isSuperArmor)
+            return;
+
+        _anim.SetTrigger("hit");
+        actor_state.isSuperArmor = true;
+        Timer.Register(super_armor_time, () => { actor_state.isSuperArmor = false; });
+        foreach (var item in GetComponentsInChildren<SpriteRenderer>())
+        {
+
+            if (item.sprite != null)
+            {
+                item.DOKill(true);
+                item.DOColor(Color.red, 0.2f).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo);
+            }
+        }
+        hurt_call_back?.Invoke();
+        switch (_type)
+        {
+            case HitType.普通:
+                break;
+            case HitType.击退:
+                _rigi.ResetVelocity();
+                _rigi.AddForce(-transform.right * 10, ForceMode2D.Impulse);
+                break;
+            case HitType.击飞:
+                _rigi.ResetVelocity();
+                _rigi.AddForce(new Vector2(-transform.right.x * 0.5f, 0.5f).normalized * 20, ForceMode2D.Impulse);
+                break;
+            case HitType.上挑:
+                break;
+            default:
+                break;
+        }
+    }
 }

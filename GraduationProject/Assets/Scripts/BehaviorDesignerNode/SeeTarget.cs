@@ -8,10 +8,15 @@ using BehaviorDesigner.Runtime.Tasks;
 using BehaviorDesigner.Runtime;
 public class SeeTarget : Conditional
 {
-    public SharedTransform target;
+    public Transform target;
     public float distance;
     public float view_angle;
     public Vector3 offset;
+    public override void OnAwake()
+    {
+        base.OnAwake();
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
     public override TaskStatus OnUpdate()
     {
         if (!GetComponent<BaseEnemyController>().isMoveable)
@@ -27,9 +32,9 @@ public class SeeTarget : Conditional
         Debug.DrawLine(newPos, newPos - newVec3.normalized * distance);
 
         Debug.DrawLine(newPos, newPos - newVec4.normalized * distance);
-        if (Vector2.Distance(transform.position,target.Value.position)<=distance)
+        if (Vector2.Distance(transform.position,target.position)<=distance)
         {
-            var dir = newPos - target.Value.transform.position;  
+            var dir = newPos - target.transform.position;  
             if(Mathf.Abs( Vector3.Dot(transform.right.normalized, dir.normalized))>= Mathf.Cos(view_angle /2 * Mathf.Deg2Rad))
             return TaskStatus.Success;
         }

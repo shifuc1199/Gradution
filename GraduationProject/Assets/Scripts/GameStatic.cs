@@ -5,6 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DreamerTool.Extra;
+using DreamerTool.GameObjectPool;
+
 public static class StaticData  
 {
     /*白色 绿色 蓝色 黄色 紫色 橙色 红色 黑色*/
@@ -20,6 +22,16 @@ public static class StaticData
         { ItemLevel.灵魂,Color.black },
     };
 
-
+   
 
 }
+public  class StaticMethod
+{
+    public static void GameInit()
+    {
+        GameObjectPoolManager.InitByScriptableObject();
+        ActorModel model = new ActorModel();
+        SkillModel.Init();
+    }
+}
+
