@@ -62,7 +62,8 @@ public class ActorController : MonoBehaviour,IHurt
         }
          
         _anim.SetBool("run", actor_state.isMoveRight || actor_state.isMoveLeft);
-        transform.Translate(move_dir * move_speed * Time.deltaTime, Space.World); 
+        _rigi.position +=  move_dir * move_speed * Time.deltaTime; 
+        
     }
  
     public virtual void Attack()
@@ -129,6 +130,7 @@ public class ActorController : MonoBehaviour,IHurt
             return;
 
         _anim.SetTrigger("hit");
+      
         actor_state.isSuperArmor = true;
         Timer.Register(super_armor_time, () => { actor_state.isSuperArmor = false; });
         foreach (var item in GetComponentsInChildren<SpriteRenderer>())

@@ -9,18 +9,29 @@ using BehaviorDesigner.Runtime.Tasks;
 using BehaviorDesigner.Runtime;
 public class SeeTargetCircle : Conditional
 {
+    GameObject find_tip;
     public SharedFloat radius;
     public SharedVector3 offset;
+    public override void OnAwake()
+    {
+        base.OnAwake();
+        find_tip = transform.GetChild(1).gameObject;
+    }
     public override TaskStatus OnUpdate()
     {
         if (!GetComponent<BaseEnemyController>().isMoveable)
-            return TaskStatus.Running;
+        {
+            find_tip.SetActive(false);
+        return TaskStatus.Running;
+        }
 
         var col = Physics2D.OverlapCircle(transform.position+ offset.Value, radius.Value,LayerMask.GetMask("player"));
         if(col!=null)
         {
+            find_tip.SetActive(true);
             return TaskStatus.Success;
         }
+        find_tip.SetActive(false);
         return TaskStatus.Failure;
     }
     public override void OnDrawGizmos()

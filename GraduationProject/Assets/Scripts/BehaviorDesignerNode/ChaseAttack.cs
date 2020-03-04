@@ -8,9 +8,9 @@ using BehaviorDesigner.Runtime.Tasks;
 using BehaviorDesigner.Runtime;
 public class ChaseAttack : Action
 {
-      GameObject find_tip;
+     
     Animator animator;
-    public Transform target;
+     Transform target;
     public float chase_speed;
     public SharedFloat attack_distance;
     public float attack_interval;
@@ -19,7 +19,8 @@ public class ChaseAttack : Action
     {
         base.OnAwake();
         animator = transform.GetChild(0).GetComponent<Animator>();
-        find_tip = transform.GetChild(1).gameObject;
+
+        
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -27,7 +28,7 @@ public class ChaseAttack : Action
     {
         base.OnStart();
          
-        find_tip.SetActive(true);
+        
         Debug.Log("Start");
     }
      
@@ -69,7 +70,7 @@ public class ChaseAttack : Action
     {
         base.OnConditionalAbort();
          
-        find_tip.SetActive(false);
+       
         Debug.Log("退出");
         animator.SetBool("run", false);
     }

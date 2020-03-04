@@ -1067,11 +1067,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwordSkeletonHandler
       objectReference: {fileID: 0}
-    - target: {fileID: 1931929020315579826, guid: 0a62c8b3811073d4ab32e986deb12e2b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1934464583699128512, guid: 0a62c8b3811073d4ab32e986deb12e2b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1161,6 +1156,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WicherSkeleton
       objectReference: {fileID: 0}
+    - target: {fileID: 1523147287638572881, guid: 59e068bfb4306a04bb5453a4a4084f31,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1527916663437240867, guid: 59e068bfb4306a04bb5453a4a4084f31,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1238,6 +1238,95 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2dc9e334bab549faa157f28ba6136ebf, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59e068bfb4306a04bb5453a4a4084f31, type: 3}
+--- !u!1001 &4447056637354815868
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2924050088067393841, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_Name
+      value: WicherSkeleton2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919280816354540611, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919280816354540611, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 12.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919280816354540611, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919280816354540611, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919280816354540611, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919280816354540611, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919280816354540611, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919280816354540611, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919280816354540611, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919280816354540611, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919280816354540611, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3050955214954524789, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2dc9e334bab549faa157f28ba6136ebf, type: 2}
+    - target: {fileID: 3049488312416002823, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 39aff146426e4678ba2fb117117f0818, type: 2}
+    - target: {fileID: 3051025671123540919, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 39aff146426e4678ba2fb117117f0818, type: 2}
+    - target: {fileID: 3050937619607241461, guid: 59fff5060b2e0cd40aaeac008489911a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2dc9e334bab549faa157f28ba6136ebf, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 59fff5060b2e0cd40aaeac008489911a, type: 3}
 --- !u!1001 &4640812258961263330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1249,6 +1338,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AxeBigSkeletonHandler
+      objectReference: {fileID: 0}
+    - target: {fileID: 2487930834834236200, guid: 4d72634a48b480d46a1bb1e47309771f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2491028902769686106, guid: 4d72634a48b480d46a1bb1e47309771f,
         type: 3}
@@ -1343,11 +1437,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LancerSkeletonHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 7710767916744109143, guid: eee5c245ce40ab94682604d2a866236e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7716118541146700069, guid: eee5c245ce40ab94682604d2a866236e,
         type: 3}

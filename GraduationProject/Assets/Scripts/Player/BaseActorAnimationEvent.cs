@@ -18,6 +18,11 @@ public class BaseActorAnimationEvent : MonoBehaviour
     {
         GameObjectPoolManager.GetPool("dust_ground").Get(transform.position+new Vector3(0,-3,0), Quaternion.identity, 1);
     }
+    public void SetInputableFalse()
+    {
+        _controller.actor_state.isInputable = false;
+        
+    }
     public void OnDashEnter()
     {
         AudioManager.Instance.PlayOneShot("dash");
