@@ -13,11 +13,11 @@ public class SkillModel
     }
     public double GetCoolTime()
     {
-        return this._config.basic_skill_cool_time+this._config.skill_cool_ratio * this.skill_level;
+        return _config.basic_skill_cool_time+_config.skill_cool_ratio * skill_level;
     }
     public double GetHurtValue()
     {
-        return _config.basic_hurt + skill_level * _config.skill_level_ratio + _config.actor_attack_ratio * ActorModel.Model.GetAttack();
+        return _config.basic_hurt + skill_level * _config.skill_level_ratio + _config.actor_attack_ratio * ActorModel.Model.GetPlayerAttribute(PlayerAttribute.攻击力);
     }
     public static SkillModel Get(int id)
     {

@@ -30,10 +30,6 @@ public   class ActorModel
     private int max_exp=100;
     public Dictionary<int, SkillModel> skillmodels = new Dictionary<int, SkillModel>();
     
-    public double GetAttack()
-    {
-        return WeaponConfig.Get(Equipment[EquipmentType.武器]).攻击力;
-    }
     private Dictionary<PlayerAttribute, double> PlayerAttributes = new Dictionary<PlayerAttribute, double>()
     {
         { PlayerAttribute.攻击力,1 },

@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class EnemyAttackTrigger : BaseAttackTrigger
 {
-    public Transform owner;
+    
     
     public override void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,7 +18,7 @@ public class EnemyAttackTrigger : BaseAttackTrigger
             
             collision.GetComponent<IHurt>().GetHurt(10, attack_type,()=>
             {
-                collision.gameObject.transform.rotation  = owner.rotation;
+                collision.gameObject.transform.rotation  = transform.position.x >collision.gameObject.transform.position.x?Quaternion.identity:Quaternion.Euler(0,180,0);
             });
         }
 

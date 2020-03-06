@@ -7,7 +7,7 @@ using UnityEngine;
 using DreamerTool.Extra;
 using DreamerTool.GameObjectPool;
 
-public static class StaticData  
+public static class GameStaticData  
 {
     /*白色 绿色 蓝色 黄色 紫色 橙色 红色 黑色*/
     public static Dictionary<ItemLevel, Color> ITEM_COLOR_DICT = new Dictionary<ItemLevel, Color>()
@@ -25,7 +25,7 @@ public static class StaticData
    
 
 }
-public  class StaticMethod
+public  class GameStaticMethod
 {
     public static void GameInit()
     {

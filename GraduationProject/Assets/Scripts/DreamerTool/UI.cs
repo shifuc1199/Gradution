@@ -1,27 +1,33 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
+ 
 using UnityEngine.SceneManagement;
 namespace DreamerTool.UI
 {
     public class Scene : MonoBehaviour
     {
         public Transform _root;
+
         public Dictionary<string, View> _views = new Dictionary<string, View>();
+
         public virtual void Awake()
         { 
             View.CurrentScene = this;
+
             if (_root)
             {
                 for (int i = 0; i < _root.childCount; i++)
                 {
                     var child = _root.GetChild(i);
+  
                     _views.Add(child.name, child.GetComponent<View>());
                 }
             }
+ 
+        }
+        private void OnEnable()
+        {
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         private void OnDisable()
@@ -62,6 +68,7 @@ namespace DreamerTool.UI
         {
             GameObjectPool.GameObjectPoolManager.ClearAll();
         }
+
     }
 
     public class View: MonoBehaviour

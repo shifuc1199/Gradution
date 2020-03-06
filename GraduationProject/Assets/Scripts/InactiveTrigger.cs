@@ -10,7 +10,7 @@ public class InactiveTrigger : MonoBehaviour
 {
     public UnityEvent enter_event;
     public UnityEvent exit_event;
-    public UnityAction inactive_event;
+    public UnityEvent inactive_event;
     public string collision_tag;
 
     public virtual void OnTriggerEnter2D(Collider2D collision)

@@ -30,11 +30,11 @@ public class GameScene : Scene
             LoadingScene.LoadScene(scene_name);
         });
     }
-    private void Awake()
+    public override void Awake()
     {
         base.Awake();
-        StaticMethod.GameInit();
-     // StartCoroutine( Util.GetDateTimeFromURL());
+        GameStaticMethod.GameInit();
+     
     }
    
     // Start is called before the first frame update
@@ -50,7 +50,7 @@ public class GameScene : Scene
         Camera.main.GetComponent<Cinemachine.CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<Cinemachine.CinemachineConfiner>().m_BoundingShape2D = pos.gameObject.GetComponent<PolygonCollider2D>(); });
     }
     // Update is called once per frame
-    void Update()
+   void Update()
     {
         if (Time.timeScale != 1)
         {

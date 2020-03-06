@@ -33,8 +33,8 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
             _rigi.ResetVelocity();
             _rigi.AddForce(transform.right * 5, ForceMode2D.Impulse);
         }
-        GameObject temp;
-        temp = GameObjectPoolManager.GetPool("sword_slash").Get(transform.position + new Vector3(0, 2, 0), Quaternion.Euler(transform.eulerAngles.y, 90, transform.eulerAngles.y + effect_rotation[index]),0.2f);
+        
+        GameObject temp = GameObjectPoolManager.GetPool("sword_slash").Get(transform.position + new Vector3(0, 2, 0), Quaternion.Euler(transform.eulerAngles.y, 90, transform.eulerAngles.y + effect_rotation[index]),0.2f);
 
         if (index == 3)
         {

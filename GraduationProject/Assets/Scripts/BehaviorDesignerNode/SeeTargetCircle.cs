@@ -36,11 +36,11 @@ public class SeeTargetCircle : Conditional
     }
     public override void OnDrawGizmos()
     {
-
+#if UNITY_EDITOR
         Color c = Color.yellow;
         UnityEditor.Handles.color =c;
         UnityEditor.Handles.CircleHandleCap(0, Owner.transform.position + offset.Value, Quaternion.identity, radius.Value, EventType.Repaint);
-        
+#endif      
     }
  
     }

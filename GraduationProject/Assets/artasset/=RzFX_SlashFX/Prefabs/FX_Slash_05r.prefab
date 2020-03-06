@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4062287230431944}
   - component: {fileID: 198385661222217894}
   - component: {fileID: 199350533841138316}
-  - component: {fileID: -138122732063576884}
+  - component: {fileID: -1540843934772318176}
   m_Layer: 0
   m_Name: FX_Slash_05r
   m_TagString: Untagged
@@ -4647,7 +4647,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &-138122732063576884
+--- !u!114 &-1540843934772318176
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4660,6 +4660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 100
+  space_type: 1
   Direction: {x: 0, y: 0, z: 1}
 --- !u!1 &2684199234594261823
 GameObject:

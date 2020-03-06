@@ -15,6 +15,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
  
     public void OnPointerDown(PointerEventData eventData)
     {
+         
         if (isDisable)
             return;
 
@@ -27,8 +28,8 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
             Vector2 dir = eventData.position - (Vector2)bound.position;
         float r = dir.magnitude;
         r = Mathf.Clamp(r, 0, radius);
-        
-            center.localPosition = dir.normalized * r;
+       
+        center.localPosition = dir.normalized * r;
        
         onJoystickDown(dir.normalized,r);
     }

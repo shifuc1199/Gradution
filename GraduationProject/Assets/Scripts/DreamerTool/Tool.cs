@@ -7,23 +7,43 @@ using DreamerTool.ScriptableObject;
 //http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1 时间
 namespace DreamerTool.Util
 {
+    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+    {
+        private static T instance;
+        public static T Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    GameObject temp = new GameObject();
+                    temp.name = typeof(T).Name;
+                    instance = temp.AddComponent<T>();
+                }
+                return instance;
+            }
+        }
+    }
+
     public static class Util
     {
-        public static System.Collections.IEnumerator GetDateTimeFromURL()
+        public static System.Collections.IEnumerator GetDateTimeFromURL(UnityAction<System.DateTime> action)
         {
             UnityWebRequest webRequest = UnityWebRequest.Get("http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1");
             yield return webRequest.SendWebRequest();
             if(webRequest.isNetworkError)
             {
-                yield return null;
+                yield break;
             }
              
             System.DateTime start =System.TimeZone.CurrentTimeZone.ToLocalTime( new System.DateTime(1970, 1, 1));
             start =  start.AddMilliseconds(long.Parse(webRequest.downloadHandler.text.Substring(2)));
-             
-            Debug.Log(start.ToString("yyyy-MM-dd HH:mm:ss"));
-            yield return null;
+            
+            action(start);
+            yield return  null;
+
         }
+    
         public static double GetHurtValue(double a, double d)
         {
             return a * a / (a + d);
@@ -180,7 +200,7 @@ namespace DreamerTool.GameObjectPool
             {
                 get_object = object_pool_queue.Dequeue();
             }
-            get_object.GetComponent<ObjectRecover>().Excute(life_time);
+            get_object.GetComponent<ObjectRecover>().Recover(life_time);
             get_object.SetActive(true);
             get_object.transform.position = pos;
             get_object.transform.rotation = rot;
@@ -201,11 +221,16 @@ namespace DreamerTool.GameObjectPool
     public class ObjectRecover : MonoBehaviour
     {
         public UnityAction<GameObject> recover_call_back;
-        public void Excute(float timer)
+        public void Recover(float timer)
         {
             Invoke("Recover", timer);
         }
-        public void Recover()
+        public void RecoverImmediately()
+        {
+            CancelInvoke();
+            Recover();
+        }
+        private void Recover()
         {
             recover_call_back?.Invoke(gameObject);
         }
@@ -358,6 +383,13 @@ namespace DreamerTool.Extra
 
     public static class Extra
     {
+        public static T GetLast<T>(this List<T> list)
+        {
+            if (list.Count == 0)
+                return default;
+
+            return list[list.Count - 1];
+        }
         public static List<Transform> GetChildren(this Transform tran)
         {
             List<Transform> result = new List<Transform>();
