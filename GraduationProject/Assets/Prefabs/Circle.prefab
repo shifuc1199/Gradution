@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428996984755328952}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.600002, y: 1.2999988, z: -50}
+  m_LocalPosition: {x: -20.600002, y: 0.54999924, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4964548778230357738}
@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Follow: {fileID: 494283290748606094}
   m_Lens:
     FieldOfView: 55
-    OrthographicSize: 30
+    OrthographicSize: 25
     NearClipPlane: 0.01
     FarClipPlane: 5000
     Dutch: 0
@@ -361,7 +361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelUpEffect: {fileID: 4964548776425947372}
   ground_check_pos: {fileID: 6922130410297177944}
-  move_speed: 40
+  move_speed: 30
   jump_speed: 25
   super_armor_time: 1
 --- !u!50 &494283290748606089
@@ -43345,7 +43345,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4964548777838160344}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.600002, y: 1.2999988, z: -50}
+  m_LocalPosition: {x: -20.600002, y: -0.20000076, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 428996986166539240}
@@ -43378,7 +43378,7 @@ Camera:
   far clip plane: 5000
   field of view: 55
   orthographic: 1
-  orthographic size: 30
+  orthographic size: 20
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -43631,7 +43631,7 @@ MonoBehaviour:
   m_LookaheadSmoothing: 10
   m_LookaheadIgnoreY: 0
   m_XDamping: 0
-  m_YDamping: 0
+  m_YDamping: 1
   m_ZDamping: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.575
