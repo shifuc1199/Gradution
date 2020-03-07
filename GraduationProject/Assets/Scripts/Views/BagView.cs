@@ -129,7 +129,6 @@ public class BagView : MonoBehaviour
         }
         if (Items[grid_index].gameObject.activeSelf)
         {
-            ItemUITip.gameObject.SetActive(true);
             ItemUITip.transform.position = Items[grid_index].transform.position;
             var itemui = Items[grid_index];
             ItemUITip.SetConfig(itemui.itemtype,itemui.config_id);
@@ -143,6 +142,13 @@ public class BagView : MonoBehaviour
         
 
     }
+    private void Update()
+    {
+         if (Items.Count > 0 && Vector2.Distance(ItemUITip.transform.position, Items[grid_index].transform.position)>=0.5f)
+         {
+             ItemUITip.transform.position = Items[grid_index].transform.position;
+         }
+    }
     public void AddItem(int id, ItemType type) 
     {
         var grid = GetEmptyGrid();
@@ -151,6 +157,7 @@ public class BagView : MonoBehaviour
             grid.GetChild(0).gameObject.SetActive(true);
             grid.GetChild(0).GetComponent<ItemUI>().SetConfig(type, id,true);
             Items.Add(grid.GetChild(0).GetComponent<ItemUI>());
+ 
         }
         
     }

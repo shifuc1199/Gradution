@@ -4,6 +4,7 @@ using UnityEngine;
 using DreamerTool.GameObjectPool;
 using DG.Tweening;
 using DreamerTool.Extra;
+using DreamerTool.UI;
 using DreamerTool.ScriptableObject;
 public class SwordActorAnimationEvent : BaseActorAnimationEvent
 {
@@ -160,6 +161,56 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
         _rigi.ResetVelocity();
         _rigi.ClearGravity();
         _rigi.velocity = Vector2.up * 100;
+    }
+    bool isSkill5=false;
+    public GameObject separated_body;
+    public void Skill5Excute()
+    {
+        isSkill5 = true;
+       
+    }
+    public void OnSkill5Enter()
+    {
+        View.CurrentScene.GetView<GameInfoView>().HideAnim();
+    }
+    public void OnSkill5Exit()
+    {
+        View.CurrentScene.GetView<GameInfoView>().ShowAnim();
+        ActorController._controller.gameObject.SetActive(true);
+        isSkill5 = false;
+        separated_body.SetActive(false);
+    }
+    Vector2 pos = Vector2.zero;
+    public void OnSkill5Stay()
+    {
+         
+        if (Input.GetKeyDown(KeyCode.Mouse0) && isSkill5)
+        {
+             
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 100000, LayerMask.GetMask("enemy"));
+            if (hit.collider)
+            {
+                separated_body.SetActive(true);
+                var pos_list = new List<int>() { -1, 0, 1 };
+                var x = pos_list[Random.Range(0, pos_list.Count)];
+                var y = pos_list[Random.Range(0, pos_list.Count)];
+                while (x == y && x == 0)
+                {
+                    x = pos_list[Random.Range(0, pos_list.Count)];
+                }
+                separated_body.transform.position = hit.collider.transform.position + new Vector3(x, y, 0).normalized * 18;
+                separated_body.transform.right = (hit.collider.transform.position - separated_body.transform.position).normalized;
+                 pos = separated_body.transform.position + separated_body.transform.right * 36;
+               var heavy_sword_slash = GameObjectPoolManager.GetPool("heavy_sword_slash").Get(separated_body.transform.position + separated_body.transform.right * 15, Quaternion.Euler(new Vector3(180 - Quaternion.FromToRotation(Vector2.right, separated_body.transform.right).eulerAngles.z, 90, 0)), 0.5f);
+                heavy_sword_slash.GetComponentInChildren<BaseAttackTrigger>().attack_type = HitType.普通;
+            }
+        }
+        if((Vector2)separated_body.transform.position ==pos)
+        {
+            separated_body.SetActive(false);
+        }
+        separated_body.transform.position = Vector3.MoveTowards(separated_body.transform.position, pos, 4f);
     }
     public void OnSkill4Exit()
     {
