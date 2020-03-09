@@ -9,4 +9,5 @@ public static class EventHandler
     public static UnityAction OnChangeMoney;
     public static UnityAction OnChangeExp;
     public static UnityAction OnChangeLevel;
+    public static UnityAction<SkillModel> OnSkillLevelUp;
 }

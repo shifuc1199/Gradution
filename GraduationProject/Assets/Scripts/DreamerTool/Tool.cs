@@ -27,6 +27,15 @@ namespace DreamerTool.Util
 
     public static class Util
     {
+        public static string GetColorRichText(string t,Color c)
+        {
+            return "<color=#"+ ColorUtility.ToHtmlStringRGBA(c) + ">" + t + "</color>";
+        }
+        public static string GetColorRichText(string t, string c)
+        {
+            return "<color=#" + c + ">" + t + "</color>";
+        }
+
         public static System.Collections.IEnumerator GetDateTimeFromURL(UnityAction<System.DateTime> action)
         {
             UnityWebRequest webRequest = UnityWebRequest.Get("http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1");
@@ -383,6 +392,7 @@ namespace DreamerTool.Extra
 
     public static class Extra
     {
+ 
         public static T GetLast<T>(this List<T> list)
         {
             if (list.Count == 0)

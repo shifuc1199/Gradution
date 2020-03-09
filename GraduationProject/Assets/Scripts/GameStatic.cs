@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DreamerTool.Extra;
 using DreamerTool.GameObjectPool;
-
+using DG.Tweening;
 public static class GameStaticData  
 {
     /*白色 绿色 蓝色 黄色 紫色 橙色 红色 黑色*/
@@ -32,6 +32,18 @@ public  class GameStaticMethod
         GameObjectPoolManager.InitByScriptableObject();
         ActorModel model = new ActorModel();
         SkillModel.Init();
+    }
+    public static void ChangeChildrenSpriteRendererColor(GameObject gameObject,Color color)
+    {
+        foreach (var item in gameObject.GetComponentsInChildren<SpriteRenderer>())
+        {
+
+            if (item.sprite != null)
+            {
+                item.DOKill(true);
+                item.DOColor(color, 0.2f).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo);
+            }
+        }
     }
 }
 

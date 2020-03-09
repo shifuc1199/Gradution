@@ -129,7 +129,7 @@ public class BagView : MonoBehaviour
         }
         if (Items[grid_index].gameObject.activeSelf)
         {
-            ItemUITip.transform.position = Items[grid_index].transform.position;
+            ItemUITip.gameObject.SetActive(true);
             var itemui = Items[grid_index];
             ItemUITip.SetConfig(itemui.itemtype,itemui.config_id);
         }

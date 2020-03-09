@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ActorState : MonoBehaviour
 {
-    public bool isMoveable = true;
-    public bool isInputable = true;
-    public bool isGround = true;
+    public bool isMoveable { get; set; }
+    public bool isInputable { get; set; }
+    public bool isGround { get; set; }
     public bool isJump { get; set; }
     public bool isAttack { get; set; }
     public bool isDash { get; set; }

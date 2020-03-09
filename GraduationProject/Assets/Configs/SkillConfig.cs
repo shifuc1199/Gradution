@@ -17,9 +17,14 @@ public class SkillConfig :  BaseConfig<SkillConfig>
     public SkillType skill_type;
     [System.NonSerialized]public string sprite_path;
     [TextArea]public string skill_des;
+
     [BoxGroup("技能伤害数据")] public double basic_hurt;
     [BoxGroup("技能伤害数据")] public double skill_level_ratio;
     [BoxGroup("技能伤害数据")] public double actor_attack_ratio;
+
+    [BoxGroup("技能升级数据")] public double skill_level_up_basic_money;
+    [BoxGroup("技能升级数据")] public double skill_level_up_money_ratio;
+
     [BoxGroup("冷却时间数据")] public double basic_skill_cool_time;
     [BoxGroup("冷却时间数据")] public double skill_cool_ratio;
 
@@ -40,6 +45,8 @@ public class SkillConfig :  BaseConfig<SkillConfig>
         data["skill_level_ratio"] = skill_level_ratio;
         data["actor_attack_ratio"] = actor_attack_ratio;
         data["basic_skill_cool_time"] = basic_skill_cool_time;
+        data["skill_level_up_basic_money"] = skill_level_up_basic_money;
+        data["skill_level_up_money_ratio"] = skill_level_up_money_ratio;
         data["skill_cool_ratio"] = skill_cool_ratio;
         data["sprite_path"] = editor_sprite ? AssetDatabase.GetAssetPath(editor_sprite).Substring(0, AssetDatabase.GetAssetPath(editor_sprite).Length - 4).Substring(17) : "";
         jd["Skill"][ID.ToString()] = data;

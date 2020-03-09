@@ -57,12 +57,13 @@ public class BaseEnemyController : MonoBehaviour,IHurt
         });
     }
  
-    public void GetHurt(double hurt_value,HitType _type,UnityAction hurt_call_back=null)
+    public void GetHurt(double hurt_value,HitType _type, Vector3 hurt_pos, UnityAction hurt_call_back=null)
     {
         if (enemy_data.isdie)
             return;
 
 
+        transform.rotation = hurt_pos.x > transform.position.x ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
         enemy_data.SetHealth(-hurt_value);
         var pop_text = GameObjectPoolManager.GetPool("pop_text").Get(transform.position, Quaternion.identity, 0.5f);
         pop_text.GetComponent<PopText>().SetText(((int)Util.GetHurtValue(hurt_value, this._config.defend)).ToString(), Color.white);
@@ -77,15 +78,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
             _type = HitType.普通;
         }
 
-        foreach (var item in GetComponentsInChildren<SpriteRenderer>())
-        {
-
-            if (item.sprite != null)
-            {
-                item.DOKill(true);
-                item.DOColor(Color.red, 0.2f).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo);
-            }
-        }
+        GameStaticMethod.ChangeChildrenSpriteRendererColor(gameObject, Color.red);
 
         switch (_type)
         {

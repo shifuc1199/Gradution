@@ -11,7 +11,7 @@ public class InactiveButtons : SerializedMonoBehaviour
 {
     public ItemSprite current_stay_item;
     public InactiveTrigger curretn_stay_trigger;
-
+    public SkillJoyStick[] skill_joys;
     public Image main_inactive_image;
     public Dictionary<InactiveType, Sprite> inactive_sprite_dic = new Dictionary<InactiveType, Sprite>();
     public InactiveType inactive_type = InactiveType.攻击;
@@ -19,6 +19,10 @@ public class InactiveButtons : SerializedMonoBehaviour
     private void Start()
     {
          
+    }
+    public void UpdateJoySticks(int index)
+    {
+        skill_joys[index].UpdateModel();
     }
     public void SetInactiveType(InactiveType _type,ItemSprite item =null,InactiveTrigger trigger=null)
     {

@@ -5,6 +5,7 @@ using DreamerTool.FSM;
 using DreamerTool.Extra;
 using DreamerTool.UI;
 using UnityEngine.Events;
+using DreamerTool.GameObjectPool;
 using DG.Tweening;
 [RequireComponent(typeof(ActorSkillController),typeof(ActorState))]
 public class ActorController : MonoBehaviour,IHurt
@@ -124,25 +125,32 @@ public class ActorController : MonoBehaviour,IHurt
         Dash();
     }
 
-    public void GetHurt(double hurtvalue, HitType _type, UnityAction hurt_call_back = null)
+    public void GetHurt(double hurtvalue, HitType _type, Vector3 hurt_pos, UnityAction hurt_call_back = null)
     {
         if (actor_state.isSuperArmor)
             return;
+        
+        if (actor_state.isShield && (hurt_pos-transform.position).normalized.x * transform.right.x>0)
+        {
+            _rigi.ResetVelocity();
+            _rigi.AddForce(-transform.right * 10, ForceMode2D.Impulse);
+            GameObjectPoolManager.GetPool("metal_hit").Get(transform.position +transform.right*2, Quaternion.identity, 1.5f);
+            return;
+        }
 
+ 
         _anim.SetTrigger("hit");
-      
+        transform.rotation = hurt_pos.x > transform.position.x ? Quaternion.identity : Quaternion.Euler(0, 180, 0);
+        GameObjectPoolManager.GetPool("hit_effect").Get(transform.position + new Vector3(0, 2, 0), Quaternion.identity, 0.5f);
+
         actor_state.isSuperArmor = true;
         Timer.Register(super_armor_time, () => { actor_state.isSuperArmor = false; });
-        foreach (var item in GetComponentsInChildren<SpriteRenderer>())
-        {
 
-            if (item.sprite != null)
-            {
-                item.DOKill(true);
-                item.DOColor(Color.red, 0.2f).SetEase(Ease.Linear).SetLoops(2, LoopType.Yoyo);
-            }
-        }
+
+        GameStaticMethod.ChangeChildrenSpriteRendererColor(gameObject, Color.red);
+
         hurt_call_back?.Invoke();
+
         switch (_type)
         {
             case HitType.普通:

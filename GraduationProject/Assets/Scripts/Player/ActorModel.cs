@@ -22,14 +22,18 @@ public   class ActorModel
 
     public string actor_name;
 
-    private double money;
+    private double money=10000;
     private double health;
     private double energy;
     private int level = 1;
     private int exp;
     private int max_exp=100;
     public Dictionary<int, SkillModel> skillmodels = new Dictionary<int, SkillModel>();
-    
+    public Dictionary<int,SkillModel> equip_skil = new Dictionary<int, SkillModel>() {
+        { 0, null},
+        { 1, null},
+        { 2, null }
+    }; //装备的技能
     private Dictionary<PlayerAttribute, double> PlayerAttributes = new Dictionary<PlayerAttribute, double>()
     {
         { PlayerAttribute.攻击力,1 },

@@ -2,7 +2,7 @@
 Created by 师鸿博
 *****************************/
 using System.Collections;
-
+using DreamerTool.Util;
 using UnityEngine;
 using UnityEngine.UI;
 using DreamerTool.Extra;
@@ -12,6 +12,7 @@ public class SignInCell : MonoBehaviour
     public Button SignInButton;
     public GameObject SelectFrame;
     public GameObject YesTip;
+    public Text ItemValueText;
     public Text DayCountText;
     public Sprite SignInButtonSignInSprite;
     public Sprite SignInButtonCommonSprite;
@@ -82,6 +83,9 @@ public class SignInCell : MonoBehaviour
         SignInView.SignInDate.Add(TimeModel.Instance.Now);
         View.CurrentScene.GetView<SignInView>().UpdateCell();
         View.CurrentScene.GetView<SignInView>().isTiming = true;
+        var money = double.Parse(ItemValueText.text.Trim('x'));
+        ActorModel.Model.SetMoney(money);
+        View.CurrentScene.OpenView<TipView>().SetContent("签到成功！ \n获得奖励"+Util.GetColorRichText( "    金币: x" + money,Color.yellow));
     }
     private void Update()
     {

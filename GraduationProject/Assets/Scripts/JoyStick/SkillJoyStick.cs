@@ -6,7 +6,7 @@ using System;
 using UnityEngine.UI;
 public class SkillJoyStick : JoyStick
 {
-    public int Skill_ID;
+    public int skill_joy_stick_id;
 
     public SplatManager splat_manager;
     SkillModel model;
@@ -16,20 +16,37 @@ public class SkillJoyStick : JoyStick
     public Image skill_image;
     private void Start()
     {
-        model = SkillModel.Get(Skill_ID);
-        skill_image.sprite = model._config.GetSprite();
-        cool_timer = model.GetCoolTime();
-        if (model._config.skill_type == SkillType.点击)
-        {
-            isDrag = false;
-        }
+        
+        UpdateModel();
     }
-    public void SetSkillModel(SkillModel model)
+    public void UpdateModel()
     {
-        if (model._config.skill_type == SkillType.点击)
+        
+        model = ActorModel.Model.equip_skil[skill_joy_stick_id];
+
+        if (model == null)
         {
-            isDrag = false;
+            isDisable = true;
+            skill_image.gameObject.SetActive(false);
+           
         }
+        else
+        {
+            isDisable = false;
+            skill_image.gameObject.SetActive(true);
+            skill_image.sprite = model._config.GetSprite();
+            cool_timer = model.GetCoolTime();
+            if (model._config.skill_type == SkillType.点击)
+            {
+                isDrag = false;
+            }
+            else
+            {
+                isDrag = true;
+            }
+        }
+ 
+
     }
     public override void onJoystickDown(Vector2 V,float R)
     {
@@ -60,7 +77,7 @@ public class SkillJoyStick : JoyStick
             splat_manager.CancelSpellIndicator();
         }
         isCoolDown = true;
-        ActorController._controller.skill_controller.ExecuteSkill(Skill_ID,V, (Vector3)V * R + ActorController._controller.transform.position);
+        ActorController._controller.skill_controller.ExecuteSkill(model._config.ID,V, (Vector3)V * R + ActorController._controller.transform.position);
     }
     public override void onJoystickMove(Vector2 V, float R)
     {

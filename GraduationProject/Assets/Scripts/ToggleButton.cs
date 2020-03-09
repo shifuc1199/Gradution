@@ -10,13 +10,16 @@ using UnityEngine.UI;
 public class ToggleButton : Toggle
 {
     public int index;
+     
  
-  
-    public override void OnSelect(BaseEventData eventData)
+    public override void OnPointerClick(PointerEventData eventData)
     {
-        base.OnSelect(eventData);
+        base.OnPointerClick(eventData);
+        
         (group as ButtonGroup).OnSelect.Invoke(index);
     }
+  
+ 
     
 
 }

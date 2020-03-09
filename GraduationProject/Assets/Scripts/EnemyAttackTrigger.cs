@@ -16,10 +16,7 @@ public class EnemyAttackTrigger : BaseAttackTrigger
         if (collision.gameObject.tag=="Player")
         {
             
-            collision.GetComponent<IHurt>().GetHurt(10, attack_type,()=>
-            {
-                collision.gameObject.transform.rotation  = transform.position.x >collision.gameObject.transform.position.x?Quaternion.identity:Quaternion.Euler(0,180,0);
-            });
+            collision.GetComponent<IHurt>().GetHurt(10, attack_type,transform.position);
         }
 
     }

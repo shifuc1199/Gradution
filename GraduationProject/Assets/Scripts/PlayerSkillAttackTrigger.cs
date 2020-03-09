@@ -24,9 +24,7 @@ public class PlayerSkillAttackTrigger : BaseAttackTrigger
                 Camera.main.GetComponent<Cinemachine.CinemachineImpulseSource>().GenerateImpulse();
                 Time.timeScale = 0.2f;
             }
-            collision.gameObject.GetComponent<IHurt>().GetHurt(model.GetHurtValue(), attack_type, () => {
-                collision.gameObject.transform.rotation = ActorController._controller.transform.rotation;
-            });
+            collision.gameObject.GetComponent<IHurt>().GetHurt(model.GetHurtValue(), attack_type,transform.position);
         }
     }
 }
