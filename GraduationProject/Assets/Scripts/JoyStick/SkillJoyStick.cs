@@ -12,18 +12,44 @@ public class SkillJoyStick : JoyStick
     SkillModel model;
     bool isCoolDown;
     double cool_timer;
-    public Image mask_image;
+    public Image no_enrgy_mask_image;
+    public Image cool_mask_image;
     public Image skill_image;
+    private void Awake()
+    {
+        EventManager.OnChangeEnergy += UpdateJoyStick;
+         
+    }
     private void Start()
     {
-        
         UpdateModel();
+    }
+    private void OnDestroy()
+    {
+        EventManager.OnChangeEnergy -= UpdateJoyStick;
+    }
+
+    public void UpdateJoyStick()
+    {
+        if (model == null)
+            return;
+        if (model.GetConsumeEnergy() > ActorModel.Model.GetEngery())
+        {
+            isDisable = true;
+            no_enrgy_mask_image.gameObject.SetActive(true);
+
+        }
+        else
+        {
+            no_enrgy_mask_image.gameObject.SetActive(false);
+            isDisable = false;
+        }
     }
     public void UpdateModel()
     {
         
         model = ActorModel.Model.equip_skil[skill_joy_stick_id];
-
+     
         if (model == null)
         {
             isDisable = true;
@@ -77,6 +103,7 @@ public class SkillJoyStick : JoyStick
             splat_manager.CancelSpellIndicator();
         }
         isCoolDown = true;
+      
         ActorController._controller.skill_controller.ExecuteSkill(model._config.ID,V, (Vector3)V * R + ActorController._controller.transform.position);
     }
     public override void onJoystickMove(Vector2 V, float R)
@@ -101,17 +128,20 @@ public class SkillJoyStick : JoyStick
     }
     private void Update()
     {
-        if(isCoolDown)
+        if(isCoolDown )
         {
+             
             isDisable = true;
+
             cool_timer -= Time.fixedDeltaTime;
-            mask_image.fillAmount = (float)(cool_timer / model.GetCoolTime());
-            mask_image.GetComponentInChildren<Text>().text = cool_timer.ToString("f1") + "s";
+            cool_mask_image.fillAmount = (float)(cool_timer / model.GetCoolTime());
+            cool_mask_image.GetComponentInChildren<Text>().text = cool_timer.ToString("f1") + "s";
             if (cool_timer<=0)
             {
-                mask_image.GetComponentInChildren<Text>().text = "";
+                cool_mask_image.GetComponentInChildren<Text>().text = "";
                 cool_timer = model.GetCoolTime();
-                isDisable = false;
+                if (!no_enrgy_mask_image.gameObject.activeSelf)
+                    isDisable = false;
                 isCoolDown = false;
             }
 

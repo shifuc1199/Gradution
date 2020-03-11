@@ -28,6 +28,9 @@ public class SkillConfig :  BaseConfig<SkillConfig>
     [BoxGroup("冷却时间数据")] public double basic_skill_cool_time;
     [BoxGroup("冷却时间数据")] public double skill_cool_ratio;
 
+    [BoxGroup("技能消耗数据")] public double basic_consume_energy;
+    [BoxGroup("技能消耗数据")] public double consume_energy_ratio;
+
     [Button("保存", 50)]
     public void Save()
     {
@@ -48,6 +51,8 @@ public class SkillConfig :  BaseConfig<SkillConfig>
         data["skill_level_up_basic_money"] = skill_level_up_basic_money;
         data["skill_level_up_money_ratio"] = skill_level_up_money_ratio;
         data["skill_cool_ratio"] = skill_cool_ratio;
+        data["basic_consume_energy"] = basic_consume_energy;
+        data["consume_energy_ratio"] = consume_energy_ratio;
         data["sprite_path"] = editor_sprite ? AssetDatabase.GetAssetPath(editor_sprite).Substring(0, AssetDatabase.GetAssetPath(editor_sprite).Length - 4).Substring(17) : "";
         jd["Skill"][ID.ToString()] = data;
         using (StreamWriter sw = new StreamWriter(new FileStream("Assets/Resources/all_config.json", FileMode.Truncate)))

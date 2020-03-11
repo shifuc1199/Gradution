@@ -14,7 +14,7 @@ public class ItemUITip : MonoBehaviour
         {
             case ItemType.武器:
                 var i1 = WeaponConfig.Get(id);
-                _text.text = "武器名字: "+i1.物品名字 + "\n\n武器描述: " +i1.物品描述+"\n\n武器阶级: " + i1.物品阶级;
+                _text.text = "武器名字: "+i1.物品名字 +"\n\n武器阶级: " + i1.物品阶级+"\n\n所需等级: "+DreamerTool.Util.DreamerUtil.GetColorRichText(i1.需要等级.ToString(), i1.需要等级>ActorModel.Model.GetLevel()?Color.red:Color.green)+ "\n\n武器描述: " + i1.物品描述;
                 break;
             case ItemType.上衣:
                 var i2 = TorsoConfig.Get(id);

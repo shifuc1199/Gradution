@@ -18,16 +18,28 @@ public class EquipmentSprite : MonoBehaviour
         if (_sprite)
         {
             UpdateSpriteRenderSprite();
-            EventHandler.OnChangeEquipment += UpdateSpriteRenderSprite;
+            EventManager.OnChangeEquipment += UpdateSpriteRenderSprite;
         }
         if (_image)
         {
             UpdateIamgeSprite();
-            EventHandler.OnChangeEquipment += UpdateIamgeSprite;
+            EventManager.OnChangeEquipment += UpdateIamgeSprite;
         }
 
          
     }
+    private void OnDestroy()
+    {
+        if (_sprite)
+        {
+            EventManager.OnChangeEquipment -= UpdateSpriteRenderSprite;
+        }
+        if (_image)
+        {
+            EventManager.OnChangeEquipment -= UpdateIamgeSprite;
+        }
+    }
+
     public void UpdateIamgeSprite()
     {
         switch (equipment_type)

@@ -20,9 +20,13 @@ public class InactiveButtons : SerializedMonoBehaviour
     {
          
     }
-    public void UpdateJoySticks(int index)
+    public void UpdateAllJoySticks()
     {
-        skill_joys[index].UpdateModel();
+        foreach (var item in skill_joys)
+        {
+            item.UpdateModel();
+        }
+      
     }
     public void SetInactiveType(InactiveType _type,ItemSprite item =null,InactiveTrigger trigger=null)
     {

@@ -12,7 +12,8 @@ public class ActorSkillController : MonoBehaviour
     }
     public void ExecuteSkill(int skill_id,Vector2 dir,Vector2 pos)
     {
-        if(dir.x>0)
+        var model = SkillModel.Get(skill_id);
+        if (dir.x>0)
         {
             transform.rotation = Quaternion.identity;
         }
@@ -23,7 +24,9 @@ public class ActorSkillController : MonoBehaviour
        
         SkillPos = pos;
         SkillDirection = dir;
-
+ 
+        ActorModel.Model.SetEngery(-model.GetConsumeEnergy());
+ 
         _anim.SetTrigger("skill"+ skill_id.ToString());
          
     }

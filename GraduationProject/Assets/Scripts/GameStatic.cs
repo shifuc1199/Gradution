@@ -32,6 +32,8 @@ public  class GameStaticMethod
         GameObjectPoolManager.InitByScriptableObject();
         ActorModel model = new ActorModel();
         SkillModel.Init();
+
+        Resources.LoadAll<Sprite>("SkillShow");
     }
     public static void ChangeChildrenSpriteRendererColor(GameObject gameObject,Color color)
     {

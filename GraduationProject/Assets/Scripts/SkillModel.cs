@@ -11,6 +11,10 @@ public class SkillModel
     {
         skill_level += v;
     }
+    public double GetConsumeEnergy()
+    {
+        return _config.basic_consume_energy; //- _config.basic_consume_energy * _config.consume_energy_ratio;
+    }
     public double GetLearnMoney()
     {
         return _config.skill_level_up_basic_money;
@@ -59,7 +63,7 @@ public class SkillModel
             if (!ActorModel.Model.skillmodels.ContainsKey(item.Key))
             ActorModel.Model.skillmodels.Add(item.Key, new SkillModel(item.Key));
         }
-        
+         
     }
 }
  

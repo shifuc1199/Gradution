@@ -66,7 +66,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
         transform.rotation = hurt_pos.x > transform.position.x ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
         enemy_data.SetHealth(-hurt_value);
         var pop_text = GameObjectPoolManager.GetPool("pop_text").Get(transform.position, Quaternion.identity, 0.5f);
-        pop_text.GetComponent<PopText>().SetText(((int)Util.GetHurtValue(hurt_value, this._config.defend)).ToString(), Color.white);
+        pop_text.GetComponent<PopText>().SetText(((int)DreamerUtil.GetHurtValue(hurt_value, this._config.defend)).ToString(), Color.white);
         View.CurrentScene.GetView<GameInfoView>().enemy_health.SetData(enemy_data);
  
         AudioManager.Instance.PlayOneShot("hit");

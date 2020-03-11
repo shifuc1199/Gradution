@@ -32,7 +32,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
         if (_controller.actor_state.isGround)
         {
             _rigi.ResetVelocity();
-            _rigi.AddForce(transform.right * 5, ForceMode2D.Impulse);
+            _rigi.AddForce(transform.right * 10, ForceMode2D.Impulse);
         }
         
         GameObject temp = GameObjectPoolManager.GetPool("sword_slash").Get(transform.position + new Vector3(0, 2, 0), Quaternion.Euler(transform.eulerAngles.y, 90, transform.eulerAngles.y + effect_rotation[index]),0.2f);
@@ -211,6 +211,17 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
             separated_body.SetActive(false);
         }
         separated_body.transform.position = Vector3.MoveTowards(separated_body.transform.position, pos, 4f);
+    }
+    public void OnDownAttackEnter()
+    {
+        _rigi.ResetVelocity();
+        _rigi.ClearGravity();
+    }
+    public void  DownAttackDash()
+    {
+        
+        _rigi.AddForce(Vector2.down * 100,ForceMode2D.Impulse);
+       
     }
     public void OnSkill4Exit()
     {

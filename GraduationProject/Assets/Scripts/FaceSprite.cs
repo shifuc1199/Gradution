@@ -17,15 +17,26 @@ public class FaceSprite : MonoBehaviour
         if (_sprite)
         {
             UpdateSpriteRenderSprite();
-            EventHandler.OnChangeFace += UpdateSpriteRenderSprite;
+
+            EventManager.OnChangeFace += UpdateSpriteRenderSprite;
         }
         if (_image)
         {
             UpdateIamgeSprite();
-            EventHandler.OnChangeFace += UpdateSpriteRenderSprite;
+            EventManager.OnChangeFace += UpdateSpriteRenderSprite;
         }
+    }
+    private void OnDestroy()
+    {
+        if (_sprite)
+        {
 
-
+            EventManager.OnChangeFace -= UpdateSpriteRenderSprite;
+        }
+        if (_image)
+        {
+            EventManager.OnChangeFace -= UpdateSpriteRenderSprite;
+        }
     }
     public void UpdateIamgeSprite()
     {

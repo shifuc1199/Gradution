@@ -20,7 +20,10 @@ public   class WeaponConfig : ItemConfig<WeaponConfig>
 	public double 暴击率;
 	[BoxGroup("属性信息")]
 	public double 暴击伤害;
- 
+    [BoxGroup("属性信息")]
+    public double 回复能量;
+    [BoxGroup("属性信息")]
+    public int 需要等级;
     [Button("保存",50)]
 	public override void Save()
 	{
@@ -30,8 +33,10 @@ public   class WeaponConfig : ItemConfig<WeaponConfig>
 		jd["Weapon"] = new JsonData();
 		JsonData data = new JsonData();
         data["物品ID"] = 物品ID;
+        data["回复能量"] = 回复能量;
         data["物品名字"] =物品名字;
         data["武器种类"] = (int)武器种类;
+        data["需要等级"] = 需要等级;
         data["物品描述"] = 物品描述;
 		data["图标名字"] = 编辑器图标 ? 编辑器图标.name:"";
         data["攻击力"] = 攻击力;

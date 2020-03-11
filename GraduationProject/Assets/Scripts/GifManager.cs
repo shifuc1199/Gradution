@@ -15,11 +15,13 @@ public class GifManager : MonoBehaviour
     private void Awake()
     {
         image = GetComponent<Image>();
+         
     }
     public void SetPath(string path)
     {
         sprites.Clear();
-        sprites .AddRange( Resources.LoadAll<Sprite>("SkillShow/"+path));
+        sprites.AddRange( Resources.LoadAll<Sprite>("SkillShow/"+path));
+       
     }
     private void Update()
     {

@@ -5,8 +5,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DreamerTool.ScriptableObject;
-using DreamerTool.Util;
-public class AudioManager : Singleton<AudioManager>
+using DreamerTool.Singleton;
+public class AudioManager : MonoSingleton<AudioManager>
 {
     private AudioSource _audio;
   

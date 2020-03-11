@@ -66,7 +66,7 @@ public class SkillJoyStickConfigPage : MonoBehaviour
 
         m_skill_image[button_index].gameObject.SetActive(true);
         m_skill_image[button_index].sprite = m_model._config.GetSprite();
-        View.CurrentScene.GetView<GameInfoView>().inactrive_buttons.UpdateJoySticks(button_index);
+        View.CurrentScene.GetView<GameInfoView>().inactrive_buttons.UpdateAllJoySticks();
         UpdateModel();
     }
 }

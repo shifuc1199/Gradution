@@ -10,15 +10,31 @@ using UnityEngine.UI;
 public class ToggleButton : Toggle
 {
     public int index;
-     
- 
+    public UnityEvent YesEvent;
+    public UnityEvent NoEvent;
+    protected override void Awake()
+    {
+        base.Awake();
+        onValueChanged.AddListener(OnValueChanged);
+        OnValueChanged(isOn);
+    }
     public override void OnPointerClick(PointerEventData eventData)
     {
         base.OnPointerClick(eventData);
         
         (group as ButtonGroup).OnSelect.Invoke(index);
     }
-  
+  public void OnValueChanged(bool v)
+    {
+        if(v)
+        {
+            YesEvent?.Invoke();
+        }
+        else
+        {
+            NoEvent?.Invoke();
+        }
+    }
  
     
 

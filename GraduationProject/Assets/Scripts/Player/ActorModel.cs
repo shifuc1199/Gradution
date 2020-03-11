@@ -23,11 +23,12 @@ public   class ActorModel
     public string actor_name;
 
     private double money=10000;
-    private double health;
-    private double energy;
+    private double health=100;
+    private double energy=100;
+
     private int level = 1;
     private int exp;
-    private int max_exp=100;
+
     public Dictionary<int, SkillModel> skillmodels = new Dictionary<int, SkillModel>();
     public Dictionary<int,SkillModel> equip_skil = new Dictionary<int, SkillModel>() {
         { 0, null},
@@ -45,7 +46,7 @@ public   class ActorModel
     private Dictionary<EquipmentType, int> Equipment = new Dictionary<EquipmentType, int>()
     {
          { EquipmentType.武器,1},
-          { EquipmentType.盾牌,1},
+         { EquipmentType.盾牌,1},
          { EquipmentType.上衣,1},
          { EquipmentType.肩膀右,1},
          { EquipmentType.肩膀左,1},
@@ -61,9 +62,56 @@ public   class ActorModel
          { FaceType.耳朵,1},
          { FaceType.发饰,1},
     };
+    public void SetHealth(double v)
+    {
+        health += v;
+        EventManager.OnChangeHealth();
+    }
+    public WeaponConfig GetCurrentWeapon()
+    {
+        return WeaponConfig.Get(GetPlayerEquipment(EquipmentType.武器));
+    }
+    public double GetHealth()
+    {
+        return health;
+    }
+    public void SetEngery(double e)
+    {
+        if (e == 0)
+            return;
+
+        if (e > 0)
+        {
+            if (energy == GetPlayerAttribute(PlayerAttribute.能量值))
+                return;
+            if (energy + e >= GetPlayerAttribute(PlayerAttribute.能量值))
+            {
+                energy = GetPlayerAttribute(PlayerAttribute.能量值);
+            }
+            else
+            {
+                energy += e;
+            }
+        }
+        else if (e<0)
+        {
+            if (energy == 0)
+                return;
+
+            energy += e;
+        }
+        EventManager.OnChangeEnergy();
+    }
+    public double GetEngery()
+    {
+        return energy;
+    }
     public void SetPlayerAttribute(PlayerAttribute attribute, double value)
     {
         PlayerAttributes[attribute] += value;
+        Debug.Log(value);
+        EventManager.OnChangePlayerAttribute(attribute,value);
+        
     }
     public double GetPlayerAttribute(PlayerAttribute attribute)
     {
@@ -72,7 +120,7 @@ public   class ActorModel
     public void SetPlayerEquipment(EquipmentType equip, int id)
     {
         Equipment[equip] = id;
-        EventHandler.OnChangeEquipment();
+        EventManager.OnChangeEquipment();
     }
     public int GetPlayerEquipment(EquipmentType equip)
     {
@@ -81,7 +129,7 @@ public   class ActorModel
     public void SetFace(FaceType face, int id)
     {
         Faces[face] = id;
-        EventHandler.OnChangeFace?.Invoke();
+        EventManager.OnChangeFace?.Invoke();
     }
     public int GetFace(FaceType face)
     {
@@ -90,7 +138,7 @@ public   class ActorModel
     public void SetMoney(double m)
     {
         money += m;
-        EventHandler.OnChangeMoney();
+        EventManager.OnChangeMoney();
     }
     public double GetMoney()
     {
@@ -99,7 +147,7 @@ public   class ActorModel
     public void SetLevel(int l)
     {
         level += l;
-        EventHandler.OnChangeLevel();
+        EventManager.OnChangeLevel();
     }
     public int GetLevel()
     {
@@ -108,17 +156,17 @@ public   class ActorModel
     public void SetExp(int exp)
     {
         this.exp += exp;
-        if(this.exp>=max_exp)
+        if(this.exp>= GetMaxExp())
         {
-            SetLevel(this.exp / max_exp);
-            this.exp = this.exp % max_exp;
+            SetLevel(this.exp / GetMaxExp());
+            this.exp = this.exp % GetMaxExp();
              
         }
-        EventHandler.OnChangeExp();
+        EventManager.OnChangeExp();
     }
     public int GetMaxExp()
     {
-        return max_exp;
+        return level * 100;
     }
     public int GetExp()
     {

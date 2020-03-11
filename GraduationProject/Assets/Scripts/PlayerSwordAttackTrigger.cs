@@ -11,6 +11,7 @@ public class PlayerSwordAttackTrigger : BaseAttackTrigger
     {   
         if(collision.gameObject.tag=="Enemy")
         {
+            ActorModel.Model.SetEngery(ActorModel.Model.GetCurrentWeapon().回复能量);
             ( View.CurrentScene as GameScene) .HitCount++;
             if(attack_type == HitType.击飞)
             {

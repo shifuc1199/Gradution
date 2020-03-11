@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using DreamerTool.Util;
+using DreamerTool.Singleton;
 #if UNITY_EDITOR
 using UnityEditor;
 using Sirenix.OdinInspector.Editor;
@@ -37,7 +37,7 @@ public class BiliBiliiMessageBackEditorWindow : OdinEditorWindow
 }
 #endif
  
-class BiliBiliMessageHelper : Singleton<BiliBiliMessageHelper>
+class BiliBiliMessageHelper : MonoSingleton<BiliBiliMessageHelper>
 {
     
     public   void SendContent(string Content,string RoomID)

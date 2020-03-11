@@ -13,16 +13,18 @@ public class ExpBar : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        EventHandler.OnChangeExp += SetBar;
+        EventManager.OnChangeExp += SetBar;
+       
+    }
+    private void OnDestroy()
+    {
+        EventManager.OnChangeExp -= SetBar;
     }
     void Start()
     {
         SetBar();
     }
-    private void OnDisable()
-    {
-        EventHandler.OnChangeExp -= SetBar;
-    }
+ 
     public void SetBar()
     {
         _level_text.text = "LV "+ ActorModel.Model.GetLevel();

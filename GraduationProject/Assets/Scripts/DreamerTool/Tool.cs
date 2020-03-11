@@ -5,9 +5,24 @@ using UnityEngine.Events;
 using UnityEngine.Networking;
 using DreamerTool.ScriptableObject;
 //http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1 时间
-namespace DreamerTool.Util
+namespace DreamerTool.Singleton
 {
-    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+    public class Singleton<T> where T : new()
+    {
+        private static T instance;
+        public static T Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new T();
+                }
+                return instance;
+            }
+        }
+    }
+    public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T instance;
         public static T Instance
@@ -24,8 +39,10 @@ namespace DreamerTool.Util
             }
         }
     }
-
-    public static class Util
+}
+namespace DreamerTool.Util
+{
+    public static class DreamerUtil
     {
         public static string GetColorRichText(string t,Color c)
         {

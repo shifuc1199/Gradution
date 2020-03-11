@@ -5,8 +5,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using DreamerTool.Singleton;
 using DreamerTool.Util;
-public class TimeModel : Singleton<TimeModel>
+public class TimeModel : MonoSingleton<TimeModel>
 {
     public   DateTime Now = DateTime.MinValue;
 
@@ -17,7 +18,7 @@ public class TimeModel : Singleton<TimeModel>
 
     public IEnumerator GetTime()
     {
-     yield return StartCoroutine(Util.GetDateTimeFromURL((time) => {
+     yield return StartCoroutine(DreamerUtil.GetDateTimeFromURL((time) => {
             Now = time;
         }));
     }

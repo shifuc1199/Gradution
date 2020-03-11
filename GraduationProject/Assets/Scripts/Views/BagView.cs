@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DreamerTool.UI;
 using UnityEngine.UI;
 public class BagView : MonoBehaviour
 {
@@ -59,8 +59,18 @@ public class BagView : MonoBehaviour
         switch (CurretnSelect.itemtype)
         {
             case ItemType.武器:
+                var config = WeaponConfig.Get(CurretnSelect.config_id);
+                if (config.需要等级 > ActorModel.Model.GetLevel())
+                {
+                    View.CurrentScene.OpenView<TipView>().SetContent("等级不够 需要等级: "+DreamerTool.Util.DreamerUtil.GetColorRichText( config.需要等级.ToString(),Color.red));
+                    return;
+                }
+                     
                 int temp = ActorModel.Model.GetPlayerEquipment(EquipmentType.武器);
-                ActorModel.Model.SetPlayerEquipment(EquipmentType.武器, CurretnSelect.config_id);  
+                var a = config.攻击力;
+                var b = WeaponConfig.Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.武器)).攻击力;
+                ActorModel.Model.SetPlayerAttribute(PlayerAttribute.攻击力, a-b );
+                ActorModel.Model.SetPlayerEquipment(EquipmentType.武器, CurretnSelect.config_id);
                 CurretnSelect.SetConfig(ItemType.武器, temp);
                 ItemUITip.SetConfig(ItemType.武器, temp);
                 break;

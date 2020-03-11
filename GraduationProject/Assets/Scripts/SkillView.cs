@@ -25,22 +25,26 @@ public class SkillView : View
             skillcell.SetModel(item.Value);
             skill_cell_list.Add(skillcell);
         }
+      
 
-         
-        EventHandler.OnSkillLevelUp += (_model)=> {
-
-            foreach (var cell in skill_cell_list)
-            {
-                cell.UpdateModel();
-            }
-            config.UpdateModel();
-            introduce.UpdateModel();
-
-        };
+        EventManager.OnSkillLevelUp += UpdateSkillViewBySkillLevelUp;
+    }
+    private void OnDestroy()
+    {
+        EventManager.OnSkillLevelUp -= UpdateSkillViewBySkillLevelUp;
     }
     private void Start()
     {
         SelecetCell(0);
+    }
+    public void UpdateSkillViewBySkillLevelUp(SkillModel model)
+    {
+        foreach (var cell in skill_cell_list)
+        {
+            cell.UpdateModel();
+        }
+        config.UpdateModel();
+        introduce.UpdateModel();
     }
     public override void OnShow()
     {

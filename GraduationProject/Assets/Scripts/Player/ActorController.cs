@@ -21,7 +21,8 @@ public class ActorController : MonoBehaviour,IHurt
     public float move_speed;
     public float jump_speed;
     public float super_armor_time;
-    
+    public int max_jump_count;
+    int jump_count = 0;
      
     private void Awake()
     {
@@ -33,12 +34,17 @@ public class ActorController : MonoBehaviour,IHurt
         actor_state = GetComponent<ActorState>();
 
 
-        EventHandler.OnChangeLevel += () => { LevelUpEffect.SetActive(true); };
+        EventManager.OnChangeLevel += LevelUp;
     }
-    private void OnDisable()
+    public void LevelUp()
     {
-        EventHandler.OnChangeLevel -= () => { LevelUpEffect.SetActive(true); };
+        LevelUpEffect.SetActive(true);
     }
+    private void OnDestroy()
+    {
+        EventManager.OnChangeLevel -= LevelUp;
+    }
+
     public void Transfer(Transform point)
     {
         transform.position = point.position;
@@ -74,8 +80,10 @@ public class ActorController : MonoBehaviour,IHurt
             if (actor_state.isAttackUp && actor_state.isGround)
             {
                 _anim.SetTrigger("pickupattack");
-                 
-                 
+            }
+            else if(actor_state.isAttackDown && !actor_state.isGround)
+           {
+                _anim.SetTrigger("downattack");
             }
             else
                 _anim.SetTrigger("attack");
@@ -88,13 +96,20 @@ public class ActorController : MonoBehaviour,IHurt
    
     public  void Jump()
     {
+        if(actor_state.isGround && jump_count!=0)
+        {
+            jump_count = 0;
+        }
         if (actor_state.isJump)
         {
-            if (actor_state.isGround)
+             
+            if (jump_count < max_jump_count)
             {
+                jump_count++;
                 _rigi.ResetVelocity();
-                _rigi.AddForce(Vector2.up * jump_speed, ForceMode2D.Impulse);
+                _rigi.AddForce  ( Vector2.up * jump_speed,ForceMode2D.Impulse);
             }
+             
             actor_state.isJump = false;
         }
     }
@@ -114,7 +129,7 @@ public class ActorController : MonoBehaviour,IHurt
         _anim.SetFloat("gravity", _rigi.gravityScale);
         actor_state.isGround = Physics2D.OverlapCircle(ground_check_pos.position, 1,LayerMask.GetMask("Ground"));
     }
-    public void Update()
+    public void FixedUpdate()
     {
         StateCheck();
         if (!actor_state.isInputable)
@@ -145,7 +160,7 @@ public class ActorController : MonoBehaviour,IHurt
 
         actor_state.isSuperArmor = true;
         Timer.Register(super_armor_time, () => { actor_state.isSuperArmor = false; });
-
+        ActorModel.Model.SetHealth(-hurtvalue);
 
         GameStaticMethod.ChangeChildrenSpriteRendererColor(gameObject, Color.red);
 

@@ -38,7 +38,7 @@ public class SkillIntroduce : MonoBehaviour
         {
             needMoney = model.GetLevelUpMoney();
             level_up_button.GetComponentInChildren<Text>().text = "升级";
-            level_up_info_text.text = Util.GetColorRichText("\t\t等级:" + model.GetSkillLevel(), Color.white) + "\n升级所需金钱: " + ((ActorModel.Model.GetMoney() >= needMoney) ? "<color=green>" : "<color=red>") + needMoney + " </color>";
+            level_up_info_text.text = DreamerUtil.GetColorRichText("\t\t等级:" + model.GetSkillLevel(), Color.white) + "\n升级所需金钱: " + ((ActorModel.Model.GetMoney() >= needMoney) ? "<color=green>" : "<color=red>") + needMoney + " </color>";
         }
          
         level_up_button.interactable = ActorModel.Model.GetMoney() >= needMoney;
@@ -49,16 +49,16 @@ public class SkillIntroduce : MonoBehaviour
     {
         if(!model.IsLearn())
         {
-            View.CurrentScene.OpenView<TipView>().SetContent(Util.GetColorRichText(model._config.skill_name,Color.yellow)+"\t学习成功！");
+            View.CurrentScene.OpenView<TipView>().SetContent(DreamerUtil.GetColorRichText(model._config.skill_name,Color.yellow)+"\t学习成功！");
             model.Learn();
         }
         else
         {
-            View.CurrentScene.OpenView<TipView>().SetContent(Util.GetColorRichText(model._config.skill_name, Color.yellow) + "\t升级成功！");
+            View.CurrentScene.OpenView<TipView>().SetContent(DreamerUtil.GetColorRichText(model._config.skill_name, Color.yellow) + "\t升级成功！");
         }
         model.SetSkillLevel (1);
          
         ActorModel.Model.SetMoney(-model.GetLevelUpMoney());
-        EventHandler.OnSkillLevelUp(model);
+        EventManager.OnSkillLevelUp(model);
     }
 }

@@ -85,7 +85,7 @@ public class SignInCell : MonoBehaviour
         View.CurrentScene.GetView<SignInView>().isTiming = true;
         var money = double.Parse(ItemValueText.text.Trim('x'));
         ActorModel.Model.SetMoney(money);
-        View.CurrentScene.OpenView<TipView>().SetContent("签到成功！ \n获得奖励"+Util.GetColorRichText( "    金币: x" + money,Color.yellow));
+        View.CurrentScene.OpenView<TipView>().SetContent("签到成功！ \n获得奖励"+DreamerUtil.GetColorRichText( "    金币: x" + money,Color.yellow));
     }
     private void Update()
     {
