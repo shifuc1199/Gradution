@@ -21,8 +21,17 @@ public static class GameStaticData
         { ItemLevel.荣誉,Color.red },
         { ItemLevel.灵魂,Color.black },
     };
+    public static Dictionary<string, ItemType> ITEM_CONFIG = new Dictionary<string, ItemType>()
+    {
+        {"WeaponConfig",ItemType.武器},
+        {"TorsoConfig",ItemType.上衣},
+        {"SleeveConfig",ItemType.手链},
+        {"ShieldConfig",ItemType.盾牌},
+        {"ArmConfig",ItemType.肩膀},
+        {"PelvisConfig",ItemType.裤子},
+        {"FootConfig",ItemType.鞋子},
+    };
 
-   
 
 }
 public  class GameStaticMethod
@@ -30,13 +39,16 @@ public  class GameStaticMethod
     public static void GameInit()
     {
         GameObjectPoolManager.InitByScriptableObject();
-        ActorModel model = new ActorModel();
+        if (ActorModel.Model == null)
+        {
+            ActorModel model = new ActorModel();
+        }
         SkillModel.Init();
-
-        Resources.LoadAll<Sprite>("SkillShow");
+ 
     }
     public static void ChangeChildrenSpriteRendererColor(GameObject gameObject,Color color)
     {
+       
         foreach (var item in gameObject.GetComponentsInChildren<SpriteRenderer>())
         {
 

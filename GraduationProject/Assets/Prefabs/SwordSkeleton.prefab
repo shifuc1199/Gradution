@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack_type: 1
+  owner: {fileID: 1128412747109389409}
 --- !u!61 &328100508
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -59,7 +60,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.20958894, y: 0.316759}
+  m_Offset: {x: 0.27594924, y: 0.316759}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -70,7 +71,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.4191779, y: 1.6335177}
+  m_Size: {x: 1.5518985, y: 1.6335177}
   m_EdgeRadius: 0
 --- !u!50 &328100509
 Rigidbody2D:
@@ -2342,10 +2343,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.5
-  m_LinearDrag: 1
+  m_Mass: 1
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 13
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -2480,6 +2481,8 @@ MonoBehaviour:
   isMoveable: 1
   isSuperArmor: 0
   ground_check_pos: {fileID: 1929261944560026448}
+  hit_fly_distance: 50
+  hit_back_distance: 20
 --- !u!114 &1540579804416393248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2516,7 +2519,7 @@ MonoBehaviour:
         dataPosition: 00000000240000003200000033000000
         unityObjects: []
         byteData: 4265686176696f7244657369676e65722e52756e74696d652e536861726564466c6f617441747461636b44697374616e6365010000e040
-        byteDataArray: 
+        byteDataArray: 4265686176696f7244657369676e65722e52756e74696d652e536861726564466c6f617441747461636b44697374616e6365010000e040
       Version: 1.6.4
   gizmoViewMode: 2
   showBehaviorDesignerGizmo: 1
@@ -17357,7 +17360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1934464583699128512
 Transform:
   m_ObjectHideFlags: 0

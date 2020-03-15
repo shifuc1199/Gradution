@@ -13,11 +13,11 @@ public class BaseEnemyData
     public Sprite head;
     public string enemy_name;
     public UnityAction die_call_back;
-     public BaseEnemyData(EnemyConfig _config,UnityAction die_call_back=null)
+     public BaseEnemyData(EnemyModel model,UnityAction die_call_back=null)
     {
-        maxhealth = _config.MaxHealth;
-        head = _config.GetSprite();
-        enemy_name = _config.EnemyName;
+        maxhealth = model.GetMaxHealth();
+        head = model.config.GetSprite();
+        enemy_name = model.config.EnemyName;
         health = maxhealth;
         this.die_call_back = die_call_back;
     }

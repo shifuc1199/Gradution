@@ -26,6 +26,8 @@ public class SkillIntroduce : MonoBehaviour
     }
     public void UpdateModel()
     {
+        if (model == null)
+            return;
         intro_text.text = model._config.skill_des.Replace("t", "<color=#FF9A00>" + (int)model.GetHurtValue() + "</color>");
         double needMoney=0;
         if (!model.IsLearn())

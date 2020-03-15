@@ -19,6 +19,7 @@ public class GifManager : MonoBehaviour
     }
     public void SetPath(string path)
     {
+        _time = 0;
         sprites.Clear();
         sprites.AddRange( Resources.LoadAll<Sprite>("SkillShow/"+path));
        
@@ -28,7 +29,9 @@ public class GifManager : MonoBehaviour
         if (sprites.Count <= 0) return;
    
         _time += Time.deltaTime;
+
         var index = (int)(_time * Fps) % sprites.Count;
+
         if (image != null)
         {
             image.sprite = sprites[index];

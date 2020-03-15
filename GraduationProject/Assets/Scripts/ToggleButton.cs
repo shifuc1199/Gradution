@@ -15,6 +15,10 @@ public class ToggleButton : Toggle
     protected override void Awake()
     {
         base.Awake();
+        if(group == null)
+        {
+            group = GetComponentInParent<ButtonGroup>();
+        }
         onValueChanged.AddListener(OnValueChanged);
         OnValueChanged(isOn);
     }
@@ -22,7 +26,7 @@ public class ToggleButton : Toggle
     {
         base.OnPointerClick(eventData);
         
-        (group as ButtonGroup).OnSelect.Invoke(index);
+        (group as ButtonGroup).OnSelect?.Invoke(index);
     }
   public void OnValueChanged(bool v)
     {

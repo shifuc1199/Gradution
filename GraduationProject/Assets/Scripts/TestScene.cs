@@ -4,22 +4,29 @@ Created by 师鸿博
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Ferr.Extensions;
+using DreamerTool.GameObjectPool;
 public class TestScene : MonoBehaviour
 {
+    bool isDraw = false;
+    Vector3 last_pos;
     private void Start()
     {
-        
-    }
-    [ContextMenu("sb")]
-    public void Test()
-    {
-        GetComponent<Ferr2DT_PathTerrain>().PathData.Clear();
+        GameObjectPoolManager.InitByScriptableObject();
 
-        GetComponent<Ferr2DT_PathTerrain>().PathData.Add(new Vector2(0, 0), new Ferr2D_PointData(1), Ferr.PointType.Sharp);
-        GetComponent<Ferr2DT_PathTerrain>().PathData.Add(new Vector2(1, 1), new Ferr2D_PointData(1), Ferr.PointType.Sharp);
-        GetComponent<Ferr2DT_PathTerrain>().PathData.Add(new Vector2(0, 1), new Ferr2D_PointData(1), Ferr.PointType.Sharp);
+    }
+ 
+    private void Update()
+    {
         
-        GetComponent<Ferr2DT_PathTerrain>().Build();
+        if (Input.GetKey(KeyCode.Mouse0) && !isDraw)
+        {
+            last_pos = Input.mousePosition;
+            isDraw = true;
+            GameObjectPoolManager.GetPool("mask_sprite").Get(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,10)), Quaternion.identity, -1);
+        }
+        if (Input.mousePosition != last_pos && isDraw)
+        {
+            isDraw = false;
+        }
     }
 }

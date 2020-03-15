@@ -102,8 +102,8 @@ public class ActorController : MonoBehaviour,IHurt
         }
         if (actor_state.isJump)
         {
-             
-            if (jump_count < max_jump_count)
+              
+            if (jump_count < max_jump_count && (jump_count!=0 || actor_state.isGround))
             {
                 jump_count++;
                 _rigi.ResetVelocity();
@@ -148,7 +148,7 @@ public class ActorController : MonoBehaviour,IHurt
         if (actor_state.isShield && (hurt_pos-transform.position).normalized.x * transform.right.x>0)
         {
             _rigi.ResetVelocity();
-            _rigi.AddForce(-transform.right * 10, ForceMode2D.Impulse);
+            _rigi.AddForce(-transform.right * 20, ForceMode2D.Impulse);
             GameObjectPoolManager.GetPool("metal_hit").Get(transform.position +transform.right*2, Quaternion.identity, 1.5f);
             return;
         }

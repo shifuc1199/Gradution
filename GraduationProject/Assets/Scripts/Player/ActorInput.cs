@@ -22,7 +22,10 @@ public class ActorInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      //  ActorController._controller.actor_state.isJump = Input.GetKeyDown(KeyCode.Space);
-       // ActorController._controller.actor_state.isAttackDown = Input.GetKey(KeyCode.S);
+#if UNITY_EDITOR
+        ActorController._controller.actor_state.isAttackUp = Input.GetKey(KeyCode.W);
+        ActorController._controller.actor_state.isJump = Input.GetKeyDown(KeyCode.Space);
+        ActorController._controller.actor_state.isAttackDown = Input.GetKey(KeyCode.S);
+#endif
     }
 }

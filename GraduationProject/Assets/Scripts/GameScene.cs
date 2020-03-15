@@ -34,7 +34,7 @@ public class GameScene : Scene
     {
         base.Awake();
         GameStaticMethod.GameInit();
-     
+
     }
    
     // Start is called before the first frame update
@@ -52,6 +52,8 @@ public class GameScene : Scene
     // Update is called once per frame
    void Update()
     {
+       
+      //  UICamera.orthographicSize =(float) Screen.width / Screen.height;
         if (Time.timeScale != 1)
         {
 

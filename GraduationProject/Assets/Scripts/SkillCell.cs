@@ -12,7 +12,7 @@ public class SkillCell : MonoBehaviour
     public Text skill_level_text;
     public Image skill_image;
     public SkillModel model;
-
+    public GameObject mask;
     private void Awake()
     {
         
@@ -40,6 +40,8 @@ public class SkillCell : MonoBehaviour
             skill_level_text.text = "未学习";
             skill_image.color = Color.gray;
             skill_info_text.color = Color.gray;
+
+            mask.SetActive(true);
         }
         else
         {
@@ -47,6 +49,8 @@ public class SkillCell : MonoBehaviour
             skill_image.color = Color.white;
             skill_level_text.color = Color.white;
             skill_level_text.text = model.GetSkillLevel() + "/" + "5";
+
+            mask.SetActive(false);
         }
         skill_info_text.text = model._config.skill_name;   
         skill_image.sprite = model._config.GetSprite();

@@ -20,9 +20,14 @@ public abstract class ItemConfig<T> : BaseConfig<T> where T: BaseConfig<T>
     [VerticalGroup("基础信息/p/o")]
     public ItemLevel 物品阶级;
     [BoxGroup("基础信息")]
+    public int 卖出价格;
+    [BoxGroup("基础信息")]
+    public int 购买价格;
+    [BoxGroup("基础信息")]
     [VerticalGroup("基础信息/p/o")]
     [TextArea()]
     public string 物品描述;/*nil*/
+ 
     public abstract void Save();
     public abstract Sprite GetSprite();
     public void SetEditorSprite()

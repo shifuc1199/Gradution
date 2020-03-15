@@ -7,8 +7,8 @@ using UnityEngine.Events;
 using System;
 public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    public Transform bound;
-    public Transform center;
+    public RectTransform bound;
+    public RectTransform center;
     public bool isDisable = false;
     public bool isDrag = true;
     public float radius;
@@ -24,11 +24,9 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
             onJoystickDown(Vector2.zero, 0);
             return;
         }
-
-            Vector2 dir = eventData.position - (Vector2)bound.position;
+        Vector2 dir = bound.InverseTransformPoint(DreamerTool.UI.Scene.UICamera.ScreenToWorldPoint(eventData.position));
         float r = dir.magnitude;
         r = Mathf.Clamp(r, 0, radius);
-       
         center.localPosition = dir.normalized * r;
        
         onJoystickDown(dir.normalized,r);
@@ -43,7 +41,8 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
             onJoystickUp(Vector2.zero, 0);
             return;
         }
-        Vector2 dir = eventData.position - (Vector2)bound.position;
+ 
+        Vector2 dir = bound.InverseTransformPoint(DreamerTool.UI.Scene.UICamera.ScreenToWorldPoint(eventData.position));
         float r = dir.magnitude;
         r = Mathf.Clamp(r, 0, radius);
        
@@ -54,6 +53,7 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
 
     public void OnDrag(PointerEventData eventData)
     {
+       
         if (isDisable)
             return;
         if (!isDrag)
@@ -61,8 +61,8 @@ public class JoyStick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, I
             onJoystickMove(Vector2.zero, 0);
             return;
         }
-        Vector2 dir = eventData.position - (Vector2)bound.position;
-     
+ 
+        Vector2 dir = bound.InverseTransformPoint(DreamerTool.UI.Scene.UICamera.ScreenToWorldPoint(eventData.position));
         float r = dir.magnitude;
         r = Mathf.Clamp(r, 0, radius);
         

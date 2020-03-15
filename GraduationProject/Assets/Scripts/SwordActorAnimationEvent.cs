@@ -8,7 +8,7 @@ using DreamerTool.UI;
 using DreamerTool.ScriptableObject;
 public class SwordActorAnimationEvent : BaseActorAnimationEvent
 {
- 
+    public float attack_forward_distance;
     List<int> effect_rotation = new List<int>() { 45, 130, 55,0};
  
     private void Awake()
@@ -32,7 +32,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
         if (_controller.actor_state.isGround)
         {
             _rigi.ResetVelocity();
-            _rigi.AddForce(transform.right * 10, ForceMode2D.Impulse);
+            _rigi.AddForce(transform.right * attack_forward_distance, ForceMode2D.Impulse);
         }
         
         GameObject temp = GameObjectPoolManager.GetPool("sword_slash").Get(transform.position + new Vector3(0, 2, 0), Quaternion.Euler(transform.eulerAngles.y, 90, transform.eulerAngles.y + effect_rotation[index]),0.2f);
@@ -105,7 +105,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     }
     public void HeavyAttackMove()
     {
-        _rigi.velocity = _controller.skill_controller.SkillDirection * 200;
+        _rigi.velocity = _controller.skill_controller.SkillDirection * 150;
         GetComponentInParent<AfterImage>().IsUpdate = true;
     }
     public void HeavyAttackReset()
@@ -118,7 +118,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     public void PickUpAttackJump()
     {
         _rigi.ResetVelocity();
-        _rigi.AddForce(Vector2.up*ActorController._controller.jump_speed,ForceMode2D.Impulse);
+        _rigi.AddForce(Vector2.up* 95, ForceMode2D.Impulse);
         _anim.ResetTrigger("pickupattack");
     }
     public void OnSkill2Exit()
@@ -140,7 +140,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
             if(ActorController._controller.actor_state.isGround)
             {
                 isMove = false;
-                GameObjectPoolManager.GetPool("skill4_effect").Get(ActorController._controller.transform.position+new Vector3(0,-4,0), Quaternion.Euler(-90,0,0), 0.75f);
+                GameObjectPoolManager.GetPool("skill4_effect").Get(ActorController._controller.transform.position+new Vector3(0,-4,0), Quaternion.identity, 0.75f);
             }
         }
     }
@@ -167,14 +167,18 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     public void Skill5Excute()
     {
         isSkill5 = true;
-       
+        Camera.main.GetComponent<CameraController>().LockEnemy();
+        View.CurrentScene.GetView<GameInfoView>().SetScreenEffect(Color.black, 1);
     }
     public void OnSkill5Enter()
     {
         View.CurrentScene.GetView<GameInfoView>().HideAnim();
+         
     }
     public void OnSkill5Exit()
     {
+        View.CurrentScene.GetView<GameInfoView>().SetScreenEffect(Color.black, 0);
+        Camera.main.GetComponent<CameraController>().UnLockEnemy();
         View.CurrentScene.GetView<GameInfoView>().ShowAnim();
         ActorController._controller.gameObject.SetActive(true);
         isSkill5 = false;
@@ -219,9 +223,13 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     }
     public void  DownAttackDash()
     {
-        
         _rigi.AddForce(Vector2.down * 100,ForceMode2D.Impulse);
-       
+    }
+    public void OnDownAttackExit()
+    {
+        _rigi.ResetVelocity();
+        _rigi.SetGravity(ActorController._controller.start_grivaty);
+        GameObjectPoolManager.GetPool("skill4_effect").Get(transform.position, Quaternion.identity,0.5f);
     }
     public void OnSkill4Exit()
     {

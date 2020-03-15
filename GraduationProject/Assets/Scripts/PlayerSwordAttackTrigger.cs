@@ -19,7 +19,7 @@ public class PlayerSwordAttackTrigger : BaseAttackTrigger
                 Camera.main.GetComponent< Cinemachine.CinemachineImpulseSource>().GenerateImpulse();
                 Time.timeScale = 0.2f;
             }
-                collision.gameObject.GetComponent<IHurt>().GetHurt(ActorModel.Model.GetPlayerAttribute(PlayerAttribute.攻击力),attack_type,transform.position);
+                collision.gameObject.GetComponent<IHurt>().GetHurt(ActorModel.Model.GetPlayerAttribute(PlayerAttribute.攻击力),attack_type,ActorController._controller.transform.position);
         }
     }
  

@@ -18,6 +18,8 @@ public   class ActorModel
     public ActorModel()
     {
         _model = this;
+
+        SetPlayerAttribute(PlayerAttribute.攻击力, GetAttackFromEquipment());
     }
 
     public string actor_name;
@@ -37,7 +39,7 @@ public   class ActorModel
     }; //装备的技能
     private Dictionary<PlayerAttribute, double> PlayerAttributes = new Dictionary<PlayerAttribute, double>()
     {
-        { PlayerAttribute.攻击力,1 },
+        { PlayerAttribute.攻击力,0 },
         { PlayerAttribute.生命值,100 },
         { PlayerAttribute.防御力,100 },
         { PlayerAttribute.能量值,100 },
@@ -62,6 +64,10 @@ public   class ActorModel
          { FaceType.耳朵,1},
          { FaceType.发饰,1},
     };
+    private double GetAttackFromEquipment()
+    {
+        return WeaponConfig.Get(Equipment[EquipmentType.武器]).攻击力;
+    }
     public void SetHealth(double v)
     {
         health += v;
@@ -109,8 +115,7 @@ public   class ActorModel
     public void SetPlayerAttribute(PlayerAttribute attribute, double value)
     {
         PlayerAttributes[attribute] += value;
-        Debug.Log(value);
-        EventManager.OnChangePlayerAttribute(attribute,value);
+        EventManager.OnChangePlayerAttribute?.Invoke(attribute,value);
         
     }
     public double GetPlayerAttribute(PlayerAttribute attribute)

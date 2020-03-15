@@ -24,6 +24,8 @@ public class PelvisConfig : ItemConfig<PelvisConfig>
         data["物品ID"] = 物品ID;
         data["物品名字"] = 物品名字;
         data["物品描述"] = 物品描述;
+        data["购买价格"] = 购买价格;
+        data["卖出价格"] = 卖出价格;
         data["图标名字"] = 编辑器图标 ? AssetDatabase.GetAssetPath(编辑器图标).Substring(0, AssetDatabase.GetAssetPath(编辑器图标).Length-4).Substring(17) : "";
         data["物品阶级"] = (int)物品阶级;
         jd["Pelvis"][物品ID.ToString()] = data;

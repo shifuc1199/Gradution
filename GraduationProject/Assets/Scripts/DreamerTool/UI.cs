@@ -8,12 +8,17 @@ namespace DreamerTool.UI
     public class Scene : MonoBehaviour
     {
         public Transform _root;
-
+        public static Camera UICamera;
         public Dictionary<string, View> _views = new Dictionary<string, View>();
 
         public virtual void Awake()
         { 
             View.CurrentScene = this;
+
+            var UICameraGameObject = GameObject.FindGameObjectWithTag("UICamera");
+
+            if(UICameraGameObject)
+            UICamera = UICameraGameObject.GetComponent<Camera>();
 
             if (_root)
             {

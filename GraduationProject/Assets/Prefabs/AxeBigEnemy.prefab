@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack_type: 2
-  owner: {fileID: 6539195199743492738}
+  owner: {fileID: 6534347473841321478}
 --- !u!50 &256388436
 Rigidbody2D:
   serializedVersion: 4
@@ -34175,7 +34175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2491028902769686106
 Transform:
   m_ObjectHideFlags: 0
@@ -35226,10 +35226,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.5
-  m_LinearDrag: 1
+  m_Mass: 1
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 13
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -35364,6 +35364,8 @@ MonoBehaviour:
   isMoveable: 1
   isSuperArmor: 1
   ground_check_pos: {fileID: 2490329346821756362}
+  hit_fly_distance: 50
+  hit_back_distance: 20
 --- !u!114 &4502151539010581086
 MonoBehaviour:
   m_ObjectHideFlags: 0

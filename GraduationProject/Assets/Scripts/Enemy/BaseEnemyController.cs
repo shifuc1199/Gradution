@@ -20,16 +20,18 @@ public class BaseEnemyController : MonoBehaviour,IHurt
     public bool isMoveable = true;
     public bool isSuperArmor = false;
     public Transform ground_check_pos;
-     
-    EnemyConfig _config;
+    public float hit_fly_distance;
+    public float hit_back_distance;
+  
+    public EnemyModel model;
     private void Awake()
     {
-        _config = EnemyConfig.Get(config_id);
+        model = new EnemyModel(config_id,1);
         _audio = GetComponent<AudioSource>();
         _anim = GetComponentInChildren<Animator>();
         _rigi = GetComponent<Rigidbody2D>();
         start_gravity = _rigi.gravityScale;
-        enemy_data = new BaseEnemyData(_config,()=> {
+        enemy_data = new BaseEnemyData(model, ()=> {
             if(Shadow)
             Shadow.SetActive(false);
             var coin = GameObjectPoolManager.GetPool("coin_effect").Get(transform.position + new Vector3(0, 1, 0), Quaternion.identity, 2f);
@@ -66,7 +68,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
         transform.rotation = hurt_pos.x > transform.position.x ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
         enemy_data.SetHealth(-hurt_value);
         var pop_text = GameObjectPoolManager.GetPool("pop_text").Get(transform.position, Quaternion.identity, 0.5f);
-        pop_text.GetComponent<PopText>().SetText(((int)DreamerUtil.GetHurtValue(hurt_value, this._config.defend)).ToString(), Color.white);
+        pop_text.GetComponent<PopText>().SetText(((int)DreamerUtil.GetHurtValue(hurt_value, model.GetDefend())).ToString(), Color.white);
         View.CurrentScene.GetView<GameInfoView>().enemy_health.SetData(enemy_data);
  
         AudioManager.Instance.PlayOneShot("hit");
@@ -78,6 +80,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
             _type = HitType.普通;
         }
 
+         
         GameStaticMethod.ChangeChildrenSpriteRendererColor(gameObject, Color.red);
 
         switch (_type)
@@ -100,7 +103,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
                 else
                 {
                     _rigi.ResetVelocity();
-                    _rigi.AddForce(transform.right * 10, ForceMode2D.Impulse);
+                    _rigi.AddForce(transform.right * hit_back_distance, ForceMode2D.Impulse);
                 }
                 _anim.SetTrigger("hit");
                 break;
@@ -109,31 +112,38 @@ public class BaseEnemyController : MonoBehaviour,IHurt
                 _rigi.ResetVelocity();
                 if (isGround)
                 {
-                    _rigi.AddForce(new Vector2(transform.right.x*0.5f, 0.5f).normalized * 35, ForceMode2D.Impulse);
+                    _rigi.AddForce(new Vector2(transform.right.x*0.5f, 0.5f).normalized * hit_fly_distance, ForceMode2D.Impulse);
                 }
                 else
                 {
-                    _rigi.AddForce(new Vector2(transform.right.x*0.5f, 0).normalized * 35, ForceMode2D.Impulse);
+                    _rigi.AddForce(new Vector2(transform.right.x*0.5f, 0).normalized * hit_fly_distance, ForceMode2D.Impulse);
                 }
                 break;
             case HitType.上挑:
                 _rigi.ResetVelocity();
-                _rigi.AddForce(Vector2.up *47, ForceMode2D.Impulse);
+                _rigi.AddForce(Vector2.up *95, ForceMode2D.Impulse);
                 break;
             default:
                 break;
         }
         
     }
-    public void IsLocked()
+    GameObject temp_aim;
+    public void Lock()
     {
-
+        temp_aim = GameObjectPoolManager.GetPool("aim").Get(transform.position, Quaternion.identity, -1);
         _rigi.ResetVelocity();
         _rigi.ClearGravity();
          
     }
-    
- 
+
+    public void UnLock()
+    {
+        temp_aim.GetComponent<ObjectRecover>().RecoverImmediately();
+        _rigi.ResetVelocity();
+        _rigi.SetGravity(start_gravity);
+
+    }
     void Update()
     {
         isGround = Physics2D.OverlapCircle(ground_check_pos.position, 1, LayerMask.GetMask("Ground"));

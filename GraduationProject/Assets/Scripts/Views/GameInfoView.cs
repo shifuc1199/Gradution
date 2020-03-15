@@ -13,6 +13,7 @@ public class GameInfoView : View
     public ExpBar expbar;
     public ActorHUD hud;
     public GameObject pop_text;
+    public Image m_screen_effect;
     public void SetInactiveType(InactiveType _type,ItemSprite item = null)
     {
         inactrive_buttons.SetInactiveType(_type,item);
@@ -24,6 +25,12 @@ public class GameInfoView : View
     {
         fade_image.DOFade(1, 0.5f).SetEase(Ease.Linear).onComplete = () => { action?.Invoke(); Timer.Register(t, () => { fade_image.DOFade(0, 0.5f).SetEase(Ease.Linear); }); };
         
+    }
+    public void SetScreenEffect(Color c,float fade_value)
+    {
+        c.a = 1-fade_value;
+        m_screen_effect.color = c;
+        m_screen_effect.DOFade(fade_value, 0.5f).SetEase(Ease.Linear);
     }
     public void SetPopText(string v,Color c,float t=0.5f)
     {

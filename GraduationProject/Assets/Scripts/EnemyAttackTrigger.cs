@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class EnemyAttackTrigger : BaseAttackTrigger
 {
-    
+    public BaseEnemyController owner;
     
     public override void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,7 +16,7 @@ public class EnemyAttackTrigger : BaseAttackTrigger
         if (collision.gameObject.tag=="Player")
         {
             
-            collision.GetComponent<IHurt>().GetHurt(10, attack_type,transform.position);
+            collision.GetComponent<IHurt>().GetHurt(owner.model.GetAttack(), attack_type,transform.position);
         }
 
     }

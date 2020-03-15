@@ -14,6 +14,7 @@ public class CreateActorScene : Scene
     // Start is called before the first frame update
     void Start()
     {
+        GameStaticMethod.GameInit();
         Application.targetFrameRate = 60;
     }
     public void LoadSceneJump(string scene_name)

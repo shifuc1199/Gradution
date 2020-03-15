@@ -344,6 +344,9 @@ MonoBehaviour:
   isMoveable: 1
   isSuperArmor: 0
   ground_check_pos: {fileID: 1809406648}
+  hit_fly_distance: 50
+  hit_back_distance: 20
+  locked_icon: {fileID: 0}
 --- !u!82 &4935843735289158080
 AudioSource:
   m_ObjectHideFlags: 0

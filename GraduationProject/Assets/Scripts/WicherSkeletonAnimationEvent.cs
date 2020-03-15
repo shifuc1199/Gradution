@@ -14,6 +14,7 @@ public class WicherSkeletonAnimationEvent : BaseEnemyAnimationEvent
             var frie_ball = GameObjectPoolManager.GetPool("enemy_fire_ball").Get(transform.position+new Vector3(0,3,0),Quaternion.Euler(0,0, i * 60),3);
             frie_ball.GetComponent<AutoMoveObjectByDirection>().Direction = new Vector3(1, 0, 0);
             frie_ball.GetComponent<AutoMoveObjectByDirection>().space_type = Space.Self;
+            frie_ball.GetComponent<EnemyAttackTrigger>().owner = GetComponentInParent<BaseEnemyController>();
         }
       
     }
@@ -23,5 +24,6 @@ public class WicherSkeletonAnimationEvent : BaseEnemyAnimationEvent
        var fireball =  GameObjectPoolManager.GetPool("enemy_fire_ball").Get(transform.position + new Vector3(0, 11, 0), Quaternion.identity, 3);
         fireball.GetComponent<AutoMoveObjectByDirection>().Direction = ActorController._controller.transform.position-fireball.transform.position;
         fireball.GetComponent<AutoMoveObjectByDirection>().space_type = Space.World;
+        fireball.GetComponent<EnemyAttackTrigger>().owner = GetComponentInParent<BaseEnemyController>();
     }
 }

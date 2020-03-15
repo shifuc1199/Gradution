@@ -12,6 +12,8 @@ public class SkillJoyStickConfigPage : MonoBehaviour
     public Text skill_info;
     public Image[] m_skill_image;
     public Button[] m_skill_button;
+    public GameObject no_learn_tip;
+    public GameObject skill_buttons;
     public void SetModel(SkillModel model)
     {
         m_model = model;
@@ -23,7 +25,8 @@ public class SkillJoyStickConfigPage : MonoBehaviour
         if (m_model.IsLearn())
         {
             SetButtons(true);
-
+           
+         
             for (int i = 0; i < m_skill_button.Length; i++)
             {
                 if ( ActorModel.Model.equip_skil[i] == m_model)
@@ -35,11 +38,14 @@ public class SkillJoyStickConfigPage : MonoBehaviour
         }
         else
         {
+            
             SetButtons(false);
         }
     }
     public void SetButtons(bool v)
     {
+        skill_buttons.SetActive(v);
+        no_learn_tip.SetActive(!v);
         foreach (var item in m_skill_button)
         {
             item.gameObject.SetActive(v);
