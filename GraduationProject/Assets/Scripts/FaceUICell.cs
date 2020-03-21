@@ -7,12 +7,15 @@ using UnityEngine;
 using DreamerTool.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.Events;
 public class FaceUICell : MonoBehaviour,IPointerDownHandler
 {
     public Image cell_image;
     public Image choose_image;
     public FaceType _type;
     public int config_id;
+
+    UnityAction<FaceUICell> on_click_call_back;
     public void Select()
     {
         choose_image.gameObject.SetActive(true);
@@ -21,8 +24,9 @@ public class FaceUICell : MonoBehaviour,IPointerDownHandler
     {
         choose_image.gameObject.SetActive(false);
     }
-    public void SetConfig(FaceType _type, int config_id)
+    public void SetConfig(FaceType _type, int config_id,UnityAction<FaceUICell> on_click_call_back)
     {
+        this.on_click_call_back = on_click_call_back;
         this._type = _type;
         this.config_id = config_id;
 
@@ -51,6 +55,6 @@ public class FaceUICell : MonoBehaviour,IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        View.CurrentScene.GetView<FaceView>().Select(this);
+        on_click_call_back?.Invoke(this);
     }
 }

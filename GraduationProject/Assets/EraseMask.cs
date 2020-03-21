@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using UnityEngine.Events;
 public class EraseMask : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
 
@@ -17,13 +17,13 @@ public class EraseMask : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoin
     public bool isEndEraser;
 
     //开始事件
-    public Action eraserStartEvent;
+    public UnityEvent eraserStartEvent;
 
     //结束事件
-    public Action eraserEndEvent;
+    public UnityEvent eraserEndEvent;
 
     public RawImage uiTex;
-    Texture2D tex;
+    public Texture2D tex;
     Texture2D MyTex;
     int mWidth;
     int mHeight;
@@ -37,13 +37,13 @@ public class EraseMask : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoin
     float maxColorA;
     float colorA;
 
-    void Awake()
+    public void SetTexture()
     {
-        tex = (Texture2D)uiTex.mainTexture;
+        uiTex.DOFade(1, 0);
         MyTex = new Texture2D(tex.width, tex.height, TextureFormat.ARGB32, false);
         mWidth = MyTex.width;
         mHeight = MyTex.height;
-        
+
         MyTex.SetPixels(tex.GetPixels());
         MyTex.Apply();
         uiTex.texture = MyTex;
@@ -51,9 +51,9 @@ public class EraseMask : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoin
         colorA = 0;
         isEndEraser = false;
         isStartEraser = false;
-
     }
-
+ 
+ 
 
     /// <summary>
     /// 贝塞尔平滑

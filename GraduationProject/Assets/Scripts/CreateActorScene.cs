@@ -10,10 +10,11 @@ using DreamerTool.GameObjectPool;
 public class CreateActorScene : Scene
 {
     public InputField name_field;
-    ActorModel actor = new ActorModel();
+     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        ActorModel actor = new ActorModel();
         GameStaticMethod.GameInit();
         Application.targetFrameRate = 60;
     }

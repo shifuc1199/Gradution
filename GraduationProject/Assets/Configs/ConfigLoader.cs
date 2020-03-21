@@ -21,6 +21,7 @@ public class ConfigLoader
         SkillConfig.LoadFromJson(json["Skill"]);
         TorsoConfig.LoadFromJson(json["Torso"]);
         ShieldConfig.LoadFromJson(json["Shield"]);
+        ConsumablesConfig.LoadFromJson(json["Consumables"]);
         HairDecorateConfig.LoadFromJson(json["HairDecorateConfig"]);
     }
 }

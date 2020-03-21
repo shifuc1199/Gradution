@@ -30,7 +30,7 @@ public   class ActorModel
 
     private int level = 1;
     private int exp;
-
+    public List<ItemUI> bag_items = new List<ItemUI>();
     public Dictionary<int, SkillModel> skillmodels = new Dictionary<int, SkillModel>();
     public Dictionary<int,SkillModel> equip_skil = new Dictionary<int, SkillModel>() {
         { 0, null},
@@ -139,6 +139,10 @@ public   class ActorModel
     public int GetFace(FaceType face)
     {
         return Faces[face];
+    }
+    public Dictionary<FaceType, int> GetFaceDictionary()
+    {
+        return Faces;
     }
     public void SetMoney(double m)
     {

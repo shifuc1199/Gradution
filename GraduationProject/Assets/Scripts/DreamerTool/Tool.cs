@@ -75,20 +75,7 @@ namespace DreamerTool.Util
             return a * a / (a + d);
         }
          
-        public static KeyValuePair<Tkey, Tvalue> Get<Tkey, Tvalue>(this Dictionary<Tkey, Tvalue> dict, int index)
-        {
-            int temp = 0;
-            foreach (var item in dict)
-            {
-
-                if (temp == index)
-                {
-                    return item;
-                }
-                temp++;
-            }
-            return default;
-        }
+       
         public static List<int> GetRandomNonRepeat(List<int> temp, int number)
         {
             List<int> result = new List<int>();
@@ -101,15 +88,7 @@ namespace DreamerTool.Util
             }
             return result;
         }
-        public static List<int> GetKeys<Tvalue>(this Dictionary<int, Tvalue> dic)
-        {
-            List<int> temp = new List<int>();
-            foreach (var item in dic)
-            {
-                temp.Add(item.Key);
-            }
-            return temp;
-        }
+      
     }
 }
 namespace DreamerTool.FSM
@@ -409,10 +388,42 @@ namespace DreamerTool.Inactive
 
 namespace DreamerTool.Extra
 {
-
+    
     public static class Extra
     {
- 
+        public static void Copy<Tkey, Tvalue>(this Dictionary<Tkey, Tvalue> dict, Dictionary<Tkey, Tvalue> copy_dict)
+        {
+            foreach (var item in copy_dict)
+            {
+                if (dict.ContainsKey(item.Key))
+                    dict[item.Key] = item.Value;
+                else
+                    dict.Add(item.Key, item.Value);
+            }
+        }
+        public static KeyValuePair<Tkey, Tvalue> Get<Tkey, Tvalue>(this Dictionary<Tkey, Tvalue> dict, int index)
+        {
+            int temp = 0;
+            foreach (var item in dict)
+            {
+
+                if (temp == index)
+                {
+                    return item;
+                }
+                temp++;
+            }
+            return default;
+        }
+        public static List<int> GetKeys<Tvalue>(this Dictionary<int, Tvalue> dic)
+        {
+            List<int> temp = new List<int>();
+            foreach (var item in dic)
+            {
+                temp.Add(item.Key);
+            }
+            return temp;
+        }
         public static T GetLast<T>(this List<T> list)
         {
             if (list.Count == 0)

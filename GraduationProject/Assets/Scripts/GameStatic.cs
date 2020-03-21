@@ -7,8 +7,40 @@ using UnityEngine;
 using DreamerTool.Extra;
 using DreamerTool.GameObjectPool;
 using DG.Tweening;
+using DreamerTool.UI;
+
+public class RectTransformData
+{
+    public RectTransformData(Vector2 p,Vector2 d,Vector3 r)
+    {
+        pos = p;
+        deltaSize = d;
+        rot = r;
+    }
+    public Vector2 pos;
+    public Vector2 deltaSize;
+    public Vector3 rot;
+
+    public   void  Copy(RectTransform _transform)
+    {
+        _transform.anchoredPosition = pos;
+        _transform.sizeDelta = deltaSize;
+        _transform.eulerAngles = rot;
+    }
+}
+
 public static class GameStaticData  
 {
+    public static RectTransformData WeaponUI = new RectTransformData(
+        new Vector2(-20.9f, -13f),
+        new Vector2(150, 150),
+        new Vector3(0, 0,-47.9f)
+        );
+    public static RectTransformData EquipmentUI = new RectTransformData(
+     new Vector2(0, 10),
+     new Vector2(180, 180),
+     new Vector3(0, 0, 0)
+     );
     /*白色 绿色 蓝色 黄色 紫色 橙色 红色 黑色*/
     public static Dictionary<ItemLevel, Color> ITEM_COLOR_DICT = new Dictionary<ItemLevel, Color>()
     {
@@ -30,6 +62,7 @@ public static class GameStaticData
         {"ArmConfig",ItemType.肩膀},
         {"PelvisConfig",ItemType.裤子},
         {"FootConfig",ItemType.鞋子},
+        {"ConsumablesConfig",ItemType.消耗品},
     };
 
 
@@ -45,6 +78,29 @@ public  class GameStaticMethod
         }
         SkillModel.Init();
  
+    }
+    public static void ExecuteCommond(string commondStr)
+    {
+ 
+        switch (commondStr)
+        {
+            case "use_scratch_card":
+                View.CurrentScene.OpenView<ScratchCardView>();
+                break;
+            case "buy_scratch_card":
+                View.CurrentScene.OpenView<ShopView>();
+                View.CurrentScene.CloseView<NPCView>();
+                break;
+            case "exit":
+                View.CurrentScene.CloseView<NPCView>();
+                break;
+            case "make_face":
+                View.CurrentScene.OpenView<FaceView>();
+                View.CurrentScene.CloseView<NPCView>();
+                break;
+            default:
+                break;
+        }
     }
     public static void ChangeChildrenSpriteRendererColor(GameObject gameObject,Color color)
     {

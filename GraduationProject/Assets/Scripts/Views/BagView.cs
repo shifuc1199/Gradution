@@ -3,17 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using DreamerTool.UI;
 using UnityEngine.UI;
+using DreamerTool.Extra;
 public class BagView : MonoBehaviour
 {
     public Text money_text;
     public Transform grid_root;
     public ItemUITip ItemUITip;
+    public ItemUITip CurrentEquipmentUITip;
     public ItemUI CurretnSelect;
-    public List<ItemUI> Items = new List<ItemUI>();
+    
+    List<ItemUI> Grids = new List<ItemUI>();
+    public Button sure_button;
+
     int grid_index = 0;
     private void Awake()
     {
+        
         SetMoney();
+        var children = grid_root.GetChildren();
+        foreach (var item in children)
+        {
+            Grids.Add(item.GetComponentInChildren<ItemUI>(true));
+        }
+        
+    }
+    public void SelectItem(int index)
+    {
+        grid_index = index;
+        ChooseGrid();
     }
     public void SetMoney()
     {
@@ -21,7 +38,6 @@ public class BagView : MonoBehaviour
     }
     public void SelectUp()
     {
-
         if (grid_index-5 <0)
             return;
         grid_index-=5;
@@ -30,7 +46,7 @@ public class BagView : MonoBehaviour
     public void SelectDown()
     {
 
-        if (grid_index+5 > Items.Count - 1)
+        if (grid_index+5 > Grids.Count - 1)
             return;
         grid_index+=5;
         ChooseGrid();
@@ -38,7 +54,7 @@ public class BagView : MonoBehaviour
     public void SelectRight()
     {
          
-        if (grid_index >= Items.Count-1)
+        if (grid_index >= Grids.Count-1)
             return;
         grid_index++;
         ChooseGrid();
@@ -51,7 +67,10 @@ public class BagView : MonoBehaviour
         grid_index--;
         ChooseGrid();
     }
-
+    private void OnEnable()
+    {
+        ChooseGrid();
+    }
     public void Equip()
     {
         if (CurretnSelect == null)
@@ -105,16 +124,20 @@ public class BagView : MonoBehaviour
                 CurretnSelect.SetConfig(ItemType.鞋子, temp5);
                 ItemUITip.SetConfig(ItemType.鞋子, temp5);
                 break;
+            case ItemType.消耗品:
+                GameStaticMethod.ExecuteCommond(ConsumablesConfig.Get(CurretnSelect.config_id).function);
+                ActorModel.Model.bag_items.Remove(CurretnSelect);
+                CurretnSelect.icon.gameObject.SetActive(false);
+                ItemUITip.gameObject.SetActive(false);
+                break;
             default:
                 break;
         }
          
          
     }
-    private void OnEnable()
-    {
-        ChooseGrid();
-    }
+   
+    
  
     public Transform GetEmptyGrid()
     {
@@ -129,35 +152,71 @@ public class BagView : MonoBehaviour
         return null;
     }
     public void ChooseGrid()
-    {
-        if (Items.Count == 0)
-            return;
-       
+    { 
         if(CurretnSelect!=null)
         {
             CurretnSelect.UnSelect();
         }
-        if (Items[grid_index].gameObject.activeSelf)
+        if (Grids[grid_index].transform.GetChild(0).gameObject.activeSelf)
         {
             ItemUITip.gameObject.SetActive(true);
-            var itemui = Items[grid_index];
+            SetTipPos();
+            var itemui = Grids[grid_index];
             ItemUITip.SetConfig(itemui.itemtype,itemui.config_id);
+
+            switch (itemui.itemtype)
+            {
+                case ItemType.鞋子:
+                    CurrentEquipmentUITip.gameObject.SetActive(true);
+                    CurrentEquipmentUITip.SetConfig(ItemType.鞋子, ActorModel.Model.GetPlayerEquipment(EquipmentType.鞋子));
+                    break;
+                case ItemType.裤子:
+                    CurrentEquipmentUITip.gameObject.SetActive(true);
+                    CurrentEquipmentUITip.SetConfig(ItemType.裤子, ActorModel.Model.GetPlayerEquipment(EquipmentType.裤子));
+                    break;
+                case ItemType.肩膀:
+                    CurrentEquipmentUITip.gameObject.SetActive(true);
+                    CurrentEquipmentUITip.SetConfig(ItemType.肩膀, ActorModel.Model.GetPlayerEquipment(EquipmentType.肩膀右));
+                    break;
+                case ItemType.手链:
+                    CurrentEquipmentUITip.gameObject.SetActive(true);
+                    CurrentEquipmentUITip.SetConfig(ItemType.手链, ActorModel.Model.GetPlayerEquipment(EquipmentType.手链));
+                    break;
+                case ItemType.武器:
+                    CurrentEquipmentUITip.gameObject.SetActive(true);
+                    CurrentEquipmentUITip.SetConfig(ItemType.武器, ActorModel.Model.GetPlayerEquipment(EquipmentType.武器));
+                    break;
+                case ItemType.上衣:
+                    CurrentEquipmentUITip.gameObject.SetActive(true);
+                    CurrentEquipmentUITip.SetConfig(ItemType.上衣, ActorModel.Model.GetPlayerEquipment(EquipmentType.上衣));
+                    break;
+                case ItemType.盾牌:
+                    CurrentEquipmentUITip.gameObject.SetActive(true);
+                    CurrentEquipmentUITip.SetConfig(ItemType.盾牌, ActorModel.Model.GetPlayerEquipment(EquipmentType.盾牌));
+                    break;
+                case ItemType.消耗品:
+                    CurrentEquipmentUITip.gameObject.SetActive(false);
+                    break;
+                default:
+                    break;
+            }
         }
         else
         {
+            
             ItemUITip.gameObject.SetActive(false);
         }
-        CurretnSelect = Items[grid_index];
-        Items[grid_index].Select();
-        
+        CurretnSelect = Grids[grid_index];
+        Grids[grid_index].Select();
 
+        if(CurretnSelect.itemtype == ItemType.消耗品)
+            sure_button.GetComponentInChildren<Text>().text = "使用";
+        else
+            sure_button.GetComponentInChildren<Text>().text = "装备";
     }
-    private void Update()
+    public void SetTipPos()
     {
-         if (Items.Count > 0 && Vector2.Distance(ItemUITip.transform.position, Items[grid_index].transform.position)>=0.5f)
-         {
-             ItemUITip.transform.position = Items[grid_index].transform.position;
-         }
+        ItemUITip.transform.position = Grids[grid_index].transform.position;
     }
     public void AddItem(int id, ItemType type) 
     {
@@ -165,8 +224,12 @@ public class BagView : MonoBehaviour
         if(grid != null)
         {
             grid.GetChild(0).gameObject.SetActive(true);
-            grid.GetChild(0).GetComponent<ItemUI>().SetConfig(type, id,true);
-            Items.Add(grid.GetChild(0).GetComponent<ItemUI>());
+            if(type==ItemType.武器)
+                GameStaticData.WeaponUI.Copy(grid.GetChild(0).GetComponent<RectTransform>());
+            else
+                GameStaticData.EquipmentUI.Copy(grid.GetChild(0).GetComponent<RectTransform>());
+            grid.GetComponent<ItemUI>().SetConfig(type, id,true);
+            ActorModel.Model.bag_items.Add(grid.GetChild(0).GetComponent<ItemUI>());
  
         }
         

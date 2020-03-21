@@ -27,8 +27,9 @@ public class ItemEditorWindow : OdinMenuEditorWindow
         _window.position = GUIHelper.GetEditorWindowRect().AlignCenter(800, 500);
         }
           protected override OdinMenuTree BuildMenuTree()
-        {
-            _tree= new OdinMenuTree(true);
+    {
+      
+        _tree = new OdinMenuTree(true);
             _tree.DefaultMenuStyle.IconSize = 28.00f;
             _tree.Config.DrawSearchToolbar = true;
             switch(config_type)
@@ -53,6 +54,9 @@ public class ItemEditorWindow : OdinMenuEditorWindow
                 break;
             case ItemType.盾牌:
                 LoadItem<ShieldConfig>(ref _tree);
+                break;
+            case ItemType.消耗品:
+                LoadItem<ConsumablesConfig>(ref _tree);
                 break;
         }        
             return _tree;
@@ -123,7 +127,8 @@ public class ItemEditorWindow : OdinMenuEditorWindow
                         CreateItem(new ShieldConfig(), ref _tree);
                         break;
                     case ItemType.消耗品:
-                            break;
+                        CreateItem(new ConsumablesConfig(), ref _tree);
+                        break;
                         default:
                             break;
                     }

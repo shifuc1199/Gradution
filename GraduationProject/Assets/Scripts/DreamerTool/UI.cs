@@ -25,8 +25,8 @@ namespace DreamerTool.UI
                 for (int i = 0; i < _root.childCount; i++)
                 {
                     var child = _root.GetChild(i);
-  
-                    _views.Add(child.name, child.GetComponent<View>());
+                    if(child.GetComponent<View>())
+                        _views.Add(child.name, child.GetComponent<View>());
                 }
             }
  

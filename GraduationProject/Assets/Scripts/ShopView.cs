@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DreamerTool.UI;
-public class ShopView : View
+public class  ShopView : View
 {
     public Transform m_root;
     public BuyGoods m_buy_goods;
@@ -24,7 +24,7 @@ public class ShopView : View
     void Start()
     {
        var cell = Instantiate(m_cell_prefab, m_root.transform).GetComponent<ShopCell>();
-        cell.SetModel(WeaponConfig.Get(1));
+        cell.SetModel(ConsumablesConfig.Get(1));
         m_buy_goods.SetModel(cell.m_itemType, cell.m_configId);
     }
    

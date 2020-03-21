@@ -7,26 +7,22 @@ using UnityEngine;
 using DreamerTool.GameObjectPool;
 public class TestScene : MonoBehaviour
 {
-    bool isDraw = false;
-    Vector3 last_pos;
+    public Texture red_tex;
+    public Texture white_tex;
+    public float amount;
     private void Start()
     {
-        GameObjectPoolManager.InitByScriptableObject();
+       
 
     }
- 
+    private void OnGUI()
+    {
+       
+        GUI.DrawTexture(new Rect(new Vector2(0, 0), new Vector2(200, 25)), white_tex);
+        GUI.DrawTexture(new Rect(new Vector2(0, 0), new Vector2(amount, 25)), red_tex);
+    }
     private void Update()
     {
         
-        if (Input.GetKey(KeyCode.Mouse0) && !isDraw)
-        {
-            last_pos = Input.mousePosition;
-            isDraw = true;
-            GameObjectPoolManager.GetPool("mask_sprite").Get(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y,10)), Quaternion.identity, -1);
-        }
-        if (Input.mousePosition != last_pos && isDraw)
-        {
-            isDraw = false;
-        }
     }
 }

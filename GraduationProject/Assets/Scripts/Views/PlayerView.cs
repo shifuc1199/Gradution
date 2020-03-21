@@ -11,6 +11,8 @@ public class PlayerView : MonoBehaviour
     public Text player_name_text;
     public Text player_level_text;
     public Text[] player_attribute_text;
+ 
+ 
   //  public Text player_attribute_text;
     private void Awake()
     {

@@ -23,14 +23,13 @@ public class FaceSprite : MonoBehaviour
         if (_image)
         {
             UpdateIamgeSprite();
-            EventManager.OnChangeFace += UpdateSpriteRenderSprite;
+            EventManager.OnChangeFace += UpdateIamgeSprite;
         }
     }
     private void OnDestroy()
     {
         if (_sprite)
         {
-
             EventManager.OnChangeFace -= UpdateSpriteRenderSprite;
         }
         if (_image)

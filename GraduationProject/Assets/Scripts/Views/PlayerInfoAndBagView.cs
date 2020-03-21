@@ -20,4 +20,8 @@ public class PlayerInfoAndBagView : View
         base.OnHide();
         CurrentScene.GetView<GameInfoView>().ShowAnim();
     }
+    public void SetBagViewTip()
+    {
+        bag_view.SetTipPos();
+    }
 }

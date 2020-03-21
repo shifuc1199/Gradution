@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class ResManager 
 {
-     public static string GetJson(string path)
+    public static TextAsset LoadTextAsset(string path)
     {
-       
-        return "";
+        return Resources.Load<TextAsset>("TextAsset/" + path);
     }
-    
 }
