@@ -58,6 +58,11 @@ public class ItemSprite : MonoBehaviour
                 _text.text = FootConfig.Get(config_id).物品名字;
                 _text.color = GameStaticData.ITEM_COLOR_DICT[FootConfig.Get(config_id).物品阶级];
                 break;
+            case ItemType.盾牌:
+                GetComponent<SpriteRenderer>().sprite = ShieldConfig.Get(config_id).GetSprite();
+                _text.text = ShieldConfig.Get(config_id).物品名字;
+                _text.color = GameStaticData.ITEM_COLOR_DICT[ShieldConfig.Get(config_id).物品阶级];
+                break;
             default:
                 break;
         }

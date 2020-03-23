@@ -11,7 +11,8 @@ using UnityEditor;
 using Sirenix.OdinInspector;
 public class SleeveConfig : ItemConfig<SleeveConfig>
 {
- 
+    public double helath;
+    public double defend;
     [Button("保存", 50)]
     public override void Save()
     {
@@ -23,6 +24,8 @@ public class SleeveConfig : ItemConfig<SleeveConfig>
         JsonData data = new JsonData();
         data["物品ID"] = 物品ID;
         data["物品名字"] = 物品名字;
+        data["helath"] =helath;
+        data["defend"] = defend;
         data["购买价格"] = 购买价格;
         data["卖出价格"] = 卖出价格;
         data["物品描述"] = 物品描述;

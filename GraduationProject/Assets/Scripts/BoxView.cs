@@ -13,8 +13,9 @@ public class BoxView : View
     public UnityAction<bool> ClickEvent;
     public Text _text;
  
-    public void SetText(string t)
+    public void SetText(string t, UnityAction<bool> c= null)
     {
+        ClickEvent = c;
         _text.text = t;
     }
     public void OnYesClick()

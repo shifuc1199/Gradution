@@ -15,11 +15,21 @@ public class PlayerSwordAttackTrigger : BaseAttackTrigger
             ( View.CurrentScene as GameScene) .HitCount++;
             if(attack_type == HitType.击飞)
             {
-                
                 Camera.main.GetComponent< Cinemachine.CinemachineImpulseSource>().GenerateImpulse();
                 Time.timeScale = 0.2f;
             }
-                collision.gameObject.GetComponent<IHurt>().GetHurt(ActorModel.Model.GetPlayerAttribute(PlayerAttribute.攻击力),attack_type,ActorController._controller.transform.position);
+            bool isCrit = false;
+            var weapon = WeaponConfig.Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.武器));
+            var hurt_value = ActorModel.Model.GetPlayerAttribute(PlayerAttribute.攻击力);
+            if (Random.value <= ActorModel.Model.GetPlayerAttribute(PlayerAttribute.暴击率))
+            {
+                isCrit = true;
+                hurt_value = ActorModel.Model.GetPlayerAttribute(PlayerAttribute.暴击伤害);
+            }
+             collision.gameObject.GetComponent<IHurt>().GetHurt(
+                  new AttackData(hurt_value, isCrit, ActorController._controller.transform.position, attack_type)
+              );
+           
         }
     }
  

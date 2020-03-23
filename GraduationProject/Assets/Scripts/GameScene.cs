@@ -43,6 +43,10 @@ public class GameScene : Scene
        
  
     }
+    public void ResetActorState()
+    {
+        ActorModel.Model.ResetState();
+    }
     public void TransferPlayerByFadeAnim(Transform pos)
     {
         GetView<GameInfoView>().FadeAnim(() => { ActorController._controller.Transfer(pos);

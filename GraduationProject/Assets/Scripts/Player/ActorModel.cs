@@ -30,7 +30,10 @@ public   class ActorModel
 
     private int level = 1;
     private int exp;
+
+    public KnightLevel knightLevel = KnightLevel.圣骑士;
     public List<ItemUI> bag_items = new List<ItemUI>();
+    public int suit_id = 1; // 套装ID
     public Dictionary<int, SkillModel> skillmodels = new Dictionary<int, SkillModel>();
     public Dictionary<int,SkillModel> equip_skil = new Dictionary<int, SkillModel>() {
         { 0, null},
@@ -41,9 +44,14 @@ public   class ActorModel
     {
         { PlayerAttribute.攻击力,0 },
         { PlayerAttribute.生命值,100 },
-        { PlayerAttribute.防御力,100 },
+        { PlayerAttribute.物防,100 },
+        { PlayerAttribute.魔抗,100 },
         { PlayerAttribute.能量值,100 },
-         { PlayerAttribute.善恶值,100 },
+        { PlayerAttribute.善恶值,100 },
+        { PlayerAttribute.暴击率,0 },
+         { PlayerAttribute.法强,0 },
+        { PlayerAttribute.移速,30 },
+        { PlayerAttribute.暴击伤害,0 },
     };
     private Dictionary<EquipmentType, int> Equipment = new Dictionary<EquipmentType, int>()
     {
@@ -58,15 +66,22 @@ public   class ActorModel
     };
     private Dictionary<FaceType, int> Faces = new Dictionary<FaceType, int>()
     {
-         { FaceType.发型,1},
+         { FaceType.发型,10},
          { FaceType.嘴巴,1},
-         { FaceType.眼睛,1},
+         { FaceType.眼睛,2},
          { FaceType.耳朵,1},
-         { FaceType.发饰,1},
+         { FaceType.发饰,3},
     };
     private double GetAttackFromEquipment()
     {
         return WeaponConfig.Get(Equipment[EquipmentType.武器]).攻击力;
+    }
+    public void ResetState()
+    {
+        health = PlayerAttributes[PlayerAttribute.生命值];
+        energy = PlayerAttributes[PlayerAttribute.能量值];
+        EventManager.OnChangeHealth();
+        EventManager.OnChangeEnergy();
     }
     public void SetHealth(double v)
     {
@@ -126,6 +141,32 @@ public   class ActorModel
     {
         Equipment[equip] = id;
         EventManager.OnChangeEquipment();
+
+        if (GetSuitAmount(id) == 5)
+        {
+            suit_id = id;
+
+            var commond = SuitConfig.Get(id).suit_function.Split(',');
+            foreach (var c in commond)
+            {
+                GameStaticMethod.ExecuteCommond(c);
+            }
+        }
+        else
+        {
+           
+            if (suit_id!=-1)
+            {
+                var commond = SuitConfig.Get(suit_id).suit_function.Split(',');
+                foreach (var c in commond)
+                {
+                    GameStaticMethod.ExecuteBackCommond(c);
+                }
+                suit_id = -1;
+            }
+
+        }
+        
     }
     public int GetPlayerEquipment(EquipmentType equip)
     {
@@ -181,6 +222,20 @@ public   class ActorModel
     {
         return exp;
     }
-
+    public int GetSuitAmount(int id)
+    {
+        int amount = 0;
+        if (GetPlayerEquipment(EquipmentType.上衣) == id)
+            amount++;
+        if (GetPlayerEquipment(EquipmentType.手链) == id)
+            amount++;
+        if (GetPlayerEquipment(EquipmentType.裤子) == id)
+            amount++;
+        if (GetPlayerEquipment(EquipmentType.鞋子) == id)
+            amount++;
+        if (GetPlayerEquipment(EquipmentType.肩膀左) == id)
+            amount++;
+        return amount;
+    }
 
 }

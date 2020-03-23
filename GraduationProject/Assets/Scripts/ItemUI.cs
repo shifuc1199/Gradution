@@ -50,8 +50,7 @@ public class ItemUI : MonoBehaviour,IPointerDownHandler
                 icon.sprite = WeaponConfig.Get(id).GetSprite();
                 if (ispickup)
                     View.CurrentScene.GetView<GameInfoView>().SetPopText("拾取 " + WeaponConfig.Get(id).物品名字 + "*1", GameStaticData.ITEM_COLOR_DICT[WeaponConfig.Get(id).物品阶级]);
-
-                GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -20);
+ 
                 break;
             case ItemType.上衣:
                 icon.sprite = TorsoConfig.Get(id).GetSprite();
@@ -62,6 +61,11 @@ public class ItemUI : MonoBehaviour,IPointerDownHandler
                 icon.sprite = ConsumablesConfig.Get(id).GetSprite();
                 if (ispickup)
                     View.CurrentScene.GetView<GameInfoView>().SetPopText("拾取 " + ConsumablesConfig.Get(id).物品名字 + "*1", GameStaticData.ITEM_COLOR_DICT[ConsumablesConfig.Get(id).物品阶级]);
+                break;
+            case ItemType.盾牌:
+                icon.sprite = ShieldConfig.Get(id).GetSprite();
+                if (ispickup)
+                    View.CurrentScene.GetView<GameInfoView>().SetPopText("拾取 " + ShieldConfig.Get(id).物品名字 + "*1", GameStaticData.ITEM_COLOR_DICT[ShieldConfig.Get(id).物品阶级]);
                 break;
             default:
                 break;

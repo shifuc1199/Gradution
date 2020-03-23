@@ -11,6 +11,10 @@ public class TipView : View
 {
     public Text Content;
     UnityAction call_back;
+    public void SetContent(string c)
+    {
+        Content.text = c;
+    }
     public void SetContent(string c,UnityAction _action=null)
     {
         call_back = _action;

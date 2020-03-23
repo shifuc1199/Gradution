@@ -33,24 +33,33 @@ public class PlayerView : MonoBehaviour
     }
     public void Init()
     {
+        player_name_text.text = ActorModel.Model.actor_name + " (" + ActorModel.Model.knightLevel + ")";
         var attrubutes = Enum.GetNames(typeof(PlayerAttribute));
 
         for (int i = 0; i < attrubutes.Length; i++)
         {
-            player_attribute_text[i].text = attrubutes[i] + ": " + ActorModel.Model.GetPlayerAttribute((PlayerAttribute)Enum.Parse(typeof(PlayerAttribute), attrubutes[i]));
+            player_attribute_text[i].transform.GetChild(0).gameObject.SetActive(false);
+            player_attribute_text[i].text = attrubutes[i] + ": " + DreamerUtil.GetColorRichText(ActorModel.Model.GetPlayerAttribute((PlayerAttribute)Enum.Parse(typeof(PlayerAttribute), attrubutes[i])).ToString(),Color.yellow) ;
         }
     }
-    PlayerAttribute change_attribute;
+    Dictionary<PlayerAttribute, Coroutine> coroutines = new Dictionary<PlayerAttribute, Coroutine>();
     public void UpdatePlayAttributeText(PlayerAttribute attribute,double value)
     {
-        change_attribute = attribute;
+        
+        //   StopAllCoroutines();
 
-        StopAllCoroutines();
+       var start = ActorModel.Model.GetPlayerAttribute(attribute)-value;
 
-        var start = double.Parse(player_attribute_text[(int)attribute].text.Split(':')[1].Trim());
+       var coroutine =  StartCoroutine(TextAnim(player_attribute_text[(int)attribute], start, ActorModel.Model.GetPlayerAttribute(attribute), attribute+": "));
 
-        StartCoroutine(TextAnim(player_attribute_text[(int)attribute], start, ActorModel.Model.GetPlayerAttribute(attribute), attribute+": "));
-      
+        if (coroutines.ContainsKey(attribute))
+        {
+            if(coroutines[attribute]!=null)
+            StopCoroutine(coroutines[attribute]);
+            coroutines.Remove(attribute);
+        }
+        coroutines.Add(attribute, coroutine);
+
         player_attribute_text[(int)attribute].transform.GetChild(0).gameObject.SetActive(false);
         player_attribute_text[(int)attribute].transform.GetChild(0).gameObject.SetActive(true);
          
@@ -58,10 +67,8 @@ public class PlayerView : MonoBehaviour
     }
     private void OnDisable()
     {
-
         StopAllCoroutines();
-        player_attribute_text[(int)change_attribute].text = change_attribute + ": " + ActorModel.Model.GetPlayerAttribute(change_attribute); 
-        player_attribute_text[(int)change_attribute].transform.GetChild(0).gameObject.SetActive(false);
+        Init();
     }
     IEnumerator TextAnim(Text t,double value,double end,string c)
     {
@@ -75,10 +82,12 @@ public class PlayerView : MonoBehaviour
             else
                 value++;
 
-            t.text = c + value;
+            t.text = c + DreamerUtil.GetColorRichText(value.ToString(),Color.yellow);
 
             yield return null;
         }
+   
+        
     }
 
 }

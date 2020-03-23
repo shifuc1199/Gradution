@@ -50,8 +50,8 @@ public static class GameStaticData
         { ItemLevel.英勇,Color.yellow },
         { ItemLevel.公正,"#BF2CAF".GetColorByString() },
         { ItemLevel.牺牲,"#E77E11".GetColorByString() },
-        { ItemLevel.荣誉,Color.red },
-        { ItemLevel.灵魂,Color.black },
+        { ItemLevel.荣誉,Color.cyan },
+        { ItemLevel.灵魂,Color.red },
     };
     public static Dictionary<string, ItemType> ITEM_CONFIG = new Dictionary<string, ItemType>()
     {
@@ -69,6 +69,7 @@ public static class GameStaticData
 }
 public  class GameStaticMethod
 {
+ 
     public static void GameInit()
     {
         GameObjectPoolManager.InitByScriptableObject();
@@ -79,11 +80,40 @@ public  class GameStaticMethod
         SkillModel.Init();
  
     }
-    public static void ExecuteCommond(string commondStr)
+    public static void ExecuteBackCommond(string commondStr)
     {
- 
+        var commond = commondStr.Split(';');
+        if (commond.Length > 0)
+        {
+            commondStr = commond[0];
+        }
         switch (commondStr)
         {
+            case "set_actor_attack":
+                ActorModel.Model.SetPlayerAttribute(PlayerAttribute.攻击力, -double.Parse(commond[1]));
+                break;
+            case "set_actor_health":
+                ActorModel.Model.SetPlayerAttribute(PlayerAttribute.生命值, -double.Parse(commond[1]));
+                break;
+            default:
+                break;
+        }
+    }
+    public static void ExecuteCommond(string commondStr)
+    {
+        var commond = commondStr.Split(';');
+        if(commond.Length>0)
+        {
+            commondStr = commond[0];
+        }
+        switch (commondStr)
+        {
+            case "set_actor_attack":
+                ActorModel.Model.SetPlayerAttribute(PlayerAttribute.攻击力, double.Parse(commond[1]));
+                break;
+            case "set_actor_health":
+                ActorModel.Model.SetPlayerAttribute(PlayerAttribute.生命值, double.Parse(commond[1]));
+                break;
             case "use_scratch_card":
                 View.CurrentScene.OpenView<ScratchCardView>();
                 break;

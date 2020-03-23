@@ -4,7 +4,7 @@ Created by 师鸿博
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DreamerTool.UI;
 public class CoinParticle : MonoBehaviour
 {
     private ParticleSystem par;
@@ -39,11 +39,12 @@ void Update()
     {
         if (isopen)
         {
+ 
+           
             arrCount = par.GetParticles(arrPar);
             for (var i = 0; i < arrCount; i++)
             {
-                
-                arrPar[i].position =Vector3.MoveTowards(arrPar[i].position, Camera.main.ScreenToWorldPoint(transf.position), speed);//设置他们的位置
+                arrPar[i].position =Vector3.MoveTowards(arrPar[i].position, Camera.main.ScreenToWorldPoint(Scene.UICamera.WorldToScreenPoint(transf.position)), speed);//设置他们的位置
             }
             par.SetParticles(arrPar, arrCount);
         }

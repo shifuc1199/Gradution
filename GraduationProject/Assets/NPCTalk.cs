@@ -12,4 +12,6 @@ public class NPCTalk : MonoBehaviour
     {
         View.CurrentScene.OpenView<NPCView>().LoadTextAsset("npc_inactive_"+id);
     }
+
+
 }

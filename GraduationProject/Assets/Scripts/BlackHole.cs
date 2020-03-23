@@ -49,7 +49,12 @@ public class BlackHole : MonoBehaviour
                     timer = 0;
                     return;
                 }
-                enemy.GetHurt(SkillModel.Get(skill_id).GetHurtValue(), HitType.普通,transform.position);
+                enemy.GetHurt(new AttackData(
+                    SkillModel.Get(skill_id).GetHurtValue(),
+                    false,
+                    transform.position,
+                    HitType.普通
+                    ));
                 timer = 0;
             }
         }

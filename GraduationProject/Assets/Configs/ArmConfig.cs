@@ -11,7 +11,7 @@ using UnityEditor;
 using Sirenix.OdinInspector;
 public class ArmConfig : ItemConfig<ArmConfig>
 {
- 
+    public double defend;
     [Button("保存", 50)]
     public override void Save()
     {
@@ -22,6 +22,7 @@ public class ArmConfig : ItemConfig<ArmConfig>
             jd["Arm"] = new JsonData();
         JsonData data = new JsonData();
         data["物品ID"] = 物品ID;
+        data["defend"] = defend;
         data["物品名字"] = 物品名字;
         data["购买价格"] = 购买价格;
         data["卖出价格"] = 卖出价格;

@@ -18,14 +18,12 @@ public class BagView : MonoBehaviour
     int grid_index = 0;
     private void Awake()
     {
-        
         SetMoney();
         var children = grid_root.GetChildren();
         foreach (var item in children)
         {
             Grids.Add(item.GetComponentInChildren<ItemUI>(true));
         }
-        
     }
     public void SelectItem(int index)
     {
@@ -45,7 +43,6 @@ public class BagView : MonoBehaviour
     }
     public void SelectDown()
     {
-
         if (grid_index+5 > Grids.Count - 1)
             return;
         grid_index+=5;
@@ -53,7 +50,6 @@ public class BagView : MonoBehaviour
     }
     public void SelectRight()
     {
-         
         if (grid_index >= Grids.Count-1)
             return;
         grid_index++;
@@ -61,7 +57,6 @@ public class BagView : MonoBehaviour
     }
     public void SelectLeft()
     {
-       
         if (grid_index == 0)
             return;
         grid_index--;
@@ -71,9 +66,26 @@ public class BagView : MonoBehaviour
     {
         ChooseGrid();
     }
+    public void Sell()
+    {
+      
+        if(!CurretnSelect.icon.gameObject.activeSelf)
+        {
+            return;
+        }
+        View.CurrentScene.OpenView<BoxView>().SetText("您确定要出售此物品吗",(v)=> {
+            if(v)
+            {
+                ItemUITip.gameObject.SetActive(false);
+                ActorModel.Model.bag_items.Remove(CurretnSelect);
+                CurretnSelect.icon.gameObject.SetActive(false);
+            }
+
+        });
+    }
     public void Equip()
     {
-        if (CurretnSelect == null)
+        if (!CurretnSelect.icon.gameObject.activeSelf)
             return;
         switch (CurretnSelect.itemtype)
         {
@@ -83,52 +95,82 @@ public class BagView : MonoBehaviour
                 {
                     View.CurrentScene.OpenView<TipView>().SetContent("等级不够 需要等级: "+DreamerTool.Util.DreamerUtil.GetColorRichText( config.需要等级.ToString(),Color.red));
                     return;
-                }
-                     
+                }  
                 int temp = ActorModel.Model.GetPlayerEquipment(EquipmentType.武器);
                 var a = config.攻击力;
                 var b = WeaponConfig.Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.武器)).攻击力;
+                var crit_ratio = config.暴击率;
+                var current_crit_ratio = WeaponConfig.Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.武器)).暴击率;
+                var crit_ratio_value = config.暴击伤害;
+                var current_crit_ratio_value = WeaponConfig.Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.武器)).暴击伤害;
+                ActorModel.Model.SetPlayerAttribute(PlayerAttribute.暴击伤害, crit_ratio_value - current_crit_ratio_value);
                 ActorModel.Model.SetPlayerAttribute(PlayerAttribute.攻击力, a-b );
+                ActorModel.Model.SetPlayerAttribute(PlayerAttribute.暴击率, crit_ratio - current_crit_ratio);
                 ActorModel.Model.SetPlayerEquipment(EquipmentType.武器, CurretnSelect.config_id);
                 CurretnSelect.SetConfig(ItemType.武器, temp);
                 ItemUITip.SetConfig(ItemType.武器, temp);
+                CurrentEquipmentUITip.SetConfig(ItemType.武器, config.物品ID);
                 break;
             case ItemType.肩膀:
+                var arm_config = ArmConfig.Get(CurretnSelect.config_id);
                 int temp1 = ActorModel.Model.GetPlayerEquipment(EquipmentType.肩膀右);
                 ActorModel.Model.SetPlayerEquipment(EquipmentType.肩膀右, CurretnSelect.config_id);
                 ActorModel.Model.SetPlayerEquipment(EquipmentType.肩膀左, CurretnSelect.config_id);
                 CurretnSelect.SetConfig(ItemType.肩膀, temp1);
                 ItemUITip.SetConfig(ItemType.肩膀, temp1);
+                CurrentEquipmentUITip.SetConfig(ItemType.肩膀, arm_config.物品ID);
                 break;
             case ItemType.上衣:
+                var torso_config = TorsoConfig.Get(CurretnSelect.config_id);
+                var torso_health = torso_config.helath;
+                var torso_defend = torso_config.defend;
+                var current_torso_defend = TorsoConfig.Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.上衣)).defend;
+                var current_torso_health = TorsoConfig.Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.上衣)).helath;
                 int temp2 = ActorModel.Model.GetPlayerEquipment(EquipmentType.上衣);
                 ActorModel.Model.SetPlayerEquipment(EquipmentType.上衣, CurretnSelect.config_id);
+                ActorModel.Model.SetPlayerAttribute(PlayerAttribute.物防, torso_defend - current_torso_defend);
+                ActorModel.Model.SetPlayerAttribute(PlayerAttribute.生命值, torso_health - current_torso_health);
                 CurretnSelect.SetConfig(ItemType.上衣, temp2);
                 ItemUITip.SetConfig(ItemType.上衣, temp2);
+                CurrentEquipmentUITip.SetConfig(ItemType.上衣, torso_config.物品ID);
                 break;
             case ItemType.手链:
+                var sleeve_config = SleeveConfig.Get(CurretnSelect.config_id);
                 int temp3= ActorModel.Model.GetPlayerEquipment(EquipmentType.手链);
                 ActorModel.Model.SetPlayerEquipment(EquipmentType.手链, CurretnSelect.config_id);
                 CurretnSelect.SetConfig(ItemType.手链, temp3);
                 ItemUITip.SetConfig(ItemType.手链, temp3);
+                CurrentEquipmentUITip.SetConfig(ItemType.手链, sleeve_config.物品ID);
                 break;
             case ItemType.裤子:
+                var pelvis_config = PelvisConfig.Get(CurretnSelect.config_id);
                 int temp4 = ActorModel.Model.GetPlayerEquipment(EquipmentType.裤子);
                 ActorModel.Model.SetPlayerEquipment(EquipmentType.裤子, CurretnSelect.config_id);
                 CurretnSelect.SetConfig(ItemType.裤子, temp4);
                 ItemUITip.SetConfig(ItemType.裤子, temp4);
+                CurrentEquipmentUITip.SetConfig(ItemType.裤子, pelvis_config.物品ID);
                 break;
             case ItemType.鞋子:
+                var foot_config = FootConfig.Get(CurretnSelect.config_id);
                 int temp5 = ActorModel.Model.GetPlayerEquipment(EquipmentType.鞋子);
                 ActorModel.Model.SetPlayerEquipment(EquipmentType.鞋子, CurretnSelect.config_id);
                 CurretnSelect.SetConfig(ItemType.鞋子, temp5);
                 ItemUITip.SetConfig(ItemType.鞋子, temp5);
+                CurrentEquipmentUITip.SetConfig(ItemType.鞋子, foot_config.物品ID);
                 break;
             case ItemType.消耗品:
                 GameStaticMethod.ExecuteCommond(ConsumablesConfig.Get(CurretnSelect.config_id).function);
                 ActorModel.Model.bag_items.Remove(CurretnSelect);
                 CurretnSelect.icon.gameObject.SetActive(false);
                 ItemUITip.gameObject.SetActive(false);
+                break;
+            case ItemType.盾牌:
+                var shield_config = ShieldConfig.Get(CurretnSelect.config_id);
+                int temp6 = ActorModel.Model.GetPlayerEquipment(EquipmentType.盾牌);
+                ActorModel.Model.SetPlayerEquipment(EquipmentType.盾牌, CurretnSelect.config_id);
+                CurretnSelect.SetConfig(ItemType.盾牌, temp6);
+                ItemUITip.SetConfig(ItemType.盾牌, temp6);
+                CurrentEquipmentUITip.SetConfig(ItemType.盾牌, shield_config.物品ID);
                 break;
             default:
                 break;

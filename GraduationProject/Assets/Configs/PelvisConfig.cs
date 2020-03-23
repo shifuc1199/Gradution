@@ -11,7 +11,7 @@ using UnityEditor;
 using Sirenix.OdinInspector;
 public class PelvisConfig : ItemConfig<PelvisConfig>
 {
- 
+    public double defend;
     [Button("保存", 50)]
     public override void Save()
     {
@@ -23,6 +23,7 @@ public class PelvisConfig : ItemConfig<PelvisConfig>
         JsonData data = new JsonData();
         data["物品ID"] = 物品ID;
         data["物品名字"] = 物品名字;
+        data["defend"] = defend;
         data["物品描述"] = 物品描述;
         data["购买价格"] = 购买价格;
         data["卖出价格"] = 卖出价格;

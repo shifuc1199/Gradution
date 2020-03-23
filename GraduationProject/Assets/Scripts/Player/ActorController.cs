@@ -140,12 +140,12 @@ public class ActorController : MonoBehaviour,IHurt
         Dash();
     }
 
-    public void GetHurt(double hurtvalue, HitType _type, Vector3 hurt_pos, UnityAction hurt_call_back = null)
+    public void GetHurt(AttackData attackData, UnityAction hurt_call_back = null)
     {
         if (actor_state.isSuperArmor)
             return;
         
-        if (actor_state.isShield && (hurt_pos-transform.position).normalized.x * transform.right.x>0)
+        if (actor_state.isShield && (attackData.attack_pos- transform.position).normalized.x * transform.right.x>0)
         {
             _rigi.ResetVelocity();
             _rigi.AddForce(-transform.right * 20, ForceMode2D.Impulse);
@@ -155,18 +155,18 @@ public class ActorController : MonoBehaviour,IHurt
 
  
         _anim.SetTrigger("hit");
-        transform.rotation = hurt_pos.x > transform.position.x ? Quaternion.identity : Quaternion.Euler(0, 180, 0);
+        transform.rotation = attackData.attack_pos.x > transform.position.x ? Quaternion.identity : Quaternion.Euler(0, 180, 0);
         GameObjectPoolManager.GetPool("hit_effect").Get(transform.position + new Vector3(0, 2, 0), Quaternion.identity, 0.5f);
 
         actor_state.isSuperArmor = true;
         Timer.Register(super_armor_time, () => { actor_state.isSuperArmor = false; });
-        ActorModel.Model.SetHealth(-hurtvalue);
+        ActorModel.Model.SetHealth(-DreamerTool.Util.DreamerUtil.GetHurtValue(attackData.hurt_value,ActorModel.Model.GetPlayerAttribute(PlayerAttribute.物防)));
 
         GameStaticMethod.ChangeChildrenSpriteRendererColor(gameObject, Color.red);
 
         hurt_call_back?.Invoke();
 
-        switch (_type)
+        switch (attackData.attack_type)
         {
             case HitType.普通:
                 break;

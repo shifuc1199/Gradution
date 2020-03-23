@@ -7,6 +7,7 @@ using UnityEngine.Events;
 using DreamerTool.GameObjectPool;
 using DreamerTool.Util;
 using DG.Tweening;
+ 
 public class BaseEnemyController : MonoBehaviour,IHurt
 {
     public int config_id;
@@ -27,6 +28,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
     private void Awake()
     {
         model = new EnemyModel(config_id,1);
+       
         _audio = GetComponent<AudioSource>();
         _anim = GetComponentInChildren<Animator>();
         _rigi = GetComponent<Rigidbody2D>();
@@ -59,16 +61,18 @@ public class BaseEnemyController : MonoBehaviour,IHurt
         });
     }
  
-    public void GetHurt(double hurt_value,HitType _type, Vector3 hurt_pos, UnityAction hurt_call_back=null)
+    public void GetHurt(AttackData attackData,UnityAction hurt_call_back=null)
     {
         if (enemy_data.isdie)
             return;
-
-
-        transform.rotation = hurt_pos.x > transform.position.x ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
-        enemy_data.SetHealth(-hurt_value);
+        
+        transform.rotation = attackData.attack_pos.x > transform.position.x ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
+         
+        var hurt = (int)DreamerUtil.GetHurtValue(attackData.hurt_value, model.GetDefend());
+        enemy_data.SetHealth(-hurt);
         var pop_text = GameObjectPoolManager.GetPool("pop_text").Get(transform.position, Quaternion.identity, 0.5f);
-        pop_text.GetComponent<PopText>().SetText(((int)DreamerUtil.GetHurtValue(hurt_value, model.GetDefend())).ToString(), Color.white);
+        pop_text.GetComponent<PopText>().SetText(hurt.ToString(), attackData.isCrit?Color.red:Color.white);
+
         View.CurrentScene.GetView<GameInfoView>().enemy_health.SetData(enemy_data);
  
         AudioManager.Instance.PlayOneShot("hit");
@@ -77,13 +81,13 @@ public class BaseEnemyController : MonoBehaviour,IHurt
 
         if (isSuperArmor)
         {
-            _type = HitType.普通;
+            attackData.attack_type = HitType.普通;
         }
 
          
         GameStaticMethod.ChangeChildrenSpriteRendererColor(gameObject, Color.red);
 
-        switch (_type)
+        switch (attackData.attack_type)
         {
             case HitType.普通:
                 if (!isGround)

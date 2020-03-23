@@ -19,14 +19,18 @@ public class BaseEnemyData
         head = model.config.GetSprite();
         enemy_name = model.config.EnemyName;
         health = maxhealth;
+       
         this.die_call_back = die_call_back;
     }
 
     public void SetHealth(double v)
     {
+        
         if (isdie)
             return;
+
         health += v;
+
         if(health<=0)
         {
             isdie = true;

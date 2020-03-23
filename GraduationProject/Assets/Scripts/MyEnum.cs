@@ -38,13 +38,30 @@ public enum WeaponType
     刀,
     法杖
 }
+public enum KnightLevel
+{
+    见习骑士,
+    骑士,
+    黑铁骑士,
+    青铜骑士,
+    白银骑士,
+    黄金骑士,
+    圣骑士,
+    神佑骑士
+}
 public enum PlayerAttribute
 {
     生命值,
-    攻击力,
-    防御力,
     能量值,
-    善恶值
+    攻击力,
+    法强,
+    善恶值,
+    物防,
+    魔抗,
+    暴击率,
+    移速,
+    暴击伤害
+
 }
 public enum FaceType
 {

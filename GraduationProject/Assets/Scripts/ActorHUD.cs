@@ -18,6 +18,7 @@ public class ActorHUD : MonoBehaviour
         EventManager.OnChangeMoney += UpdateMoneyText;
         EventManager.OnChangeHealth += UpdateHealth;
         EventManager.OnChangeEnergy += UpdateEnergy;
+        EventManager.OnChangePlayerAttribute += UpdateMaxHealth;
     }
     private void Start()
     {
@@ -30,10 +31,17 @@ public class ActorHUD : MonoBehaviour
         EventManager.OnChangeMoney -= UpdateMoneyText;
         EventManager.OnChangeHealth -= UpdateHealth;
         EventManager.OnChangeEnergy -= UpdateEnergy;
+        EventManager.OnChangePlayerAttribute -= UpdateMaxHealth;
+    }
+    public void UpdateMaxHealth (PlayerAttribute p,double v)
+    {
+        if(p == PlayerAttribute.生命值)
+        {
+            UpdateHealth();
+        }
     }
     public void UpdateEnergy()
     {
-         
         energy_text.text = ActorModel.Model.GetEngery() + "/" + ActorModel.Model.GetPlayerAttribute(PlayerAttribute.能量值);
         energy_bar.fillAmount = (float)(ActorModel.Model.GetEngery() / ActorModel.Model.GetPlayerAttribute(PlayerAttribute.能量值));
     }

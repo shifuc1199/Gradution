@@ -72,6 +72,9 @@ namespace DreamerTool.Util
     
         public static double GetHurtValue(double a, double d)
         {
+            if ((a + d) == 0)
+                return 0;
+
             return a * a / (a + d);
         }
          

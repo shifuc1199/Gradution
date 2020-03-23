@@ -9,7 +9,7 @@ public class EnemyModel
 {
    public readonly EnemyConfig config;
 
-   private int level;
+   private int level=1;
 
    public EnemyModel(int config_id,int level)
    {

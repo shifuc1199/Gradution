@@ -54,7 +54,7 @@ public class EnemyConfig : BaseConfig<EnemyConfig>
         data["level_ratio"] = level_ratio;
         data["MaxHealth"] = MaxHealth;
         jd["Enemy"][EnemyID.ToString()] = data;
-        Debug.Log(jd.ToJson());
+ 
         using (StreamWriter sw = new StreamWriter(new FileStream("Assets/Resources/all_config.json", FileMode.Truncate)))
         {
             sw.Write(jd.ToJson());

@@ -43,7 +43,7 @@ public class ExpParticle : MonoBehaviour
             for (var i = 0; i < arrCount; i++)
             {
 
-                arrPar[i].position = Vector3.MoveTowards(arrPar[i].position, Camera.main.ScreenToWorldPoint(transf.position), speed);//设置他们的位置
+                arrPar[i].position = Vector3.MoveTowards(arrPar[i].position, Camera.main.ScreenToWorldPoint(DreamerTool.UI.Scene.UICamera.WorldToScreenPoint(transf.position)), speed);//设置他们的位置
             }
             par.SetParticles(arrPar, arrCount);
         }
