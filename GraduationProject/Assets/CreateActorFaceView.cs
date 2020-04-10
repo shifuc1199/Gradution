@@ -5,18 +5,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DreamerTool.UI;
-public class CreateActorFaceView : MonoBehaviour
+public class CreateActorFaceView : View
 {
     public GameObject Cell;
     public Transform Root;
 
     private FaceUICell current_select_item;
     private List<GameObject> cell_lists = new List<GameObject>();
-
+  
     // Start is called before the first frame update
     private void Start()
     {
         SetType(0);
+
+ 
     }
 
     public void Select(FaceUICell cell)

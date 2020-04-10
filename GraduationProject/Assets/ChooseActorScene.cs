@@ -5,10 +5,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DreamerTool.UI;
-public class MainView : View
+public class ChooseActorScene : Scene
 {
-    public void GuestLogin()
+    // Start is called before the first frame update
+    void Start()
     {
-        LoadingScene.LoadScene(GameConstData.CHOOSE_ACTOR_SCENE_NAME);
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }

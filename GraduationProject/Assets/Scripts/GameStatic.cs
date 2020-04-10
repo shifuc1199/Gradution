@@ -69,10 +69,13 @@ public static class GameStaticData
 }
 public class GameConstData
 {
+    public const string GAME_MAIN_SCENE_NAME ="test";
+    public const int SAVE_DATA_COUNT = 3;
+    public const string CHOOSE_ACTOR_SCENE_NAME = "ChooseActor";
     public const string CREATE_ACTOR_SCENE_NAME = "CreateActor";
     public const string DATA_BASE_PORT = "3306";
     public const string DATA_BASE_IP = "127.0.0.1";
-    public const string SAVE_DATA_PATH = "test.txt";
+    public const string SAVE_DATA_KEY = "game_data_";
     public const string USER_DATABASE_NAME = "user";
     public const string USER_TABLE_NAME = "user";
 }
@@ -84,11 +87,7 @@ public  class GameStaticMethod
     {
        
         GameObjectPoolManager.InitByScriptableObject();
-        if (ActorModel.Model == null)
-        {
-           ActorModel.Model = SaveManager.Instance.GetActorModel();
-            
-        }
+    
         SkillModel.Init();
  
     }

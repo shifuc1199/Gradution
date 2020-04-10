@@ -14,17 +14,22 @@ public   class ActorModel
         {
             return _model;
         }
-        set
-        {
-            _model = value;
-        }
+ 
+    }
+    public static void CreateModel()
+    {
+        _model = new ActorModel();
+    }
+    public static void UpdateModel(ActorModel model)
+    {
+        _model = model;
     }
     public ActorModel()
     {
-        _model = this;
-
         SetPlayerAttribute(PlayerAttribute.攻击力, GetAttackFromEquipment());
     }
+
+    public int SaveDataID ;
 
     public string actor_name;
 

@@ -400,7 +400,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1108147376037454127}
   - component: {fileID: 5040076678651756427}
-  - component: {fileID: 3412907077386530618}
   - component: {fileID: 4983704032973646752}
   m_Layer: 0
   m_Name: Torso[Armor]
@@ -472,19 +471,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3412907077386530618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 582038955718507455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0111c17f98e43c4b931ab01b187fddb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  equipment_type: 6
 --- !u!114 &4983704032973646752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1447,7 +1433,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6325200919749675543}
   - component: {fileID: 32940769843786114}
-  - component: {fileID: 5729159227741377507}
   - component: {fileID: 4560995050495801375}
   m_Layer: 0
   m_Name: Pelvis[Armor]
@@ -1519,19 +1504,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5729159227741377507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3475161835577801764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0111c17f98e43c4b931ab01b187fddb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  equipment_type: 1
 --- !u!114 &4560995050495801375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1555,7 +1527,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7273378580492318850}
   - component: {fileID: 8659732658664659253}
-  - component: {fileID: 3188848939825108437}
   - component: {fileID: 4068464550663075646}
   m_Layer: 0
   m_Name: ArmL[Armor]
@@ -1627,19 +1598,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3188848939825108437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3793269423940753552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0111c17f98e43c4b931ab01b187fddb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  equipment_type: 2
 --- !u!114 &4068464550663075646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6505,7 +6463,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6192012955311381118}
   - component: {fileID: 4195849440553369132}
-  - component: {fileID: 5578728526966879152}
   - component: {fileID: 6580295538138949557}
   m_Layer: 0
   m_Name: Shin[Armor]
@@ -6577,19 +6534,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5578728526966879152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4819888044110700590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0111c17f98e43c4b931ab01b187fddb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  equipment_type: 0
 --- !u!114 &6580295538138949557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6613,7 +6557,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2786540436359243793}
   - component: {fileID: 1354000595139847830}
-  - component: {fileID: 7644630387345192806}
   - component: {fileID: 6148747418350108633}
   m_Layer: 0
   m_Name: Shin[Armor]
@@ -6685,19 +6628,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7644630387345192806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4945350498498976933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0111c17f98e43c4b931ab01b187fddb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  equipment_type: 0
 --- !u!114 &6148747418350108633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12467,7 +12397,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2724575962836562183}
   - component: {fileID: 3558865135697627928}
-  - component: {fileID: 6938855142207323707}
   - component: {fileID: 6296249857073679197}
   m_Layer: 0
   m_Name: ArmR[Armor]
@@ -12539,19 +12468,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6938855142207323707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6349692953928122440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0111c17f98e43c4b931ab01b187fddb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  equipment_type: 3
 --- !u!114 &6296249857073679197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12575,7 +12491,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6354380986632086927}
   - component: {fileID: 5630124955268504935}
-  - component: {fileID: 974143910536649051}
   - component: {fileID: 7790905535493545935}
   m_Layer: 0
   m_Name: SleeveR[Armor]
@@ -12647,19 +12562,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &974143910536649051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6743592120236419210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0111c17f98e43c4b931ab01b187fddb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  equipment_type: 4
 --- !u!114 &7790905535493545935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13942,31 +13844,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2499998
       objectReference: {fileID: 0}
-    - target: {fileID: 19984166, guid: 6b5cdea243db4bc4b9498aae2aa4c103, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -823648801
-      objectReference: {fileID: 0}
-    - target: {fileID: 19984166, guid: 6b5cdea243db4bc4b9498aae2aa4c103, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 19888532, guid: 6b5cdea243db4bc4b9498aae2aa4c103, type: 3}
       propertyPath: simulationSpeed
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 19932212, guid: 6b5cdea243db4bc4b9498aae2aa4c103, type: 3}
+    - target: {fileID: 19984166, guid: 6b5cdea243db4bc4b9498aae2aa4c103, type: 3}
       propertyPath: m_SortingLayerID
       value: -823648801
       objectReference: {fileID: 0}
-    - target: {fileID: 19932212, guid: 6b5cdea243db4bc4b9498aae2aa4c103, type: 3}
-      propertyPath: m_SortingLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 19940534, guid: 6b5cdea243db4bc4b9498aae2aa4c103, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -823648801
-      objectReference: {fileID: 0}
-    - target: {fileID: 19940534, guid: 6b5cdea243db4bc4b9498aae2aa4c103, type: 3}
+    - target: {fileID: 19984166, guid: 6b5cdea243db4bc4b9498aae2aa4c103, type: 3}
       propertyPath: m_SortingLayer
       value: 1
       objectReference: {fileID: 0}
@@ -13993,6 +13879,22 @@ PrefabInstance:
     - target: {fileID: 19877172, guid: 6b5cdea243db4bc4b9498aae2aa4c103, type: 3}
       propertyPath: InitialModule.startSizeZ.minMaxState
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19932212, guid: 6b5cdea243db4bc4b9498aae2aa4c103, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -823648801
+      objectReference: {fileID: 0}
+    - target: {fileID: 19932212, guid: 6b5cdea243db4bc4b9498aae2aa4c103, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19940534, guid: 6b5cdea243db4bc4b9498aae2aa4c103, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -823648801
+      objectReference: {fileID: 0}
+    - target: {fileID: 19940534, guid: 6b5cdea243db4bc4b9498aae2aa4c103, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b5cdea243db4bc4b9498aae2aa4c103, type: 3}
