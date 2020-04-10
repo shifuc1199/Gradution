@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
+
+ 
+
 public abstract class ItemConfig<T> : BaseConfig<T> where T: BaseConfig<T>
 {
     [ReadOnly][BoxGroup("基础信息")][VerticalGroup("基础信息/p/o")]

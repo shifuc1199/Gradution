@@ -3711,6 +3711,18 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &1146135725 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5957137560460883650, guid: 427471401cd9a024d8712736854a618b,
+    type: 3}
+  m_PrefabInstance: {fileID: 4995403145981979461}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1180645132 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012454214018, guid: 87ee797c72794cb79ddbc7e895612561,
@@ -6853,6 +6865,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4732786308099427625, guid: 427471401cd9a024d8712736854a618b,
         type: 3}
+    - target: {fileID: 7451519928856847607, guid: 427471401cd9a024d8712736854a618b,
+        type: 3}
+      propertyPath: sell_button
+      value: 
+      objectReference: {fileID: 1146135725}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 427471401cd9a024d8712736854a618b, type: 3}
 --- !u!1001 &7363260435030485225

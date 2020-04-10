@@ -71,7 +71,7 @@ public enum FaceType
     耳朵,
     发饰,
 }
-
+ 
 public enum ItemType
 {
     鞋子,

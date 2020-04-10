@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using TMPro;
+[RequireComponent(typeof(TextMeshPro))]
 public class PopText : MonoBehaviour
 {
     private TextMeshPro _text;

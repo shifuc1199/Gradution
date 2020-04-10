@@ -435,11 +435,12 @@ namespace LitJson
                 ObjectMetadata t_data = object_metadata[value_type];
                 try
                 {
+ 
                     instance = Activator.CreateInstance(value_type);
                 }
                 catch(System.Exception e)
                 {
-                    UnityEngine.Debug.LogError(inst_type.ToString() + " convert failed");
+                    UnityEngine.Debug.LogError(inst_type.ToString() + " convert failed"+e);
                 }
 
 

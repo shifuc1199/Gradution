@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+ 
 public   class ActorModel
 {
     [JsonNonField]
@@ -14,6 +14,10 @@ public   class ActorModel
         {
             return _model;
         }
+        set
+        {
+            _model = value;
+        }
     }
     public ActorModel()
     {
@@ -24,15 +28,19 @@ public   class ActorModel
 
     public string actor_name;
 
-    private double money=10000;
-    private double health=100;
-    private double energy=100;
+    public double money=10000;
 
-    private int level = 1;
-    private int exp;
+    public double health=100;
+
+    public double energy=100;
+
+    public int level = 1;
+
+    public int exp = 0;
 
     public KnightLevel knightLevel = KnightLevel.圣骑士;
-    public List<ItemUI> bag_items = new List<ItemUI>();
+    public List<ItemData> bag_items = new List<ItemData>();
+
     public int suit_id = 1; // 套装ID
     public Dictionary<int, SkillModel> skillmodels = new Dictionary<int, SkillModel>();
     public Dictionary<int,SkillModel> equip_skil = new Dictionary<int, SkillModel>() {
@@ -40,7 +48,8 @@ public   class ActorModel
         { 1, null},
         { 2, null }
     }; //装备的技能
-    private Dictionary<PlayerAttribute, double> PlayerAttributes = new Dictionary<PlayerAttribute, double>()
+
+    public Dictionary<PlayerAttribute, double> PlayerAttributes = new Dictionary<PlayerAttribute, double>()
     {
         { PlayerAttribute.攻击力,0 },
         { PlayerAttribute.生命值,100 },
@@ -53,7 +62,8 @@ public   class ActorModel
         { PlayerAttribute.移速,30 },
         { PlayerAttribute.暴击伤害,0 },
     };
-    private Dictionary<EquipmentType, int> Equipment = new Dictionary<EquipmentType, int>()
+
+    public Dictionary<EquipmentType, int> Equipment = new Dictionary<EquipmentType, int>()
     {
          { EquipmentType.武器,1},
          { EquipmentType.盾牌,1},
@@ -64,7 +74,8 @@ public   class ActorModel
          { EquipmentType.裤子,1},
          { EquipmentType.鞋子,1}
     };
-    private Dictionary<FaceType, int> Faces = new Dictionary<FaceType, int>()
+
+    public Dictionary<FaceType, int> Faces = new Dictionary<FaceType, int>()
     {
          { FaceType.发型,10},
          { FaceType.嘴巴,1},

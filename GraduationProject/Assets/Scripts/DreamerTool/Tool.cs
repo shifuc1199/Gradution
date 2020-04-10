@@ -4,7 +4,114 @@ using UnityEngine.Events;
  
 using UnityEngine.Networking;
 using DreamerTool.ScriptableObject;
+using MySql.Data.MySqlClient;
+using System;
+using System.Data;
+using UnityEngine.SceneManagement;
 //http://www.hko.gov.hk/cgi-bin/gts/time5a.pr?a=1 时间
+namespace DreamerTool.UI
+{
+    public class Scene : MonoBehaviour
+    {
+        public Transform _root;
+        public static Camera UICamera;
+        public Dictionary<string, View> _views = new Dictionary<string, View>();
+
+        public virtual void Awake()
+        {
+            View.CurrentScene = this;
+
+            var UICameraGameObject = GameObject.FindGameObjectWithTag("UICamera");
+
+            if (UICameraGameObject)
+                UICamera = UICameraGameObject.GetComponent<Camera>();
+
+            if (_root)
+            {
+                for (int i = 0; i < _root.childCount; i++)
+                {
+                    var child = _root.GetChild(i);
+                    if (child.GetComponent<View>())
+                        _views.Add(child.name, child.GetComponent<View>());
+                }
+            }
+
+        }
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
+
+        public T OpenView<T>() where T : View
+        {
+            var _name = typeof(T).Name;
+            if (!_views.ContainsKey(_name))
+                return null;
+            _views[_name].gameObject.SetActive(true);
+
+            return (T)_views[_name];
+        }
+        public T GetView<T>() where T : View
+        {
+            var _name = typeof(T).Name;
+            if (!_views.ContainsKey(_name))
+                return null;
+
+            return (T)_views[_name];
+        }
+        public T CloseView<T>() where T : View
+        {
+            var _name = typeof(T).Name;
+            if (!_views.ContainsKey(_name))
+                return null;
+            _views[_name].gameObject.SetActive(false);
+            return (T)_views[_name];
+        }
+        public void SceneChange(string scene_name)
+        {
+            SceneManager.LoadScene(scene_name);
+        }
+        public virtual void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, LoadSceneMode mode)
+        {
+            GameObjectPool.GameObjectPoolManager.ClearAll();
+        }
+
+    }
+
+    public class View : MonoBehaviour
+    {
+        public static Scene CurrentScene;
+
+        public virtual void OnShow()
+        {
+
+        }
+        public virtual void OnHide()
+        {
+
+        }
+        private void OnEnable()
+        {
+            OnShow();
+        }
+        private void OnDisable()
+        {
+            OnHide();
+        }
+        public void OnCloseClick()
+        {
+            gameObject.SetActive(false);
+        }
+        public void OnShowClick()
+        {
+            gameObject.SetActive(true);
+        }
+    }
+}
 namespace DreamerTool.Singleton
 {
     public class Singleton<T> where T : new()
@@ -40,6 +147,8 @@ namespace DreamerTool.Singleton
         }
     }
 }
+
+
 namespace DreamerTool.Util
 {
     public static class DreamerUtil
@@ -85,7 +194,7 @@ namespace DreamerTool.Util
 
             for (int i = 0; i < number; i++)
             {
-                var index = Random.Range(0, temp.Count);
+                var index = UnityEngine.Random.Range(0, temp.Count);
                 result.Add(temp[index]);
                 temp.RemoveAt(index);
             }
@@ -251,11 +360,11 @@ namespace DreamerTool.ScriptableObject
 {
     public class ScriptableObjectUtil
     {
-        public static T GetScriptableObject<T>() where T:Object
+        public static T GetScriptableObject<T>() where T:UnityEngine.Object
         {
             return Resources.Load<T>("ScriptableObject/"+typeof(T).Name);
         }
-        public static T GetScriptableObject<T>(string _name) where T : Object
+        public static T GetScriptableObject<T>(string _name) where T : UnityEngine.Object
         {
             return Resources.Load<T>("ScriptableObject/" + _name);
         }
@@ -388,7 +497,138 @@ namespace DreamerTool.Inactive
         }
     }
 }
+namespace DreamerTool.MySql.User
+{
+    public static class UserDao
+    {
+        private static string user_table_name = "";
 
+        public static Result Init(string table_name)
+        {
+            user_table_name = table_name;
+
+            return MySqlHelper.ExecuteNonQuery("CREATE TABLE IF NOT EXISTS " + user_table_name + "(id CHAR(11)" + ",data text)");
+        }
+        public static Result Delete(object o)
+        {
+            if (!(o is UserModel))
+            {
+                return Result.Failed;
+            }
+            var user = o as UserModel;
+            return MySqlHelper.ExecuteNonQuery("DELETE FROM " + user_table_name + " WHERE id='" + user.id + "'");
+        }
+
+        public static object GetAll()
+        {
+            List<UserModel> models = new List<UserModel>();
+            var table = MySqlHelper.ExcuteQuery("SELECT * FROM " + user_table_name);
+            foreach (System.Data.DataRow row in table.Rows)
+            {
+                models.Add(new UserModel(row["id"].ToString(), row["data"].ToString()));
+            }
+            return models;
+        }
+
+        public static object GetBy(string where)
+        {
+            List<UserModel> models = new List<UserModel>();
+            var table = MySqlHelper.ExcuteQuery("SELECT * FROM " + user_table_name + " WHERE " + where);
+            foreach (System.Data.DataRow row in table.Rows)
+            {
+                models.Add(new UserModel(row["id"].ToString(), row["data"].ToString()));
+            }
+            return models;
+        }
+
+        public static Result Insert(object o)
+        {
+            if (!(o is UserModel))
+            {
+                return Result.Failed;
+            }
+            var user = o as UserModel;
+            return MySqlHelper.ExecuteNonQuery("INSERT INTO " + user_table_name + " VALUES ('" + user.id + "','" + user.data + "')");
+        }
+
+        public static Result Update(object o)
+        {
+            if (!(o is UserModel))
+            {
+                return Result.Failed;
+            }
+            var user = o as UserModel;
+            return MySqlHelper.ExecuteNonQuery("UPDATE " + user_table_name + "SET id='" + user.id + "',data='" + user.data + "' WHERE id='" + user.id + "'");
+        }
+    }
+
+}
+namespace DreamerTool.MySql
+{
+    public enum Result
+    {
+        Failed,
+        Successful
+    }
+    public class MySqlHelper
+    {
+        private static MySqlConnection connection;
+        public static void Connect(string ip, string port, string dabase_name)
+        {
+            var connString = "datasource=" + ip + ";port=" + port + ";database=" + dabase_name + ";user=root;pwd=007088;";
+            connection = new MySqlConnection(connString);
+        }
+        public static Result ExecuteNonQuery(string sql_string)
+        {
+            Debug.Log("执行 : " + sql_string);
+            using (MySqlCommand cmd = new MySqlCommand(sql_string, connection))
+            {
+                try
+                {
+                    connection.Open();
+                    int rows = cmd.ExecuteNonQuery();
+                    if (rows == 0)
+                        return Result.Failed;
+
+                    return Result.Successful;
+                }
+                catch (MySqlException E)
+                {
+                    throw new Exception(E.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+        public static DataTable ExcuteQuery(string sql_string)
+        {
+            Debug.Log("执行 : " + sql_string);
+            using (MySqlCommand command = new MySqlCommand(sql_string, connection))
+            {
+                try
+                {
+                    connection.Open();
+                    DataTable result = new DataTable();
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                    adapter.Fill(result);
+                    return result;
+                }
+                catch (MySqlException E)
+                {
+                    throw new Exception(E.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+        }
+
+    }
+}
 namespace DreamerTool.Extra
 {
     

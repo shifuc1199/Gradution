@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+ 
 public class SkillModel 
 {
-    public SkillConfig _config;
-    private int skill_level=0;
-    private bool is_learn = false;
+    public int config_id;
+    [JsonNonField]public SkillConfig _config { get { return SkillConfig.Get(config_id); } }
+    public int skill_level=0;
+    public bool is_learn = false;
     public void SetSkillLevel(int v)
     {
         skill_level += v;
@@ -37,7 +38,11 @@ public class SkillModel
     }
     public SkillModel(int config_id)
     {
-        this._config = SkillConfig.Get(config_id);
+        this.config_id = config_id;
+    }
+    public SkillModel()
+    {
+
     }
  
     public double GetCoolTime()

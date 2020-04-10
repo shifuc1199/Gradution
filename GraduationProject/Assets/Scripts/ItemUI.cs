@@ -8,22 +8,35 @@ using System;
 using DreamerTool.UI;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-public class ItemUI : MonoBehaviour,IPointerDownHandler
+public class ItemData
 {
     public int config_id;
     public ItemType itemtype;
+
+    public ItemData(ItemType type,int id)
+    {
+        this.config_id = id;
+        this.itemtype = type;
+    }
+    public ItemData()
+    {
+
+    }
+}
+
+
+public class ItemUI : MonoBehaviour,IPointerDownHandler
+{
+    public ItemData data; 
     public GameObject select_frame;
     public Image icon;
-  
 
-    public void SetConfig(ItemType t,int id,bool ispickup=false)
+    public void SetConfig(ItemData data, bool ispickup=false)
     {
-        
-
-        config_id = id;
-        itemtype = t;
- 
-        switch (t)
+        this.data = data;
+        var id = this.data.config_id;
+        var typ = this.data.itemtype;
+        switch (typ)
         {
            
             case ItemType.鞋子:

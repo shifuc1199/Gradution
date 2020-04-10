@@ -14,7 +14,7 @@ public class CreateActorScene : Scene
     // Start is called before the first frame update
     void Awake()
     {
-        ActorModel actor = new ActorModel();
+         
         GameStaticMethod.GameInit();
         Application.targetFrameRate = 60;
     }

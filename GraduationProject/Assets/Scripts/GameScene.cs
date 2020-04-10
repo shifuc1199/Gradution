@@ -30,6 +30,10 @@ public class GameScene : Scene
             LoadingScene.LoadScene(scene_name);
         });
     }
+    private void OnApplicationQuit()
+    {
+        SaveManager.Instance.SaveActorModel();
+    }
     public override void Awake()
     {
         base.Awake();
