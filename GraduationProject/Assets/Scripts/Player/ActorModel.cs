@@ -44,7 +44,7 @@ public   class ActorModel
     public int exp = 0;
 
     public KnightLevel knightLevel = KnightLevel.圣骑士;
-    public List<ItemData> bag_items = new List<ItemData>();
+    public List<BagItemData> bag_items = new List<BagItemData>();
 
     public int suit_id = 1; // 套装ID
     public Dictionary<int, SkillModel> skillmodels = new Dictionary<int, SkillModel>();

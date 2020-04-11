@@ -30,7 +30,7 @@ public class GameScene : Scene
             LoadingScene.LoadScene(scene_name);
         });
     }
-    private void OnApplicationQuit()
+   public void Save()
     {
         SaveManager.Instance.SaveActorModel();
     }
@@ -39,6 +39,7 @@ public class GameScene : Scene
         base.Awake();
         GameStaticMethod.GameInit();
 
+        
     }
    
     // Start is called before the first frame update

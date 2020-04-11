@@ -8,17 +8,19 @@ using System;
 using DreamerTool.UI;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-public class ItemData
+public class BagItemData
 {
     public int config_id;
     public ItemType itemtype;
+    public int bag_index;
 
-    public ItemData(ItemType type,int id)
+    public BagItemData(ItemType type,int id,int bag_index)
     {
         this.config_id = id;
         this.itemtype = type;
+        this.bag_index = bag_index;
     }
-    public ItemData()
+    public BagItemData()
     {
 
     }
@@ -27,11 +29,11 @@ public class ItemData
 
 public class ItemUI : MonoBehaviour,IPointerDownHandler
 {
-    public ItemData data; 
+    public BagItemData data; 
     public GameObject select_frame;
     public Image icon;
 
-    public void SetConfig(ItemData data, bool ispickup=false)
+    public void SetConfig(BagItemData data, bool ispickup=false)
     {
         this.data = data;
         var id = this.data.config_id;

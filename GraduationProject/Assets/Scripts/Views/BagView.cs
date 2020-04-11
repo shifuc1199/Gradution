@@ -27,10 +27,10 @@ public class BagView : MonoBehaviour
 
         foreach (var item in ActorModel.Model.bag_items)
         {
-            
-            AddItem(item.config_id, item.itemtype,false);
+            AddItem(item);
         }
     }
+  
     public void SelectItem(int index)
     {
         grid_index = index;
@@ -70,7 +70,12 @@ public class BagView : MonoBehaviour
     }
     private void OnEnable()
     {
+        foreach (var item in ActorModel.Model.bag_items)
+        {
+            ShowItem(item);
+        }
         ChooseGrid();
+
     }
     public void Sell()
     {
@@ -113,16 +118,20 @@ public class BagView : MonoBehaviour
                 ActorModel.Model.SetPlayerAttribute(PlayerAttribute.攻击力, a-b );
                 ActorModel.Model.SetPlayerAttribute(PlayerAttribute.暴击率, crit_ratio - current_crit_ratio);
                 ActorModel.Model.SetPlayerEquipment(EquipmentType.武器, CurretnSelect.data.config_id);
-                CurretnSelect.SetConfig(new ItemData(ItemType.武器, temp));
+                ActorModel.Model.bag_items.Remove(CurretnSelect.data);
+                CurretnSelect.SetConfig(new BagItemData(ItemType.武器, temp, CurretnSelect.transform.GetSiblingIndex()));
                 ItemUITip.SetConfig(ItemType.武器, temp);
                 CurrentEquipmentUITip.SetConfig(ItemType.武器, config.物品ID);
+                ActorModel.Model.bag_items.Add(CurretnSelect.data);
                 break;
             case ItemType.肩膀:
                 var arm_config = ArmConfig.Get(CurretnSelect.data.config_id);
                 int temp1 = ActorModel.Model.GetPlayerEquipment(EquipmentType.肩膀右);
                 ActorModel.Model.SetPlayerEquipment(EquipmentType.肩膀右, CurretnSelect.data.config_id);
                 ActorModel.Model.SetPlayerEquipment(EquipmentType.肩膀左, CurretnSelect.data.config_id);
-                CurretnSelect.SetConfig(new ItemData(ItemType.肩膀, temp1));
+                ActorModel.Model.bag_items.Remove(CurretnSelect.data);
+                CurretnSelect.SetConfig(new BagItemData(ItemType.肩膀, temp1, CurretnSelect.transform.GetSiblingIndex()));
+                ActorModel.Model.bag_items.Add(CurretnSelect.data);
                 ItemUITip.SetConfig(ItemType.肩膀, temp1);
                 CurrentEquipmentUITip.SetConfig(ItemType.肩膀, arm_config.物品ID);
                 break;
@@ -137,7 +146,8 @@ public class BagView : MonoBehaviour
                 ActorModel.Model.SetPlayerAttribute(PlayerAttribute.物防, torso_defend - current_torso_defend);
                 ActorModel.Model.SetPlayerAttribute(PlayerAttribute.生命值, torso_health - current_torso_health);
                 ActorModel.Model.bag_items.Remove(CurretnSelect.data);
-                CurretnSelect.SetConfig(new ItemData( ItemType.上衣, temp2));
+
+                CurretnSelect.SetConfig(new BagItemData( ItemType.上衣, temp2, CurretnSelect.transform.GetSiblingIndex()));
                 ItemUITip.SetConfig(ItemType.上衣, temp2);
                 CurrentEquipmentUITip.SetConfig(ItemType.上衣, torso_config.物品ID);
                 ActorModel.Model.bag_items.Add(CurretnSelect.data);
@@ -146,15 +156,19 @@ public class BagView : MonoBehaviour
                 var sleeve_config = SleeveConfig.Get(CurretnSelect.data.config_id);
                 int temp3= ActorModel.Model.GetPlayerEquipment(EquipmentType.手链);
                 ActorModel.Model.SetPlayerEquipment(EquipmentType.手链, CurretnSelect.data.config_id);
-                CurretnSelect.SetConfig(new ItemData(ItemType.手链, temp3));
+                CurretnSelect.SetConfig(new BagItemData(ItemType.手链, temp3, CurretnSelect.transform.GetSiblingIndex()));
+                ActorModel.Model.bag_items.Remove(CurretnSelect.data);
                 ItemUITip.SetConfig(ItemType.手链, temp3);
+                ActorModel.Model.bag_items.Add(CurretnSelect.data);
                 CurrentEquipmentUITip.SetConfig(ItemType.手链, sleeve_config.物品ID);
                 break;
             case ItemType.裤子:
                 var pelvis_config = PelvisConfig.Get(CurretnSelect.data.config_id);
                 int temp4 = ActorModel.Model.GetPlayerEquipment(EquipmentType.裤子);
                 ActorModel.Model.SetPlayerEquipment(EquipmentType.裤子, CurretnSelect.data.config_id);
-                CurretnSelect.SetConfig(new ItemData(ItemType.裤子, temp4));
+                ActorModel.Model.bag_items.Remove(CurretnSelect.data);
+                CurretnSelect.SetConfig(new BagItemData(ItemType.裤子, temp4, CurretnSelect.transform.GetSiblingIndex()));
+                ActorModel.Model.bag_items.Add(CurretnSelect.data);
                 ItemUITip.SetConfig(ItemType.裤子, temp4);
                 CurrentEquipmentUITip.SetConfig(ItemType.裤子, pelvis_config.物品ID);
                 break;
@@ -162,7 +176,9 @@ public class BagView : MonoBehaviour
                 var foot_config = FootConfig.Get(CurretnSelect.data.config_id);
                 int temp5 = ActorModel.Model.GetPlayerEquipment(EquipmentType.鞋子);
                 ActorModel.Model.SetPlayerEquipment(EquipmentType.鞋子, CurretnSelect.data.config_id);
-                CurretnSelect.SetConfig(new ItemData(ItemType.鞋子, temp5));
+                ActorModel.Model.bag_items.Remove(CurretnSelect.data);
+                CurretnSelect.SetConfig(new BagItemData(ItemType.鞋子, temp5, CurretnSelect.transform.GetSiblingIndex()));
+                ActorModel.Model.bag_items.Add(CurretnSelect.data);
                 ItemUITip.SetConfig(ItemType.鞋子, temp5);
                 CurrentEquipmentUITip.SetConfig(ItemType.鞋子, foot_config.物品ID);
                 break;
@@ -176,7 +192,9 @@ public class BagView : MonoBehaviour
                 var shield_config = ShieldConfig.Get(CurretnSelect.data.config_id);
                 int temp6 = ActorModel.Model.GetPlayerEquipment(EquipmentType.盾牌);
                 ActorModel.Model.SetPlayerEquipment(EquipmentType.盾牌, CurretnSelect.data.config_id);
-                CurretnSelect.SetConfig(new ItemData(ItemType.盾牌, temp6));
+                ActorModel.Model.bag_items.Remove(CurretnSelect.data);
+                CurretnSelect.SetConfig(new BagItemData(ItemType.盾牌, temp6, CurretnSelect.transform.GetSiblingIndex()));
+                ActorModel.Model.bag_items.Add(CurretnSelect.data);
                 ItemUITip.SetConfig(ItemType.盾牌, temp6);
                 CurrentEquipmentUITip.SetConfig(ItemType.盾牌, shield_config.物品ID);
                 break;
@@ -277,20 +295,31 @@ public class BagView : MonoBehaviour
     {
         ItemUITip.transform.position = Grids[grid_index].transform.position;
     }
-    public void AddItem(int id, ItemType type,bool save=true) 
+    public void ShowItem(BagItemData data)
+    {
+        Grids[data.bag_index].transform.GetChild(0).gameObject.SetActive(true);
+    }  
+    public void AddItem(BagItemData data)
+    {
+        var grid = Grids[data.bag_index].transform;
+        if (data.itemtype == ItemType.武器)
+            GameStaticData.WeaponUI.Copy(grid.GetChild(0).GetComponent<RectTransform>());
+        else
+            GameStaticData.EquipmentUI.Copy(grid.GetChild(0).GetComponent<RectTransform>());
+        grid.GetComponent<ItemUI>().SetConfig(data);
+    }
+    public void AddItem(int id, ItemType type) 
     {
         var grid = GetEmptyGrid();
         if(grid != null)
         {
-            grid.GetChild(0).gameObject.SetActive(true);
             if(type==ItemType.武器)
                 GameStaticData.WeaponUI.Copy(grid.GetChild(0).GetComponent<RectTransform>());
             else
                 GameStaticData.EquipmentUI.Copy(grid.GetChild(0).GetComponent<RectTransform>());
-            grid.GetComponent<ItemUI>().SetConfig(new ItemData(type, id),true);
-            if(save)
+            grid.GetComponent<ItemUI>().SetConfig(new BagItemData(type, id, grid.GetSiblingIndex()),true);
+
             ActorModel.Model.bag_items.Add(grid.GetComponent<ItemUI>().data);
- 
         }
         
     }

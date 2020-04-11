@@ -20,6 +20,12 @@ public enum EquipmentType
     上衣,
     盾牌,
 }
+public enum LoginType
+{
+    游客,
+    短信
+}
+
 public enum HitType
 {
     普通,

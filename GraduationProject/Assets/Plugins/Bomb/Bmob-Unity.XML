@@ -1,0 +1,1776 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Bmob-Unity</name>
+    </assembly>
+    <members>
+        <member name="T:cn.bmob.api.Bmob">
+            <summary>
+            基本功能实现
+            </summary>
+        </member>
+        <member name="T:cn.bmob.api.IBmobAPI">
+            <summary>
+            SDK对外API抽象接口类
+            </summary>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.initialize(System.String,System.String)">
+            <summary>
+            初始化服务
+            </summary>
+            <param name="appKey">应用程序密钥AppKey</param>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.Create(System.String,cn.bmob.io.IBmobWritable,cn.bmob.http.BmobCallback{cn.bmob.response.CreateCallbackData})">
+            <summary>
+            创建
+            
+            往Bmob云数据库中添加一条数据记录
+            </summary>
+            <param name="data">需要添加的数据</param>
+            <param name="callback">添加之后的结果回调</param>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.Update(System.String,System.String,cn.bmob.io.IBmobWritable,cn.bmob.http.BmobCallback{cn.bmob.response.UpdateCallbackData})">
+            <summary>
+            更新Bmob云数据库中的某一条记录信息
+            </summary>
+            <param name="tablename">数据表名称</param>
+            <param name="objectId">这个记录对应的objectId</param>
+            <param name="data">需要更新的记录信息</param>
+            <param name="callback">更新之后的回调</param>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.UpdateUser(System.String,cn.bmob.io.BmobUser,System.String,cn.bmob.http.BmobCallback{cn.bmob.response.UpdateCallbackData})">
+            <summary>
+            更新用户信息
+            </summary>
+            <param name="objectId">这条用户信息对应的objectId</param>
+            <param name="data">需要更新的内容</param>
+            <param name="sessionToken">这个用户登录之后获取的sessionToken</param>
+            <param name="callback">更新之后的回调</param>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.Delete(System.String,System.String,cn.bmob.http.BmobCallback{cn.bmob.response.DeleteCallbackData})">
+            <summary>
+            删除
+            
+            从Bmob云数据库中删除一条数据记录
+            </summary>
+            <param name="tablename">数据表名称</param>
+            <param name="objectId">这条数据记录的objectId</param>
+            <param name="callback">删除数据结果的回调</param>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.DeleteUser(System.String,System.String,cn.bmob.http.BmobCallback{cn.bmob.response.DeleteCallbackData})">
+            <summary>
+            删除用户
+            
+            从Bmob云数据库中删除一个用户
+            </summary>
+            <param name="objectId">这个用户记录的objectId</param>
+            <param name="sessionToken">这个用户的sessionToken信息</param>
+            <param name="callback">删除用户结果的回调</param>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.Find``1(System.String,cn.bmob.io.BmobQuery,cn.bmob.http.BmobCallback{cn.bmob.response.QueryCallbackData{``0}})">
+            <summary>
+            查找
+            
+            从Bmob云数据库中获取数据记录列表
+            </summary>
+            <typeparam name="T">推荐使用继承自BmobTable类型</typeparam>
+            <param name="tablename">数据表名称</param>
+            <param name="query">查询条件</param>
+            <param name="callback">查询结果回调</param>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.Get``1(System.String,System.String,cn.bmob.http.BmobCallback{``0})">
+            <summary>
+            根据objectId获取一条记录
+            
+            从Bmob云数据库中获取某一条数据记录
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="tablename">数据表名称</param>
+            <param name="objectId">这条数据记录的objectId</param>
+            <param name="callback">获取数据的结果回调</param>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.Login``1(System.String,System.String,cn.bmob.http.BmobCallback{``0})">
+            <summary>
+            用户登录
+            
+            返回用户User表改用户的所有字段
+            </summary>
+            <typeparam name="T">BmobUser用户类泛型</typeparam>
+            <param name="username">用户名</param>
+            <param name="pwd">密码</param>
+            <param name="callback">用户登录的结果回调</param>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.Signup``1(``0,cn.bmob.http.BmobCallback{``0})">
+            <summary>
+            注册用户
+            </summary>
+            <typeparam name="T">BmobUser用户类泛型</typeparam>
+            <param name="user">用户注册信息</param>
+            <param name="callback">注册结果回调。 仅返回用户User表的objectId,createdAt,sessionToken字段！同时会把当前登录的用户信息保存到BmobUser.CurrentUser中！</param>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.Reset(System.String,cn.bmob.http.BmobCallback{cn.bmob.response.EmptyCallbackData})">
+            <summary>
+            重置密码
+            
+            查找用户表中对应email，并发邮件到该邮箱修改密码。（往注册用户的邮箱中发送一封密码重置的邮件）
+            </summary>
+            <param name="email">用户的Email</param>
+            <param name="callback">重置结果的回调</param>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.EmailVerify(System.String,cn.bmob.http.BmobCallback{cn.bmob.response.EmptyCallbackData})">
+            <summary>
+            邮箱验证
+            </summary>
+            <param name="email">需要验证的邮箱号</param>
+            <param name="callback">验证结果的回调</param>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.Endpoint``1(System.String,System.Collections.Generic.IDictionary{System.String,System.Object},cn.bmob.http.BmobCallback{cn.bmob.response.EndPointCallbackData{``0}})">
+            <summary>
+            云端代码
+            
+            执行Bmob的云端代码. 
+            
+            注意：SDK暂时不支持直接从云端返回primitive类型的数据。也就是返回的值要么是键值对，要么是数组
+            </summary>
+            <typeparam name="T">对象。 FIXME 当前处理List的返回有问题！需要进一步的完善。</typeparam>
+            <param name="eMethod">云端代码方法名</param>
+            <param name="callback">云端代码结果的回调</param>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.FileUpload(cn.bmob.io.BmobLocalFile,cn.bmob.http.BmobCallback{cn.bmob.response.UploadCallbackData})">
+            <summary>
+            文件上传
+            
+            将文件上传到Bmob文件服务中
+            </summary>
+            <param name="file">本地文件对象。使用文件名/文件内容/二进制流来构造。</param>
+            <param name="callback">上传文件的结果回调，返回BmobFile对象</param>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.FileDelete(System.String,cn.bmob.http.BmobCallback{cn.bmob.response.EmptyCallbackData})">
+            <summary>
+            
+            </summary>
+            <param name="url">如：M02/C2/95/oYYBAFYDuR6AD3AbAAAUWOcV3Ew650.png</param>
+            <param name="callback"></param>
+        </member>
+        <member name="M:cn.bmob.api.Bmob.Timestamp(cn.bmob.http.BmobCallback{cn.bmob.response.TimeStampCallbackData})">
+             <summary>
+             获取服务器的时间
+            
+             获取Bmob云服务器的时间戳
+             </summary>
+             <param name="callback">结果回调</param>
+        </member>
+        <!-- 对于成员“M:cn.bmob.api.Bmob.Sql``1(System.String,System.Collections.Generic.List{System.Object},cn.bmob.http.BmobCallback{cn.bmob.response.QueryCallbackData{``0}})”忽略有格式错误的 XML 注释 -->
+        <member name="M:cn.bmob.api.Bmob.FileUpload(System.String,cn.bmob.http.BmobCallback{cn.bmob.response.UploadCallbackData})">
+            <summary>
+            文件上传
+            </summary>
+            <param name="localPath"></param>
+            <param name="callback"></param>
+        </member>
+        <!-- 对于成员“M:cn.bmob.api.Bmob.Login(System.String,System.String,cn.bmob.http.BmobCallback{cn.bmob.io.BmobUser})”忽略有格式错误的 XML 注释 -->
+        <member name="M:cn.bmob.api.Bmob.Signup(cn.bmob.io.BmobUser,cn.bmob.http.BmobCallback{cn.bmob.io.BmobUser})">
+            <summary>
+            使用默认的BmobUser进行注册。即不添加任何额外的字段情况下使用。
+            </summary>
+        </member>
+        <member name="T:cn.bmob.api.BmobUnity">
+            <summary>
+            Bmob SDK入口类，开发者直接调用该类即可获取Bmob提供的各种服务。
+            </summary>
+        </member>
+        <member name="M:cn.bmob.api.BmobUnity.Update">
+            <summary>
+            Unity Behavior 
+            </summary>
+        </member>
+        <member name="F:cn.bmob.api.BmobUnity.ApplicationId">
+            <summary>
+            仅用于在界面设置
+            </summary>
+        </member>
+        <member name="M:cn.bmob.api.BmobUnity.execute``1(cn.bmob.http.BmobCommand{``0},cn.bmob.http.BmobCallback{``0})">
+            <summary>
+            调用
+            </summary>
+        </member>
+        <member name="F:cn.bmob.config.Configuration.PLATFORM_KEY">
+            <summary>
+            平台序列号
+            </summary>
+        </member>
+        <member name="F:cn.bmob.config.Configuration.VERSION">
+            <summary>
+            请求Bmob后端接口版本号
+            </summary>
+        </member>
+        <member name="F:cn.bmob.config.Configuration.BUILD_VERSION">
+            <summary>
+            此SDK版本号
+            </summary>
+        </member>
+        <member name="F:cn.bmob.config.Configuration.PLATFORM">
+            <summary>
+            平台识别字段
+            
+            默认为WindowsDisktop。
+            </summary>
+        </member>
+        <member name="T:cn.bmob.exception.BmobException">
+            <summary>
+            Bmob自定义异常处理类
+            </summary>
+        </member>
+        <member name="T:cn.bmob.Extensions.MiscExtensions">
+            <summary>
+            copy restsharp
+            </summary>
+        </member>
+        <member name="M:cn.bmob.Extensions.MiscExtensions.ReadAsBytes(System.IO.Stream)">
+            <summary>
+            Read a stream into a byte array
+            </summary>
+            <param name="input">Stream to read</param>
+            <returns>byte[]</returns>
+        </member>
+        <member name="M:cn.bmob.Extensions.MiscExtensions.AsString(System.Byte[])">
+            <summary>
+            Converts a byte array to a string, using its byte order mark to convert it to the right encoding.
+            http://www.shrinkrays.net/code-snippets/csharp/an-extension-method-for-converting-a-byte-array-to-a-string.aspx
+            </summary>
+            <param name="buffer">An array of bytes to convert</param>
+            <returns>The byte as a string.</returns>
+        </member>
+        <member name="M:cn.bmob.Extensions.MiscExtensions.join(System.Collections.IList)">
+            <summary>
+            将列表连接为字符串，连接符为,号
+            </summary>
+            <param name="list">列表</param>
+            <returns>连接之后的字符串</returns>
+        </member>
+        <member name="M:cn.bmob.Extensions.MiscExtensions.join(System.Collections.IList,System.Char)">
+            <summary>
+            将列表连接为字符串
+            </summary>
+            <param name="list">列表</param>
+            <param name="separator">连接符</param>
+            <returns>连接之后的字符串</returns>
+        </member>
+        <member name="T:cn.bmob.http.BmobCallback`1">
+            <summary>
+            请求回调函数
+            
+            <para>Bmob服务器请求到数据后调用该委托实现。
+            </para>
+            </summary>
+            <typeparam name="T">返回类型</typeparam>
+            <param name="response">请求返回数据</param>
+            <param name="exception">调用过程中发生的异常，包括调用执行过程中的校验和服务端返回状态非200情况。</param>
+        </member>
+        <member name="M:cn.bmob.http.BmobCommand`1.execute``1(System.Func{System.String,System.String,System.String,System.Byte[],System.Collections.Generic.IDictionary{System.String,System.String},System.Action{System.String,cn.bmob.response.Status,cn.bmob.exception.BmobException},``0},cn.bmob.http.BmobCallback{`0})">
+            <typeparam name="R">操作返回值类型</typeparam>
+            <param name="request">参数对应为： url, contenttype, requestData, headers, callback(请求服务器数据返回值回调函数)</param>
+            <param name="fCallback">返回结果回调函数</param>
+            <returns>操作返回值</returns>
+        </member>
+        <member name="T:cn.bmob.http.BmobInteractObject">
+            <summary>
+            request请求的包装类
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.BmobInteractObject.Method">
+            <summary>
+            请求的类型POST/PUT/DELETE/GET
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.BmobInteractObject.Data">
+            <summary>
+            请求数据，相当于curl的-d参数的值
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.BmobInteractObject.SessionToken">
+            <summary>
+            更新|删除，当c="_User"时，必须先登录获取sessionToken的值。然后作为X-Bmob-Session-Token的Http头部操作ACL数据
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.BmobInteractObject.EndPointName">
+            <summary>
+            云端代码的名称
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.Http.Timeout">
+            <summary>
+            Timeout in milliseconds to be used for the request
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.Http.ReadWriteTimeout">
+            <summary>
+            The number of milliseconds before the writing or reading times out.
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.Http.UseSynchronizationContext">
+            <summary>
+            Whether to invoke async callbacks using the SynchronizationContext.Current captured when invoked
+            </summary>
+        </member>
+        <member name="T:cn.bmob.http.HttpParameter">
+            <summary>
+            Representation of an HTTP parameter (QueryString or Form value)
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.HttpParameter.Name">
+            <summary>
+            Name of the parameter
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.HttpParameter.Value">
+            <summary>
+            Value of the parameter
+            </summary>
+        </member>
+        <member name="T:cn.bmob.http.HttpResponse">
+            <summary>
+            HTTP response data
+            </summary>
+        </member>
+        <member name="M:cn.bmob.http.HttpResponse.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.HttpResponse.ContentType">
+            <summary>
+            MIME content type of response
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.HttpResponse.ContentLength">
+            <summary>
+            Length in bytes of the response content
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.HttpResponse.ContentEncoding">
+            <summary>
+            Encoding of the response content
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.HttpResponse.Content">
+            <summary>
+            Lazy-loaded string representation of response content
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.HttpResponse.StatusCode">
+            <summary>
+            HTTP response status code
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.HttpResponse.StatusDescription">
+            <summary>
+            Description of HTTP status returned
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.HttpResponse.RawBytes">
+            <summary>
+            Response content
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.HttpResponse.ResponseUri">
+            <summary>
+            The URL that actually responded to the content (different from request if redirected)
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.HttpResponse.Server">
+            <summary>
+            HttpWebResponse.Server
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.HttpResponse.ResponseStatus">
+            <summary>
+            Status of the request. Will return Error for transport errors.
+            HTTP errors will still return ResponseStatus.Completed, check StatusCode instead
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.HttpResponse.ErrorMessage">
+            <summary>
+            Transport or other non-HTTP error generated while attempting request
+            </summary>
+        </member>
+        <member name="P:cn.bmob.http.HttpResponse.ErrorException">
+            <summary>
+            Exception thrown when error is encountered.
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.IBmobValue`1">
+            <summary>
+            实现该接口的类直接进行赋值
+            
+            Visible For API! 暂时仅支持API自带的值类型. 由于泛型T，导致在JSON解析注册时很麻烦，不推荐用户实现值类型！
+            </summary>
+        </member>
+        <!-- 对于成员“T:cn.bmob.io.BmobACL”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“M:cn.bmob.io.BmobACL.Get”忽略有格式错误的 XML 注释 -->
+        <member name="M:cn.bmob.io.BmobACL.ReadAccess(System.String)">
+            <summary>
+            key是objectId（用户表某个用户对应的objectId）或者是 *(表示公共的访问权限)，ACL 的值是 "读和写的权限", 这个JSON对象的key总是权限名, 而这些key的值总是 true
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.BmobDate">
+            <summary>
+            BmobDate时间类
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.BmobObject">
+            <summary>
+            所有键值对对象的基类。
+            
+            重写<c>ToString</c>方法，实现打印输出当前对象的JSON字符串。
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.IBmobWritable">
+            <summary>
+            Bmob自定义的序列化反序列化的对象，Hashtable仅支持简单类型和Hashtable。对象就是简单类型的组合！
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.IBmobWritable.readFields(cn.bmob.io.BmobInput)">
+            <summary>
+             把服务端返回的数据转化为本地对象值
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:cn.bmob.io.IBmobWritable.write(cn.bmob.io.BmobOutput,System.Boolean)">
+            <summary>
+            把本地对象写入到output，后续序列化提交到服务器
+            </summary>
+            <param name="output"></param>
+            <param name="all">用于区分请求/打印输出序列化</param>
+        </member>
+        <member name="P:cn.bmob.io.IBmobWritable._type">
+            <summary>
+            获取自定义对象的类型
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobObject.ToString">
+            <summary>
+            输出当前对象的字符串
+            </summary>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobObject.ToString(cn.bmob.io.IBmobWritable)">
+            <summary>
+            输出对象的JSON字符串
+            </summary>
+            <param name="ele">需要转换为JSON字符串的对象</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobDate.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobDate._type">
+            <summary>
+            返回类型标识
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobDate.iso">
+            <summary>
+            时间的IOS格式（yyyy-MM-dd HH:mm:ss）
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.BmobFile">
+            <summary>
+            文件处理类
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobFile.getPath">
+            <summary>
+            获取文件地址
+            </summary>
+            <returns>文件地址</returns>
+        </member>
+        <member name="P:cn.bmob.io.BmobFile.filename">
+            <summary>
+            文件名
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobFile.group">
+            <summary>
+            文件的组名
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobFile.url">
+            <summary>
+            相对于Bmob文件服务器的位置，结果需要附加上http://file.codenow.cn
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.BmobGeoPoint">
+            <summary>
+            地理位置处理类
+            
+            纬度的范围应该是在-90.0到90.0之间。经度的范围应该是在-180.0到180.0之间。
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobGeoPoint.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobGeoPoint.#ctor(System.Double,System.Double)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="latitude">纬度</param>
+            <param name="longitude">经度</param>
+        </member>
+        <member name="P:cn.bmob.io.BmobGeoPoint._type">
+            <summary>
+            获取类型信息
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobGeoPoint.Latitude">
+            <summary>
+            纬度 [-90, 90]
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobGeoPoint.Longitude">
+            <summary>
+            经度 [-180, 180]
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobInput.getRaw(System.String)">
+            <summary>
+            简单类型/简单类型的键值对
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobInput.getListRaw(System.String)">
+            <summary>
+            这里获取到的list是没有被序列化的，list中的元素还是hashtable/valuetype对象，没有对应到用户自定义的类型的！
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobInput.Get``1(System.String)">
+            <summary>
+            获取对象
+            </summary>
+            <typeparam name="W">获取数据对应的模型类型</typeparam>
+            <param name="name">字段名</param>
+        </member>
+        <member name="M:cn.bmob.io.BmobInput.getList``1(System.String)">
+            <summary>
+            获取列表
+            </summary>
+            <typeparam name="U">列表中对象的具体类型</typeparam>
+            <param name="name">字段名</param>
+        </member>
+        <member name="M:cn.bmob.io.BmobInput.Parse``1(System.Object)">
+            <summary>
+            对象转换的公共类
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.BmobInstallation">
+            <summary>
+            订阅配置表
+            
+            继承该类，定制更通用的推送。
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.BmobTable">
+            <summary>
+            数据表操作类
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.IBmobOperator">
+            <summary>
+            操作类。可以作用于任一对象的任何字段，这里提取出来作为公共的基类。
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobTable.Increment(System.String)">
+            <summary>
+            自增操作
+            </summary>
+            <param name="column">需要自增的字段</param>
+            <returns></returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobTable.Delete(System.String)">
+            <summary>
+            删除一个对象中一个字段
+            </summary>
+            <param name="column">需要删除的字段名</param>
+            <returns></returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobTable.AddUnique``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            更新数组类型字段的数据。
+            
+            举个例子，技能skills是一个类似于集合的数组类型，那么我们可以使用该方法在原有skills值基础上添加一些对象（只有在skills原来的对象中不包含这些值的情况下才会被加入）
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobTable.Add``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            添加数组数据。
+            
+            添加一行记录时创建一个普通的类似于列表的数组类型字段。
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobTable.Remove``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            删除数组数据。
+            
+            把values这些对象从column字段值中移除
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobTable.AddRelation``1(System.String,cn.bmob.io.BmobRelation{``0})">
+            <summary>
+            添加关联信息
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <param name="column">字段</param>
+            <param name="values">关联信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobTable.RemoveRelation``1(System.String,cn.bmob.io.BmobRelation{``0})">
+            <summary>
+            删除关联信息
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <param name="column">字段</param>
+            <param name="values">关联信息</param>
+            <returns></returns>
+        </member>
+        <member name="P:cn.bmob.io.BmobTable.table">
+            <summary>
+            获取表名， 默认为对象的名称
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobTable.objectId">
+            <summary>
+            数据的唯一标识。放开set功能！
+            
+            TODO 如果设置了objectId则为更新！！！
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobTable.createdAt">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobTable.updatedAt">
+            <summary>
+            更新时间
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobTable.ACL">
+            <summary>
+            ACL信息，每条数据默认都有ACL信息
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobInstallation.subscribe(System.Collections.Generic.List{System.String})">
+            <summary>
+            订阅
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobInstallation.unsubscribe(System.Collections.Generic.List{System.String})">
+            <summary>
+            取消订阅
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobInstallation.deviceType">
+            <summary>
+            设备的类型, 值为："ios" 或 "android",或"windows phone" (只读)
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobInstallation.installationId">
+            <summary>
+            Bmob使用的设备唯一号，唯一标示（与用于一对一即可！）. Android设备是必须的，iOS可选 (只读)
+            
+            如果仅仅为了进行数据推送，可以使用UUID生成，然后把该值写入到用户表中！**该字段是前后端联系的枢纽**！！
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.BmobKV">
+            <summary>
+            主要用于请求参数，推荐在一次性场景下使用！
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobOutput.getData">
+            <summary>
+            internal
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobOutput.Put(System.String,System.Object)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="value">cannot be null !!!</param>
+        </member>
+        <member name="M:cn.bmob.io.BmobOutput.Put(System.String,cn.bmob.io.IBmobWritable)">
+            <summary>
+            添加键值对。加入已经存在的键时，会覆盖原有的值！不同与Hashtable#Add方法抛出异常的方式。
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:cn.bmob.io.BmobOutput.Put``1(System.String,cn.bmob.io.IBmobValue{``0})">
+            <summary>
+            添加键值对。加入已经存在的键时，会覆盖原有的值！不同与Hashtable#Add方法抛出异常的方式。
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:cn.bmob.io.BmobOutput.Put``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            添加键值对。加入已经存在的键时，会覆盖原有的值！不同与Hashtable#Add方法抛出异常的方式。
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <param name="list"></param>
+        </member>
+        <member name="M:cn.bmob.io.BmobOutput.Composite(System.Collections.IDictionary,System.String,System.String,System.Object)">
+            <summary>
+            实现 {column: {key: value}} 的效果
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobOutput.Save(System.Collections.IDictionary,System.String,System.Object)">
+            <summary>
+            如果data中已经存在key，则覆盖为value
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobOutput.Put(System.String,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:cn.bmob.io.BmobOutput.Put(System.String,System.Collections.IDictionary)">
+            <summary>
+            value的键值对都是基础类型，或为hashtable类型！否则请实现IBmobWritable来处理该数据。
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+        </member>
+        <member name="T:cn.bmob.io.BmobPointer`1">
+            <summary>
+            Pointer 类型是当前对象要指向另一个对象时使用，它包含了 className 和 objectId 作为一个指针正确指向的必填值。
+            T类型必须继承自BmobTable！
+            
+            如果你使用
+            
+            如，指向用户对象的 Pointer 的 className 为_User, 前面加一个下划线表示开发者不能定义的类名, 而且所指的类是系统内置的。
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobPointer`1.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobPointer`1.#ctor(`0)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="t">指针数据</param>
+        </member>
+        <member name="F:cn.bmob.io.BmobPointer`1._refObjectId">
+            <summary>
+            序列化时优先获取refObjectId的值，refObjectId值为null时才取reference的objectId值。
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobPointer`1._type">
+            <summary>
+            指针类型
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobPointer`1.className">
+            <summary>
+            关联表的名称
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobPointer`1.refObjectId">
+            <summary>
+            use T.objectId instead.
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.BmobQuery">
+            <summary>
+            Bmob查询条件对象类
+            </summary>
+        </member>
+        <member name="F:cn.bmob.io.BmobQuery.skip">
+            <summary>
+            过滤前面num条数据
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.Skip(System.Int32)">
+            <summary>
+            Skip查询语法，跳过一定的（skip个）记录数，主要用于翻页用途
+            </summary>
+            <param name="skip">跳过的记录数</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="F:cn.bmob.io.BmobQuery.keys">
+            <summary>
+            keys 查询指定列
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.Select(System.String[])">
+            <summary>
+            Select查询语法，选择指定的列
+            </summary>
+            <param name="keys">需要获取的列</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="F:cn.bmob.io.BmobQuery.count">
+            <summary>
+            是否返回记录总数, 默认不返回！
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.Count">
+            <summary>
+            count查询语法，用于获取记录总数
+            </summary>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="F:cn.bmob.io.BmobQuery.limit">
+            <summary>
+            只查max条数据
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.Limit(System.Int32)">
+            <summary>
+            Limit查询语法，用于获取限定数量（limit）的记录列表
+            
+            默认10条 最多1000条。地理位置查询，默认是100，最大是1000
+            </summary>
+            <param name="limit">记录数限制数</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.OrderBy(System.String)">
+            <summary>
+            升序
+            OrderBy查询语法，对查询结果进行顺序排列
+            </summary>
+            <param name="column">字段</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.OrderByDescending(System.String)">
+            <summary>
+            OrderByDescending查询语法，对查询结果进行逆序排列
+            </summary>
+            <param name="column">字段</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.ThenBy(System.String)">
+            <summary>
+            ThenBy查询语法，对查询结果进行顺序排列
+            </summary>
+            <param name="column">字段</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.ThenByDescending(System.String)">
+            <summary>
+            ThenByDescending查询语法，对查询结果进行逆序排列
+            </summary>
+            <param name="column">字段</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.Include(System.String)">
+            <summary>
+            include查询语法，关联查询，该方法用在字段为Pointer类型时（例："Post.user"）
+            </summary>
+            <param name="pointer">指针对应的object字段名， 如user</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereContainedIn``1(System.String,``0[])">
+            <summary>
+            WhereContainedIn查询语法，查询某字段（column）的值包含在XX范围（values）内的数据
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <param name="column">字段</param>
+            <param name="values">值</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereNotContainedIn``1(System.String,``0[])">
+            <summary>
+            WhereNotContainedIn查询语法，获取某一字段不是values值的数据
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <param name="column">字段</param>
+            <param name="values">值</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereEqualTo(System.String,System.Object)">
+            <summary>
+            WhereEqualTo查询语法，查询字段（column）值为value的数据
+            </summary>
+            <param name="column">字段</param>
+            <param name="value">值</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereNotEqualTo(System.String,System.Object)">
+            <summary>
+            WhereNotEqualTo查询语法，获取某一字段值不为value值的数据
+            </summary>
+            <param name="column">字段</param>
+            <param name="value">值</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereExists(System.String)">
+            <summary>
+            WhereExists查询语法，查询存在指定字段的数据
+            </summary>
+            <param name="column">字段</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereNotExists(System.String)">
+            <summary>
+            WhereNotExists查询语法，查询不存在指定字段的数据
+            </summary>
+            <param name="column"></param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereGreaterThan(System.String,System.Object)">
+            <summary>
+            WhereGreaterThan查询语法，查询某字段值大于某一数的数据
+            </summary>
+            <param name="column">字段</param>
+            <param name="value">值</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereGreaterThanOrEqualTo(System.String,System.Object)">
+            <summary>
+            WhereGreaterThanOrEqualTo查询语法，查询某字段大于等于某一数的数据
+            </summary>
+            <param name="column">字段</param>
+            <param name="value">值</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereLessThan(System.String,System.Object)">
+            <summary>
+            WhereLessThan查询语法，查询某字段小于某一数的数据
+            </summary>
+            <param name="column">字段</param>
+            <param name="value">值</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereLessThanOrEqualTo(System.String,System.Object)">
+            <summary>
+            WhereLessThanOrEqualTo查询语法，查询某字段小于等于某一数的数据
+            </summary>
+            <param name="column">字段</param>
+            <param name="value">值</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereMatches(System.String,System.String)">
+            <summary>
+            WhereMatches查询语法，查询某字段的正则表达满足value的数据
+            </summary>
+            <param name="column">字段</param>
+            <param name="value">正则表达式</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereStartsWith(System.String,System.String)">
+            <summary>
+            WhereStartsWith查询语法，查询column字段以value字符串开头的数据
+            </summary>
+            <param name="column">字段</param>
+            <param name="value">值</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereMatchesKeyInQuery(System.String,cn.bmob.io.BmobQuery,System.String)">
+            <summary>
+            WhereMatchesKeyInQuery查询语法，查询的对象中的某个列符合另一个查询
+            
+            如果你想要获取对象, 这些对象的一个字段指向的对象是符合另一个查询的.
+            举例说, 假设你有一个帖子(Post)类和一个评论(Comment)类, 每个评论(Comment)都有一个指向它的帖子(Post)的关系Key名为post，并且类型为Pointer, 可以找到所有带有图片的帖子(Post)的评论(Comment)
+            
+            注意默认的 limit 是 100 而且最大的 limit 是 1000，这个限制同样适用于内部的查询, 所以对于较大的数据集你可能需要细心地构建查询来获得期望的行为。
+            
+            ！！查询 关联字段满足条件 的记录。
+            'where={"post":{"$inQuery":{"where":{"image":{"$exists":true}},"className":"Post"}}}' \
+            https://api.bmob.cn/1/classes/Comment
+            </summary>
+            <param name="anotherTable">类名对应为Bmob服务端的表名</param>
+            <param name="anotherQuery">column指向另一个类型的过滤条件</param>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereRelatedTo``1(System.String,cn.bmob.io.BmobPointer{``0})">
+            <summary>
+            WhereRelatedTo查询语法
+            
+            如果你想获取的对象，是其父对象的关系 Relation 类型的Key的所有成员的话.
+            假设你有一个帖子(Post)类和一个系统默认的用户(_User)类, 而每一个帖子(Post)都可以被不同的用户(_User)所喜欢。 如果帖子(Post)类下面有一个Key名为likes，且是 Relation 类型, 存储了喜欢这个帖子(Post)的用户(_User)。那么你可以找到喜欢过同一个指定的帖子(Post)的所有用户
+            
+            ！！查询user表（返回数据为user表记录），条件关联Post表的likes字段。（查询B表，关联关系在A表中）下面的例子 为获取 指定Post:1dafb9ed9b喜欢字段likes列表 的 用户详细信息
+            'where={"$relatedTo":{"object":{"__type":"Pointer","className":"Post","objectId":"1dafb9ed9b"},"key":"likes"}}' \
+            https://api.bmob.cn/1/users
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <param name="column">注意, 这里的column是Relation类型字段名， Relation字段所在表与Pointer的className是同一个表！</param>
+            <param name="pointer">指向帖子记录的对象</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereMatchesKeyNotInQuery``1(System.String,cn.bmob.io.BmobQuery)">
+            <summary>
+            WhereMatchesKeyNotInQuery查询语法，查询的某个列不符合另一个查询
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <param name="column">字段</param>
+            <param name="value">另一个查询</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereMatchesKeyNotInQuery(System.String,cn.bmob.io.BmobQuery,System.String)">
+            <summary>
+            WhereMatchesKeyNotInQuery查询语法，查询的某个列不符合另一个查询
+            </summary>
+            <param name="column">字段</param>
+            <param name="value">另一个查询</param>
+            <param name="table">表名</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereMatchesQuery``1(System.String,cn.bmob.io.BmobPointer{``0})">
+            <summary>
+            WhereMatchesQuery查询语法，查询的对象中的某个列符合另一个指针值
+            </summary>
+            <typeparam name="T">泛型</typeparam>
+            <param name="column">字段</param>
+            <param name="value">指针</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereMatchesFromSelect(System.String,cn.bmob.io.BmobQuery,System.String,System.String)">
+            <summary>
+            查询条件某个列值要匹配另一个查询的返回值
+            
+            举例有一个队伍(Team)保存了每个城市的得分情况且用户表中有一列为用户家乡(hometown), 您可以创建一个查询来寻找用户的家乡是得分大于0.5的城市的所有运动员
+            
+            'where={"hometown":{"$select":{"query":{"className":"Team","where":{"winPct":{"$gt":0.5}}},"key":"city"}}}' \
+            https://api.bmob.cn/1/users
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereMatchesNotFromSelect(System.String,cn.bmob.io.BmobQuery,System.String,System.String)">
+            <summary>
+            查询条件某个列值要匹配另一个查询的返回值
+            
+            查询Team中得分小于等于0.5的城市的所有运动员
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereNear(System.String,cn.bmob.io.BmobGeoPoint)">
+            <summary>
+            WhereNear查询语法，查询最接近某一地点的数据
+            </summary>
+            <param name="column">字段（必须是GeoPoint坐标类型的字段）</param>
+            <param name="geo">坐标点</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereWithinDistance(System.String,cn.bmob.io.BmobGeoPoint,System.Double)">
+            <summary>
+            WhereWithinDistance查询语法，查询多少公里之内的数据
+            </summary>
+            <param name="column">字段</param>
+            <param name="geo">坐标点</param>
+            <param name="maxDistanceInKilometers">最大的公里数</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.WhereWithinGeoBox(System.String,cn.bmob.io.BmobGeoPoint,cn.bmob.io.BmobGeoPoint)">
+            <summary>
+            WhereWithinGeoBox查询语法，查询一个矩形范围内的信息
+            </summary>
+            <param name="column">字段</param>
+            <param name="southwest">矩形左下角的坐标点</param>
+            <param name="northeast">矩形右上角的坐标点 </param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.Or(cn.bmob.io.BmobQuery[])">
+            <summary>
+            Or查询语法，或查询
+            复合查询，返回新对象
+            
+            如： where={"$or":[{"wins":{"$gt":150}},{"wins":{"$lt":5}}]}
+            </summary>
+            <param name="querys">查询参数</param>
+            <returns>返回当前对象</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.write(cn.bmob.io.BmobOutput,System.Boolean)">
+            <summary>
+            查询条件序列化对象
+            
+            将请求封装为JSON发送到Bmob服务器中
+            </summary>
+            <param name="output"></param>
+            <param name="all">是否输出所有的字段的值！请求的json是all为false。用于toString！</param>
+        </member>
+        <member name="M:cn.bmob.io.BmobQuery.clone">
+            <summary>
+            浅拷贝 
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.QueryOrder">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.QueryOrder.Column">
+            <summary>
+            字段
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.QueryOrder.SC">
+            <summary>
+            -1 降 / 1 升
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.Where">
+            <summary>
+            条件查询语句where类
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.BmobRole">
+            <summary>
+            BmobRole角色管理类
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobRole.AddRoles(cn.bmob.io.BmobRelation{cn.bmob.io.BmobRole})">
+             <summary>
+             一个角色可以包含另一个，可以为 2 个角色建立一个父-子关系。 这个关系的结果就是任何被授予父角色的权限隐含地被授予子角色。
+            
+             这样的关系类型通常在用户管理的内容类的应用上比较常见, 比如在论坛中，有一些少数的用户是 "管理员（Administartors）", 有最高的权限，可以调整系统设置、 创建新的论坛等等。 另一类用户是 "版主（Moderators）"，他们可以对用户发帖的内容进行管理。可见，任何有管理员权限的人都应该有版主的权限。为建立起这种关系, 您应该把 "Administartors" 的角色设置为 "Moderators" 的子角色, 具体来说就是把 "Administrators" 这个角色加入 "Moderators" 对象的 roles 关系之中
+             </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobRole.table">
+            <summary>
+            获取表名
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobRole.name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.BmobUser">
+            <summary>
+            用户操作类
+            </summary>
+        </member>
+        <member name="F:cn.bmob.io.BmobUser.TABLE">
+            <summary>
+            对应的操作数据表，注意：操作对应的表是_User，这是系统内置的表
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobUser.LogOut">
+            <summary>
+            退出登录
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobUser.CurrentUser">
+            <summary>
+            获取当前用户
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobUser.table">
+            <summary>
+            获取表名
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobUser.username">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobUser.password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobUser.phone">
+            <summary>
+            手机号，接收修改密码短信验证码
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobUser.emailVerified">
+            <summary>
+            邮箱验证信息
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobUser.email">
+            <summary>
+            邮箱，用于校验和重置密码！
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.BmobUser.sessionToken">
+            <summary>
+            登录之后的会话信息
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.BmobTable2">
+            <summary>
+            数据表操作类
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.AddRelation`1">
+            <summary>
+            Relation 类型被用在多对多的类型上, 移动端的库将使用 BmobRelation 作为值, 它有一个 className 字段表示目标对象的类名
+            
+            当使用查询时， Relation 对象的行为很像是 Pointer 的数组, 任何操作针对于 Pointer 的数组的 (除了 include) 都可以对 Relation 起作用.
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.Increment">
+            <summary>
+            原子计数器
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.BmobBatch">
+            <summary>
+            为了减少因为网络通讯次数太多而带来的时间浪费, 你可以使用下面的批量(batch)操作，在一个请求中对多个普通对象(不支持系统内置的用户对象)进行添加(create)、更新(update)、删除(delete) 操作
+            
+            上限为50个, 这些操作会以发送过去的顺序来执行
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.BmobRemote">
+            <summary>
+            可以参考BmobCloud
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.BmobLocalFile">
+            <summary>
+            文件处理类
+            
+            byte[]优先级最高，流，最后才是判断filename获取本地文件的内容
+            </summary>
+        </member>
+        <member name="M:cn.bmob.io.BmobLocalFile.#ctor(System.Byte[],System.String)">
+            <summary>
+            上传附件内容构造函数
+            </summary>
+            <param name="datas">文件内容</param>
+            <param name="name">文件标识，[文件名称.后缀]的形式组成，如: bmob.png。上传成功后回调的filename属性的值</param>
+        </member>
+        <member name="M:cn.bmob.io.BmobLocalFile.#ctor(System.IO.Stream,System.String)">
+            <summary>
+            上传附件内容构造函数
+            </summary>
+            <param name="inputStream">附件流</param>
+            <param name="name">文件标识，[文件名称.后缀]的形式组成，如: bmob.png。上传成功后回调的filename属性的值</param>
+        </member>
+        <member name="M:cn.bmob.io.BmobLocalFile.#ctor(System.String)">
+            <summary>
+            构造函数（设置文件路径）
+            </summary>
+            <param name="path">文件路径</param>
+        </member>
+        <member name="M:cn.bmob.io.BmobLocalFile.#ctor(System.IO.FileInfo)">
+            <summary>
+            构造函数（设置文件路径）
+            </summary>
+            <param name="file">文件对象</param>
+        </member>
+        <member name="M:cn.bmob.io.BmobLocalFile.Content">
+            <summary>
+            获取文件流
+            </summary>
+            <returns>文件流</returns>
+        </member>
+        <member name="M:cn.bmob.io.BmobLocalFile.Filename">
+            <summary>
+            获取文件名
+            </summary>
+            <returns>文件名</returns>
+        </member>
+        <member name="T:cn.bmob.io.SMSParamter">
+            <summary>
+            短信
+            </summary>
+        </member>
+        <member name="T:cn.bmob.io.PushParamter">
+            <summary>
+            接收 Windows Phone 的推送通知: http://msdn.microsoft.com/zh-cn/library/hh202945(v=vs.92).aspx
+            
+            与 Web 服务进行通信的最佳做法包括：
+             * 应用程序应该对其相应的 Web 服务进行身份验证。
+             * 应用程序应该在向其相应的 Web 服务发送 URI 之前对其通知通道 URI 进行加密。
+             * 如果您的 Web 服务将使用 Windows Phone OS 7.0 中不存在的通知属性(Toast 通知的 Parameter 属性和 Tile 通知的 BackTitle、BackBackgroundImage、BackContent 或 Tile ID 属性)，则您应将操作系统版本信息传递到您的 Web 服务，以便 Web 服务可以正确降级 Windows Phone OS 7.0 客户端的通知。
+             * Web 服务应该验证从其相应应用程序接收的通知通道 URI 并采用安全方式进行存储。
+             * 当启动应用程序中的会话时，通知通道 URI 应该始终发送到其相应的 Web 服务。
+             * Web 服务应该拥有一个可以发送到其相应应用程序的状态代码，该代码将触发应用程序创建新的通知通道 URI。
+            </summary>
+        </member>
+        <member name="F:cn.bmob.io.PushParamter.ExpirationTime">
+            <summary>
+            "2013-12-04 00:51:13"
+            </summary>
+        </member>
+        <member name="F:cn.bmob.io.PushParamter.ExpirationInterval">
+            <summary>
+            518400
+            </summary>
+        </member>
+        <member name="P:cn.bmob.io.PushParamter.PushTime">
+            <summary>
+            相对时间（根据push_time做定期推送，从push_time时间开始算起，直到expiration_interval时间后过期）
+            
+            "2012-01-28 00:51:13"
+            </summary>
+        </member>
+        <!-- 对于成员“T:cn.bmob.io.ThumbnailParameter”忽略有格式错误的 XML 注释 -->
+        <member name="T:cn.bmob.json.IJsonParser">
+            <summary>
+            对象与JSON互相转换的接口
+            
+            <para>用于可以自定义JSON转换的实现：
+            <list type="number">
+            <item><term>实现<c>IJsonParser</c>；</term></item>
+            <item><term>调用<c>JSONAdapter.register(parser)</c>进行注册。</term></item>
+            </list>
+            </para>
+            </summary>
+        </member>
+        <member name="M:cn.bmob.json.IJsonParser.ToDebugJsonString(System.Object)">
+            <summary>
+            用于打印调试用！结合writable接口的write第二个参数一起使用
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:cn.bmob.json.IJsonParser.ToJsonString(System.Object)">
+            <summary>
+            把对象转换为JSON字符串. 
+            ATTENTION: 只能处理基本的类型，Writable/IDictionary/IList/string/Numeric/Boolean/null
+            </summary>
+            <param name="data">需序列化的对象.</param>
+            <returns>JSON字符串.</returns>
+        </member>
+        <!-- 对于成员“M:cn.bmob.json.IJsonParser.ToObject(System.String)”忽略有格式错误的 XML 注释 -->
+        <member name="T:cn.bmob.json.JsonAdapter">
+            <summary>
+            对象和JSON转换的适配器
+            </summary>
+        </member>
+        <member name="M:cn.bmob.json.JsonAdapter.register(cn.bmob.json.IJsonParser)">
+            <summary>
+            注册自定义的JsonParser
+            实现IJsonParser，然后调用该方法。即可以实现自己的JSON序列化的功能。
+            </summary>
+            <param name="parser">parser</param>
+        </member>
+        <member name="P:cn.bmob.json.JsonAdapter.JSON">
+            <summary>
+            注册的JsonParser对象
+            </summary>
+        </member>
+        <member name="T:SimpleJson.JsonArray">
+            <summary>
+            Represents the json array.
+            </summary>
+        </member>
+        <member name="M:SimpleJson.JsonArray.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimpleJson.JsonArray"/> class. 
+            </summary>
+        </member>
+        <member name="M:SimpleJson.JsonArray.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimpleJson.JsonArray"/> class. 
+            </summary>
+            <param name="capacity">The capacity of the json array.</param>
+        </member>
+        <member name="M:SimpleJson.JsonArray.ToString">
+            <summary>
+            The json representation of the array.
+            </summary>
+            <returns>The json representation of the array.</returns>
+        </member>
+        <member name="T:SimpleJson.JsonObject">
+            <summary>
+            Represents the json object.
+            </summary>
+        </member>
+        <member name="F:SimpleJson.JsonObject._members">
+            <summary>
+            The internal member dictionary.
+            </summary>
+        </member>
+        <member name="M:SimpleJson.JsonObject.#ctor">
+            <summary>
+            Initializes a new instance of <see cref="T:SimpleJson.JsonObject"/>.
+            </summary>
+        </member>
+        <member name="M:SimpleJson.JsonObject.#ctor(System.Collections.Generic.IEqualityComparer{System.String})">
+            <summary>
+            Initializes a new instance of <see cref="T:SimpleJson.JsonObject"/>.
+            </summary>
+            <param name="comparer">The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> implementation to use when comparing keys, or null to use the default <see cref="T:System.Collections.Generic.EqualityComparer`1"/> for the type of the key.</param>
+        </member>
+        <member name="M:SimpleJson.JsonObject.Add(System.String,System.Object)">
+            <summary>
+            Adds the specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:SimpleJson.JsonObject.ContainsKey(System.String)">
+            <summary>
+            Determines whether the specified key contains key.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>
+                <c>true</c> if the specified key contains key; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:SimpleJson.JsonObject.Remove(System.String)">
+            <summary>
+            Removes the specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleJson.JsonObject.TryGetValue(System.String,System.Object@)">
+            <summary>
+            Tries the get value.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleJson.JsonObject.Add(System.Collections.Generic.KeyValuePair{System.String,System.Object})">
+            <summary>
+            Adds the specified item.
+            </summary>
+            <param name="item">The item.</param>
+        </member>
+        <member name="M:SimpleJson.JsonObject.Clear">
+            <summary>
+            Clears this instance.
+            </summary>
+        </member>
+        <member name="M:SimpleJson.JsonObject.Contains(System.Collections.Generic.KeyValuePair{System.String,System.Object})">
+            <summary>
+            Determines whether [contains] [the specified item].
+            </summary>
+            <param name="item">The item.</param>
+            <returns>
+            	<c>true</c> if [contains] [the specified item]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:SimpleJson.JsonObject.CopyTo(System.Collections.Generic.KeyValuePair{System.String,System.Object}[],System.Int32)">
+            <summary>
+            Copies to.
+            </summary>
+            <param name="array">The array.</param>
+            <param name="arrayIndex">Index of the array.</param>
+        </member>
+        <member name="M:SimpleJson.JsonObject.Remove(System.Collections.Generic.KeyValuePair{System.String,System.Object})">
+            <summary>
+            Removes the specified item.
+            </summary>
+            <param name="item">The item.</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleJson.JsonObject.GetEnumerator">
+            <summary>
+            Gets the enumerator.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleJson.JsonObject.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:SimpleJson.JsonObject.ToString">
+            <summary>
+            Returns a json <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </summary>
+            <returns>
+            A json <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+            </returns>
+        </member>
+        <member name="P:SimpleJson.JsonObject.Item(System.Int32)">
+            <summary>
+            Gets the <see cref="T:System.Object"/> at the specified index.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SimpleJson.JsonObject.Keys">
+            <summary>
+            Gets the keys.
+            </summary>
+            <value>The keys.</value>
+        </member>
+        <member name="P:SimpleJson.JsonObject.Values">
+            <summary>
+            Gets the values.
+            </summary>
+            <value>The values.</value>
+        </member>
+        <member name="P:SimpleJson.JsonObject.Item(System.String)">
+            <summary>
+            Gets or sets the <see cref="T:System.Object"/> with the specified key.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:SimpleJson.JsonObject.Count">
+            <summary>
+            Gets the count.
+            </summary>
+            <value>The count.</value>
+        </member>
+        <member name="P:SimpleJson.JsonObject.IsReadOnly">
+            <summary>
+            Gets a value indicating whether this instance is read only.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is read only; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:SimpleJson.SimpleJson">
+            <summary>
+            This class encodes and decodes JSON strings.
+            Spec. details, see http://www.json.org/
+            
+            JSON uses Arrays and Objects. These correspond here to the datatypes JsonArray(IList&lt;object>) and JsonObject(IDictionary&lt;string,object>).
+            All numbers are parsed to doubles.
+            </summary>
+        </member>
+        <member name="M:SimpleJson.SimpleJson.DeserializeObject(System.String)">
+            <summary>
+            Parses the string json into a value
+            </summary>
+            <param name="json">A JSON string.</param>
+            <returns>An IList&lt;object>, a IDictionary&lt;string,object>, a double, a string, null, true, or false</returns>
+        </member>
+        <member name="M:SimpleJson.SimpleJson.TryDeserializeObject(System.String,System.Object@)">
+            <summary>
+            Try parsing the json string into a value.
+            </summary>
+            <param name="json">
+            A JSON string.
+            </param>
+            <param name="obj">
+            The object.
+            </param>
+            <returns>
+            Returns true if successfull otherwise false.
+            </returns>
+        </member>
+        <member name="M:SimpleJson.SimpleJson.SerializeObject(System.Object,SimpleJson.IJsonSerializerStrategy)">
+            <summary>
+            Converts a IDictionary&lt;string,object> / IList&lt;object> object into a JSON string
+            </summary>
+            <param name="json">A IDictionary&lt;string,object> / IList&lt;object></param>
+            <param name="jsonSerializerStrategy">Serializer strategy to use</param>
+            <returns>A JSON encoded string, or null if object 'json' is not serializable</returns>
+        </member>
+        <member name="M:SimpleJson.SimpleJson.IsNumeric(System.Object)">
+            <summary>
+            Determines if a given object is numeric in any way
+            (can be integer, double, null, etc).
+            </summary>
+        </member>
+        <member name="M:cn.bmob.json.SimpleJsonParser.ToRawString(System.Object)">
+            <summary>
+            使用反射进行序列化
+            </summary>
+        </member>
+        <member name="M:cn.bmob.json.SimpleJsonParser.ToObject``1(System.String)">
+            <summary>
+            使用反射进行反序列化
+            </summary>
+        </member>
+        <member name="P:cn.bmob.response.BmobResponseParser`1.data">
+            <summary>
+            对应返回Json字符串的data节点数据对象
+            </summary>
+        </member>
+        <member name="T:cn.bmob.response.CreateCallbackData">
+            <summary>
+            添加数据的回调类，创建成功，返回objectId和createAt信息
+            </summary>
+        </member>
+        <member name="M:cn.bmob.response.CreateCallbackData.write(cn.bmob.io.BmobOutput,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="output"></param>
+            <param name="all"></param>
+        </member>
+        <member name="P:cn.bmob.response.CreateCallbackData.createdAt">
+            <summary>
+            创建时间
+            </summary>
+        </member>
+        <member name="P:cn.bmob.response.CreateCallbackData.objectId">
+            <summary>
+            objectId
+            </summary>
+        </member>
+        <member name="T:cn.bmob.response.DeleteCallbackData">
+            <summary>
+            删除数据的回调
+            </summary>
+        </member>
+        <member name="P:cn.bmob.response.DeleteCallbackData.msg">
+            <summary>
+            返回信息
+            </summary>
+        </member>
+        <member name="T:cn.bmob.response.EmptyCallbackData">
+            <summary>
+            没有具体内容的返回值
+            </summary>
+        </member>
+        <member name="T:cn.bmob.response.EndPointCallbackData`1">
+            <summary>
+            云端代码的执行回调
+            </summary>
+        </member>
+        <member name="T:cn.bmob.response.EndPointCallbackStat">
+            <summary>
+            云端代码的执行回调
+            </summary>
+        </member>
+        <member name="P:cn.bmob.response.EndPointCallbackStat.sucess">
+            <summary>
+            执行结果
+            </summary>
+        </member>
+        <member name="P:cn.bmob.response.EndPointCallbackStat.message">
+            <summary>
+            返回信息
+            </summary>
+        </member>
+        <member name="T:cn.bmob.response.QueryCallbackData`1">
+            <summary>
+            获取数据列表的回调类
+            </summary>
+            <typeparam name="T">用户模型对象</typeparam>
+        </member>
+        <member name="P:cn.bmob.response.QueryCallbackData`1.results">
+            <summary>
+            返回结果列表
+            </summary>
+        </member>
+        <member name="P:cn.bmob.response.QueryCallbackData`1.count">
+            <summary>
+            请求数据总数，返回查询结果总数
+            </summary>
+        </member>
+        <member name="T:cn.bmob.response.Status">
+            <summary>
+            请求返回值的状态节点
+            </summary>
+        </member>
+        <member name="M:cn.bmob.response.Status.ok">
+            <summary>
+            判断返回状态是否为200
+            </summary>
+            <returns>true为200</returns>
+        </member>
+        <member name="M:cn.bmob.response.Status.ToString">
+            <summary>
+            对象对应的字符串
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:cn.bmob.response.Status.code">
+            <summary>
+            返回值的状态编码
+            </summary>
+        </member>
+        <member name="P:cn.bmob.response.Status.message">
+            <summary>
+            返回值的状态信息
+            </summary>
+        </member>
+        <member name="T:cn.bmob.response.TimeStampCallbackData">
+            <summary>
+            获取服务器时间戳
+            </summary>
+        </member>
+        <member name="P:cn.bmob.response.TimeStampCallbackData.timestamp">
+            <summary>
+            UTC时间秒数,时间戳
+            </summary>
+        </member>
+        <member name="T:cn.bmob.response.RequestSmsCodeCallbackData">
+            <summary>
+            SMS数据的回调类
+            </summary>
+        </member>
+        <member name="T:cn.bmob.response.UpdateCallbackData">
+            <summary>
+            更新数据的回调类
+            </summary>
+        </member>
+        <member name="P:cn.bmob.response.UpdateCallbackData.updatedAt">
+            <summary>
+            数据的更新时间
+            </summary>
+        </member>
+        <member name="T:cn.bmob.response.UploadCallbackData">
+            <summary>
+            上传文件的返回数据回调类
+            </summary>
+        </member>
+        <member name="T:cn.bmob.response.ThumbnailCallbackData">
+            <summary>
+            上传文件的返回数据回调类
+            </summary>
+        </member>
+        <member name="P:cn.bmob.response.ThumbnailCallbackData.file">
+            <summary>
+            内容的base64
+            </summary>
+        </member>
+        <member name="T:cn.bmob.tools.BmobArrays">
+            <summary>
+            Bmob提供的数组处理类
+            ps：之所以提供这个类，是因为反序列化的数组只支持List
+            </summary>
+        </member>
+        <member name="M:cn.bmob.tools.BmobArrays.wrap``1(``0[])">
+            <summary>
+            将数组转成强类型列表
+            </summary>
+            <typeparam name="U">泛型</typeparam>
+            <param name="eles">数组</param>
+            <returns>列表</returns>
+        </member>
+        <member name="M:cn.bmob.tools.BmobArrays.wrap``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            将列表转换为强类型列表
+            </summary>
+            <typeparam name="U">泛型</typeparam>
+            <param name="list">列表</param>
+            <returns>列表</returns>
+        </member>
+        <member name="T:cn.bmob.tools.BmobDebug">
+            <summary>
+            日志公共类
+            </summary>
+        </member>
+        <member name="M:cn.bmob.tools.BmobDebug.Register(System.Action{System.Object},cn.bmob.tools.BmobDebug.Level)">
+            <summary>
+            注册打印日志的实现方法
+            </summary>
+            <param name="l">打印日志的输出方法</param>
+        </member>
+        <member name="M:cn.bmob.tools.Utilities.value``1(``0,``0)">
+            <summary>
+            t为null，则返回mDefault的值。
+            </summary>
+        </member>
+        <member name="M:cn.bmob.tools.Utilities.EndPointHead(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="appkey"></param>
+            <param name="longitude"></param>
+            <param name="latitude"></param>
+            <param name="packageName"></param>
+            <param name="aid">设备唯一id</param>
+            <param name="platform">平台标识[1-ios,0-android]</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

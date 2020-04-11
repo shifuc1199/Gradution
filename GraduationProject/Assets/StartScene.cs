@@ -5,9 +5,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DreamerTool.UI;
- 
+using cn.bmob.api;
+using cn.bmob.tools;
+using cn.bmob.io;
 
 public class StartScene : Scene   
 {
+    
+   
   
+    private void Start()
+    {
+
+        BmobDebug.Register(Debug.Log);
+
+    }
 }
