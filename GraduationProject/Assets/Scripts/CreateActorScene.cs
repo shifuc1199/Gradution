@@ -16,7 +16,7 @@ public class CreateActorScene : Scene
     {
          
         GameStaticMethod.GameInit();
-        Application.targetFrameRate = 60;
+       
     }
     public void LoadSceneJump(string scene_name)
     {

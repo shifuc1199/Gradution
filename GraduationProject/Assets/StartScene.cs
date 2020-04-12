@@ -8,16 +8,15 @@ using DreamerTool.UI;
 using cn.bmob.api;
 using cn.bmob.tools;
 using cn.bmob.io;
-
-public class StartScene : Scene   
+ 
+public class StartScene : Scene
 {
-    
+
    
-  
     private void Start()
     {
-
+        Application.targetFrameRate = 60;
         BmobDebug.Register(Debug.Log);
-
+        
     }
 }

@@ -91,7 +91,7 @@ public class LoginView : View, SMSSDKHandler
                       }
 
                       CurrentScene.CloseView<LoadView>();
-                  });
+                  },()=> { CurrentScene.OpenView<LoadView>().SetText("登录失败，请检查网络设置"); });
                 
                 break;
             default:

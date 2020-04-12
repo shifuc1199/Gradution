@@ -21,13 +21,14 @@ public class UserBmobDao : BmobTable
 
     }
     public UserBmobDao() { }
-    public void Insert(Action insert_call_back)
+    public void Insert(Action insert_call_back,Action fail_call_back=null)
     {
  
         BmobManager.Instance.Bmob.Create(GameConstData.USER_TABLE_NAME, this, (resp, exce) =>
         {
             if (exce != null)
             {
+                fail_call_back();
                 Debug.LogError("Exists Error: " + exce.Message);
                 return;
             }
@@ -36,7 +37,7 @@ public class UserBmobDao : BmobTable
         });
         
     }
-    public void Update(Action update_call_back)
+    public void Update(Action update_call_back, Action fail_call_back = null)
     {
         FindByID((dao)=> {
 
@@ -59,10 +60,10 @@ public class UserBmobDao : BmobTable
             });
 
 
-        });
+        }, fail_call_back);
        
     }
-    public void FindByID(Action<UserBmobDao> call_back)
+    public void FindByID(Action<UserBmobDao> call_back, Action fail_call_back = null)
     {
  
         BmobQuery query = new BmobQuery();
@@ -71,6 +72,7 @@ public class UserBmobDao : BmobTable
             UserBmobDao result = null;
             if (exce != null)
             {
+                fail_call_back();
                 Debug.LogError(exce.Message);
                 return;
             }
