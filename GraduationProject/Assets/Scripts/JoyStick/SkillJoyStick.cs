@@ -18,10 +18,12 @@ public class SkillJoyStick : JoyStick
     private void Awake()
     {
         EventManager.OnChangeEnergy += UpdateJoyStick;
-         
+        
+        
     }
     private void Start()
     {
+        splat_manager = FindObjectOfType<SplatManager>();
         UpdateModel();
     }
     private void OnDestroy()
@@ -82,7 +84,7 @@ public class SkillJoyStick : JoyStick
         {
             case SkillType.点:
                 splat_manager.SelectSpellIndicator("skill" + model._config.ID + "_indicator");
-                splat_manager.CurrentSpellIndicator.transform.position = (Vector3)V * R + ActorController._controller.transform.position;
+                splat_manager.CurrentSpellIndicator.transform.position = (Vector3)V * R + ActorController.Controller.transform.position;
                 break;
             case SkillType.线:
                 splat_manager.SelectSpellIndicator("skill" + model._config.ID + "_indicator");
@@ -104,7 +106,7 @@ public class SkillJoyStick : JoyStick
         }
         isCoolDown = true;
       
-        ActorController._controller.skill_controller.ExecuteSkill(model._config.ID,V, (Vector3)V * R + ActorController._controller.transform.position);
+        ActorController.Controller.skill_controller.ExecuteSkill(model._config.ID,V, (Vector3)V * R + ActorController.Controller.transform.position);
     }
     public override void onJoystickMove(Vector2 V, float R)
     {
@@ -112,7 +114,7 @@ public class SkillJoyStick : JoyStick
         switch (model._config.skill_type)
         {
             case SkillType.点:
-                splat_manager.CurrentSpellIndicator.transform.position =  (Vector3)V*R+ActorController._controller.transform.position;
+                splat_manager.CurrentSpellIndicator.transform.position =  (Vector3)V*R+ActorController.Controller.transform.position;
                 break;
             case SkillType.线:
                 splat_manager.CurrentSpellIndicator.transform.rotation = Quaternion.FromToRotation(Vector2.up, V);

@@ -54,8 +54,9 @@ public class SkillView : View
     }
     public void SelecetCell(int index)
     {
-        config.SetModel(root.GetComponent<ButtonGroup>().Toggles[index].GetComponent<SkillCell>().model);
-        introduce.SetModel( root.GetComponent<ButtonGroup>().Toggles[index].GetComponent<SkillCell>().model);
+        Debug.Log(index);
+        config.SetModel(skill_cell_list[index].model);
+        introduce.SetModel(skill_cell_list[index].model);
     }
   
     public override void OnHide()

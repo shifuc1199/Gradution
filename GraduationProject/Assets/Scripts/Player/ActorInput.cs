@@ -23,9 +23,9 @@ public class ActorInput : MonoBehaviour
     void Update()
     {
 #if UNITY_EDITOR
-        ActorController._controller.actor_state.isAttackUp = Input.GetKey(KeyCode.W);
-        ActorController._controller.actor_state.isJump = Input.GetKeyDown(KeyCode.Space);
-        ActorController._controller.actor_state.isAttackDown = Input.GetKey(KeyCode.S);
+        ActorController.Controller.actor_state.isAttackUp = Input.GetKey(KeyCode.W);
+        ActorController.Controller.actor_state.isJump = Input.GetKeyDown(KeyCode.Space);
+        ActorController.Controller.actor_state.isAttackDown = Input.GetKey(KeyCode.S);
 #endif
     }
 }

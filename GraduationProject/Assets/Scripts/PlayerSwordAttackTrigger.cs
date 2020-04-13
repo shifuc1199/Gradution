@@ -27,7 +27,7 @@ public class PlayerSwordAttackTrigger : BaseAttackTrigger
                 hurt_value = ActorModel.Model.GetPlayerAttribute(PlayerAttribute.暴击伤害);
             }
              collision.gameObject.GetComponent<IHurt>().GetHurt(
-                  new AttackData(hurt_value, isCrit, ActorController._controller.transform.position, attack_type)
+                  new AttackData(hurt_value, isCrit, ActorController.Controller.transform.position, attack_type)
               );
            
         }

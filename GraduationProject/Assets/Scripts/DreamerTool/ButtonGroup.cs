@@ -13,9 +13,9 @@ public class ButtonGroup : ToggleGroup
     [System.NonSerialized]
     public List<Toggle> Toggles = new List<Toggle>();
 
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
+        base.Start();
         var tbs = GetComponentsInChildren<ToggleButton>();
         foreach (var tb in tbs)
         {

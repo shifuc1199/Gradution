@@ -14,7 +14,6 @@ public   class ActorModel
         {
             return _model;
         }
- 
     }
     public static void CreateModel()
     {

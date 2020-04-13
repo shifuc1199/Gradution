@@ -54,12 +54,28 @@ public class InactiveButtons : SerializedMonoBehaviour
                 break;
         }
     }
+    public void DashOnClick()
+    {
+        ActorController.Controller.actor_state.isDash = true;
+    }
+    public void JumpOnClick()
+    {
+        ActorController.Controller.actor_state.isJump = true;
+    }
+    public void ShieldOnRelease()
+    {
+        ActorController.Controller.actor_state.isShield = false;
+    }
+    public void ShieldOnClick()
+    {
+        ActorController.Controller.actor_state.isShield = true;
+    }
     public void Inactive_Click()
     {
         switch (inactive_type)
         {
             case InactiveType.攻击:
-                ActorController._controller.actor_state.isAttack = true;
+                ActorController.Controller.actor_state.isAttack = true;
                 break;
             case InactiveType.拾取:
                 if(current_stay_item!=null)

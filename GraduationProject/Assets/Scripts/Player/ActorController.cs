@@ -10,7 +10,9 @@ using DG.Tweening;
 [RequireComponent(typeof(ActorSkillController),typeof(ActorState))]
 public class ActorController : MonoBehaviour,IHurt
 {
-    public static ActorController _controller;
+     
+    public static ActorController Controller;
+
     [System.NonSerialized] public ActorSkillController skill_controller;
     [System.NonSerialized] public ActorState actor_state;
     [System.NonSerialized] public Rigidbody2D _rigi;
@@ -23,17 +25,19 @@ public class ActorController : MonoBehaviour,IHurt
     public float super_armor_time;
     public int max_jump_count;
     int jump_count = 0;
-     
-    private void Awake()
+
+    public void Start()
     {
-        _controller = this;
+        Controller = this;
+    }
+    public void Awake()
+    {
+        
         _rigi = GetComponent<Rigidbody2D>();
         start_grivaty = _rigi.gravityScale;
         _anim = GetComponentInChildren<Animator>();
         skill_controller = GetComponent<ActorSkillController>();
         actor_state = GetComponent<ActorState>();
-
-
         EventManager.OnChangeLevel += LevelUp;
     }
     public void LevelUp()
@@ -131,6 +135,7 @@ public class ActorController : MonoBehaviour,IHurt
     }
     public void FixedUpdate()
     {
+        
         StateCheck();
         if (!actor_state.isInputable)
             return;

@@ -13,10 +13,10 @@ public class MoveJoyStick : JoyStick
     public override void onJoystickUp(Vector2 V, float R)
     {
         base.onJoystickUp(V,R);
-        ActorController._controller.actor_state.isAttackDown = false;
-        ActorController._controller.actor_state.isAttackUp = false;
-        ActorController._controller.actor_state.isMoveRight = false;
-        ActorController._controller.actor_state.isMoveLeft = false;
+        ActorController.Controller.actor_state.isAttackDown = false;
+        ActorController.Controller.actor_state.isAttackUp = false;
+        ActorController.Controller.actor_state.isMoveRight = false;
+        ActorController.Controller.actor_state.isMoveLeft = false;
     }
     public override void onJoystickMove(Vector2 V, float R)
     {
@@ -28,33 +28,33 @@ public class MoveJoyStick : JoyStick
     {
         if (V.y >= 0.9f && Mathf.Abs(V.x) <= 0.8f)
         {
-            ActorController._controller.actor_state.isAttackUp = true;
-            ActorController._controller.actor_state.isMoveRight = false;
-            ActorController._controller.actor_state.isMoveLeft = false;
-            ActorController._controller.actor_state.isAttackDown = false;
+            ActorController.Controller.actor_state.isAttackUp = true;
+            ActorController.Controller.actor_state.isMoveRight = false;
+            ActorController.Controller.actor_state.isMoveLeft = false;
+            ActorController.Controller.actor_state.isAttackDown = false;
 
         }
         else if (V.y <= -0.9f && Mathf.Abs(V.x) <= 0.8f)
         {
-            ActorController._controller.actor_state.isAttackDown = true;
-            ActorController._controller.actor_state.isAttackUp = false;
-            ActorController._controller.actor_state.isMoveRight = false;
-            ActorController._controller.actor_state.isMoveLeft = false;
+            ActorController.Controller.actor_state.isAttackDown = true;
+            ActorController.Controller.actor_state.isAttackUp = false;
+            ActorController.Controller.actor_state.isMoveRight = false;
+            ActorController.Controller.actor_state.isMoveLeft = false;
         }
         else if  (V.x > 0.8f && V.y< 0.8f)
         {
-            ActorController._controller.actor_state.isAttackUp = false;
-            ActorController._controller.actor_state.isMoveRight = true;
-            ActorController._controller.actor_state.isMoveLeft = false;
-            ActorController._controller.actor_state.isAttackDown = false;
+            ActorController.Controller.actor_state.isAttackUp = false;
+            ActorController.Controller.actor_state.isMoveRight = true;
+            ActorController.Controller.actor_state.isMoveLeft = false;
+            ActorController.Controller.actor_state.isAttackDown = false;
 
         }
         else if (V.x < -0.8f && V.y < 0.8f)
         {
-            ActorController._controller.actor_state.isAttackUp = false;
-            ActorController._controller.actor_state.isMoveRight = false;
-            ActorController._controller.actor_state.isMoveLeft = true;
-            ActorController._controller.actor_state.isAttackDown = false;
+            ActorController.Controller.actor_state.isAttackUp = false;
+            ActorController.Controller.actor_state.isMoveRight = false;
+            ActorController.Controller.actor_state.isMoveLeft = true;
+            ActorController.Controller.actor_state.isAttackDown = false;
 
         }
 

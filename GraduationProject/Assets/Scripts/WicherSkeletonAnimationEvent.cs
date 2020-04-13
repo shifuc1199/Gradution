@@ -22,7 +22,7 @@ public class WicherSkeletonAnimationEvent : BaseEnemyAnimationEvent
     public void FireAttackOnce() // 发射出一个火球 追踪玩家
     {
        var fireball =  GameObjectPoolManager.GetPool("enemy_fire_ball").Get(transform.position + new Vector3(0, 11, 0), Quaternion.identity, 3);
-        fireball.GetComponent<AutoMoveObjectByDirection>().Direction = ActorController._controller.transform.position-fireball.transform.position;
+        fireball.GetComponent<AutoMoveObjectByDirection>().Direction = ActorController.Controller.transform.position-fireball.transform.position;
         fireball.GetComponent<AutoMoveObjectByDirection>().space_type = Space.World;
         fireball.GetComponent<EnemyAttackTrigger>().owner = GetComponentInParent<BaseEnemyController>();
     }

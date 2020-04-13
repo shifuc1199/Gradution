@@ -68,7 +68,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     }
     public void SetBlackHole()
     {
-        GameObjectPoolManager.GetPool("blackhole").Get(ActorController._controller.skill_controller.SkillPos, Quaternion.identity, 3);
+        GameObjectPoolManager.GetPool("blackhole").Get(ActorController.Controller.skill_controller.SkillPos, Quaternion.identity, 3);
     }
     public void OnHeavyAttackEnter()
     {
@@ -95,7 +95,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
           
             if (enemy || enemy1 || enemy2)
             {
-                ActorController._controller.transform.SetPositionY((enemy ? enemy : (enemy1 ? enemy1 : enemy2)).transform.position.y);
+                ActorController.Controller.transform.SetPositionY((enemy ? enemy : (enemy1 ? enemy1 : enemy2)).transform.position.y);
 
                 _rigi.velocity = Vector2.zero;
                 _anim.SetTrigger("skill2_dash");
@@ -136,11 +136,11 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
         if (isMove)
         {
              
-            ActorController._controller.transform.position  = Vector3.MoveTowards(ActorController._controller.transform.position , Skill4_Pos, 2.5f);
-            if(ActorController._controller.actor_state.isGround)
+            ActorController.Controller.transform.position  = Vector3.MoveTowards(ActorController.Controller.transform.position , Skill4_Pos, 2.5f);
+            if(ActorController.Controller.actor_state.isGround)
             {
                 isMove = false;
-                GameObjectPoolManager.GetPool("skill4_effect").Get(ActorController._controller.transform.position+new Vector3(0,-4,0), Quaternion.identity, 0.75f);
+                GameObjectPoolManager.GetPool("skill4_effect").Get(ActorController.Controller.transform.position+new Vector3(0,-4,0), Quaternion.identity, 0.75f);
             }
         }
     }
@@ -157,7 +157,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     }
     public void OnSkill4Enter()
     {
-        Skill4_Pos = ActorController._controller.transform.position + transform.right *40;
+        Skill4_Pos = ActorController.Controller.transform.position + transform.right *40;
         _rigi.ResetVelocity();
         _rigi.ClearGravity();
         _rigi.velocity = Vector2.up * 100;
@@ -180,7 +180,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
         View.CurrentScene.GetView<GameInfoView>().SetScreenEffect(Color.black, 0);
         Camera.main.GetComponent<CameraController>().UnLockEnemy();
         View.CurrentScene.GetView<GameInfoView>().ShowAnim();
-        ActorController._controller.gameObject.SetActive(true);
+        ActorController.Controller.gameObject.SetActive(true);
         isSkill5 = false;
         separated_body.SetActive(false);
     }
@@ -228,7 +228,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     public void OnDownAttackExit()
     {
         _rigi.ResetVelocity();
-        _rigi.SetGravity(ActorController._controller.start_grivaty);
+        _rigi.SetGravity(ActorController.Controller.start_grivaty);
         GameObjectPoolManager.GetPool("skill4_effect").Get(transform.position, Quaternion.identity,0.5f);
     }
     public void OnSkill4Exit()

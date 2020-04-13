@@ -69,6 +69,7 @@ public static class GameStaticData
 }
 public class GameConstData
 {
+    public const string FIGHT_SCENE_NAME = "FightScene";
     public const string LOGINING_PHONE_NUMBER = "logining_phone_number";
     public const string BMOB_APP_ID = "15fe84103d433cfdbbafb8754c88b5ef";
     public const string BMOB_REST_KEY = "ec2cf19d1d8bbecbf48c8427655284f6";
@@ -81,7 +82,7 @@ public class GameConstData
     public const string DATA_BASE_IP = "127.0.0.1";
     public const string SAVE_DATA_KEY = "game_data_";
     public const string USER_DATABASE_NAME = "user";
-  
+    public const byte NETWORK_READY_STATE_CHANGE_EVENT = 0;
 }
 
 public  class GameStaticMethod
