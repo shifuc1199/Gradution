@@ -72,6 +72,7 @@ public class BagView : MonoBehaviour
     {
         foreach (var item in ActorModel.Model.bag_items)
         {
+            
             ShowItem(item);
         }
         ChooseGrid();
@@ -89,6 +90,7 @@ public class BagView : MonoBehaviour
             {
                 ItemUITip.gameObject.SetActive(false);
                 ActorModel.Model.bag_items.Remove(CurretnSelect.data);
+                CurretnSelect.data = null;
                 CurretnSelect.icon.gameObject.SetActive(false);
             }
 
@@ -211,7 +213,7 @@ public class BagView : MonoBehaviour
     {
         for(int i =0;i<grid_root.childCount;i++)
         {
-            if(!grid_root.GetChild(i).GetChild(0).gameObject.activeSelf)
+            if(grid_root.GetChild(i).GetComponent<ItemUI>().data==null)
             {
                 return grid_root.GetChild(i);
             }
@@ -317,9 +319,11 @@ public class BagView : MonoBehaviour
                 GameStaticData.WeaponUI.Copy(grid.GetChild(0).GetComponent<RectTransform>());
             else
                 GameStaticData.EquipmentUI.Copy(grid.GetChild(0).GetComponent<RectTransform>());
+            
             grid.GetComponent<ItemUI>().SetConfig(new BagItemData(type, id, grid.GetSiblingIndex()),true);
-
+             
             ActorModel.Model.bag_items.Add(grid.GetComponent<ItemUI>().data);
+            
         }
         
     }

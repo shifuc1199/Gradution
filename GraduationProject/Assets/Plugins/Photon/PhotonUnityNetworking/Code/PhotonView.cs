@@ -239,6 +239,7 @@ namespace Photon.Pun
         {
             get
             {
+ 
                 // using this.OwnerActorNr instead of this.ownerId so that it's the right value during awake.
                 return (this.OwnerActorNr == PhotonNetwork.LocalPlayer.ActorNumber) || (PhotonNetwork.IsMasterClient && !this.IsOwnerActive);
              }

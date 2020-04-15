@@ -153,7 +153,7 @@ public  class GameStaticMethod
        
         foreach (var item in gameObject.GetComponentsInChildren<SpriteRenderer>())
         {
-
+             
             if (item.sprite != null)
             {
                 item.DOKill(true);

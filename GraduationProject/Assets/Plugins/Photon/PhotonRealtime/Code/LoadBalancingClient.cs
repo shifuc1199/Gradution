@@ -2158,6 +2158,8 @@ namespace Photon.Realtime
 
         private bool CheckIfOpAllowedOnServer(byte opCode, ServerConnection serverConnection)
         {
+           
+
             switch (serverConnection)
             {
                 case ServerConnection.MasterServer:

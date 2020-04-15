@@ -2166,75 +2166,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1864191664}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &513693060
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2328508583512032053, guid: 0e2663d2416d11f40b58be7b18a4d5cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DebugTool
-      objectReference: {fileID: 0}
-    - target: {fileID: 2328508583512032043, guid: 0e2663d2416d11f40b58be7b18a4d5cf,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2328508583512032043, guid: 0e2663d2416d11f40b58be7b18a4d5cf,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2328508583512032043, guid: 0e2663d2416d11f40b58be7b18a4d5cf,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2328508583512032043, guid: 0e2663d2416d11f40b58be7b18a4d5cf,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2328508583512032043, guid: 0e2663d2416d11f40b58be7b18a4d5cf,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2328508583512032043, guid: 0e2663d2416d11f40b58be7b18a4d5cf,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2328508583512032043, guid: 0e2663d2416d11f40b58be7b18a4d5cf,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2328508583512032043, guid: 0e2663d2416d11f40b58be7b18a4d5cf,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 2328508583512032043, guid: 0e2663d2416d11f40b58be7b18a4d5cf,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2328508583512032043, guid: 0e2663d2416d11f40b58be7b18a4d5cf,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2328508583512032043, guid: 0e2663d2416d11f40b58be7b18a4d5cf,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0e2663d2416d11f40b58be7b18a4d5cf, type: 3}
 --- !u!1001 &520637952
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17416,7 +17347,7 @@ PrefabInstance:
     - target: {fileID: 5957137560911229984, guid: 427471401cd9a024d8712736854a618b,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -134.99998
+      value: -135
       objectReference: {fileID: 0}
     - target: {fileID: 5957137561617820554, guid: 427471401cd9a024d8712736854a618b,
         type: 3}
@@ -17446,6 +17377,46 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 24be54f9a7d08f34bb46358cb98aa32f,
         type: 3}
+    - target: {fileID: 726324534155033612, guid: 427471401cd9a024d8712736854a618b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 726324534155033612, guid: 427471401cd9a024d8712736854a618b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 726324534155033612, guid: 427471401cd9a024d8712736854a618b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 726324534155033612, guid: 427471401cd9a024d8712736854a618b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4995403145981979463}
+    - target: {fileID: 726324534155033612, guid: 427471401cd9a024d8712736854a618b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LeaveRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 726324534155033612, guid: 427471401cd9a024d8712736854a618b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5957137561898596066, guid: 427471401cd9a024d8712736854a618b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 4995403145981979462}
+    - target: {fileID: 5957137561898596066, guid: 427471401cd9a024d8712736854a618b,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnCloseClick
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 427471401cd9a024d8712736854a618b, type: 3}
 --- !u!114 &4995403145981979462 stripped
@@ -17458,6 +17429,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b47b91744335c846ada0b33d74662e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4995403145981979463 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 726324533764973679, guid: 427471401cd9a024d8712736854a618b,
+    type: 3}
+  m_PrefabInstance: {fileID: 4995403145981979461}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a9c6de8a797a841a938b95b45ada17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7363260433253444609

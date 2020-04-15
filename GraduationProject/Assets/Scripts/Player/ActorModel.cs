@@ -95,13 +95,13 @@ public   class ActorModel
     {
         health = PlayerAttributes[PlayerAttribute.生命值];
         energy = PlayerAttributes[PlayerAttribute.能量值];
-        EventManager.OnChangeHealth();
-        EventManager.OnChangeEnergy();
+        EventManager.OnChangeHealth?.Invoke();
+        EventManager.OnChangeEnergy?.Invoke();
     }
     public void SetHealth(double v)
     {
         health += v;
-        EventManager.OnChangeHealth();
+        EventManager.OnChangeHealth?.Invoke();
     }
     public WeaponConfig GetCurrentWeapon()
     {
@@ -136,7 +136,7 @@ public   class ActorModel
 
             energy += e;
         }
-        EventManager.OnChangeEnergy();
+        EventManager.OnChangeEnergy?.Invoke();
     }
     public double GetEngery()
     {
@@ -155,7 +155,7 @@ public   class ActorModel
     public void SetPlayerEquipment(EquipmentType equip, int id)
     {
         Equipment[equip] = id;
-        EventManager.OnChangeEquipment();
+        EventManager.OnChangeEquipment?.Invoke();
 
         if (GetSuitAmount(id) == 5)
         {
@@ -203,7 +203,7 @@ public   class ActorModel
     public void SetMoney(double m)
     {
         money += m;
-        EventManager.OnChangeMoney();
+        EventManager.OnChangeMoney?.Invoke();
     }
     public double GetMoney()
     {
@@ -212,7 +212,7 @@ public   class ActorModel
     public void SetLevel(int l)
     {
         level += l;
-        EventManager.OnChangeLevel();
+        EventManager.OnChangeLevel?.Invoke();
     }
     public int GetLevel()
     {
@@ -227,7 +227,7 @@ public   class ActorModel
             this.exp = this.exp % GetMaxExp();
              
         }
-        EventManager.OnChangeExp();
+        EventManager.OnChangeExp?.Invoke();
     }
     public int GetMaxExp()
     {

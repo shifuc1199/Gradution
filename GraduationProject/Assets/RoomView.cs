@@ -8,7 +8,8 @@ using DreamerTool.UI;
 using Photon.Pun;
 using LitJson;
 using ExitGames.Client.Photon;
-
+using DreamerTool.Extra;
+using System.Linq;
 public class RoomView : View
 {
     public RoomActor[] actors;
@@ -16,12 +17,14 @@ public class RoomView : View
     private void Start()
     {
          
-        UpdatePlayer();
+      
       
     }
     public override void OnShow()
     {
         base.OnShow();
+        UpdatePlayer();
+        
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.NetworkingClient.EventReceived += NetworkingClient_RoomEventHandler;
     }
@@ -37,7 +40,7 @@ public class RoomView : View
             object[] datas = (object[])obj.CustomData;
             var number = (int)datas[0];
             var ready_state = (bool)datas[1];
-            actors[number - 1].UpdateReadyState(ready_state);
+            actors[number].UpdateReadyState(ready_state);
             
 
 
@@ -61,12 +64,31 @@ public class RoomView : View
             PhotonNetwork.LoadLevel(GameConstData.FIGHT_SCENE_NAME);
         }
     }
+    public void LeaveRoom()
+    {
+
+        actors[(int)PhotonNetwork.LocalPlayer.CustomProperties["number"]].gameObject.SetActive(false);
+        PhotonNetwork.LeaveRoom();
+       
+        OnCloseClick();
+    }
     public void UpdatePlayer()
     {
-        foreach (var player in PhotonNetwork.PlayerList)
+        var dict = (from entry in PhotonNetwork.CurrentRoom.Players
+                    orderby entry.Key ascending
+                    select entry).ToDictionary(pair => pair.Key, pair => pair.Value);
+        foreach (var item in actors)
         {
-             
-            actors[player.ActorNumber - 1].SetModel(player.IsLocal,(JsonMapper.ToObject<ActorModel>(player.CustomProperties["model"].ToString())));
+            item.gameObject.SetActive(false);
+        }
+        for (int i = 0; i < PhotonNetwork.CurrentRoom.Players.Count; i++)
+        {
+            var player = dict.Get(i).Value;
+            Debug.Log(PhotonNetwork.CurrentRoom.Players.Get(i).Key);
+            var table = new ExitGames.Client.Photon.Hashtable();
+            table.Add("number" , i);
+            player.SetCustomProperties(table);
+            actors[i].SetModel(player.IsLocal,(JsonMapper.ToObject<ActorModel>(player.CustomProperties["model"].ToString())));
         }
     }
    

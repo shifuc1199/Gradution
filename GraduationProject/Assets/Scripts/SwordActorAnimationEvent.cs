@@ -36,7 +36,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
         }
         
         GameObject temp = GameObjectPoolManager.GetPool("sword_slash").Get(transform.position + new Vector3(0, 2, 0), Quaternion.Euler(transform.eulerAngles.y, 90, transform.eulerAngles.y + effect_rotation[index]),0.2f);
-
+        temp.GetComponentInChildren<NetPlayerSwordAttackTrigger>().owner = _controller as NetWorkActorController;
         if (index == 3)
         {
             temp.GetComponentInChildren<PlayerSwordAttackTrigger>().attack_type = HitType.击飞;

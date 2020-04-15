@@ -15,18 +15,52 @@ public class HobbyView : View
 
     public Transform room_root;
     public GameObject room_cell_refab;
+
+    Dictionary<string, RoomInfoCell> room_cells = new Dictionary<string, RoomInfoCell>();
     private void Start()
     {
-        PhotonNetwork.ConnectUsingSettings();
+       
+         
+    }
+    public void OnDisable()
+    {
+       
+        foreach (var item in room_cells)
+        {
+            Destroy(item.Value.gameObject);
+        }
+        room_cells.Clear();
     }
     private void OnEnable()
     {
+         PhotonNetwork.ConnectUsingSettings();
+        HobbyManager.isConnected = true;
         name_text.text = ActorModel.Model.actor_name;
         lv_text.text = "LV " + ActorModel.Model.level;
     }
     public void CreateRoomCell(RoomInfo info)
     {
+        if (room_cells.ContainsKey(info.Name))
+            return;
       var cell =  Instantiate(room_cell_refab, room_root).GetComponent<RoomInfoCell>();
         cell.SetModel(info.Name);
+        room_cells.Add(info.Name,cell);
+    }
+    public void DeleteAllRoomCell()
+    {
+        foreach (var cell in room_cells)
+        {
+            Destroy(cell.Value.gameObject);
+        }
+        room_cells.Clear();
+    }
+    public void DeleteRoomCell(RoomInfo info)
+    {
+        if(!room_cells.ContainsKey(info.Name))
+        {
+            return;
+        }
+        Destroy(room_cells[info.Name].gameObject);
+        room_cells.Remove(info.Name);
     }
 }

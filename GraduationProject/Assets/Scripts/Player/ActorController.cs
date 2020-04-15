@@ -145,7 +145,7 @@ public class ActorController : MonoBehaviour,IHurt
         Dash();
     }
 
-    public void GetHurt(AttackData attackData, UnityAction hurt_call_back = null)
+    public   void GetHurt(AttackData attackData, UnityAction hurt_call_back = null)
     {
         if (actor_state.isSuperArmor)
             return;
