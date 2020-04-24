@@ -53,12 +53,13 @@ public class SkillModel
     {
         return _config.basic_hurt + skill_level * _config.skill_level_ratio + _config.actor_attack_ratio * ActorModel.Model.GetPlayerAttribute(PlayerAttribute.攻击力);
     }
+ 
     public static SkillModel Get(int id)
     {
-        if(ActorModel.Model.skillmodels.ContainsKey(id))
-        return ActorModel.Model.skillmodels[id];
+       
+        return ActorModel.Model.GetSkillModel(id);
 
-        return null;
+     
         
     }
     public static void Init()

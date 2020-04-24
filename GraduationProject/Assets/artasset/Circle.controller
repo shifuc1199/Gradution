@@ -1143,12 +1143,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: attack
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: skill2_dash
     m_Type: 9
     m_DefaultFloat: 0
@@ -1204,6 +1198,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: downattack
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -2233,7 +2233,7 @@ AnimatorStateMachine:
     m_Position: {x: 430, y: -120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6474664588253959076}
-    m_Position: {x: 420, y: 30, z: 0}
+    m_Position: {x: 370, y: 40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2520359598178107974}
     m_Position: {x: 370, y: 100, z: 0}

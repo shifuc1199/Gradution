@@ -9,6 +9,11 @@
     荣誉,
     灵魂
 }
+public enum BackScene
+{
+    None,
+    FightScene,
+}
 public enum EquipmentType
 {
     鞋子,

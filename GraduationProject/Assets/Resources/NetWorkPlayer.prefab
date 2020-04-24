@@ -18460,7 +18460,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2188222560628582886}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.600006, y: 8.199999, z: -50}
+  m_LocalPosition: {x: 42.379997, y: -0.55000067, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6867888689805849558}
@@ -18493,7 +18493,7 @@ Camera:
   far clip plane: 5000
   field of view: 55
   orthographic: 1
-  orthographic size: 30
+  orthographic size: 25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -18707,6 +18707,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3978783268620662201}
   - component: {fileID: 8353257520164308905}
+  - component: {fileID: 1918343725897216960}
   m_Layer: 0
   m_Name: NetWorkPlayer
   m_TagString: Untagged
@@ -18755,6 +18756,18 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1918343725897216960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3978783268620662207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9333dede203c8c04badb63edaa5345e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4227726605366507365
 GameObject:
   m_ObjectHideFlags: 0
@@ -22338,10 +22351,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5062157251481085697}
   - component: {fileID: 3978783268900756065}
-  - component: {fileID: 4227726604701811131}
   - component: {fileID: 5464121072825879439}
   - component: {fileID: 5064554609388015701}
   - component: {fileID: 5064554609388015698}
+  - component: {fileID: 1650493887146154062}
   m_Layer: 0
   m_Name: Animation
   m_TagString: Untagged
@@ -22388,20 +22401,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4227726604701811131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5064554609388015699}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2b2f6be71b3cb64698ae2f8caf162ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attack_forward_distance: 20
-  separated_body: {fileID: 4239508748960386770}
 --- !u!114 &5464121072825879439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22456,7 +22455,7 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: attack
   - Type: 4
     SynchronizeType: 1
@@ -22495,7 +22494,7 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: shield
   - Type: 9
-    SynchronizeType: 1
+    SynchronizeType: 0
     Name: hit
   - Type: 9
     SynchronizeType: 1
@@ -22506,6 +22505,20 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
+--- !u!114 &1650493887146154062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5064554609388015699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3306b8aef29d4b94b92e5b5483236dc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack_forward_distance: 20
+  separated_body: {fileID: 4239508748960386770}
 --- !u!1 &5065746970051086917
 GameObject:
   m_ObjectHideFlags: 0
@@ -22856,7 +22869,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6658486376844809910}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -22981,8 +22994,10 @@ MonoBehaviour:
   hide_gameObject:
   - {fileID: 6867888689805849559}
   - {fileID: 2188222560652759204}
+  photonView: {fileID: 0}
   nameText: {fileID: 8267686132947828686}
   circle: {fileID: 6974054852981752684}
+  shieldEffect: {fileID: 2015146713296328214}
 --- !u!114 &3944658980277153577
 MonoBehaviour:
   m_ObjectHideFlags: 0

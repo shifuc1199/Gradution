@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DreamerTool.UI;
 public class NetWorkActorHUD : MonoBehaviour
 {
 
@@ -34,13 +35,18 @@ public class NetWorkActorHUD : MonoBehaviour
     }
     public void UpdateHealth()
     {
-
+        if(model.GetHealth()<=0)
+        {
+            (View.CurrentScene as FightScene).GameOver(transform.GetSiblingIndex());
+        }
         health_text.text = (int)model.GetHealth() + "/" + model.GetPlayerAttribute(PlayerAttribute.生命值);
         health_bar.fillAmount = (float)(model.GetHealth() / model.GetPlayerAttribute(PlayerAttribute.生命值));
     }
  
     private void Update()
     {
+        if (model == null)
+            return;
         UpdateHealth();
         UpdateEnergy();
     }

@@ -30,7 +30,7 @@ public   class ActorModel
 
     public int SaveDataID ;
 
-    public string actor_name;
+    public string actor_name="无名氏";
 
     public double money=10000;
 
@@ -97,6 +97,14 @@ public   class ActorModel
         energy = PlayerAttributes[PlayerAttribute.能量值];
         EventManager.OnChangeHealth?.Invoke();
         EventManager.OnChangeEnergy?.Invoke();
+    }
+    public  SkillModel GetSkillModel(int id)
+    {
+        if (skillmodels.ContainsKey(id))
+            return skillmodels[id];
+
+        return null;
+
     }
     public void SetHealth(double v)
     {

@@ -26,11 +26,12 @@ public class GameInfoView : View
         fade_image.DOFade(1, 0.5f).SetEase(Ease.Linear).onComplete = () => { action?.Invoke(); Timer.Register(t, () => { fade_image.DOFade(0, 0.5f).SetEase(Ease.Linear); }); };
         
     }
-    public void SetScreenEffect(Color c,float fade_value)
+    public void SetScreenEffect(Color c,float fade_value, float fade_time = 0.5f,float fill=0.1f)
     {
         c.a = 1-fade_value;
+        m_screen_effect.pixelsPerUnitMultiplier = fill;
         m_screen_effect.color = c;
-        m_screen_effect.DOFade(fade_value, 0.5f).SetEase(Ease.Linear);
+        m_screen_effect.DOFade(fade_value, fade_time).SetEase(Ease.Linear);
     }
     public void SetPopText(string v,Color c,float t=0.5f)
     {

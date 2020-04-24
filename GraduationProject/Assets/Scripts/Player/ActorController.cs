@@ -26,11 +26,11 @@ public class ActorController : MonoBehaviour,IHurt
     public int max_jump_count;
     int jump_count = 0;
 
-    public void Start()
+    public virtual  void Start()
     {
         Controller = this;
     }
-    public void Awake()
+    public virtual void Awake()
     {
         
         _rigi = GetComponent<Rigidbody2D>();
@@ -127,25 +127,35 @@ public class ActorController : MonoBehaviour,IHurt
     }
     public void StateCheck()
     {
+        actor_state.isGround = Physics2D.OverlapCircle(ground_check_pos.position, 1, LayerMask.GetMask("Ground"));
+    }
+    public void AnimCheck()
+    {
         _anim.SetBool("shield", actor_state.isShield);
         _anim.SetFloat("speedy", _rigi.velocity.y);
         _anim.SetBool("isground", actor_state.isGround);
         _anim.SetFloat("gravity", _rigi.gravityScale);
-        actor_state.isGround = Physics2D.OverlapCircle(ground_check_pos.position, 1,LayerMask.GetMask("Ground"));
     }
     public void FixedUpdate()
     {
+        if (!actor_state.isInputable)
+            return;
+         
+        Move();
+        Jump();
         
+    }
+    public void Update()
+    {
+        AnimCheck();
         StateCheck();
         if (!actor_state.isInputable)
             return;
         Attack();
-        Move();
-        Jump();
         Dash();
     }
 
-    public   void GetHurt(AttackData attackData, UnityAction hurt_call_back = null)
+    public virtual  void GetHurt(AttackData attackData, UnityAction hurt_call_back = null)
     {
         if (actor_state.isSuperArmor)
             return;
@@ -158,13 +168,13 @@ public class ActorController : MonoBehaviour,IHurt
             return;
         }
 
- 
+        View.CurrentScene.GetView<GameInfoView>().SetScreenEffect(Color.red,1, 0.1f,0.5f);
         _anim.SetTrigger("hit");
         transform.rotation = attackData.attack_pos.x > transform.position.x ? Quaternion.identity : Quaternion.Euler(0, 180, 0);
         GameObjectPoolManager.GetPool("hit_effect").Get(transform.position + new Vector3(0, 2, 0), Quaternion.identity, 0.5f);
-
+        Timer.Register(0.25f, () => { View.CurrentScene.GetView<GameInfoView>().SetScreenEffect(Color.red, 0, 0.1f, 0.5f); });
         actor_state.isSuperArmor = true;
-        Timer.Register(super_armor_time, () => { actor_state.isSuperArmor = false; });
+        Timer.Register(super_armor_time, () => {   actor_state.isSuperArmor = false; });
         ActorModel.Model.SetHealth(-DreamerTool.Util.DreamerUtil.GetHurtValue(attackData.hurt_value,ActorModel.Model.GetPlayerAttribute(PlayerAttribute.物防)));
 
         GameStaticMethod.ChangeChildrenSpriteRendererColor(gameObject, Color.red);

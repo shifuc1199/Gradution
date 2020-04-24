@@ -121,6 +121,17 @@ PrefabInstance:
       propertyPath: OnRelease.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8944994500620764170}
+    - target: {fileID: 1030181977, guid: cfe0f252c4072e84c8389b7a6b47b336, type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 1030181977, guid: cfe0f252c4072e84c8389b7a6b47b336,
+        type: 3}
+    - target: {fileID: 691304319869927832, guid: cfe0f252c4072e84c8389b7a6b47b336,
+        type: 3}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 691304319869927832, guid: cfe0f252c4072e84c8389b7a6b47b336,
+        type: 3}
     - target: {fileID: 3489165429405197062, guid: cfe0f252c4072e84c8389b7a6b47b336,
         type: 3}
       propertyPath: splat_manager
@@ -146,16 +157,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8944994500620764170}
-    - target: {fileID: 691304319869927832, guid: cfe0f252c4072e84c8389b7a6b47b336,
+    - target: {fileID: 3874534845673997093, guid: cfe0f252c4072e84c8389b7a6b47b336,
         type: 3}
-      propertyPath: serializationData.Prefab
+      propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 691304319869927832, guid: cfe0f252c4072e84c8389b7a6b47b336,
-        type: 3}
-    - target: {fileID: 1030181977, guid: cfe0f252c4072e84c8389b7a6b47b336, type: 3}
-      propertyPath: serializationData.Prefab
-      value: 
-      objectReference: {fileID: 1030181977, guid: cfe0f252c4072e84c8389b7a6b47b336,
+      objectReference: {fileID: 21300000, guid: 422fdb43dded1204092ec611bdc2afb0,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfe0f252c4072e84c8389b7a6b47b336, type: 3}
@@ -231,6 +237,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 494283290748606092, guid: c60f6d1fd81d9814ea2566ce5d13da63,
+        type: 3}
+      propertyPath: super_armor_time
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964548777838160346, guid: c60f6d1fd81d9814ea2566ce5d13da63,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0.5660378
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964548777838160346, guid: c60f6d1fd81d9814ea2566ce5d13da63,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0.5168892
+      objectReference: {fileID: 0}
+    - target: {fileID: 4964548777838160346, guid: c60f6d1fd81d9814ea2566ce5d13da63,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0.35510862
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c60f6d1fd81d9814ea2566ce5d13da63, type: 3}

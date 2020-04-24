@@ -24,7 +24,7 @@ public class ActorHUD : MonoBehaviour
     {
         UpdateMoneyText();
         UpdateEnergy();
-        UpdateMoneyText();
+        UpdateHealth();
     }
     private void OnDestroy()
     {
@@ -42,13 +42,13 @@ public class ActorHUD : MonoBehaviour
     }
     public void UpdateEnergy()
     {
-        energy_text.text = ActorModel.Model.GetEngery() + "/" + ActorModel.Model.GetPlayerAttribute(PlayerAttribute.能量值);
+        energy_text.text = (int)ActorModel.Model.GetEngery() + "/" + ActorModel.Model.GetPlayerAttribute(PlayerAttribute.能量值);
         energy_bar.fillAmount = (float)(ActorModel.Model.GetEngery() / ActorModel.Model.GetPlayerAttribute(PlayerAttribute.能量值));
     }
     public void UpdateHealth()
     {
         
-        health_text .text  = ActorModel.Model.GetHealth()+"/"+ ActorModel.Model.GetPlayerAttribute(PlayerAttribute.生命值);
+        health_text .text  = (int)ActorModel.Model.GetHealth()+"/"+ ActorModel.Model.GetPlayerAttribute(PlayerAttribute.生命值);
         health_bar.fillAmount =(float)( ActorModel.Model.GetHealth()/ActorModel.Model.GetPlayerAttribute(PlayerAttribute.生命值));
     }
     public void UpdateMoneyText()

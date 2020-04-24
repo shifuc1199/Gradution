@@ -79,7 +79,7 @@ public class EnemyConfig : BaseConfig<EnemyConfig>
     }
     public Sprite GetSprite()
     {
-        return Resources.Load<Sprite>(图标名字);
+        return Resources.Load<Sprite>("MonsterHeadIcon/" + 图标名字);
     }
     public GameObject GetGameObjectPrefab()
     {

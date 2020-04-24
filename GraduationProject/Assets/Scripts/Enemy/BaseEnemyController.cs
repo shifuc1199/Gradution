@@ -33,34 +33,36 @@ public class BaseEnemyController : MonoBehaviour,IHurt
         _anim = GetComponentInChildren<Animator>();
         _rigi = GetComponent<Rigidbody2D>();
         start_gravity = _rigi.gravityScale;
-        enemy_data = new BaseEnemyData(model, ()=> {
-            if(Shadow)
-            Shadow.SetActive(false);
-            var coin = GameObjectPoolManager.GetPool("coin_effect").Get(transform.position + new Vector3(0, 1, 0), Quaternion.identity, 2f);
-            coin.GetComponent<CoinParticle>().transf = View.CurrentScene.GetView<GameInfoView>().hud.coin_icon.rectTransform;
-            var exp = GameObjectPoolManager.GetPool("exp_effect").Get(transform.position + new Vector3(0, 1, 0), Quaternion.identity, 1.85f);
-            exp.GetComponent<ExpParticle>().transf = View.CurrentScene.GetView<GameInfoView>().expbar.GetComponent<RectTransform>();
-            var colliders = GetComponentsInChildren<PolygonCollider2D>();
-            var rigis = GetComponentsInChildren<Rigidbody2D>();
-            _anim.enabled = false;
-            foreach (var col in colliders)
-            {
-                col.enabled = true;
-            }
-            foreach (var rigi in rigis)
-            {
-                if (!rigi.simulated)
-                {
-                    rigi.simulated = true;
-                    rigi.AddTorque(2,ForceMode2D.Impulse);
-                    rigi.AddForce(new Vector3(Random.Range(-1f, 1f)*4f, Random.Range(0.5f, 1f)*5, 0) ,ForceMode2D.Impulse);
-                }
-            }
-            GetComponent<Collider2D>().enabled = false;
-            _rigi.simulated = false;
-        });
+        enemy_data = new BaseEnemyData(model,DieCallBack);
     }
- 
+    protected virtual void DieCallBack()
+    {
+        if (Shadow)
+            Shadow.SetActive(false);
+        var coin = GameObjectPoolManager.GetPool("coin_effect").Get(transform.position + new Vector3(0, 1, 0), Quaternion.identity, 2f);
+        coin.GetComponent<CoinParticle>().transf = View.CurrentScene.GetView<GameInfoView>().hud.coin_icon.rectTransform;
+        var exp = GameObjectPoolManager.GetPool("exp_effect").Get(transform.position + new Vector3(0, 1, 0), Quaternion.identity, 1.85f);
+        exp.GetComponent<ExpParticle>().transf = View.CurrentScene.GetView<GameInfoView>().expbar.GetComponent<RectTransform>();
+        var colliders = GetComponentsInChildren<PolygonCollider2D>();
+        var rigis = GetComponentsInChildren<Rigidbody2D>();
+        _anim.enabled = false;
+        foreach (var col in colliders)
+        {
+            col.enabled = true;
+        }
+        foreach (var rigi in rigis)
+        {
+            if (!rigi.simulated)
+            {
+                rigi.simulated = true;
+                rigi.AddTorque(2, ForceMode2D.Impulse);
+                rigi.AddForce(new Vector3(Random.Range(-1f, 1f) * 4f, Random.Range(0.5f, 1f) * 5, 0), ForceMode2D.Impulse);
+            }
+        }
+        GetComponent<Collider2D>().enabled = false;
+        _rigi.simulated = false;
+        Destroy(gameObject, 3);
+    }
     public void GetHurt(AttackData attackData,UnityAction hurt_call_back=null)
     {
         if (enemy_data.isdie)

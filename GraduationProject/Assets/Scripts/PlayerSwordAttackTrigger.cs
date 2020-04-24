@@ -8,15 +8,23 @@ public class PlayerSwordAttackTrigger : BaseAttackTrigger
 
    
     public override void OnTriggerEnter2D(Collider2D collision)
-    {   
-        if(collision.gameObject.tag=="Enemy")
+    {
+        
+        if (collision.gameObject.tag=="Enemy")
         {
+           
             ActorModel.Model.SetEngery(ActorModel.Model.GetCurrentWeapon().回复能量);
-            ( View.CurrentScene as GameScene) .HitCount++;
+            if (View.CurrentScene is GameScene)
+            {
+                (View.CurrentScene as GameScene).HitCount++;
+            }
             if(attack_type == HitType.击飞)
             {
                 Camera.main.GetComponent< Cinemachine.CinemachineImpulseSource>().GenerateImpulse();
-                Time.timeScale = 0.2f;
+                if (View.CurrentScene is GameScene)
+                {
+                    Time.timeScale = 0.2f;
+                }
             }
             bool isCrit = false;
             var weapon = WeaponConfig.Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.武器));

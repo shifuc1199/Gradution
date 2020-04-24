@@ -1,27 +1,34 @@
 ﻿/*****************************
 Created by 师鸿博
 *****************************/
+using LitJson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NetPlayerSwordAttackTrigger : BaseAttackTrigger
 {
-    [HideInInspector]
-    public NetWorkActorController owner;
-
+    private Photon.Pun.PhotonView photonView;
+    ActorModel model;
+    private void Awake()
+    {
+        Destroy(gameObject, 0.5f);
+        photonView = GetComponentInParent<Photon.Pun.PhotonView>();
+        this.attack_type =(HitType)photonView.InstantiationData[0];
+ 
+        model = JsonMapper.ToObject<ActorModel>(photonView.Owner.CustomProperties["model"].ToString());
+    }
     public override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
         if(collision.CompareTag("Player"))
         {
             // ActorModel.Model.SetEngery(ActorModel.Model.GetCurrentWeapon().回复能量);
-            if (owner == collision.GetComponent<NetWorkActorController>())
+            if (photonView.Owner.ActorNumber == collision.GetComponent<NetkActorController>().photonView.Owner.ActorNumber)
             {
                 return;
             }
-            Debug.Log(collision.gameObject.name);
-            var model = owner.GetModel();
+    
 
             if (attack_type == HitType.击飞)
             {
@@ -36,7 +43,7 @@ public class NetPlayerSwordAttackTrigger : BaseAttackTrigger
                 hurt_value = model.GetPlayerAttribute(PlayerAttribute.暴击伤害);
             }
 
-            collision.GetComponent<NetWorkActorController>().GetHurt(new AttackData(hurt_value, isCrit, transform.position, this.attack_type));
+            collision.GetComponent<NetkActorController>().GetHurt(new AttackData(hurt_value, isCrit, transform.position, this.attack_type));
         }
     }
 }

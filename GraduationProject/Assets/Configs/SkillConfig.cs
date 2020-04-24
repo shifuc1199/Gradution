@@ -8,15 +8,15 @@ using LitJson;
 using System.IO;
 using UnityEditor;
 using Sirenix.OdinInspector;
-public class SkillConfig :  BaseConfig<SkillConfig>
+public class SkillConfig:BaseConfig<SkillConfig>
 {
     [ReadOnly]
     public int ID;
-    [PreviewField(100)][AssetsOnly]public Sprite editor_sprite;
+    [PreviewField(100)] [AssetsOnly] public Sprite editor_sprite;
     public string skill_name;
     public SkillType skill_type;
-    [System.NonSerialized]public string sprite_path;
-    [TextArea]public string skill_des;
+    [System.NonSerialized] public string sprite_path;
+    [TextArea] public string skill_des;
 
     [BoxGroup("技能伤害数据")] public double basic_hurt;
     [BoxGroup("技能伤害数据")] public double skill_level_ratio;
@@ -63,7 +63,7 @@ public class SkillConfig :  BaseConfig<SkillConfig>
         AssetDatabase.Refresh();
         SkillEditorWindow._window.ForceMenuTreeRebuild();
         SkillEditorWindow._window.isCreate = false;
-        SkillEditorWindow._window._tree.MenuItems[ID-1].Select();
+        SkillEditorWindow._window._tree.MenuItems[ID - 1].Select();
 #endif
     }
     public static void RemoveAll()

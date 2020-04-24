@@ -271,6 +271,11 @@ namespace DreamerTool.GameObjectPool
                 pools.Add(item.prefab_name, new GameObjectPool(item.prefab));
             }
         }
+        public static GameObject GetGameObjectByScripteableObject(string key)
+        {
+            var prefabs = ScriptableObjectUtil.GetScriptableObject<GameObjectPoolPrefabs>();
+            return prefabs.Prefabs.Find(a => { return a.prefab_name == key; }).prefab;
+        }
         public static void ClearAll()
         {
             foreach (var pool in pools)

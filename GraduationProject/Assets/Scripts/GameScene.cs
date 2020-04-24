@@ -10,6 +10,7 @@ public class GameScene : Scene
 {
     float timer;
     private int hit_count;
+    public static BackScene backScene = BackScene.None;
     public Text hit_count_text;
     public int HitCount {
         get
@@ -37,9 +38,22 @@ public class GameScene : Scene
     public override void Awake()
     {
         base.Awake();
+        if(ActorModel.Model==null)
+        ActorModel.CreateModel();
         GameStaticMethod.GameInit();
 
-        
+        switch (backScene)
+        {
+            case BackScene.None:
+                break;
+            case BackScene.FightScene:
+                OpenView<HobbyView>();
+                OpenView<RoomView>();
+                break;
+            default:
+                break;
+        }
+        backScene = BackScene.None;
     }
    
     // Start is called before the first frame update
