@@ -152,8 +152,45 @@ namespace DreamerTool.Singleton
 
 namespace DreamerTool.Util
 {
+    class NumUtil
+    {
+        private HashSet<int> s = new HashSet<int>();
+        private System.Random r = new System.Random();
+        private int maxNum = 99999999;
+
+        // 随机生成一个8位数字
+        public int genNum()
+        {
+            // 号码用完
+            if (s.Count >= 89999999)
+            {
+                return -1;
+            }
+
+            // 随机生成8位数字
+            int n = r.Next(89999999) + 10000000;
+            while (!s.Add(n))
+            {
+                n++;
+
+                if (n > maxNum)
+                {
+                    n = 0;
+                }
+            }
+            return n;
+        }
+
+        // 回收一个数字
+        public void reUse(int num)
+        {
+            s.Remove(num);
+        }
+    }
+
     public static class DreamerUtil
     {
+    
         public static string GetColorRichText(string t,Color c)
         {
             return "<color=#"+ ColorUtility.ToHtmlStringRGBA(c) + ">" + t + "</color>";

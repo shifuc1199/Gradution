@@ -9,6 +9,9 @@ using LitJson;
 using System.IO;
 using UnityEditor;
 using Sirenix.OdinInspector;
+using System.Reflection;
+using System.Text;
+
 public class PelvisConfig : ItemConfig<PelvisConfig>
 {
     public double defend;
@@ -41,7 +44,59 @@ public class PelvisConfig : ItemConfig<PelvisConfig>
         ItemEditorWindow._window._tree.MenuItems[物品ID- 1].Select();
 #endif
     }
+    public override string GetTipString()
+    {
+        var type = GetType();
+        var fields = type.GetFields();
+        StringBuilder sb = new StringBuilder();
+        SortedDictionary<int, string> dict = new SortedDictionary<int, string>();
+        foreach (var field in fields)
+        {
+            var tip_attribute = field.GetCustomAttribute(typeof(TipAttribute));
+            if (tip_attribute != null)
+            {
+                var attribute = (tip_attribute as TipAttribute);
+                var valueStr = DreamerTool.Util.DreamerUtil.GetColorRichText(field.GetValue(this).ToString(), attribute.valueColor);
+                dict.Add(attribute.index, field.Name + ": " + valueStr + "\n");
 
+            }
+        }
+        foreach (var item in dict)
+        {
+            if (item.Key < 3)
+            {
+                sb.Append("\t\t\t\t\t");
+            }
+            if (item.Key == 3)
+            {
+                sb.Append("\n");
+            }
+            if (item.Key == int.MaxValue)
+            {
+                sb.Append(SuitConfig.Get(物品ID).GetItemUITipStr());
+            }
+            sb.Append(item.Value);
+        }
+        return sb.ToString();
+    }
+    public override void ChangePlayerAttribute()
+    {
+        var current = Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.裤子));
+        var type = GetType();
+        foreach (FieldInfo f in type.GetFields())
+        {
+            var attribute = f.GetCustomAttribute(typeof(EquipMentAttribute));
+            if (attribute != null)
+            {
+                var equipmentAttribute = attribute as EquipMentAttribute;
+                var before = f.GetValue(current);
+                var after = f.GetValue(this);
+                var value = (double)after - (double)before;
+                ActorModel.Model.SetPlayerAttribute(equipmentAttribute.attribute, value);
+            }
+        }
+
+    }
     public override Sprite GetSprite()
     {
  

@@ -8,8 +8,11 @@ using Photon.Pun;
 using Photon.Realtime;
 using DreamerTool.UI;
 using LitJson;
+using DreamerTool.Util;
+
 public class HobbyManager : MonoBehaviourPunCallbacks
 {
+    NumUtil roomIdNumUtil = new NumUtil();
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -47,11 +50,13 @@ public class HobbyManager : MonoBehaviourPunCallbacks
         {
             if (room.PlayerCount == 0)
             {
+                
                 View.CurrentScene.GetView<HobbyView>().DeleteRoomCell(room);
                 RemoveRoomList.Add(room);
             }
             else
             {
+                
                 View.CurrentScene.GetView<HobbyView>().CreateRoomCell(room);
             }
         }
@@ -74,7 +79,12 @@ public class HobbyManager : MonoBehaviourPunCallbacks
     }
     public void CreateRoom()
     {
-        PhotonNetwork.CreateRoom(System.Guid.NewGuid().ToString());
+        RoomOptions roomOptions = new RoomOptions();
+        var num = roomIdNumUtil.genNum();
+        roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable();
+        roomOptions.CustomRoomProperties.Add("room_id", num);
+        roomOptions.CustomRoomPropertiesForLobby = new string[] {"room_id" };
+        PhotonNetwork.CreateRoom(System.Guid.NewGuid().ToString()+ ";"+ActorModel.Model.actor_name + ": 的房间", roomOptions);
     }
     
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -85,6 +95,7 @@ public class HobbyManager : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         base.OnCreatedRoom();
+ 
         View.CurrentScene.OpenView<RoomView>();
     }
     public override void OnJoinedRoom()

@@ -1,29 +1,85 @@
-
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using LitJson;
 using System.IO;
 using UnityEditor;
+using System.Text;
  using Sirenix.OdinInspector;
 public   class WeaponConfig : ItemConfig<WeaponConfig>
 {
- 
+    [Tip(3, GameConstData.COLOR_WHITE)]
     [BoxGroup("属性信息")]
     public WeaponType 武器种类;/*nil*/
     [BoxGroup("属性信息")]
+    [Tip(4, GameConstData.COLOR_WHITE)]
+    [EquipMent(PlayerAttribute.攻击力)]
     public double 攻击力;
 	[BoxGroup("属性信息")]
-	public double 法术强度;
+    [Tip(5, GameConstData.COLOR_WHITE)]
+    public double 法术强度;
 	[BoxGroup("属性信息")]
-	public double 暴击率;
+    [Tip(6, GameConstData.COLOR_WHITE)]
+    [EquipMent(PlayerAttribute.暴击率)]
+    public double 暴击率;
 	[BoxGroup("属性信息")]
-	public double 暴击伤害;
+    [Tip(7, GameConstData.COLOR_WHITE)]
+    public double 暴击伤害;
     [BoxGroup("属性信息")]
+    [Tip(8, GameConstData.COLOR_WHITE)]
     public double 回复能量;
     [BoxGroup("属性信息")]
+    [Tip(9, GameConstData.COLOR_WHITE)]
     public int 需要等级;
+  
+    public override string GetTipString()
+    {
+        var type = GetType();
+        var fields = type.GetFields();
+        StringBuilder sb = new StringBuilder();
+        System.Collections.Generic.SortedDictionary<int, string> dict = new System.Collections.Generic.SortedDictionary<int, string>();
+        foreach (var field in fields)
+        {
+            var tip_attribute = field.GetCustomAttribute(typeof(TipAttribute));
+            if(tip_attribute!=null)
+            {
+                var attribute = (tip_attribute as TipAttribute);
+                var valueStr = DreamerTool.Util.DreamerUtil.GetColorRichText(field.GetValue(this).ToString(), attribute.valueColor);
+                dict.Add(attribute.index, field.Name + ": " + valueStr + "\n");
+               
+            }
+        }
+        foreach (var item in dict)
+        {
+            if(item.Key<3)
+            {
+                sb.Append("\t\t\t\t\t");
+            }
+            if (item.Key == 3)
+            {
+                sb.Append("\n");
+            }   
+            sb.Append(item.Value);
+        }
+        return sb.ToString();
+    }
+    public override void ChangePlayerAttribute()
+    {
+        var current = Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.武器));
+        var type = GetType();
+        foreach (FieldInfo f in type.GetFields())
+        {
+            var attribute = f.GetCustomAttribute(typeof(EquipMentAttribute));
+            if (attribute != null)
+            {
+                var equipmentAttribute = attribute as EquipMentAttribute;
+                var before = f.GetValue(current);
+                var after = f.GetValue(this);
+                var value = (double)after - (double)before;
+                ActorModel.Model.SetPlayerAttribute(equipmentAttribute.attribute, value);
+             }
+        }
+        
+    }
     [Button("保存",50)]
 	public override void Save()
 	{
@@ -65,11 +121,7 @@ public   class WeaponConfig : ItemConfig<WeaponConfig>
         return Resources.Load<Sprite>("Weapons/"+ 图标名字);
     }
 
-
-
-
-
-
+ 
 }
  
 

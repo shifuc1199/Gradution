@@ -12,7 +12,7 @@ public class NetPlayerSwordAttackTrigger : BaseAttackTrigger
     ActorModel model;
     private void Awake()
     {
-        Destroy(gameObject, 0.5f);
+        Destroy(transform.parent.gameObject, 0.5f);
         photonView = GetComponentInParent<Photon.Pun.PhotonView>();
         this.attack_type =(HitType)photonView.InstantiationData[0];
  
@@ -21,8 +21,10 @@ public class NetPlayerSwordAttackTrigger : BaseAttackTrigger
     public override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
-        if(collision.CompareTag("Player"))
+        if(collision.CompareTag("Enemy"))
         {
+            Debug.Log(photonView.Owner.ActorNumber);
+
             // ActorModel.Model.SetEngery(ActorModel.Model.GetCurrentWeapon().回复能量);
             if (photonView.Owner.ActorNumber == collision.GetComponent<NetkActorController>().photonView.Owner.ActorNumber)
             {
@@ -37,7 +39,7 @@ public class NetPlayerSwordAttackTrigger : BaseAttackTrigger
             bool isCrit = false;
             var weapon = WeaponConfig.Get(model.GetPlayerEquipment(EquipmentType.武器));
             var hurt_value = model.GetPlayerAttribute(PlayerAttribute.攻击力);
-            if (Random.value <= model.GetPlayerAttribute(PlayerAttribute.暴击率))
+            if (Random.value <= model.GetPlayerAttribute(PlayerAttribute.暴击率)*0.01f)
             {
                 isCrit = true;
                 hurt_value = model.GetPlayerAttribute(PlayerAttribute.暴击伤害);

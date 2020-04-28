@@ -11,10 +11,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
     public float attack_forward_distance;
     List<int> effect_rotation = new List<int>() { 45, 130, 55,0};
  
-    private void Awake()
-    {
  
-    }
     public void SetPickUpSlash()
     {
         AudioManager.Instance.PlayOneShot("player_heavy_attack");

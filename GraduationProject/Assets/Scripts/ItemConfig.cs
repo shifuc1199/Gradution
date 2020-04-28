@@ -11,16 +11,16 @@ using Sirenix.OdinInspector;
 
 public abstract class ItemConfig<T> : BaseConfig<T> where T: BaseConfig<T>
 {
+     
     [ReadOnly][BoxGroup("基础信息")][VerticalGroup("基础信息/p/o")]
     public int 物品ID;/*nil*/
-    [BoxGroup("基础信息")][VerticalGroup("基础信息/p/o")]
+    [BoxGroup("基础信息")][VerticalGroup("基础信息/p/o")][Tip(1, GameConstData.COLOR_WHITE)]
     public string 物品名字;/*nil*/
     [JsonNonField][HideLabel, PreviewField(100)][AssetsOnly][BoxGroup("基础信息")][HorizontalGroup("基础信息/p", 100)]
     public Sprite 编辑器图标 = null;
     [NonSerialized]
     public string 图标名字;
-    [BoxGroup("基础信息")]
-    [VerticalGroup("基础信息/p/o")]
+    [BoxGroup("基础信息")][VerticalGroup("基础信息/p/o")][Tip(2, GameConstData.COLOR_WHITE)]
     public ItemLevel 物品阶级;
     [BoxGroup("基础信息")]
     public int 卖出价格;
@@ -29,8 +29,10 @@ public abstract class ItemConfig<T> : BaseConfig<T> where T: BaseConfig<T>
     [BoxGroup("基础信息")]
     [VerticalGroup("基础信息/p/o")]
     [TextArea()]
+    [Tip(int.MaxValue, GameConstData.COLOR_WHITE)]
     public string 物品描述;/*nil*/
- 
+    public abstract void ChangePlayerAttribute();
+    public abstract string GetTipString();
     public abstract void Save();
     public abstract Sprite GetSprite();
     public void SetEditorSprite()

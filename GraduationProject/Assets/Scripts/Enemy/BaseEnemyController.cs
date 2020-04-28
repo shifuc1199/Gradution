@@ -63,7 +63,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
         _rigi.simulated = false;
         Destroy(gameObject, 3);
     }
-    public void GetHurt(AttackData attackData,UnityAction hurt_call_back=null)
+    public void GetHurt(AttackData attackData)
     {
         if (enemy_data.isdie)
             return;
@@ -79,7 +79,7 @@ public class BaseEnemyController : MonoBehaviour,IHurt
  
         AudioManager.Instance.PlayOneShot("hit");
         GameObjectPoolManager.GetPool("hit_effect").Get(transform.position + new Vector3(0, 2, 0), Quaternion.identity,0.5f);
-        hurt_call_back?.Invoke();
+ 
 
         if (isSuperArmor)
         {

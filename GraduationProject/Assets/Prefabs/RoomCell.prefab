@@ -225,7 +225,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14136b10c8efc2644b31061f09e5cf67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  joinBtn: {fileID: 2722834090868375372}
   room_name_text: {fileID: 7315439523341435964}
+  player_count_text: {fileID: 7315439523260761501}
 --- !u!1 &7315439523260761491
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 64.1, y: -1.8}
+  m_AnchoredPosition: {x: 73.7, y: -1.8}
   m_SizeDelta: {x: 42.76, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7315439523260761500
@@ -383,7 +385,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u623F\u95F4\u53F7\uFF1A123\n\u623F\u95F4\u540D\uFF1A\u6709\u79CD\u4F60\u5C31\u6765"
+  m_Text: "\u623F\u95F4\u53F7\uFF1A123\n\u623F\u95F4\u540D\uFF1A\u65E0\u540D\u6C0F\u7684\u623F\u95F4"
 --- !u!1 &7315439523463211539
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,7 +420,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.9, y: -1.8}
+  m_AnchoredPosition: {x: 16.1, y: -1.8}
   m_SizeDelta: {x: 42.76, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7315439523463211548

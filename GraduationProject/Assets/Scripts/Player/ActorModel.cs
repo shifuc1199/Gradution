@@ -57,7 +57,7 @@ public   class ActorModel
     {
         { PlayerAttribute.攻击力,0 },
         { PlayerAttribute.生命值,100 },
-        { PlayerAttribute.物防,100 },
+        { PlayerAttribute.物防,10 },
         { PlayerAttribute.魔抗,100 },
         { PlayerAttribute.能量值,100 },
         { PlayerAttribute.善恶值,100 },
@@ -152,6 +152,7 @@ public   class ActorModel
     }
     public void SetPlayerAttribute(PlayerAttribute attribute, double value)
     {
+       
         PlayerAttributes[attribute] += value;
         EventManager.OnChangePlayerAttribute?.Invoke(attribute,value);
         
@@ -164,7 +165,35 @@ public   class ActorModel
     {
         Equipment[equip] = id;
         EventManager.OnChangeEquipment?.Invoke();
-
+        switch (equip)
+        {
+            case EquipmentType.鞋子:
+                CheckSuit(id);
+                break;
+            case EquipmentType.裤子:
+                CheckSuit(id);
+                break;
+            case EquipmentType.肩膀左:
+                CheckSuit(id);
+                break;
+            case EquipmentType.手链:
+                CheckSuit(id);
+                break;
+            case EquipmentType.武器:
+                break;
+            case EquipmentType.上衣:
+                CheckSuit(id);
+                break;
+            case EquipmentType.盾牌:
+                break;
+            default:
+                break;
+        }
+         
+        
+    }
+    void CheckSuit(int id)
+    {
         if (GetSuitAmount(id) == 5)
         {
             suit_id = id;
@@ -177,8 +206,8 @@ public   class ActorModel
         }
         else
         {
-           
-            if (suit_id!=-1)
+
+            if (suit_id != -1)
             {
                 var commond = SuitConfig.Get(suit_id).suit_function.Split(',');
                 foreach (var c in commond)
@@ -189,7 +218,6 @@ public   class ActorModel
             }
 
         }
-        
     }
     public int GetPlayerEquipment(EquipmentType equip)
     {

@@ -29,7 +29,7 @@ public class PlayerSwordAttackTrigger : BaseAttackTrigger
             bool isCrit = false;
             var weapon = WeaponConfig.Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.武器));
             var hurt_value = ActorModel.Model.GetPlayerAttribute(PlayerAttribute.攻击力);
-            if (Random.value <= ActorModel.Model.GetPlayerAttribute(PlayerAttribute.暴击率))
+            if (Random.value <= ActorModel.Model.GetPlayerAttribute(PlayerAttribute.暴击率)*0.01f)
             {
                 isCrit = true;
                 hurt_value = ActorModel.Model.GetPlayerAttribute(PlayerAttribute.暴击伤害);

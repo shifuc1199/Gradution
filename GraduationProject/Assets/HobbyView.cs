@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using DreamerTool.UI;
 using Photon.Realtime;
 using Photon.Pun;
+using DreamerTool.Util;
 public class HobbyView : View
 {
     public Text name_text;
@@ -15,7 +16,7 @@ public class HobbyView : View
 
     public Transform room_root;
     public GameObject room_cell_refab;
-
+    
     Dictionary<string, RoomInfoCell> room_cells = new Dictionary<string, RoomInfoCell>();
     private void Start()
     {
@@ -42,8 +43,10 @@ public class HobbyView : View
     {
         if (room_cells.ContainsKey(info.Name))
             return;
-      var cell =  Instantiate(room_cell_refab, room_root).GetComponent<RoomInfoCell>();
-        cell.SetModel(info.Name);
+         
+         var cell =  Instantiate(room_cell_refab, room_root).GetComponent<RoomInfoCell>();
+        
+        cell.SetModel((int)info.CustomProperties["room_id"], info.Name, info.PlayerCount);
         room_cells.Add(info.Name,cell);
     }
     public void DeleteAllRoomCell()

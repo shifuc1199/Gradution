@@ -43,7 +43,7 @@ public class SuitConfig : BaseConfig<SuitConfig>
     }
     private  string GetItemUITipSuitString(string suit_name)
     {
-        return "\n\n\t\t\t\t" +
+        return "\n\t\t\t\t" +
           DreamerTool.Util.DreamerUtil.GetColorRichText(suit_name + "战甲", ActorModel.Model.GetPlayerEquipment(EquipmentType.上衣) == ID?Color.white:Color.gray)    + "\n\t\t\t\t" +
            DreamerTool.Util.DreamerUtil.GetColorRichText(suit_name + "战裤", ActorModel.Model.GetPlayerEquipment(EquipmentType.裤子) == ID ? Color.white : Color.gray) + "\n\t\t\t\t" +
         DreamerTool.Util.DreamerUtil.GetColorRichText(suit_name + "肩甲", ActorModel.Model.GetPlayerEquipment(EquipmentType.肩膀右) == ID ? Color.white : Color.gray) + "\n\t\t\t\t" +
@@ -53,6 +53,6 @@ public class SuitConfig : BaseConfig<SuitConfig>
     public string   GetItemUITipStr()
     {
         int suit_amount = ActorModel.Model.GetSuitAmount(ID);
-        return "\n\n" + suit_name + "套装" + "("+ suit_amount + "/5)" + GetItemUITipSuitString(suit_name) + "\n\n\t"+DreamerTool.Util.DreamerUtil.GetColorRichText("(5)套装: " +  suit_des, suit_amount == 5 ? Color.white:Color.gray);
+        return  suit_name + "套装" + "("+ suit_amount + "/5)" + GetItemUITipSuitString(suit_name) + "\n"+DreamerTool.Util.DreamerUtil.GetColorRichText("(5)套装: " +  suit_des, suit_amount == 5 ? Color.white:Color.gray);
     }
 }

@@ -8,12 +8,13 @@ public class BaseActorAnimationEvent : MonoBehaviour
     [System.NonSerialized]public Rigidbody2D _rigi;
     [System.NonSerialized]public Animator _anim;
     [System.NonSerialized]public ActorController _controller;
-    private void Start()
+    private void Awake()
     {
         _controller = GetComponentInParent<ActorController>();
         _rigi = GetComponentInParent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
     }
+   
     public void OnFallExit()
     {
         GameObjectPoolManager.GetPool("dust_ground").Get(transform.position+new Vector3(0,-3,0), Quaternion.identity, 1);

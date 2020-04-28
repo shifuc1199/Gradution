@@ -69,6 +69,7 @@ public static class GameStaticData
 }
 public class GameConstData
 {
+    public const string COLOR_WHITE = "";
     public const string FIGHT_SCENE_NAME = "FightScene";
     public const string LOGINING_PHONE_NUMBER = "logining_phone_number";
     public const string BMOB_APP_ID = "15fe84103d433cfdbbafb8754c88b5ef";

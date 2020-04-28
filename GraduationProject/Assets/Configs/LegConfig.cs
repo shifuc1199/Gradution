@@ -9,10 +9,13 @@ using LitJson;
 using System.IO;
 using UnityEditor;
 using Sirenix.OdinInspector;
+using System.Reflection;
+using System.Text;
+
 public class FootConfig : ItemConfig<FootConfig>
 {
-    public double speed;
-    public double defend;
+     [Tip(3,GameConstData.COLOR_WHITE,"速度")]   public double speed;
+    [Tip(4, GameConstData.COLOR_WHITE, "防御")] public double defend;
     [Button("保存", 50)]
     public override void Save()
     {
@@ -48,7 +51,63 @@ public class FootConfig : ItemConfig<FootConfig>
     {
         return Resources.Load<Sprite>(图标名字);
     }
+    public override string GetTipString()
+    {
+        var type = GetType();
+        var fields = type.GetFields();
+        StringBuilder sb = new StringBuilder();
+        SortedDictionary<int, string> dict = new SortedDictionary<int, string>();
+        foreach (var field in fields)
+        {
+            var tip_attribute = field.GetCustomAttribute(typeof(TipAttribute));
+            if (tip_attribute != null)
+            {
+                var attribute = (tip_attribute as TipAttribute);
+                if (attribute.showName == "")
+                {
+                    attribute.showName = field.Name;
+                }
+                var valueStr = DreamerTool.Util.DreamerUtil.GetColorRichText(field.GetValue(this).ToString(), attribute.valueColor);
+                dict.Add(attribute.index, attribute.showName + ": " + valueStr + "\n");
 
- 
+            }
+        }
+        foreach (var item in dict)
+        {
+            if (item.Key < 3)
+            {
+                sb.Append("\t\t\t\t\t");
+            }
+            if (item.Key == 3)
+            {
+                sb.Append("\n");
+            }
+            if (item.Key == int.MaxValue)
+            {
+                sb.Append(SuitConfig.Get(物品ID).GetItemUITipStr() + "\n");
+            }
+            sb.Append(item.Value);
+        }
+        return sb.ToString();
+    }
+    public override void ChangePlayerAttribute()
+    {
+        var current = Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.鞋子));
+        var type = GetType();
+        foreach (FieldInfo f in type.GetFields())
+        {
+            var attribute = f.GetCustomAttribute(typeof(EquipMentAttribute));
+            if (attribute != null)
+            {
+                var equipmentAttribute = attribute as EquipMentAttribute;
+                var before = f.GetValue(current);
+                var after = f.GetValue(this);
+                var value = (double)after - (double)before;
+                ActorModel.Model.SetPlayerAttribute(equipmentAttribute.attribute, value);
+            }
+        }
+
+    }
+
 }
 

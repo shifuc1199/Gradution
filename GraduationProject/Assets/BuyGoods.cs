@@ -19,8 +19,9 @@ public class BuyGoods : MonoBehaviour
 
     private ItemType m_type;
     private int m_id;
+ 
     private void Awake()
-    {
+    {       
         EventManager.OnChangeMoney += UpdateMoneyText;
     }
     private void Start()
@@ -35,10 +36,12 @@ public class BuyGoods : MonoBehaviour
     {
         m_moneyText.text = ActorModel.Model.GetMoney().ToString();
     }
+    
     public void SetModel(ItemType _type,int _id)
     {
         m_id = _id;
         m_type = _type;
+        
         switch (_type)
         {
             case ItemType.鞋子:

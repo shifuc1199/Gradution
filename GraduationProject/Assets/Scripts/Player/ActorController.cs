@@ -155,7 +155,7 @@ public class ActorController : MonoBehaviour,IHurt
         Dash();
     }
 
-    public virtual  void GetHurt(AttackData attackData, UnityAction hurt_call_back = null)
+    public virtual  void GetHurt(AttackData attackData)
     {
         if (actor_state.isSuperArmor)
             return;
@@ -179,7 +179,7 @@ public class ActorController : MonoBehaviour,IHurt
 
         GameStaticMethod.ChangeChildrenSpriteRendererColor(gameObject, Color.red);
 
-        hurt_call_back?.Invoke();
+     
 
         switch (attackData.attack_type)
         {

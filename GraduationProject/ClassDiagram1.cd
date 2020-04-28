@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SkillConfig">
+    <Position X="57.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAA4EAEBARkAEAAgAAAAIAAAEAQQAAIAECAAAAAAA=</HashCode>
+      <FileName>Assets\Configs\SkillConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TimeModel">
+    <Position X="53.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\TimeModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkillModel">
+    <Position X="57.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASIAAAIAAAAAABAAAAAAAAAACABEAAECAACgEAAQAA=</HashCode>
+      <FileName>Assets\Scripts\SkillModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="_config" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="UserModel">
+    <Position X="55.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAgA=</HashCode>
+      <FileName>Assets\UserModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ActorModel">
+    <Position X="53.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAIBAAEAMIBSBAwAQAAQJBgEIABKACBmEImAAEo4=</HashCode>
+      <FileName>Assets\Scripts\Player\ActorModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Model" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EnemyModel">
+    <Position X="55.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAQAAAAAAAAAAAAAAAEAAAAAAAAAACAAIAA=</HashCode>
+      <FileName>Assets\Scripts\EnemyModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="config" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="EnemyConfig">
+    <Position X="55.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAA4AEACAAHgAAAAAAAAAQgAACAACAgABAAAAAAAA=</HashCode>
+      <FileName>Assets\Configs\EnemyConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

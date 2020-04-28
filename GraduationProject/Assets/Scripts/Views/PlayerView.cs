@@ -72,8 +72,8 @@ public class PlayerView : MonoBehaviour
     }
     IEnumerator TextAnim(Text t,double value,double end,string c)
     {
-
-        
+ 
+            
         while (value  != end)
         {
 
