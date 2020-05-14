@@ -58,7 +58,7 @@ public class FaceConfig<T> : BaseConfig<T> where T:BaseConfig<T>
     }
     public Sprite GetSprite()
     {
-        return Resources.Load<Sprite>(sprite_path);
+        return Resources.Load<Sprite>("Faces/"+sprite_path);
     }
     public void SetEditorSprite()
     {

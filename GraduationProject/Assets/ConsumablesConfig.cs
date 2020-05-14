@@ -17,13 +17,13 @@ public class ConsumablesConfig : ItemConfig<ConsumablesConfig>
 
     public override Sprite GetSprite()
     {
-        return Resources.Load<Sprite>(图标名字);
+        return Resources.Load<Sprite>( 图标名字);
     }
 
     [Button("保存", 50)]
     public override void Save()
     {
-
+        
 #if UNITY_EDITOR
         TextAsset ta = Resources.Load<TextAsset>("all_config");
         JsonData jd = JsonMapper.ToObject(ta.text);
@@ -74,7 +74,7 @@ public class ConsumablesConfig : ItemConfig<ConsumablesConfig>
             {
                 sb.Append("\t\t\t\t\t");
             }
-            if (item.Key == 3)
+            if (item.Key == int.MaxValue)
             {
                 sb.Append("\n");
             }

@@ -14,7 +14,10 @@ using System.Reflection;
 
 public class SleeveConfig : ItemConfig<SleeveConfig>
 {
+    
+    [EquipMent(PlayerAttribute.生命值)] [Tip(3, GameConstData.COLOR_WHITE, GameConstData.HEALTH_TIP_STR)]
     public double helath;
+    [EquipMent(PlayerAttribute.物防)] [Tip(4, GameConstData.COLOR_WHITE, GameConstData.DEFEND_TIP_STR)]
     public double defend;
     [Button("保存", 50)]
     public override void Save()
@@ -57,8 +60,12 @@ public class SleeveConfig : ItemConfig<SleeveConfig>
             if (tip_attribute != null)
             {
                 var attribute = (tip_attribute as TipAttribute);
+                if (attribute.showName == "")
+                {
+                    attribute.showName = field.Name;
+                }
                 var valueStr = DreamerTool.Util.DreamerUtil.GetColorRichText(field.GetValue(this).ToString(), attribute.valueColor);
-                dict.Add(attribute.index, field.Name + ": " + valueStr + "\n");
+                dict.Add(attribute.index, attribute.showName + ": " + valueStr + "\n");
 
             }
         }
@@ -74,7 +81,7 @@ public class SleeveConfig : ItemConfig<SleeveConfig>
             }
             if (item.Key == int.MaxValue)
             {
-                sb.Append(SuitConfig.Get(物品ID).GetItemUITipStr());
+                sb.Append(SuitConfig.Get(物品ID).GetItemUITipStr() + "\n");
             }
             sb.Append(item.Value);
         }

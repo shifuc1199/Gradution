@@ -7,6 +7,21 @@ using DG.Tweening;
 using UnityEngine.Events;
 public class GameInfoView : View
 {
+    private int hit_count;
+    public Text hit_count_text;
+    public int HitCount
+    {
+        get
+        {
+            return hit_count;
+        }
+        set
+        {
+            hit_count = value;
+            hit_count_text.GetComponent<DOTweenAnimation>().DORestart();
+            hit_count_text.text = hit_count + "  Combo";
+        }
+    }
     public InactiveButtons inactrive_buttons;
     public EnemyHealthBar enemy_health;
     public Image fade_image;
@@ -14,12 +29,17 @@ public class GameInfoView : View
     public ActorHUD hud;
     public GameObject pop_text;
     public Image m_screen_effect;
+    public Text tipText;
     public void SetInactiveType(InactiveType _type,ItemSprite item = null)
     {
         inactrive_buttons.SetInactiveType(_type,item);
     }
-    Timer timer1=null;
-    Timer timer2 = null;
+    public void SetTipText(string text)
+    {
+        tipText.text = text;
+    }
+    Timer popTextTimer_1=null;
+    Timer popTextTimer_2 = null;
  
     public void FadeAnim(UnityAction action = null,float t = 1)
     {
@@ -35,13 +55,13 @@ public class GameInfoView : View
     }
     public void SetPopText(string v,Color c,float t=0.5f)
     {
-        if (timer1 != null)
+        if (popTextTimer_1 != null)
         {
-            timer1.Cancel();
+            popTextTimer_1.Cancel();
         }
-        if(timer2!=null)
+        if(popTextTimer_2!=null)
         {
-            timer2.Cancel();
+            popTextTimer_2.Cancel();
         }
         if(pop_text.activeSelf)
             pop_text.SetActive(false);
@@ -49,7 +69,7 @@ public class GameInfoView : View
         pop_text.GetComponentInChildren<Text>().text = v;
         pop_text.GetComponentInChildren<Text>().color = c;
         pop_text.GetComponent<Animator>().SetTrigger("show");
-        timer1 = Timer.Register(t, () => { pop_text.GetComponent<Animator>().SetTrigger("hide"); timer2= Timer.Register(0.5f, () => { pop_text.SetActive(false); }); });
+        popTextTimer_1 = Timer.Register(t, () => { pop_text.GetComponent<Animator>().SetTrigger("hide"); popTextTimer_2= Timer.Register(0.5f, () => { pop_text.SetActive(false); }); });
     }
     public void ShowAnim()
     {

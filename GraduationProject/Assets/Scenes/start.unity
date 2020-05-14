@@ -1502,7 +1502,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 34a23d93ab91c354f81de83b3987f5a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 093cbc13425738e49ad4c434a9dedf3c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2229,7 +2229,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 34a23d93ab91c354f81de83b3987f5a2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 093cbc13425738e49ad4c434a9dedf3c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3937,6 +3937,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadView
       objectReference: {fileID: 0}
+    - target: {fileID: 7351622181956943767, guid: c907c140d8a1b1d4b9321b378ad90c2a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7351622181956943766, guid: c907c140d8a1b1d4b9321b378ad90c2a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4042,5 +4047,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7351622183111031552, guid: c907c140d8a1b1d4b9321b378ad90c2a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 093cbc13425738e49ad4c434a9dedf3c,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c907c140d8a1b1d4b9321b378ad90c2a, type: 3}

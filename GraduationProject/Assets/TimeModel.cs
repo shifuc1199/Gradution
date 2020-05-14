@@ -15,7 +15,15 @@ public class TimeModel : MonoSingleton<TimeModel>
     {
          
     }
-
+    public System.DateTime GetDateTimeBySeconds(int second)
+    {
+        var hour = second / 3600;
+        second -= hour * 3600;
+        var minute = second / 60;
+        second -= minute * 60;
+    
+        return new System.DateTime(1, 1, 1, hour, minute, second);
+    }
     public IEnumerator GetTime()
     {
      yield return StartCoroutine(DreamerUtil.GetDateTimeFromURL((time) => {
@@ -27,6 +35,7 @@ public class TimeModel : MonoSingleton<TimeModel>
     {
         if(Now != DateTime.MinValue)
         Now = Now.AddSeconds(Time.deltaTime);
+ 
     }
 
 }

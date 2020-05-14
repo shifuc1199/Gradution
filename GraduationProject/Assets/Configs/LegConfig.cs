@@ -14,8 +14,8 @@ using System.Text;
 
 public class FootConfig : ItemConfig<FootConfig>
 {
-     [Tip(3,GameConstData.COLOR_WHITE,"速度")]   public double speed;
-    [Tip(4, GameConstData.COLOR_WHITE, "防御")] public double defend;
+    [EquipMent(PlayerAttribute.移速)] [Tip(3,GameConstData.COLOR_WHITE, GameConstData.SPEED_TIP_STR)]   public double speed;
+    [EquipMent(PlayerAttribute.物防)] [Tip(4, GameConstData.COLOR_WHITE, GameConstData.DEFEND_TIP_STR)] public double defend;
     [Button("保存", 50)]
     public override void Save()
     {

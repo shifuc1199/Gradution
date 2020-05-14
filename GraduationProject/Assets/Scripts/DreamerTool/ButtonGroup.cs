@@ -10,7 +10,7 @@ public class ButtonGroup : ToggleGroup
 {
      
     public MyIntUnityEvent OnSelect;
-    [System.NonSerialized]
+   
     public List<Toggle> Toggles = new List<Toggle>();
 
     protected override void Start()
@@ -19,6 +19,7 @@ public class ButtonGroup : ToggleGroup
         var tbs = GetComponentsInChildren<ToggleButton>();
         foreach (var tb in tbs)
         {
+           
             tb.index = Toggles.Count;
             tb.group = this;
             Toggles.Add(tb);

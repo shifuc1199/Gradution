@@ -9,21 +9,9 @@ using DreamerTool.GameObjectPool;
 public class GameScene : Scene
 {
     float timer;
-    private int hit_count;
+ 
     public static BackScene backScene = BackScene.None;
-    public Text hit_count_text;
-    public int HitCount {
-        get
-        {
-            return hit_count;
-        }
-        set
-        {
-            hit_count = value;
-            hit_count_text.GetComponent<DOTweenAnimation>().DORestart();
-            hit_count_text.text = hit_count + "  Combo";
-        }
-    }
+ 
     
     public void LoadSceneJumpByFadeAnim(string scene_name)
     {

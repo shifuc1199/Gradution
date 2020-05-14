@@ -14,10 +14,9 @@ public class PlayerSwordAttackTrigger : BaseAttackTrigger
         {
            
             ActorModel.Model.SetEngery(ActorModel.Model.GetCurrentWeapon().回复能量);
-            if (View.CurrentScene is GameScene)
-            {
-                (View.CurrentScene as GameScene).HitCount++;
-            }
+            
+               View.CurrentScene.GetView<GameInfoView>().HitCount++;
+           
             if(attack_type == HitType.击飞)
             {
                 Camera.main.GetComponent< Cinemachine.CinemachineImpulseSource>().GenerateImpulse();

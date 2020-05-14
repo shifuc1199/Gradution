@@ -23,13 +23,13 @@ public class NetSwordActorAnimationEvent : BaseActorAnimationEvent
         if (isMine)
         {
             AudioManager.Instance.PlayOneShot("player_heavy_attack");
-            PhotonNetwork.Instantiate("net_pick_up_slash", transform.position + new Vector3(0, 2, -5), Quaternion.Euler(-45, 90 * transform.right.x, 180),0 ,new object[] { HitType.上挑  });
+            PhotonNetwork.Instantiate("Net/net_pick_up_slash", transform.position + new Vector3(0, 2, -5), Quaternion.Euler(-45, 90 * transform.right.x, 180),0 ,new object[] { HitType.上挑  });
         }
     }
     public void SetSkill1()
     {
         if (isMine)
-             PhotonNetwork.Instantiate("skill_1", transform.position + transform.right * 2 + new Vector3(0, -1.5f, 0), Quaternion.Euler(new Vector3(-Quaternion.FromToRotation(Vector2.right, _controller.skill_controller.SkillDirection).eulerAngles.z, 90, 0)),0,new object[] { 2});
+             PhotonNetwork.Instantiate("Net/skill_1", transform.position + transform.right * 2 + new Vector3(0, -1.5f, 0), Quaternion.Euler(new Vector3(-Quaternion.FromToRotation(Vector2.right, _controller.skill_controller.SkillDirection).eulerAngles.z, 90, 0)),0,new object[] { 2});
     }
     public void SetSlash(int index)
     {
@@ -41,7 +41,7 @@ public class NetSwordActorAnimationEvent : BaseActorAnimationEvent
                 _rigi.AddForce(transform.right * attack_forward_distance, ForceMode2D.Impulse);
             }
             
-            var temp = PhotonNetwork.Instantiate("net_sword_slash", transform.position + new Vector3(0, 2, 0), Quaternion.Euler(transform.eulerAngles.y, 90, transform.eulerAngles.y + effect_rotation[index]), 0,new object[] { index==3? HitType.击飞: HitType.击退 });
+            var temp = PhotonNetwork.Instantiate("Net/net_sword_slash", transform.position + new Vector3(0, 2, 0), Quaternion.Euler(transform.eulerAngles.y, 90, transform.eulerAngles.y + effect_rotation[index]), 0,new object[] { index==3? HitType.击飞: HitType.击退 });
 
             if (index == 3)
             {
@@ -61,7 +61,7 @@ public class NetSwordActorAnimationEvent : BaseActorAnimationEvent
     {
         if (isMine)
         {
-            PhotonNetwork.Instantiate("net_heavy_sword_slash", transform.position + new Vector3(0, 1.5f, 0), Quaternion.Euler(180 - transform.eulerAngles.y, 90, 0), 0, new object[] { 0.5f });
+            PhotonNetwork.Instantiate("Net/net_heavy_sword_slash", transform.position + new Vector3(0, 1.5f, 0), Quaternion.Euler(180 - transform.eulerAngles.y, 90, 0), 0, new object[] { 0.5f });
         }
     }
     public void OnAttackEnter()
@@ -79,7 +79,7 @@ public class NetSwordActorAnimationEvent : BaseActorAnimationEvent
     {
         if (isMine)
         {
-            PhotonNetwork.Instantiate("net_blackhole",ActorController.Controller.skill_controller.SkillPos, Quaternion.identity, 0,new object[] { 3});
+            PhotonNetwork.Instantiate("Net/net_blackhole", ActorController.Controller.skill_controller.SkillPos, Quaternion.identity, 0,new object[] { 3});
         }
     }
     public void OnHeavyAttackEnter()
@@ -154,7 +154,7 @@ public class NetSwordActorAnimationEvent : BaseActorAnimationEvent
             if (ActorController.Controller.actor_state.isGround)
             {
                 isMove = false;
-               PhotonNetwork.Instantiate("net_skill4_effect",ActorController.Controller.transform.position + new Vector3(0, -4, 0), Quaternion.identity, 0,new object[] { 0.75f });
+               PhotonNetwork.Instantiate("Net/net_skill4_effect", ActorController.Controller.transform.position + new Vector3(0, -4, 0), Quaternion.identity, 0,new object[] { 0.75f });
             }
         }
     }
@@ -238,7 +238,7 @@ public class NetSwordActorAnimationEvent : BaseActorAnimationEvent
                     separated_body.transform.position = hit.collider.transform.position + new Vector3(x, y, 0).normalized * 18;
                     separated_body.transform.right = (hit.collider.transform.position - separated_body.transform.position).normalized;
                     pos = separated_body.transform.position + separated_body.transform.right * 36;
-                    var heavy_sword_slash = PhotonNetwork.Instantiate("net_heavy_sword_slash", separated_body.transform.position + separated_body.transform.right * 15, Quaternion.Euler(new Vector3(180 - Quaternion.FromToRotation(Vector2.right, separated_body.transform.right).eulerAngles.z, 90, 0)), 0, new object[] { 0.5f });
+                    var heavy_sword_slash = PhotonNetwork.Instantiate("Net/net_heavy_sword_slash", separated_body.transform.position + separated_body.transform.right * 15, Quaternion.Euler(new Vector3(180 - Quaternion.FromToRotation(Vector2.right, separated_body.transform.right).eulerAngles.z, 90, 0)), 0, new object[] { 0.5f });
                     heavy_sword_slash.GetComponentInChildren<BaseAttackTrigger>().attack_type = HitType.普通;
                 }
             }

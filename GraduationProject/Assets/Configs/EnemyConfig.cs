@@ -83,6 +83,6 @@ public class EnemyConfig : BaseConfig<EnemyConfig>
     }
     public GameObject GetGameObjectPrefab()
     {
-        return Resources.Load<GameObject>(EnemyPrefabName);
+        return Resources.Load<GameObject>("EnemyPrefabs/"+EnemyPrefabName);
     }
 }

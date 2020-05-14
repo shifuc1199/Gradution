@@ -50,10 +50,18 @@ namespace DreamerTool.UI
         {
             var _name = typeof(T).Name;
             if (!_views.ContainsKey(_name))
-                return null;
+            {
+                var viewPrefab = ResManager.LoadViewPrefab<T>();
+                if (viewPrefab == null)
+                    return null;
+                var view = viewPrefab.GetComponent<T>();
+                view.transform.parent = _root;
+                _views.Add(view.name, view);
+                return view ;
+            }
             _views[_name].gameObject.SetActive(true);
 
-            return (T)_views[_name];
+            return _views[_name] as T;
         }
         public T GetView<T>() where T : View
         {
@@ -221,7 +229,7 @@ namespace DreamerTool.Util
         {
             if ((a + d) == 0)
                 return 0;
-
+ 
             return a * a / (a + d);
         }
          
@@ -443,18 +451,19 @@ namespace DreamerTool.EditorTool
                     Debug.LogError("Sorry,There is not find sprite!");
                     return;
                 }
-                string[] splitSpritePath = spritePath.Split(new char[] { '/' });
-                //文件夹路径 通过完整路径再去掉文件名称即可;
-                string fullFolderPath = Inset(spritePath, 0, splitSpritePath[splitSpritePath.Length - 1].Length + 1) + "/" + Selection.objects[i].name;
-                //同名文件夹;
+                
+             
+                
+                
                 string folderName = Selection.objects[i].name;
-                string adjFolderPath = InsetFromEnd(fullFolderPath, Selection.objects[i].name.Length + 1);
-                //验证路径;
+
+                string fullFolderPath = "Assets/Resources/Equipment"+"/" + folderName;
+
                 if (!AssetDatabase.IsValidFolder(fullFolderPath))
                 {
-                    AssetDatabase.CreateFolder(adjFolderPath, folderName);
+                    AssetDatabase.CreateFolder("Assets/Resources/Equipment", folderName);
                 }
-
+               
                 for (int j = 0; j < sprites.Length; j++)
                 {   //进度条;
                     string pgTitle = (i + 1).ToString() + "/" + Selection.objects.Length + " 开始导出Sprite";
@@ -469,7 +478,7 @@ namespace DreamerTool.EditorTool
                     tex.Apply();
                     //判断保存路径;
                     string savePath = fullFolderPath + "/" + sprites[j].name + ".png";
- 
+                    Debug.Log(savePath);
                     //生成png;
                     File.WriteAllBytes(savePath, tex.EncodeToPNG());
                 }
@@ -546,6 +555,11 @@ namespace DreamerTool.Extra
     
     public static class Extra
     {
+        public static string ToHtmlString(this Color c)
+        {
+            return ColorUtility.ToHtmlStringRGBA(c);
+        }
+         
         public static void Copy<Tkey, Tvalue>(this Dictionary<Tkey, Tvalue> dict, Dictionary<Tkey, Tvalue> copy_dict)
         {
             foreach (var item in copy_dict)

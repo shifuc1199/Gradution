@@ -25,4 +25,6 @@ public class ShopCell : MonoBehaviour
         m_icon.sprite = config.GetSprite();
         m_singlepriceText.text = config.购买价格.ToString();
     }
+
+     
  }

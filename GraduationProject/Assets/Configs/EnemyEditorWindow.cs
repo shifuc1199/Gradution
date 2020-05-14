@@ -1,15 +1,11 @@
 ﻿#if UNITY_EDITOR
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 using Sirenix.Utilities.Editor;
 using Sirenix.Utilities;
-using System;
- using System.Linq;
-using Sirenix.OdinInspector;
-
+using System.Linq;
+ 
  
 public class EnemyEditorWindow : OdinMenuEditorWindow
 {
@@ -56,8 +52,9 @@ public class EnemyEditorWindow : OdinMenuEditorWindow
         {
             var selected = this.MenuTree.Selection.FirstOrDefault();
             var toolbarHeight = this.MenuTree.Config.SearchToolbarHeight;
- 
- 
+         
+
+
             SirenixEditorGUI.BeginHorizontalToolbar(toolbarHeight);
         {
             SirenixEditorGUI.ToolbarTab(false, new GUIContent(""));

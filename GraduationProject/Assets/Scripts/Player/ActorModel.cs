@@ -41,7 +41,7 @@ public   class ActorModel
     public int level = 1;
 
     public int exp = 0;
-
+    public List<System.DateTime> SignInDate = new List<System.DateTime>();
     public KnightLevel knightLevel = KnightLevel.圣骑士;
     public List<BagItemData> bag_items = new List<BagItemData>();
 
@@ -152,7 +152,8 @@ public   class ActorModel
     }
     public void SetPlayerAttribute(PlayerAttribute attribute, double value)
     {
-       
+        if (value == 0)
+            return;
         PlayerAttributes[attribute] += value;
         EventManager.OnChangePlayerAttribute?.Invoke(attribute,value);
         
@@ -198,7 +199,7 @@ public   class ActorModel
         {
             suit_id = id;
 
-            var commond = SuitConfig.Get(id).suit_function.Split(',');
+            var commond = SuitConfig.Get(id).suit_function.Split(';');
             foreach (var c in commond)
             {
                 GameStaticMethod.ExecuteCommond(c);
@@ -209,7 +210,7 @@ public   class ActorModel
 
             if (suit_id != -1)
             {
-                var commond = SuitConfig.Get(suit_id).suit_function.Split(',');
+                var commond = SuitConfig.Get(suit_id).suit_function.Split(';');
                 foreach (var c in commond)
                 {
                     GameStaticMethod.ExecuteBackCommond(c);

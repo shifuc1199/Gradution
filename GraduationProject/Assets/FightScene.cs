@@ -16,7 +16,7 @@ public class FightScene : Scene
     // Start is called before the first frame update
     void Start()
     {
-      GameObject player = PhotonNetwork.Instantiate("NetWorkPlayer", new Vector3(-50, 3, 0), Quaternion.identity,0,new object[] {JsonMapper.ToJson(ActorModel.Model )});
+      GameObject player = PhotonNetwork.Instantiate("Net/NetWorkPlayer", new Vector3(-50, 3, 0), Quaternion.identity,0,new object[] {JsonMapper.ToJson(ActorModel.Model )});
     }
     public void GameOver(int lose)
     {

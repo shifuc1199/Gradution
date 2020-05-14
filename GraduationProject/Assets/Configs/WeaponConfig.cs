@@ -5,13 +5,14 @@ using System.IO;
 using UnityEditor;
 using System.Text;
  using Sirenix.OdinInspector;
+using DreamerTool.Extra;
 public   class WeaponConfig : ItemConfig<WeaponConfig>
 {
     [Tip(3, GameConstData.COLOR_WHITE)]
     [BoxGroup("属性信息")]
     public WeaponType 武器种类;/*nil*/
     [BoxGroup("属性信息")]
-    [Tip(4, GameConstData.COLOR_WHITE)]
+    [Tip(4, GameConstData.COLOR_YELLOW)]
     [EquipMent(PlayerAttribute.攻击力)]
     public double 攻击力;
 	[BoxGroup("属性信息")]
@@ -36,14 +37,17 @@ public   class WeaponConfig : ItemConfig<WeaponConfig>
         var type = GetType();
         var fields = type.GetFields();
         StringBuilder sb = new StringBuilder();
+        var color = GameStaticData.ITEM_COLOR_DICT[(ItemLevel)type.GetField("物品阶级").GetValue(this)].ToHtmlString();
         System.Collections.Generic.SortedDictionary<int, string> dict = new System.Collections.Generic.SortedDictionary<int, string>();
         foreach (var field in fields)
         {
             var tip_attribute = field.GetCustomAttribute(typeof(TipAttribute));
             if(tip_attribute!=null)
             {
+                
                 var attribute = (tip_attribute as TipAttribute);
-                var valueStr = DreamerTool.Util.DreamerUtil.GetColorRichText(field.GetValue(this).ToString(), attribute.valueColor);
+
+                var valueStr = DreamerTool.Util.DreamerUtil.GetColorRichText(field.GetValue(this).ToString(), attribute.index==2 || attribute.index == 1 ? color : attribute.valueColor);
                 dict.Add(attribute.index, field.Name + ": " + valueStr + "\n");
                
             }

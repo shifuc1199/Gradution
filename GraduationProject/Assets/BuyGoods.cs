@@ -15,7 +15,7 @@ public class BuyGoods : MonoBehaviour
     public Text m_moneyText;
     public Slider m_countSlider;
     int singlePrice;
-    int amount = 10;
+    int amount = 1;
 
     private ItemType m_type;
     private int m_id;

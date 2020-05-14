@@ -65,6 +65,7 @@ public class ItemEditorWindow : OdinMenuEditorWindow
     {
         item.OnDrawItem += (t) => { (t.Value as T).SetEditorSprite(); };
     }
+ 
     public void CreateItem<T>(T i,ref OdinMenuTree t) where T:ItemConfig<T>
     {
         i.物品ID = _tree.MenuItems.Count + 1;
@@ -132,6 +133,10 @@ public class ItemEditorWindow : OdinMenuEditorWindow
                         default:
                             break;
                     }
+                }
+                if (SirenixEditorGUI.ToolbarButton(new GUIContent("    -   ")) )
+                {
+
                 }
             }
             SirenixEditorGUI.EndHorizontalToolbar();

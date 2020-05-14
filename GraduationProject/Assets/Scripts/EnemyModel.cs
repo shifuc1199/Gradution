@@ -28,6 +28,7 @@ public class EnemyModel
     }
     public double GetAttack()
     {
+ 
         return level * config.attack * config.level_ratio;
     }
 }

@@ -56,6 +56,7 @@ public class BagView : MonoBehaviour
   
     public void SelectItem(int index)
     {
+ 
         grid_index = index;
         ChooseGrid();
     }
@@ -131,7 +132,7 @@ public class BagView : MonoBehaviour
     {
         config.ChangePlayerAttribute();
         ChangeEquipMent(equipType);
-        SetTip(config, config_2);
+        SetTip(config_2, config);
     }
     public void SetTip<T>(ItemConfig<T> config, ItemConfig<T> config_2) where T : BaseConfig<T>
     {
@@ -161,7 +162,7 @@ public class BagView : MonoBehaviour
                 break;
             case ItemType.肩膀:
                 var arm_config = ArmConfig.Get(CurretnSelect.data.config_id);
-                Equip(arm_config, ArmConfig.Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.肩膀右)), EquipmentType.肩膀右);
+                Equip(arm_config, ArmConfig.Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.肩膀左)), EquipmentType.肩膀左);
                 break;
             case ItemType.上衣:
                 var torso_config = TorsoConfig.Get(CurretnSelect.data.config_id);
@@ -209,14 +210,14 @@ public class BagView : MonoBehaviour
         return null;
     }
     public void ChooseGrid()
-    { 
-        if(CurretnSelect!=null)
+    {
+       
+        if (CurretnSelect!=null)
         {
             CurretnSelect.UnSelect();
         }
         CurretnSelect = Grids[grid_index];
         CurretnSelect.Select();
-
         if (CurretnSelect.data != null)
         {
             
@@ -233,7 +234,7 @@ public class BagView : MonoBehaviour
                     break;
                 case ItemType.肩膀:
                     var arm = ArmConfig.Get(CurretnSelect.data.config_id);
-                    SetTip(arm, ArmConfig.Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.肩膀右)));
+                    SetTip(arm, ArmConfig.Get(ActorModel.Model.GetPlayerEquipment(EquipmentType.肩膀左)));
                     break;
                 case ItemType.手链:
                     var sleeve = SleeveConfig.Get(CurretnSelect.data.config_id);

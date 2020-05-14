@@ -41,6 +41,7 @@ public class SignInCell : MonoBehaviour
     }
     public void SetModel(int daycount,int index)
     {
+      
         DayCountText.text = "第" + index.ToString() + "天";
         int value = daycount - (index - 1);
         //value>0 代表签到过的
@@ -50,10 +51,17 @@ public class SignInCell : MonoBehaviour
         {
             if (daycount > 0)
             {
-                if ((TimeModel.Instance.Now - SignInView.SignInDate.GetLast()).Seconds >= 24*60*60)
+                if ((TimeModel.Instance.Now - ActorModel.Model.SignInDate.GetLast()).Seconds >= 24*60*60)
                 {
+                     
                     SetSignInButton(true);
                 }
+                else
+                {
+                    SignInButton.gameObject.SetActive(false);
+                    SelectFrame.SetActive(false);
+                }
+ 
             }
             else
             {
@@ -80,7 +88,7 @@ public class SignInCell : MonoBehaviour
     }
     public void SignIn()
     {
-        SignInView.SignInDate.Add(TimeModel.Instance.Now);
+        ActorModel.Model.SignInDate.Add(TimeModel.Instance.Now);
         View.CurrentScene.GetView<SignInView>().UpdateCell();
         View.CurrentScene.GetView<SignInView>().isTiming = true;
         var money = double.Parse(ItemValueText.text.Trim('x'));

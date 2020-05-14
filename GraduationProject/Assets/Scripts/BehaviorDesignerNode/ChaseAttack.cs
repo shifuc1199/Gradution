@@ -29,7 +29,7 @@ public class ChaseAttack : Action
         base.OnStart();
          
         
-        Debug.Log("Start");
+ 
     }
      
     
@@ -53,7 +53,7 @@ public class ChaseAttack : Action
             else
             {
                  
-                transform.position = Vector3.MoveTowards(transform.position, new Vector2(target.position.x, transform.position.y), Time.deltaTime * chase_speed);
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.position.x, transform.position.y,transform.position.z), Time.deltaTime * chase_speed);
                 animator.SetBool("run", true);
             }
         }
@@ -71,7 +71,7 @@ public class ChaseAttack : Action
         base.OnConditionalAbort();
          
        
-        Debug.Log("退出");
+ 
         animator.SetBool("run", false);
     }
      

@@ -175,7 +175,8 @@ public class ActorController : MonoBehaviour,IHurt
         Timer.Register(0.25f, () => { View.CurrentScene.GetView<GameInfoView>().SetScreenEffect(Color.red, 0, 0.1f, 0.5f); });
         actor_state.isSuperArmor = true;
         Timer.Register(super_armor_time, () => {   actor_state.isSuperArmor = false; });
-        ActorModel.Model.SetHealth(-DreamerTool.Util.DreamerUtil.GetHurtValue(attackData.hurt_value,ActorModel.Model.GetPlayerAttribute(PlayerAttribute.物防)));
+        var hurt_value = -DreamerTool.Util.DreamerUtil.GetHurtValue(attackData.hurt_value, ActorModel.Model.GetPlayerAttribute(PlayerAttribute.物防));
+        ActorModel.Model.SetHealth(hurt_value);
 
         GameStaticMethod.ChangeChildrenSpriteRendererColor(gameObject, Color.red);
 

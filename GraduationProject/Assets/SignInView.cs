@@ -13,9 +13,9 @@ public class SignInView : View
     public Transform root;
     public GameObject cell_prefab;
     public Text timing_text;
-    public static List<System.DateTime> SignInDate = new List<System.DateTime>();
+    
     private List<SignInCell> cell_list = new List<SignInCell>();
-
+    int second;
     public GameObject failed;
     public GameObject successful;
     public GameObject loading;
@@ -37,7 +37,7 @@ public class SignInView : View
         {
             var cell = Instantiate(cell_prefab, root);
             var signincell = cell.GetComponent<SignInCell>();
-            signincell.SetModel(SignInDate.Count, i+1);
+            signincell.SetModel(ActorModel.Model. SignInDate.Count, i+1);
             cell_list.Add(signincell);
         }
     }
@@ -46,7 +46,8 @@ public class SignInView : View
     {
         base.OnShow();
         CurrentScene.GetView<GameInfoView>().HideAnim();
-
+         
+       
     }
     public override void OnHide()
     {
@@ -59,7 +60,7 @@ public class SignInView : View
  
         for (int i = 0; i < cell_list.Count; i++)
         {
-            cell_list[i].SetModel(SignInDate.Count, i + 1);
+            cell_list[i].SetModel(ActorModel.Model.SignInDate.Count, i + 1);
         }
          
     }
@@ -67,20 +68,22 @@ public class SignInView : View
     public bool isTiming = true;
 
 
-    System.DateTime test = new System.DateTime(1,1,1,23,59,59);
+    
 
     private void Update()
     {
-        if (isTiming && SignInDate.Count > 0)
+        if (isTiming && ActorModel.Model.SignInDate.Count > 0)
         {
-            
-            timing_text.text = "(距离下一次签到还有: <color=green>" + test.AddSeconds( (24 * 60 * 60 - (TimeModel.Instance.Now - SignInDate.GetLast()).Seconds)).ToString("HH时:mm分:ss秒") + "</color>)";
-            if ((24 * 60 * 60 - (TimeModel.Instance.Now - SignInDate.GetLast()).Seconds) <= 0)
+            second = (24 * 60 * 60 - (int)(TimeModel.Instance.Now - ActorModel.Model.SignInDate.GetLast()).TotalSeconds);
+         
+          
+            timing_text.text = "(距离下一次签到还有: <color=green>" + TimeModel.Instance.GetDateTimeBySeconds(second).ToString("HH时:mm分:ss秒") + "</color>)";
+            if ((24 * 60 * 60 - (TimeModel.Instance.Now - ActorModel.Model.SignInDate.GetLast()).Seconds) <= 0)
             {
                 timing_text.text = "(可以签到啦!)";
-                if (SignInDate.Count == 6)
+                if (ActorModel.Model.SignInDate.Count == 6)
                 {
-                    SignInDate.Clear();
+                    ActorModel.Model.SignInDate.Clear();
                 }
                 isTiming = false;
                 UpdateCell();

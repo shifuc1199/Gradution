@@ -14,9 +14,10 @@ using System.Text;
 
 public class ShieldConfig : ItemConfig<ShieldConfig>
 {
+    [Tip(3,GameConstData.COLOR_WHITE,GameConstData.HEALTH_TIP_STR)]
     public double helath;
-    public double magic_defend;
-    public double defend;
+    [Tip(4, GameConstData.COLOR_WHITE, GameConstData.MAGIC_DEFEND_TIP_STR)] public double magic_defend;
+    [Tip(5, GameConstData.COLOR_WHITE, GameConstData.DEFEND_TIP_STR)] public double defend;
     [Button("保存", 50)]
     public override void Save()
     {
@@ -60,8 +61,13 @@ public class ShieldConfig : ItemConfig<ShieldConfig>
             if (tip_attribute != null)
             {
                 var attribute = (tip_attribute as TipAttribute);
+                if (attribute.showName == "")
+                {
+                    attribute.showName = field.Name;
+                }
+ 
                 var valueStr = DreamerTool.Util.DreamerUtil.GetColorRichText(field.GetValue(this).ToString(), attribute.valueColor);
-                dict.Add(attribute.index, field.Name + ": " + valueStr + "\n");
+                dict.Add(attribute.index, attribute.showName + ": " + valueStr + "\n");
 
             }
         }
@@ -75,6 +81,7 @@ public class ShieldConfig : ItemConfig<ShieldConfig>
             {
                 sb.Append("\n");
             }
+ 
             sb.Append(item.Value);
         }
         return sb.ToString();

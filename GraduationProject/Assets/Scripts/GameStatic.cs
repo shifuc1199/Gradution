@@ -69,7 +69,12 @@ public static class GameStaticData
 }
 public class GameConstData
 {
+    public const string MAGIC_DEFEND_TIP_STR = "魔抗";
+    public const string HEALTH_TIP_STR = "生命值";
+    public const string DEFEND_TIP_STR = "防御";
+    public const string  SPEED_TIP_STR = "移速";
     public const string COLOR_WHITE = "";
+    public const string COLOR_YELLOW = "FFFA00";
     public const string FIGHT_SCENE_NAME = "FightScene";
     public const string LOGINING_PHONE_NUMBER = "logining_phone_number";
     public const string BMOB_APP_ID = "15fe84103d433cfdbbafb8754c88b5ef";
@@ -99,7 +104,7 @@ public  class GameStaticMethod
     }
     public static void ExecuteBackCommond(string commondStr)
     {
-        var commond = commondStr.Split(';');
+        var commond = commondStr.Split(',');
         if (commond.Length > 0)
         {
             commondStr = commond[0];
@@ -118,7 +123,7 @@ public  class GameStaticMethod
     }
     public static void ExecuteCommond(string commondStr)
     {
-        var commond = commondStr.Split(';');
+        var commond = commondStr.Split(',');
         if(commond.Length>0)
         {
             commondStr = commond[0];
@@ -137,6 +142,9 @@ public  class GameStaticMethod
             case "buy_scratch_card":
                 View.CurrentScene.OpenView<ShopView>();
                 View.CurrentScene.CloseView<NPCView>();
+                break;
+            case "loadscene":
+                LoadingScene.LoadScene(commond[1]);
                 break;
             case "exit":
                 View.CurrentScene.CloseView<NPCView>();

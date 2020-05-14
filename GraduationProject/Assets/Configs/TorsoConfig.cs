@@ -14,9 +14,9 @@ using System.Reflection;
 
 public class TorsoConfig : ItemConfig<TorsoConfig>
 {
-    [Tip(3,GameConstData.COLOR_WHITE,"生命值")][EquipMent(PlayerAttribute.生命值)]public double helath;
-    [Tip(4, GameConstData.COLOR_WHITE, "防御力")] [EquipMent(PlayerAttribute.物防)] public double defend;
-    [Tip(5, GameConstData.COLOR_WHITE, "魔抗")] [EquipMent(PlayerAttribute.魔抗)] public double magicdefend;
+    [Tip(3,GameConstData.COLOR_WHITE,GameConstData.HEALTH_TIP_STR)][EquipMent(PlayerAttribute.生命值)]public double helath;
+    [Tip(4, GameConstData.COLOR_WHITE, GameConstData.DEFEND_TIP_STR)] [EquipMent(PlayerAttribute.物防)] public double defend;
+    [Tip(5, GameConstData.COLOR_WHITE, GameConstData.MAGIC_DEFEND_TIP_STR)] [EquipMent(PlayerAttribute.魔抗)] public double magicdefend;
     [Button("保存", 50)]
     public override void Save()
     {

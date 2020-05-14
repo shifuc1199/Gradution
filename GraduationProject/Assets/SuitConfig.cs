@@ -46,7 +46,7 @@ public class SuitConfig : BaseConfig<SuitConfig>
         return "\n\t\t\t\t" +
           DreamerTool.Util.DreamerUtil.GetColorRichText(suit_name + "战甲", ActorModel.Model.GetPlayerEquipment(EquipmentType.上衣) == ID?Color.white:Color.gray)    + "\n\t\t\t\t" +
            DreamerTool.Util.DreamerUtil.GetColorRichText(suit_name + "战裤", ActorModel.Model.GetPlayerEquipment(EquipmentType.裤子) == ID ? Color.white : Color.gray) + "\n\t\t\t\t" +
-        DreamerTool.Util.DreamerUtil.GetColorRichText(suit_name + "肩甲", ActorModel.Model.GetPlayerEquipment(EquipmentType.肩膀右) == ID ? Color.white : Color.gray) + "\n\t\t\t\t" +
+        DreamerTool.Util.DreamerUtil.GetColorRichText(suit_name + "肩甲", ActorModel.Model.GetPlayerEquipment(EquipmentType.肩膀左) == ID ? Color.white : Color.gray) + "\n\t\t\t\t" +
           DreamerTool.Util.DreamerUtil.GetColorRichText(suit_name + "手环", ActorModel.Model.GetPlayerEquipment(EquipmentType.手链) == ID ? Color.white : Color.gray) + "\n\t\t\t\t" +
          DreamerTool.Util.DreamerUtil.GetColorRichText(suit_name + "战靴", ActorModel.Model.GetPlayerEquipment(EquipmentType.鞋子) == ID ? Color.white : Color.gray);
     }

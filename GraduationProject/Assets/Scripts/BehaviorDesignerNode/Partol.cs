@@ -23,10 +23,10 @@ public class Partol : Action
     public override TaskStatus OnUpdate()
     { if (GetComponent<BaseEnemyController>().isMoveable)
         {
-            var target = new Vector2(way_points[way_point_index].transform.position.x, transform.position.y);
+            var target = new Vector3(way_points[way_point_index].transform.position.x, transform.position.y, transform.position.z);
 
             transform.rotation = target.x > transform.position.x ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
-            transform.position = Vector2.MoveTowards(transform.position, target, partol_speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target, partol_speed * Time.deltaTime);
             if (Vector2.Distance(transform.position, target) <= 1f)
             {
                 way_point_index++;

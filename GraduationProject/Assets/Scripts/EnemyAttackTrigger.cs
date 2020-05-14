@@ -15,7 +15,7 @@ public class EnemyAttackTrigger : BaseAttackTrigger
         
         if (collision.gameObject.tag=="Player")
         {
-            
+ 
             collision.GetComponent<IHurt>().GetHurt(
                 new AttackData(owner.model.GetAttack(),false ,transform.position, attack_type)
                 

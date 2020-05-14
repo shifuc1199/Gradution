@@ -39,7 +39,7 @@ public class SeeTarget : Conditional
         Debug.DrawLine(newPos, newPos - newVec3.normalized * distance);
 
         Debug.DrawLine(newPos, newPos - newVec4.normalized * distance);
-        if (Vector2.Distance(transform.position,target.position)<=distance)
+        if (Vector3.Distance(transform.position,target.position)<=distance)
         {
             find_tip.SetActive(true);
             var dir = newPos - target.transform.position;  

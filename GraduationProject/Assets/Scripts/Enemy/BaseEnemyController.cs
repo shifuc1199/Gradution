@@ -10,6 +10,7 @@ using DG.Tweening;
  
 public class BaseEnemyController : MonoBehaviour,IHurt
 {
+    public Vector3 popTextOffset;
     public int config_id;
     BaseEnemyData enemy_data;
     private AudioSource _audio;
@@ -23,17 +24,22 @@ public class BaseEnemyController : MonoBehaviour,IHurt
     public Transform ground_check_pos;
     public float hit_fly_distance;
     public float hit_back_distance;
-  
+    private int level = 1;
     public EnemyModel model;
+    public UnityAction dieCallBack;
+    public void SetLevel(int l)
+    {
+        level = l;
+        model = new EnemyModel(config_id, level);
+        enemy_data = new BaseEnemyData(model, DieCallBack);
+    }
     private void Awake()
     {
-        model = new EnemyModel(config_id,1);
-       
+        SetLevel(1);
         _audio = GetComponent<AudioSource>();
         _anim = GetComponentInChildren<Animator>();
         _rigi = GetComponent<Rigidbody2D>();
         start_gravity = _rigi.gravityScale;
-        enemy_data = new BaseEnemyData(model,DieCallBack);
     }
     protected virtual void DieCallBack()
     {
@@ -59,21 +65,23 @@ public class BaseEnemyController : MonoBehaviour,IHurt
                 rigi.AddForce(new Vector3(Random.Range(-1f, 1f) * 4f, Random.Range(0.5f, 1f) * 5, 0), ForceMode2D.Impulse);
             }
         }
+        isMoveable = false;
         GetComponent<Collider2D>().enabled = false;
         _rigi.simulated = false;
+        dieCallBack?.Invoke();
         Destroy(gameObject, 3);
     }
     public void GetHurt(AttackData attackData)
     {
         if (enemy_data.isdie)
             return;
-        
-        transform.rotation = attackData.attack_pos.x > transform.position.x ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
-         
-        var hurt = (int)DreamerUtil.GetHurtValue(attackData.hurt_value, model.GetDefend());
+        if (!isSuperArmor)
+            transform.rotation = attackData.attack_pos.x > transform.position.x ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
+        var hurt =  DreamerUtil.GetHurtValue(attackData.hurt_value, model.GetDefend());
         enemy_data.SetHealth(-hurt);
-        var pop_text = GameObjectPoolManager.GetPool("pop_text").Get(transform.position, Quaternion.identity, 0.5f);
-        pop_text.GetComponent<PopText>().SetText(hurt.ToString(), attackData.isCrit?Color.red:Color.white);
+      
+        var pop_text = GameObjectPoolManager.GetPool("pop_text").Get(transform.position+ popTextOffset, Quaternion.identity, 0.5f);
+        pop_text.GetComponent<PopText>().SetText(Mathf.RoundToInt((float)hurt).ToString(), attackData.isCrit?Color.red:Color.white);
 
         View.CurrentScene.GetView<GameInfoView>().enemy_health.SetData(enemy_data);
  

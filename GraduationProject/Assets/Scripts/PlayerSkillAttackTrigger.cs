@@ -17,7 +17,7 @@ public class PlayerSkillAttackTrigger : BaseAttackTrigger
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            (View.CurrentScene as GameScene).HitCount++;
+            View.CurrentScene.GetView<GameInfoView>().HitCount++;
             if (attack_type == HitType.击飞)
             {
 
