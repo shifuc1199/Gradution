@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DreamerTool.UI;
 public class ActorHUD : MonoBehaviour
 {
     public Image coin_icon;
@@ -50,6 +51,15 @@ public class ActorHUD : MonoBehaviour
         
         health_text .text  = (int)ActorModel.Model.GetHealth()+"/"+ ActorModel.Model.GetPlayerAttribute(PlayerAttribute.生命值);
         health_bar.fillAmount =(float)( ActorModel.Model.GetHealth()/ActorModel.Model.GetPlayerAttribute(PlayerAttribute.生命值));
+        if(ActorModel.Model.GetHealth()<=0)
+        {
+            TimeModel.SetTimeScale(0.2f);
+            View.CurrentScene.OpenView<TipView>().SetContent("你已经死了！!",()=> {
+                TimeModel.SetTimeScale(1);
+                ActorModel.Model.ResetState();
+                LoadingScene.LoadScene(GameConstData.GAME_MAIN_SCENE_NAME);
+            });
+        }
     }
     public void UpdateMoneyText()
     {

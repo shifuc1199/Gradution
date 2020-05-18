@@ -24,7 +24,8 @@ public class FightScene : Scene
         lose %= 2;
         PhotonNetwork.AutomaticallySyncScene = false;
         OpenView<TipView>().SetContent("比赛结束\n"+ PlayerDict[lose].GetModel().actor_name+ "获胜！",()=>{
-             
+          if (PlayerDict[lose].GetModel().actor_name == ActorModel.Model.actor_name)
+                ActorModel.Model.SetPKScore(10);
             GameScene.backScene = BackScene.FightScene;
             LoadingScene.LoadScene(GameConstData.GAME_MAIN_SCENE_NAME); });
     }

@@ -37,11 +37,12 @@ public class ChaseAttack : Action
     {
         if (GetComponent<BaseEnemyController>().isMoveable)
         {
+
             transform.rotation = target.position.x > transform.position.x ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
             if (Vector3.Distance(transform.position, new Vector2(target.position.x, transform.position.y)) <= attack_distance.Value)
             {
                 animator.SetBool("run", false);
-
+            
                 attack_timer += Time.deltaTime;
                 if (attack_timer >= attack_interval)
                 {

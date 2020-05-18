@@ -57,14 +57,12 @@ public class GameScene : Scene
     public void TransferPlayerByFadeAnim(Transform pos)
     {
         GetView<GameInfoView>().FadeAnim(() => { ActorController.Controller.Transfer(pos);
-            Camera.main.GetComponent<Cinemachine.CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<Cinemachine.CinemachineConfiner>().InvalidatePathCache();
+        Camera.main.GetComponent<Cinemachine.CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<Cinemachine.CinemachineConfiner>().InvalidatePathCache();
         Camera.main.GetComponent<Cinemachine.CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<Cinemachine.CinemachineConfiner>().m_BoundingShape2D = pos.gameObject.GetComponent<PolygonCollider2D>(); });
     }
     // Update is called once per frame
    void Update()
     {
-       
-      //  UICamera.orthographicSize =(float) Screen.width / Screen.height;
         if (Time.timeScale != 1)
         {
 

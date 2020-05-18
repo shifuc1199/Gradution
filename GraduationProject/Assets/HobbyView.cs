@@ -13,7 +13,7 @@ public class HobbyView : View
 {
     public Text name_text;
     public Text lv_text;
-
+    public Text scoreText;
     public Transform room_root;
     public GameObject room_cell_refab;
     
@@ -38,6 +38,7 @@ public class HobbyView : View
         HobbyManager.isConnected = true;
         name_text.text = ActorModel.Model.actor_name;
         lv_text.text = "LV " + ActorModel.Model.level;
+        scoreText.text = "竞技点: " + ActorModel.Model.pkScore;
     }
     public void CreateRoomCell(RoomInfo info)
     {

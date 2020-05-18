@@ -42,11 +42,13 @@ public class SeeTarget : Conditional
         if (Vector3.Distance(transform.position,target.position)<=distance)
         {
             find_tip.SetActive(true);
-            var dir = newPos - target.transform.position;  
+            var dir = newPos - target.transform.position;
+           
             if(Mathf.Abs( Vector3.Dot(transform.right.normalized, dir.normalized))>= Mathf.Cos(view_angle /2 * Mathf.Deg2Rad))
             return TaskStatus.Success;
         }
         find_tip.SetActive(false);
+       
         return TaskStatus.Failure;
     }
 }

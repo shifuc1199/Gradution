@@ -204,6 +204,7 @@ public class SwordActorAnimationEvent : BaseActorAnimationEvent
                 separated_body.transform.right = (hit.collider.transform.position - separated_body.transform.position).normalized;
                  pos = separated_body.transform.position + separated_body.transform.right * 36;
                var heavy_sword_slash = GameObjectPoolManager.GetPool("heavy_sword_slash").Get(separated_body.transform.position + separated_body.transform.right * 15, Quaternion.Euler(new Vector3(180 - Quaternion.FromToRotation(Vector2.right, separated_body.transform.right).eulerAngles.z, 90, 0)), 0.5f);
+             
                 heavy_sword_slash.GetComponentInChildren<BaseAttackTrigger>().attack_type = HitType.普通;
             }
         }

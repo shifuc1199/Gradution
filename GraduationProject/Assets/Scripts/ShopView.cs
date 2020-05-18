@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DreamerTool.UI;
+using UnityEngine.UI;
 public class  ShopView : View
 {
     public Transform m_root;
@@ -12,12 +13,14 @@ public class  ShopView : View
    
     public BuyGoods m_buy_goods;
     public GameObject m_cell_prefab;
-
-    List<GameObject> cellList = new List<GameObject>();
+    public ButtonGroup itemType_group;
+ 
     public override void OnShow()
     {
         base.OnShow();
         CurrentScene.GetView<GameInfoView>().HideAnim();
+
+       
     }
     public override void OnHide()
     {
@@ -27,24 +30,23 @@ public class  ShopView : View
     // Start is called before the first frame update
     void Awake()
     {
-        Update(ItemType.武器);
+        UpdateItemType(ItemType.武器);
     }
     private void GetData<T>() where T: ItemConfig<T>
     {
-        foreach (var item in cellList)
-        {
-            Destroy(item);
-        }
-        cellList.Clear();
+        m_group.ClearToggles();
+
         foreach (var data in ItemConfig<T>.Datas)
         {
             var cellObject = Instantiate(m_cell_prefab, m_root.transform);
             var cell = cellObject.GetComponent<ShopCell>();
-            cellList.Add(cellObject);
             cell.SetModel(data.Value);
         }
+        
+        
+         
     }
-    public void Update(ItemType itemType)
+    public void UpdateItemType(ItemType itemType)
     {
         switch (itemType)
         {
@@ -75,15 +77,17 @@ public class  ShopView : View
             default:
                 break;
         }
-       
+        OnCellSelect(0);
     }
     public void OnGroupCellSelect(int index)
     {
-        Update((ItemType)index);
+        var cell = itemType_group.Toggles[index];
+        var item_type = (ItemType)System.Enum.Parse(typeof(ItemType), cell.GetComponentInChildren<Text>().text);
+        UpdateItemType(item_type);
     }
    public void OnCellSelect(int index)
     {
-        var shopCell = m_group.Toggles[index].GetComponent<ShopCell>();
+        var shopCell = m_group.Toggles[index].GetComponent<ShopCell>();;
         m_buy_goods.SetModel(shopCell.m_itemType, shopCell.m_configId);
     }
     // Update is called once per frame

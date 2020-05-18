@@ -15,6 +15,10 @@ public class TimeModel : MonoSingleton<TimeModel>
     {
          
     }
+    public static void   SetTimeScale(float value)
+    {
+        Time.timeScale = value;
+    }
     public System.DateTime GetDateTimeBySeconds(int second)
     {
         var hour = second / 3600;

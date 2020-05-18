@@ -22,7 +22,7 @@ public class PlayerSwordAttackTrigger : BaseAttackTrigger
                 Camera.main.GetComponent< Cinemachine.CinemachineImpulseSource>().GenerateImpulse();
                 if (View.CurrentScene is GameScene)
                 {
-                    Time.timeScale = 0.2f;
+                    TimeModel.SetTimeScale( 0.2f);
                 }
             }
             bool isCrit = false;

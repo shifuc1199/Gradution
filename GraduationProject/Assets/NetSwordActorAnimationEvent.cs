@@ -43,18 +43,18 @@ public class NetSwordActorAnimationEvent : BaseActorAnimationEvent
             
             var temp = PhotonNetwork.Instantiate("Net/net_sword_slash", transform.position + new Vector3(0, 2, 0), Quaternion.Euler(transform.eulerAngles.y, 90, transform.eulerAngles.y + effect_rotation[index]), 0,new object[] { index==3? HitType.击飞: HitType.击退 });
 
-            if (index == 3)
-            {
-             
-                AudioManager.Instance.PlayOneShot("player_heavy_attack");
-            }
-            else
-            {
-                AudioManager.Instance.PlayOneShot("player_common_attack");
-                
-            }
+           
         }
+        if (index == 3)
+        {
 
+            AudioManager.Instance.PlayOneShot("player_heavy_attack");
+        }
+        else
+        {
+            AudioManager.Instance.PlayOneShot("player_common_attack");
+
+        }
 
     }
     public void SetHeavySlash()

@@ -19,7 +19,7 @@ public class ToggleButton : Toggle
         {
             group = GetComponentInParent<ButtonGroup>();
         }
-    
+        (group as ButtonGroup).AddToggle(this);
         onValueChanged.AddListener(OnValueChanged);
         OnValueChanged(isOn);
     }

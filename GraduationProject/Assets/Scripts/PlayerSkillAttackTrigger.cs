@@ -22,7 +22,7 @@ public class PlayerSkillAttackTrigger : BaseAttackTrigger
             {
 
                 Camera.main.GetComponent<Cinemachine.CinemachineImpulseSource>().GenerateImpulse();
-                Time.timeScale = 0.2f;
+               TimeModel.SetTimeScale( 0.2f);
             }
             collision.gameObject.GetComponent<IHurt>().GetHurt(
                 new AttackData(model.GetHurtValue(),false,transform.position, attack_type)

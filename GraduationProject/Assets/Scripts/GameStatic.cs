@@ -31,6 +31,11 @@ public class RectTransformData
 
 public static class GameStaticData  
 {
+    public static List<List<int>> towerEnemys = new List<List<int>> { 
+        new List<int>{2,2,2,2 },
+         new List<int> {4,2,2,4},
+       new List<int> {-1,3,3,-1},                                                           
+    };
     public static RectTransformData WeaponUI = new RectTransformData(
         new Vector2(-20.9f, -13f),
         new Vector2(150, 150),
@@ -69,6 +74,7 @@ public static class GameStaticData
 }
 public class GameConstData
 {
+    public const string ENDLESSS_SCENE_NAME = "EndlessScene";
     public const string MAGIC_DEFEND_TIP_STR = "魔抗";
     public const string HEALTH_TIP_STR = "生命值";
     public const string DEFEND_TIP_STR = "防御";
@@ -89,6 +95,7 @@ public class GameConstData
     public const string SAVE_DATA_KEY = "game_data_";
     public const string USER_DATABASE_NAME = "user";
     public const byte NETWORK_READY_STATE_CHANGE_EVENT = 0;
+     
 }
 
 public  class GameStaticMethod

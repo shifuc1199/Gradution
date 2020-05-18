@@ -10,16 +10,33 @@ public class ButtonGroup : ToggleGroup
 {
      
     public MyIntUnityEvent OnSelect;
-   
+ 
     public List<Toggle> Toggles = new List<Toggle>();
-
-    protected override void Start()
+ 
+    public void ClearToggles()
     {
-        base.Start();
-        var tbs = GetComponentsInChildren<ToggleButton>();
+        foreach (var item in Toggles)
+        {
+            Destroy(item.gameObject);
+        }
+        Toggles.Clear();
+    }
+    public void AddToggle(ToggleButton toggleBtn)
+    {
+        
+        toggleBtn.index = Toggles.Count;
+        Toggles.Add(toggleBtn);
+    }
+    public void UpdateToggle()
+    {
+ 
+      ClearToggles();
+       
+       var tbs = GetComponentsInChildren<ToggleButton>();
+       
         foreach (var tb in tbs)
         {
-           
+
             tb.index = Toggles.Count;
             tb.group = this;
             Toggles.Add(tb);

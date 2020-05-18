@@ -41,6 +41,8 @@ public   class ActorModel
     public int level = 1;
 
     public int exp = 0;
+    public int towerLevel =3;
+    public int pkScore = 0;
     public List<System.DateTime> SignInDate = new List<System.DateTime>();
     public KnightLevel knightLevel = KnightLevel.圣骑士;
     public List<BagItemData> bag_items = new List<BagItemData>();
@@ -98,6 +100,10 @@ public   class ActorModel
         EventManager.OnChangeHealth?.Invoke();
         EventManager.OnChangeEnergy?.Invoke();
     }
+    public void SetPKScore(int score)
+    {
+        pkScore += score;
+    }
     public  SkillModel GetSkillModel(int id)
     {
         if (skillmodels.ContainsKey(id))
@@ -105,6 +111,11 @@ public   class ActorModel
 
         return null;
 
+    }
+    public void SetTowerLevel(int l)
+    {
+        if(l>towerLevel)
+            towerLevel = l;
     }
     public void SetHealth(double v)
     {
@@ -260,8 +271,10 @@ public   class ActorModel
         this.exp += exp;
         if(this.exp>= GetMaxExp())
         {
-            SetLevel(this.exp / GetMaxExp());
-            this.exp = this.exp % GetMaxExp();
+            var level = this.exp / GetMaxExp();
+            this.exp %= GetMaxExp();
+            SetLevel(level);
+  
              
         }
         EventManager.OnChangeExp?.Invoke();
