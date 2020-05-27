@@ -50,7 +50,7 @@ public class BuyGoods : MonoBehaviour
                 singlePrice = foot.购买价格;
                 break;
             case ItemType.裤子:
-                var sleeve = SleeveConfig.Get(_id);
+                var sleeve = PelvisConfig.Get(_id);
                 m_desText.text = sleeve.物品描述;
                 singlePrice = sleeve.购买价格;
                 break;
@@ -60,7 +60,7 @@ public class BuyGoods : MonoBehaviour
                 singlePrice = arm.购买价格;
                 break;
             case ItemType.手链:
-                var pelvis = PelvisConfig.Get(_id);
+                var pelvis = SleeveConfig.Get(_id);
                 m_desText.text = pelvis.物品描述;
                 singlePrice = pelvis.购买价格;
                 break;

@@ -18873,7 +18873,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9076454137723809779}
-  - component: {fileID: 2103938548600811769}
   - component: {fileID: 8535513898630030971}
   - component: {fileID: 8818509404018177846}
   m_Layer: 0
@@ -18898,23 +18897,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2103938548600811769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9076454137723447043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f3b87cd4a874bb488f0cc531f3d034b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 15
-  speed: 75
-  attack_timer_interval: 0.25
-  skill_id: 3
-  enemys: []
 --- !u!114 &8535513898630030971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18949,7 +18931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62c9bf5bdaae0d04d93f9873346c6e3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 15
+  radius: 5
   speed: 75
   attack_timer_interval: 0.25
   skill_id: 3

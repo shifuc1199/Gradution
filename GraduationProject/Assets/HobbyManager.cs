@@ -19,10 +19,15 @@ public class HobbyManager : MonoBehaviourPunCallbacks
     }
     public static bool isConnected = false;
     public static Dictionary<string, string> roomDict = new Dictionary<string, string>();
+    public override void OnEnable()
+    {
+        base.OnEnable();
+        View.CurrentScene.GetView<HobbyView>().tipText.text = "正在连接中......";
+    }
     public override void OnConnected()
     {
         base.OnConnected();
-         
+    
     }
     public override void OnConnectedToMaster()
     {
@@ -35,6 +40,7 @@ public class HobbyManager : MonoBehaviourPunCallbacks
         base.OnJoinedLobby();
         if (isConnected)
         {
+            View.CurrentScene.GetView<HobbyView>().tipText.text = "";
             Debug.Log("加入大厅");
             var table = new ExitGames.Client.Photon.Hashtable();
             table.Add("model", JsonMapper.ToJson(ActorModel.Model));
@@ -46,6 +52,7 @@ public class HobbyManager : MonoBehaviourPunCallbacks
     {
         base.OnRoomListUpdate(roomList);
         List<RoomInfo> RemoveRoomList = new List<RoomInfo>();
+ 
         foreach (var room in roomList)
         {
             if (room.PlayerCount == 0)
@@ -63,6 +70,14 @@ public class HobbyManager : MonoBehaviourPunCallbacks
         foreach (var item in RemoveRoomList)
         {
             roomList.Remove(item);
+        }
+        if (roomList.Count == 0)
+        {
+            View.CurrentScene.GetView<HobbyView>().tipText.text = "暂无房间！";
+        }
+        else
+        {
+            View.CurrentScene.GetView<HobbyView>().tipText.text = "";
         }
     }
      

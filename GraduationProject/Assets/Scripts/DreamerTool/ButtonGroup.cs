@@ -11,37 +11,23 @@ public class ButtonGroup : ToggleGroup
      
     public MyIntUnityEvent OnSelect;
  
-    public List<Toggle> Toggles = new List<Toggle>();
+    public Dictionary<int,Toggle> Toggles = new Dictionary<int,Toggle>();
  
     public void ClearToggles()
     {
-        foreach (var item in Toggles)
+        foreach (var item in Toggles.Values)
         {
-            Destroy(item.gameObject);
+            DestroyImmediate(item.gameObject);
         }
         Toggles.Clear();
     }
-    public void AddToggle(ToggleButton toggleBtn)
+    public void AddToggle(ToggleButton toggleBtn,int index)
     {
         
-        toggleBtn.index = Toggles.Count;
-        Toggles.Add(toggleBtn);
+        toggleBtn.index = index;
+        Toggles.Add(index,toggleBtn);
     }
-    public void UpdateToggle()
-    {
- 
-      ClearToggles();
-       
-       var tbs = GetComponentsInChildren<ToggleButton>();
-       
-        foreach (var tb in tbs)
-        {
-
-            tb.index = Toggles.Count;
-            tb.group = this;
-            Toggles.Add(tb);
-        }
-    }
+    
 
 }
 [System.Serializable]

@@ -14,6 +14,10 @@ public class SkillJoyStickConfigPage : MonoBehaviour
     public Button[] m_skill_button;
     public GameObject no_learn_tip;
     public GameObject skill_buttons;
+    private void Start()
+    {
+        UpdateEquipSkill();
+    }
     public void SetModel(SkillModel model)
     {
         m_model = model;
@@ -38,7 +42,6 @@ public class SkillJoyStickConfigPage : MonoBehaviour
         }
         else
         {
-            
             SetButtons(false);
         }
     }
@@ -49,25 +52,41 @@ public class SkillJoyStickConfigPage : MonoBehaviour
         foreach (var item in m_skill_button)
         {
             item.gameObject.SetActive(v);
+
         }
+    }
+    public void UpdateEquipSkill()
+    {
+        foreach (var keyValue in ActorModel.Model.equip_skil)
+        {
+            if (keyValue.Value != null)
+            {
+                m_skill_image[keyValue.Key].gameObject.SetActive(true);
+                m_skill_image[keyValue.Key].sprite = keyValue.Value._config.GetSprite();
+            }
+        }
+
     }
     public void SetSkill(int button_index)
     {
         int key=-1;
         foreach (var item in ActorModel.Model.equip_skil)
         {
-            if (item.Value == m_model)
+            if (item.Value != null)
             {
-                key = item.Key;
-                m_skill_image[item.Key].gameObject.SetActive(false);
-                break;
+                if (item.Value.config_id == m_model.config_id)
+                {
+                    key = item.Key;
+                    m_skill_image[item.Key].gameObject.SetActive(false);
+                    break;
+                }
             }
         }
         
         if (key!= -1)
         ActorModel.Model.equip_skil[key] = null;
  
-      ActorModel.Model.equip_skil[button_index] = m_model;
+         ActorModel.Model.equip_skil[button_index] = m_model;
        
 
         m_skill_image[button_index].gameObject.SetActive(true);

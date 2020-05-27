@@ -24,8 +24,8 @@ public class RoomView : View
     {
         base.OnShow();
         UpdatePlayer();
-        
-        
+
+        PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.NetworkingClient.EventReceived += NetworkingClient_RoomEventHandler;
     }
     public override void OnHide()
@@ -41,14 +41,11 @@ public class RoomView : View
             var number = (int)datas[0];
             var ready_state = (bool)datas[1];
             actors[number].UpdateReadyState(ready_state);
-            
-
-
         }
     }
     public void CheckReady()
     {
-        PhotonNetwork.AutomaticallySyncScene = true;
+        
         foreach (var actor in actors)
         {
             if (!actor.isReady)
@@ -59,9 +56,12 @@ public class RoomView : View
             Debug.Log(actor.name_text.text + ": 已准备");
         }
 
-       
+      
+
         if (PhotonNetwork.IsMasterClient)
         {
+          
+
             Debug.Log("IsMaster");
             PhotonNetwork.LoadLevel(GameConstData.FIGHT_SCENE_NAME);
         }

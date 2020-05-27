@@ -16,7 +16,7 @@ public class NetPlayerSkillAttackTrigger : BaseAttackTrigger
     private void Awake()
     {
         photonView = GetComponentInParent<PhotonView>();
-        Destroy(transform.parent.gameObject,(float)photonView.InstantiationData[0]);
+        Destroy(transform.parent.gameObject,float.Parse(photonView.InstantiationData[0].ToString()));
         model = (JsonMapper.ToObject<ActorModel>(photonView.Owner.CustomProperties["model"].ToString())).GetSkillModel(skill_id);
     }
     public override void OnTriggerEnter2D(Collider2D collision)

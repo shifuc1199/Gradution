@@ -34,7 +34,10 @@ public static class GameStaticData
     public static List<List<int>> towerEnemys = new List<List<int>> { 
         new List<int>{2,2,2,2 },
          new List<int> {4,2,2,4},
-       new List<int> {-1,3,3,-1},                                                           
+         new List<int> {5,2,2,5},
+         new List<int> {6,2,2,6},
+       new List<int> {-1,3,3,-1},
+        new List<int> {5,3,3,6},
     };
     public static RectTransformData WeaponUI = new RectTransformData(
         new Vector2(-20.9f, -13f),
@@ -103,7 +106,9 @@ public  class GameStaticMethod
     
     public static void GameInit()
     {
-       
+        if (ActorModel.Model == null)
+            ActorModel.CreateModel();
+
         GameObjectPoolManager.InitByScriptableObject();
     
         SkillModel.Init();

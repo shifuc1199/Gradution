@@ -79,7 +79,6 @@ public class NetkActorController : ActorController
             return;
         }
 
-        Debug.Log("GetHurt: "+ DreamerTool.Util.DreamerUtil.GetHurtValue(attackData.hurt_value, _model.GetPlayerAttribute(PlayerAttribute.物防)));
         _anim.SetTrigger("hit");
         GameStaticMethod.ChangeChildrenSpriteRendererColor(gameObject, Color.red);
         transform.rotation = attackData.attack_pos.x > transform.position.x ? Quaternion.identity : Quaternion.Euler(0, 180, 0);

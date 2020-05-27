@@ -59761,6 +59761,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerView
       objectReference: {fileID: 0}
+    - target: {fileID: 3930958185630341427, guid: 4dcec0f73f20ded4ab13acffbb0e49a9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3930958185630341424, guid: 4dcec0f73f20ded4ab13acffbb0e49a9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -59866,10 +59871,45 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3930958186941244068, guid: 4dcec0f73f20ded4ab13acffbb0e49a9,
+    - target: {fileID: 8478707191297839453, guid: 4dcec0f73f20ded4ab13acffbb0e49a9,
         type: 3}
-      propertyPath: Toggles.Array.size
-      value: 0
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478707191297839453, guid: 4dcec0f73f20ded4ab13acffbb0e49a9,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8478707191297839453, guid: 4dcec0f73f20ded4ab13acffbb0e49a9,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1048374762533501807, guid: 4dcec0f73f20ded4ab13acffbb0e49a9,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 354.20007
+      objectReference: {fileID: 0}
+    - target: {fileID: 1048374762533501807, guid: 4dcec0f73f20ded4ab13acffbb0e49a9,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7984559847452345758, guid: 4dcec0f73f20ded4ab13acffbb0e49a9,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7984559847452345758, guid: 4dcec0f73f20ded4ab13acffbb0e49a9,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7984559847452345758, guid: 4dcec0f73f20ded4ab13acffbb0e49a9,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dcec0f73f20ded4ab13acffbb0e49a9, type: 3}

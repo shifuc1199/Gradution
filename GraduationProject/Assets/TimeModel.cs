@@ -15,9 +15,11 @@ public class TimeModel : MonoSingleton<TimeModel>
     {
          
     }
-    public static void   SetTimeScale(float value)
+    public static void   SetTimeScale(float value,bool resetTime = false,float resetTimer = 0.2f)
     {
         Time.timeScale = value;
+        if(resetTime)
+        Timer.Register(resetTimer, () => { Time.timeScale = 1; },null,false,true);
     }
     public System.DateTime GetDateTimeBySeconds(int second)
     {

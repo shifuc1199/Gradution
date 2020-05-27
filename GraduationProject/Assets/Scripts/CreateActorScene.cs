@@ -15,7 +15,7 @@ public class CreateActorScene : Scene
     void Awake()
     {
          
-        GameStaticMethod.GameInit();
+       
        
     }
     public void LoadSceneJump(string scene_name)

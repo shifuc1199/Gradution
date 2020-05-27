@@ -8,28 +8,19 @@ using DreamerTool.UI;
 using DreamerTool.GameObjectPool;
 public class GameScene : Scene
 {
-    float timer;
- 
+  
     public static BackScene backScene = BackScene.None;
- 
-    
-    public void LoadSceneJumpByFadeAnim(string scene_name)
-    {
-        GetView<GameInfoView>().FadeAnim(() => {
-            LoadingScene.LoadScene(scene_name);
-        });
-    }
-   public void Save()
+
+    private void OnApplicationQuit()
     {
         SaveManager.Instance.SaveActorModel();
     }
     public override void Awake()
     {
         base.Awake();
-        if(ActorModel.Model==null)
-        ActorModel.CreateModel();
+ 
         GameStaticMethod.GameInit();
-
+ 
         switch (backScene)
         {
             case BackScene.None:
@@ -47,8 +38,14 @@ public class GameScene : Scene
     // Start is called before the first frame update
     void Start()
     {
-       
- 
+
+
+    }
+    public void LoadSceneJumpByFadeAnim(string scene_name)
+    {
+        GetView<GameInfoView>().FadeAnim(() => {
+            LoadingScene.LoadScene(scene_name);
+        });
     }
     public void ResetActorState()
     {
@@ -63,21 +60,6 @@ public class GameScene : Scene
     // Update is called once per frame
    void Update()
     {
-        if (Time.timeScale != 1)
-        {
-
-            timer += Time.unscaledDeltaTime;
-
-            if (timer >= 0.15f)
-            {
-
-                timer = 0;
-                Time.timeScale = 1f;
-            }
-        }
-        else
-        {
-            timer = 0;
-        }
+         
     }
 }

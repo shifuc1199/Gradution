@@ -26,7 +26,8 @@ public class NetBlackHole : MonoBehaviour
     private void Start()
     {
         photonView = GetComponent<PhotonView>();
-        Destroy(gameObject, (float)photonView.InstantiationData[0]);
+     
+        Destroy(gameObject,float.Parse(photonView.InstantiationData[0].ToString()));
         model = (JsonMapper.ToObject<ActorModel>(photonView.Owner.CustomProperties["model"].ToString())).GetSkillModel(skill_id);
     }
 
@@ -38,12 +39,12 @@ public class NetBlackHole : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var cols = Physics2D.OverlapCircleAll(transform.position, radius, LayerMask.GetMask("player"));
+        var cols = Physics2D.OverlapCircleAll(transform.position, radius, LayerMask.GetMask("enemy"));
 
         foreach (var col in cols)
         {
             var enemy_ctr = col.GetComponent<NetkActorController>();
-            if (enemy_ctr && !enemys.Contains(enemy_ctr) &&! enemy_ctr.photonView.IsMine)
+            if (enemy_ctr && !enemys.Contains(enemy_ctr) &&photonView.IsMine)
                 enemys.Add(enemy_ctr);
         }
         timer += Time.deltaTime;
@@ -65,11 +66,7 @@ public class NetBlackHole : MonoBehaviour
                 timer = 0;
             }
         }
-        foreach (var enemy in enemys)
-        {
-            if (!enemy.actor_state.isSuperArmor)
-                enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, transform.position, speed * Time.deltaTime);
-        }
+
 
     }
 }

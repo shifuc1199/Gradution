@@ -19,6 +19,7 @@ public class ShopCell : MonoBehaviour
     {
 
         m_itemType = GameStaticData.ITEM_CONFIG[typeof(T).Name];
+    
         m_configId = config.物品ID;
 
         m_nameText.text = DreamerTool.Util.DreamerUtil.GetColorRichText(config.物品名字,GameStaticData.ITEM_COLOR_DICT[config.物品阶级]);

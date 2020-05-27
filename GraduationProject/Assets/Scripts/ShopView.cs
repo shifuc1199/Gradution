@@ -87,7 +87,9 @@ public class  ShopView : View
     }
    public void OnCellSelect(int index)
     {
-        var shopCell = m_group.Toggles[index].GetComponent<ShopCell>();;
+ 
+        var shopCell = m_group.Toggles[index].GetComponent<ShopCell>();
+        m_group.Toggles[index].isOn = true;
         m_buy_goods.SetModel(shopCell.m_itemType, shopCell.m_configId);
     }
     // Update is called once per frame

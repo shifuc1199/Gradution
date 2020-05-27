@@ -16,7 +16,7 @@ public class HobbyView : View
     public Text scoreText;
     public Transform room_root;
     public GameObject room_cell_refab;
-    
+    public Text tipText;
     Dictionary<string, RoomInfoCell> room_cells = new Dictionary<string, RoomInfoCell>();
     private void Start()
     {
